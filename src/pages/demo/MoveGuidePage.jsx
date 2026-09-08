@@ -11,14 +11,19 @@
  * 로그인 O/X 두 경우 다 테스트 가능함
  */
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 // PageLayout: 공통 헤더+틀을 씌워주는 컴포넌트 (지연님이 만든 그 파일)
-import PageLayout from '../components/common/layout/PageLayout';
+import PageLayout from '../../components/common/layout/PageLayout.jsx';
 
 const MoveGuidePage = () => {
   // navigate: 버튼 눌렀을 때 다른 경로로 이동시켜주는 함수
   // (예: navigate('/demo/move/auth-check') → 그 경로로 화면 전환)
   const navigate = useNavigate();
+
+  // ProtectedRoute가 로그인 안 된 상태에서 이 화면으로 돌려보낼 때
+  // state에 blockedReason을 실어서 넘겨줌 -> 그 값을 꺼내서 안내 문구로 보여줌
+  const location = useLocation();
+  const blockedReason = location.state?.blockedReason;
 
   // isLoggedIn: 지금 로그인된 걸로 칠지 아닐지 저장하는 상태값
   // 처음 화면 켤 때, localStorage에 이미 저장된 값이 있으면 그걸로 시작함
@@ -45,6 +50,11 @@ const MoveGuidePage = () => {
         {/* 화면 설명 문구 */}
         <p className="muted">아래 3개는 각각 다른 라우팅 패턴을 보여줍니다.</p>
 
+        {/* ProtectedRoute에 의해 튕겨져 왔을 때만 보이는 안내 메시지 */}
+        {blockedReason && (
+          <p style={{ color: '#e5484d', fontSize: 13 }}>⚠ {blockedReason}</p>
+        )}
+
         {/* 로그인 상태 토글 영역 */}
         <div className="toggle-row">
           <span className="muted">로그인 상태 시뮬레이션</span>
@@ -66,11 +76,11 @@ const MoveGuidePage = () => {
             권한검사 <span>›</span>
           </button>
 
-          {/* 파라미터전달로 이동 - 파트C가 만든 페이지로 연결만 함 */}
-          {/* /42 부분은 실제 파라미터 값 예시 (예: 상품번호, id 등) */}
+          {/* 파라미터전달로 이동 - ParamPassPage(목록)에서 클릭하면 state로 값을 넘겨서
+              ParamDetailPage로 이동하는 방식이라 URL에 값을 직접 안 넣음 */}
           <button
             className="base-button base-button--ghost base-button--full"
-            onClick={() => navigate('/demo/move/param/42')}
+            onClick={() => navigate('/demo/move/param')}
           >
             파라미터전달 <span>›</span>
           </button>
