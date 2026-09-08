@@ -321,3 +321,8 @@ code {
 .page-layout__main {
   flex: 1;
 }
+
+.base-badge--blue {
+  background: #dbeafe;
+  color: #1d4ed8;
+}

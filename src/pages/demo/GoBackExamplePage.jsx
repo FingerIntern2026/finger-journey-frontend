@@ -1,4 +1,4 @@
-// GoBackPage.jsx의 역할
+// GoBackExamplePage.jsx의 역할
 // "뒤로가기" 데모 화면
 // useNavigation.js의 goBack()으로 이전 페이지로 이동
 // useNavigation.js의 goTo()로 히스토리가 없을 때 대체 이동 처리
@@ -6,7 +6,7 @@
 
 import useNavigation from "../../hooks/useNavigation";
 
-export default function GoBackPage() {
+export default function GoBackExamplePage() {
   const { goBack, goTo } = useNavigation();
 
   return (
