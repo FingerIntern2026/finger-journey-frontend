@@ -177,3 +177,228 @@ code {
   margin-bottom: 16px;
   color: var(--text-h);
 }
+/* ===== Demo 메뉴/화면이동 관련 ===== */
+.base-button--ghost {
+  background: var(--code-bg);
+  color: var(--text-h);
+  border: 1px solid var(--border);
+}
+.base-button--full {
+  width: 100%;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.index-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 6px;
+}
+.index-grid .base-button {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+.link-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ===== 로그인 토글 스위치 ===== */
+.toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--code-bg);
+}
+.switch {
+  position: relative;
+  width: 40px;
+  height: 22px;
+  flex-shrink: 0;
+}
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.switch .slider {
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+  background: var(--border);
+  border-radius: 999px;
+  transition: 0.15s;
+}
+.switch .slider::before {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  left: 3px;
+  top: 3px;
+  background: #fff;
+  border-radius: 50%;
+  transition: 0.15s;
+}
+.switch input:checked + .slider {
+  background: var(--accent);
+}
+.switch input:checked + .slider::before {
+  transform: translateX(18px);
+}/* ===== BaseInput ===== */
+.base-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: left;
+}
+.base-input-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-h);
+}
+.base-input {
+  font-family: var(--sans);
+  font-size: 15px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  outline: none;
+}
+.base-input:focus {
+  border-color: var(--accent);
+}
+.base-input-error-text {
+  font-size: 13px;
+  color: #e5484d;
+  margin: 0;
+}
+
+/* ===== BaseSelect ===== */
+.base-select-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: left;
+}
+.base-select-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-h);
+}
+.base-select {
+  font-family: var(--sans);
+  font-size: 15px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+}
+.base-select-error-text {
+  font-size: 13px;
+  color: #e5484d;
+  margin: 0;
+}
+
+/* ===== BaseTextArea ===== */
+.base-textarea-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: left;
+}
+.base-textarea-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-h);
+}
+.base-textarea {
+  font-family: var(--sans);
+  font-size: 15px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  resize: vertical;
+  outline: none;
+}
+.base-textarea:focus {
+  border-color: var(--accent);
+}
+.base-textarea-error-text {
+  font-size: 13px;
+  color: #e5484d;
+  margin: 0;
+}
+
+/* ===== Header (공통 헤더) ===== */
+.header {
+  padding: 16px 16px 8px;
+  text-align: left;
+}
+.header__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.header__label {
+  font-size: 14px;
+  color: var(--text);
+}
+.header__count {
+  font-size: 14px;
+  color: #9ca3af;
+}
+.header__row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.header__back-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.header__progress-track {
+  flex: 1;
+  height: 8px;
+  background: #e5e7eb;
+  border-radius: 999px;
+  overflow: hidden;
+}
+.header__progress-fill {
+  height: 100%;
+  background: #22c55e;
+  border-radius: 999px;
+  transition: width 0.2s ease;
+}
+.header__icon {
+  width: 24px;
+  height: 24px;
+}
+
+/* ===== PageLayout ===== */
+.page-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.page-layout__main {
+  flex: 1;
+}
+
+.base-badge--blue {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
