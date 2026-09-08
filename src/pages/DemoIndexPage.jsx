@@ -1,5 +1,5 @@
 /**
- * DemoIndex (컴포넌트 데모 페이지)
+ * DemoIndexPage (컴포넌트 데모 페이지)
  *
  * 파트B에서 만든 공통 컴포넌트(PageLayout, Header, BaseInput, BaseSelect,
  * BaseTextArea)가 실제로 잘 작동하는지 한 화면에 모아서 눈으로 확인하는 용도.
@@ -11,7 +11,7 @@ import BaseInput from '../components/common/base/BaseInput';
 import BaseSelect from '../components/common/base/BaseSelect';
 import BaseTextArea from '../components/common/base/BaseTextArea';
 
-const DemoIndex = () => {
+const DemoIndexPage = () => {
   // 각 컴포넌트에 입력한 값을 저장할 상태들.
   // 실제 화면에서는 이 값들을 서버로 보내거나 다음 화면으로 넘기게 될 예정.
   const [name, setName] = useState('');
@@ -61,4 +61,4 @@ const DemoIndex = () => {
   );
 };
 
-export default DemoIndex;
+export default DemoIndexPage;
