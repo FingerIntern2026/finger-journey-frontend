@@ -1,61 +1,60 @@
 /**
- * DemoIndexPage (컴포넌트 데모 페이지)
+ * DemoIndexPage (데모 홈 - 메뉴 화면)
  *
- * 파트B에서 만든 공통 컴포넌트(PageLayout, Header, BaseInput, BaseSelect,
- * BaseTextArea)가 실제로 잘 작동하는지 한 화면에 모아서 눈으로 확인하는 용도.
- * 실제 서비스 화면이 아니라 개발/테스트용 페이지.
+ * 팀 데모용 4가지 패턴(화면이동/컴포넌트리스트/다이얼로그예제/API통신)의
+ * 진입점 역할만 하는 메뉴 화면. 실제 내용은 각 화면에서 보여줌.
+ * (이전에 만들었던 "컴포넌트 직접 테스트" 버전에서 이 메뉴 버전으로 교체함)
+ *
+ *
  */
-import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+// PageLayout: 공통 헤더+틀을 씌워주는 컴포넌트
 import PageLayout from '../components/common/layout/PageLayout';
-import BaseInput from '../components/common/base/BaseInput';
-import BaseSelect from '../components/common/base/BaseSelect';
-import BaseTextArea from '../components/common/base/BaseTextArea';
 
 const DemoIndexPage = () => {
-  // 각 컴포넌트에 입력한 값을 저장할 상태들.
-  // 실제 화면에서는 이 값들을 서버로 보내거나 다음 화면으로 넘기게 될 예정.
-  const [name, setName] = useState('');
-  const [department, setDepartment] = useState('');
-  const [wikiContent, setWikiContent] = useState('');
-
-  // BaseSelect에 넣을 옵션 목록. { value, label } 형태로 맞춰야 함 (확정된 규칙)
-  const departmentOptions = [
-    { value: 'common-tech', label: 'Common Tech Part' },
-    { value: 'platform', label: 'Platform Part' },
-  ];
+  // navigate: 버튼 눌렀을 때 다른 경로로 화면 전환시켜주는 함수
+  const navigate = useNavigate();
 
   return (
-    // 데모 페이지는 오솔길/체크인 화면이 아니니까 label은 그냥 "컴포넌트 데모"로 임시 지정
-    <PageLayout label="컴포넌트 데모" onBack={() => window.history.back()}>
-      <div className="p-4 flex flex-col gap-6">
+    // showHeader={false}: 이 화면은 체크인/오솔길 같은 화면이 아니라
+    // 그냥 메뉴 화면이라서, 공통 Header(뒤로가기+진행률바)는 필요 없음
+    <PageLayout showHeader={false}>
+      <div style={{ padding: 16 }}>
 
-        {/* BaseInput 테스트: 한 줄 텍스트 입력 */}
-        <BaseInput
-          label="이름"
-          placeholder="이름을 입력하세요"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <p className="text-sm text-gray-500">입력된 값: {name}</p>
+        {/* 화면 제목 */}
+        <h2>핑거저니 프레임워크 데모</h2>
 
-        {/* BaseSelect 테스트: 드롭다운 선택 */}
-        <BaseSelect
-          label="부서"
-          options={departmentOptions}
-          value={department}
-          onChange={(e) => setDepartment(e.target.value)}
-        />
-        <p className="text-sm text-gray-500">선택된 값: {department}</p>
+        {/* 화면 설명 문구. muted는 index.css에 있는 흐린 회색 텍스트 스타일 */}
+        <p className="muted">
+          아래 4개 버튼이 이번 과제의 핵심 산출물입니다. 각각 다른 프레임워크
+          패턴을 보여줍니다.
+        </p>
 
-        {/* BaseTextArea 테스트: 여러 줄 입력 (기본 rows=6) */}
-        <BaseTextArea
-          label="위키 상세내용"
-          placeholder="내용을 입력하세요"
-          value={wikiContent}
-          onChange={(e) => setWikiContent(e.target.value)}
-        />
-        <p className="text-sm text-gray-500">글자 수: {wikiContent.length}자</p>
+        {/* index-grid: index.css에 정의한 2x2 격자 배치 스타일 */}
+        <div className="index-grid">
 
+          {/* ① 화면이동 버튼 - 클릭하면 MoveGuidePage(/demo/move)로 이동 */}
+          {/* base-button, base-button--primary: 기존에 정의된 초록/파랑 버튼 스타일 재사용 */}
+          <button className="base-button base-button--primary" onClick={() => navigate('/demo/move')}>
+            <span>①</span>화면이동
+          </button>
+
+          {/* ② 컴포넌트리스트 버튼 - 다른 파트 담당 화면으로 연결만 함 */}
+          <button className="base-button base-button--primary" onClick={() => navigate('/demo/components')}>
+            <span>②</span>컴포넌트리스트
+          </button>
+
+          {/* ③ 다이얼로그예제 버튼 - 파트A 담당 화면으로 연결만 함 */}
+          <button className="base-button base-button--primary" onClick={() => navigate('/demo/dialog')}>
+            <span>③</span>다이얼로그예제
+          </button>
+
+          {/* ④ API통신 버튼 - 파트C 담당 화면으로 연결만 함 */}
+          <button className="base-button base-button--primary" onClick={() => navigate('/demo/api')}>
+            <span>④</span>API통신
+          </button>
+
+        </div>
       </div>
     </PageLayout>
   );
