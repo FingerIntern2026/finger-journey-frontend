@@ -2,8 +2,8 @@
 // 다이얼로그(버튼③) 데모 페이지. DialogContext의 showAlert/showConfirm을 호출해서
 // Alert/Confirm이 실제로 뜨는 걸 보여줌. 별도의 useState 없이 useDialog 하나로 끝남
 
-import BaseButton from '../components/common/base/BaseButton';
-import { useDialog } from '../components/common/dialog/DialogContext';
+import BaseButton from '../../components/common/base/BaseButton.jsx';
+import { useDialog } from '../../components/common/dialog/DialogContext.jsx';
 
 export default function DialogExamplePage() {
     // Context 창고에서 showAlert, showConfirm 함수 꺼내오기
