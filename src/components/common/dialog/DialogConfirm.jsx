@@ -13,7 +13,7 @@ export default function DialogConfirm({ open, message, onConfirm, onCancel }) {
             <div className="dialog-box">
                 <p>{message}</p>
                 <div className="dialog-actions">
-                    {/* 이 컴포넌트는 "확인/취소가 뭘 의미하는지" 전혀 모름. 그냥 받은 콜백을 실행할 뿐 */}
+                    {/* 이 컴포넌트는 "확인/취소가 뭘 의미하는지" 전혀 모름. 그냥 받은 콜백을 실행할 뿐*/}
                     <BaseButton label="취소" onClick={onCancel} />
                     <BaseButton label="확인" onClick={onConfirm} />
                 </div>
