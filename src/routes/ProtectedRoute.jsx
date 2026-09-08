@@ -9,10 +9,11 @@ import { useAuth } from '../hooks/useAuth';
 export default function ProtectedRoute({ children }) {
     const { isLoggedIn } = useAuth();
 
-    // 로그인 안 됐으면 children을 그리지 않고 /demo로 이동시킴
+    // 로그인 안 됐으면 children을 그리지 않고 로그인 토글이 있는 MoveGuidePage로 돌려보냄
     // replace: 브라우저 히스토리에 남기지 않음 (뒤로가기 눌러도 보호된 페이지로 안 돌아감)
+    // state로 "왜 튕겼는지" 이유를 같이 넘겨서, MoveGuidePage에서 안내 메시지를 보여줄 수 있게 함
     if (!isLoggedIn) {
-        return <Navigate to="/demo" replace />;
+        return <Navigate to="/demo/move" replace state={{ blockedReason: '로그인이 필요한 페이지입니다.' }} />;
     }
 
     // 로그인 됐으면 원래 보여주려던 페이지(children)를 그대로 렌더링

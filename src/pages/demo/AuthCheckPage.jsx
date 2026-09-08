@@ -8,10 +8,10 @@
  */
 import { useNavigate } from 'react-router-dom';
 // PageLayout: 공통 헤더+틀을 씌워주는 컴포넌트
-import PageLayout from '../components/common/layout/PageLayout';
+import PageLayout from '../../components/common/layout/PageLayout.jsx';
 // useAuth: 파트A(재웅님)가 만든 훅. localStorage의 로그인 상태를 읽어서
 // { isLoggedIn: true/false } 형태로 돌려줌
-import { useAuth } from '../hooks/useAuth';
+import { useAuth } from '../../hooks/useAuth.js';
 
 const AuthCheckPage = () => {
   // navigate: 뒤로가기 버튼 눌렀을 때 이전 화면으로 이동시키는 함수
