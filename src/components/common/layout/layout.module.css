@@ -1,0 +1,69 @@
+/* layout.module.css의 역할 */
+/* Header, PageLayout 등 layout 폴더 컴포넌트들이 공통으로 쓰는 스타일 모음 */
+
+/* ===== Header ===== */
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 16px;
+}
+
+.headerTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.headerLabel {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.headerCount {
+  font-size: 13px;
+  color: #888;
+}
+
+.headerRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.headerBackBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.headerProgressTrack {
+  flex: 1;
+  height: 6px;
+  background: #eee;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.headerProgressFill {
+  height: 100%;
+  background: #4CAF50;
+  transition: width 0.2s ease;
+}
+
+.headerIcon {
+  width: 20px;
+  height: 20px;
+}
+
+/* ===== PageLayout ===== */
+.pageLayout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.pageLayoutMain {
+  flex: 1;
+}

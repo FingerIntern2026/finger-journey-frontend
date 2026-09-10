@@ -9,9 +9,10 @@
  *   그대로 넘겨주면 Header까지 전달됨
  *
  * ※ 스타일은 layout.module.css의 CSS Modules 클래스를 사용함
-//    (팀 컨벤션: 폴더 단위 CSS Modules 방식)
+ *    (팀 컨벤션: 폴더 단위 CSS Modules 방식)
  */
 import Header from './Header';
+import styles from './layout.module.css';
 
 const PageLayout = ({
   showHeader = true,   // 헤더 보여줄지 여부 (기본값: 보여줌)
@@ -24,14 +25,14 @@ const PageLayout = ({
 }) => {
   return (
     // page-layout: 화면 전체 높이 채우고, 위(헤더)에서 아래(본문)로 세로 배치
-    <div className={`page-layout ${className}`}>
+    <div className={`${styles.pageLayout} ${className}`}>
       {/* showHeader가 true일 때만 Header를 보여주고, 받은 값들을 그대로 전달 */}
       {showHeader && (
         <Header label={label} current={current} total={total} onBack={onBack} />
       )}
 
       {/* page-layout__main: 헤더 빼고 남은 공간을 본문이 다 차지하게 함 */}
-      <main className="page-layout__main">{children}</main>
+      <main className={styles.pageLayoutMain}>{children}</main>
     </div>
   );
 };
