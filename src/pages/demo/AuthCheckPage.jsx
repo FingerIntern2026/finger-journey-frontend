@@ -12,6 +12,7 @@ import PageLayout from '../../components/common/layout/PageLayout.jsx';
 // useAuth: 파트A(재웅님)가 만든 훅. localStorage의 로그인 상태를 읽어서
 // { isLoggedIn: true/false } 형태로 돌려줌
 import { useAuth } from '../../hooks/useAuth.js';
+import BaseBadge from '../../components/common/base/BaseBadge.jsx';
 
 const AuthCheckPage = () => {
   // navigate: 뒤로가기 버튼 눌렀을 때 이전 화면으로 이동시키는 함수
@@ -30,9 +31,9 @@ const AuthCheckPage = () => {
         {/* isLoggedIn 값에 따라 초록/회색 뱃지를 다르게 보여줌 */}
         {/* base-badge, base-badge--green/gray는 index.css에 정의된 기존 스타일 재사용 */}
         {isLoggedIn ? (
-          <span className="base-badge base-badge--green">로그인됨</span>
+          <BaseBadge label="로그인됨" color="green" />
         ) : (
-          <span className="base-badge base-badge--gray">로그인 안 됨</span>
+          <BaseBadge label="로그인 안 됨" color="gray" />
         )}
 
         {/* 상태에 맞는 설명 문구도 같이 보여줌 (디버깅/데모 목적) */}

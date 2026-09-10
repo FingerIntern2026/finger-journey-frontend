@@ -64,7 +64,7 @@ export default function ComponentListPage() {
 
       <BaseCard>
         <h3>BaseCheckbox</h3>
-        <BaseCheckbox checked={checked} onClick={() => setChecked(!checked)} />
+        <BaseCheckbox checked={checked} onChange={() => setChecked(!checked)} />
       </BaseCard>
     </div>
   );

@@ -1,0 +1,31 @@
+/* dialog.module.css의 역할 */
+/* DialogAlert, DialogConfirm 등 dialog 폴더 컴포넌트들이 공통으로 쓰는 스타일 모음 */
+/* CSS Modules 방식이라 클래스명이 빌드 시 자동으로 고유화되어 다른 폴더 스타일과 충돌하지 않음 */
+
+/* 화면 전체를 덮는 반투명 배경 (다이얼로그 뒤 어둡게 처리) */
+.overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* 실제 다이얼로그 내용이 담기는 흰색 박스 */
+.box {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  min-width: 280px;
+  max-width: 90%;
+}
+
+/* 확인/취소 버튼 등 액션 버튼들을 가로로 배치하는 영역 (DialogConfirm에서 사용) */
+.actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
