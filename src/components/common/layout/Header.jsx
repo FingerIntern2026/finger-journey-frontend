@@ -12,8 +12,8 @@
  * ⚠️ 오솔길 메인맵 전용 헤더(FINGER ONBOARDING 배지 있는 것)는 구조가 달라서
  *    이 컴포넌트가 아니라 별도 컴포넌트(PathMapHeader 등)로 만들어야 함.
  *
- * ※ 스타일은 index.css에 정의된 일반 CSS 클래스(.header 등)를
- *    사용함 (팀 컨벤션: BaseButton/BaseInput 등과 동일한 방식)
+ * ※ 스타일은 layout.module.css의 CSS Modules 클래스를 사용함
+//    (팀 컨벤션: 폴더 단위 CSS Modules 방식)
  */
 import { ChevronLeft } from 'lucide-react';
 // ↑ 왼쪽 화살표 아이콘. lucide-react 라이브러리에서 가져와요.

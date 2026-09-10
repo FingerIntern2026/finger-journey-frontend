@@ -8,8 +8,8 @@
  * - Header에 넘길 값(label, current, total, onBack)은 이 컴포넌트를 쓰는 쪽에서
  *   그대로 넘겨주면 Header까지 전달됨
  *
- * ※ 스타일은 index.css에 정의된 일반 CSS 클래스(.page-layout 등)를
- *    사용함 (팀 컨벤션: BaseButton/BaseInput 등과 동일한 방식)
+ * ※ 스타일은 layout.module.css의 CSS Modules 클래스를 사용함
+//    (팀 컨벤션: 폴더 단위 CSS Modules 방식)
  */
 import Header from './Header';
 
