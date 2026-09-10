@@ -68,30 +68,24 @@ const MoveGuidePage = () => {
 
         {/* 3개 링크 버튼 목록 */}
         <div className="link-list">
-          {/* 권한검사로 이동 - 지연님이 만든 AuthCheckPage로 연결 */}
-          <button
-            className="base-button base-button--ghost base-button--full"
+          <BaseButton
+            label={<>권한검사 <span>›</span></>}
+            variant="ghost"
+            fullWidth
             onClick={() => navigate('/demo/move/auth-check')}
-          >
-            권한검사 <span>›</span>
-          </button>
-
-          {/* 파라미터전달로 이동 - ParamPassPage(목록)에서 클릭하면 state로 값을 넘겨서
-              ParamDetailPage로 이동하는 방식이라 URL에 값을 직접 안 넣음 */}
-          <button
-            className="base-button base-button--ghost base-button--full"
+          />
+          <BaseButton
+            label={<>파라미터전달 <span>›</span></>}
+            variant="ghost"
+            fullWidth
             onClick={() => navigate('/demo/move/param')}
-          >
-            파라미터전달 <span>›</span>
-          </button>
-
-          {/* 뒤로가기로 이동 - 파트C가 만든 페이지로 연결만 함 */}
-          <button
-            className="base-button base-button--ghost base-button--full"
+          />
+          <BaseButton
+            label={<>뒤로가기 <span>›</span></>}
+            variant="ghost"
+            fullWidth
             onClick={() => navigate('/demo/move/go-back')}
-          >
-            뒤로가기 <span>›</span>
-          </button>
+          />
         </div>
 
       </div>

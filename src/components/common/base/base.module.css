@@ -1,0 +1,99 @@
+/* ===== BaseButton ===== */
+.button {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
+.primary {
+  background: #4CAF50;
+  color: white;
+}
+.secondary {
+  background: white;
+  color: #4CAF50;
+  border: 1px solid #4CAF50;
+}
+.danger {
+  background: #e53935;
+  color: white;
+}
+.ghost {
+  background: transparent;
+  color: #4CAF50;
+  border: 1px solid #ddd;
+}
+.full {
+  width: 100%;
+}
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ===== BaseCard ===== */
+.card {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+/* ===== BaseCheckbox ===== */
+.checkbox {
+  width: 24px;
+  height: 24px;
+  border: 1px solid #999;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+  background-color: white;
+}
+.checkboxChecked {
+  background-color: #4CAF50;
+}
+
+/* ===== BaseBadge ===== */
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+}
+.gray {
+  background: #eee;
+  color: #666;
+}
+.green {
+  background: #e6f7ec;
+  color: #2e7d32;
+}
+.blue {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+/* ===== BaseInput / BaseSelect / BaseTextArea (공통 폼 스타일) ===== */
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+.inputLabel {
+  font-size: 14px;
+  font-weight: 500;
+}
+.input {
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+.inputErrorText {
+  color: #e53935;
+  font-size: 12px;
+}

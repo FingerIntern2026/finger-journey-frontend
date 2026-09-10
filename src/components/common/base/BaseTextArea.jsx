@@ -1,17 +1,18 @@
 import { forwardRef } from 'react';
+import styles from './base.module.css';
 
 const BaseTextArea = forwardRef(
   ({ label, error, rows = 6, className = '', ...rest }, ref) => {
     return (
-      <div className="base-textarea-wrapper">
-        {label && <label className="base-textarea-label">{label}</label>}
+      <div className={styles.inputWrapper}>
+        {label && <label className={styles.inputLabel}>{label}</label>}
         <textarea
           ref={ref}
           rows={rows}
-          className={`base-textarea ${className}`}
+          className={`${styles.input} ${className}`}
           {...rest}
         />
-        {error && <p className="base-textarea-error-text">{error}</p>}
+        {error && <p className={styles.inputErrorText}>{error}</p>}
       </div>
     );
   }

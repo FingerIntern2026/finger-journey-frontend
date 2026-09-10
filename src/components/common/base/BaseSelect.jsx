@@ -1,13 +1,14 @@
 import { forwardRef } from 'react';
+import styles from './base.module.css';
 
 const BaseSelect = forwardRef(
   ({ label, options = [], placeholder = '선택하세요', error, className = '', ...rest }, ref) => {
     return (
-      <div className="base-select-wrapper">
-        {label && <label className="base-select-label">{label}</label>}
+      <div className={styles.inputWrapper}>
+        {label && <label className={styles.inputLabel}>{label}</label>}
         <select
           ref={ref}
-          className={`base-select ${className}`}
+          className={`${styles.input} ${className}`}
           {...rest}
         >
           <option value="" disabled>
@@ -19,7 +20,7 @@ const BaseSelect = forwardRef(
             </option>
           ))}
         </select>
-        {error && <p className="base-select-error-text">{error}</p>}
+        {error && <p className={styles.inputErrorText}>{error}</p>}
       </div>
     );
   }
