@@ -14,6 +14,7 @@ import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 // PageLayout: 공통 헤더+틀을 씌워주는 컴포넌트 (지연님이 만든 그 파일)
 import PageLayout from '../../components/common/layout/PageLayout.jsx';
+import BaseButton from '../../components/common/base/BaseButton.jsx';
 
 const MoveGuidePage = () => {
   // navigate: 버튼 눌렀을 때 다른 경로로 이동시켜주는 함수

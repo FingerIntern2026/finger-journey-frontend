@@ -12,6 +12,7 @@ import PageLayout from '../../components/common/layout/PageLayout.jsx';
 // useAuth: 파트A(재웅님)가 만든 훅. localStorage의 로그인 상태를 읽어서
 // { isLoggedIn: true/false } 형태로 돌려줌
 import { useAuth } from '../../hooks/useAuth.js';
+import BaseBadge from '../../components/common/base/BaseBadge.jsx';
 
 const AuthCheckPage = () => {
   // navigate: 뒤로가기 버튼 눌렀을 때 이전 화면으로 이동시키는 함수
