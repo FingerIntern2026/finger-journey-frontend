@@ -8,12 +8,6 @@
   gap: 8px;
 }
 
-.progressIndicatorBadge {
-  font-size: 13px;
-  color: #888;
-  white-space: nowrap;
-}
-
 .progressIndicatorBar {
   flex: 1;
 }

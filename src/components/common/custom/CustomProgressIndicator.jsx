@@ -6,14 +6,13 @@
  * 단계)를 덧붙임 — Header.jsx가 자체적으로 갖고 있던 진행률 로직을 분리한 것.
  */
 import BaseProgressBar from '../base/BaseProgressBar';
+import BaseBadge from '../base/BaseBadge';
 import styles from './custom.module.css';
 
 const CustomProgressIndicator = ({ current, total, showBadge = true, className = '' }) => {
   return (
     <div className={`${styles.progressIndicator} ${className}`}>
-      {showBadge && (
-        <span className={styles.progressIndicatorBadge}>{current}/{total}</span>
-      )}
+      {showBadge && <BaseBadge label={`${current}/${total}`} color="gray" />}
       <BaseProgressBar current={current} total={total} className={styles.progressIndicatorBar} />
       <img src="/icons/sprout.svg" alt="새싹" className={styles.progressIndicatorIcon} />
     </div>
