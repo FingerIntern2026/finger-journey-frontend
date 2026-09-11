@@ -166,6 +166,60 @@
   color: #888;
 }
 
+/* ===== ContentCarousel ===== */
+.contentCarousel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 24px 16px;
+  text-align: center;
+}
+
+.contentCarouselYear {
+  font-size: 13px;
+  font-weight: 700;
+  color: #4CAF50;
+}
+
+.contentCarouselIllustration {
+  width: 160px;
+  height: 160px;
+  object-fit: contain;
+}
+
+.contentCarouselTitle {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.contentCarouselDescription {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.5;
+}
+
+.contentCarouselSteps {
+  display: flex;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.contentCarouselStep {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: #888;
+}
+
+.contentCarouselFootnote {
+  font-size: 12px;
+  color: #aaa;
+  margin-top: 8px;
+}
+
 .chatEntryBadge {
   position: absolute;
   top: -2px;
