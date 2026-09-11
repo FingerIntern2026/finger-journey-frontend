@@ -25,3 +25,13 @@
   background: #fff59d;
   border-radius: 2px;
 }
+
+/* WikiCategoryPanel 아이콘 */
+.wikiCategoryIcon {
+  font-size: 18px;
+}
+.wikiCategoryIconImg {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
