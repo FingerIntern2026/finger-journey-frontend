@@ -13,6 +13,7 @@ import BaseCard from "../../components/common/base/BaseCard";
 import BaseCheckbox from "../../components/common/base/BaseCheckbox";
 import BaseProgressBar from "../../components/common/base/BaseProgressBar";
 import CustomProgressIndicator from "../../components/common/custom/CustomProgressIndicator";
+import Header from "../../components/common/layout/Header";
 import AdminHeader from "../../components/common/layout/AdminHeader";
 import BottomTabNav from "../../components/common/layout/BottomTabNav";
 import ChatEntryButton from "../../components/common/layout/ChatEntryButton";
@@ -100,6 +101,11 @@ export default function ComponentListPage() {
       <BaseCard>
         <h3>CustomProgressIndicator</h3>
         <CustomProgressIndicator current={7} total={10} />
+      </BaseCard>
+
+      <BaseCard>
+        <h3>Header</h3>
+        <Header label="온보딩 진행 중" current={4} total={10} onBack={() => alert("뒤로가기")} />
       </BaseCard>
 
       <BaseCard>
