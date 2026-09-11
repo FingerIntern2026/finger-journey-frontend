@@ -11,10 +11,23 @@ import BaseSelect from "../../components/common/base/BaseSelect";
 import BaseTextArea from "../../components/common/base/BaseTextArea";
 import BaseCard from "../../components/common/base/BaseCard";
 import BaseCheckbox from "../../components/common/base/BaseCheckbox";
+import AdminHeader from "../../components/common/layout/AdminHeader";
+import BottomTabNav from "../../components/common/layout/BottomTabNav";
+import ChatEntryButton from "../../components/common/layout/ChatEntryButton";
+
+const ADMIN_TABS = [
+  { icon: "user", label: "입사자", path: "/admin/employee" },
+  { icon: "wiki", label: "위키관리", path: "/admin/wiki" },
+  { icon: "progress", label: "진행현황", path: "/admin/progress" },
+  { icon: "bell", label: "HR확인", path: "/admin/hr" },
+];
 
 export default function ComponentListPage() {
   // BaseCheckbox는 checked를 직접 관리해줘야 하는 controlled 컴포넌트라 state 필요
   const [checked, setChecked] = useState(false);
+
+  // BottomTabNav 데모용 활성 탭 state
+  const [activeTab, setActiveTab] = useState(ADMIN_TABS[0].path);
 
   // BaseInput도 controlled로 써볼 수 있게 state 준비
   const [inputValue, setInputValue] = useState("");
@@ -65,6 +78,22 @@ export default function ComponentListPage() {
       <BaseCard>
         <h3>BaseCheckbox</h3>
         <BaseCheckbox checked={checked} onChange={() => setChecked(!checked)} />
+      </BaseCard>
+
+      <BaseCard>
+        <h3>AdminHeader</h3>
+        <AdminHeader onLogout={() => alert("로그아웃")} />
+      </BaseCard>
+
+      <BaseCard>
+        <h3>BottomTabNav</h3>
+        <BottomTabNav tabs={ADMIN_TABS} active={activeTab} onChange={setActiveTab} />
+      </BaseCard>
+
+      <BaseCard>
+        <h3>ChatEntryButton</h3>
+        <p className="muted">화면 우측 하단에 플로팅으로 떠있습니다.</p>
+        <ChatEntryButton onClick={() => alert("챗봇 열기")} unreadCount={2} />
       </BaseCard>
     </div>
   );
