@@ -1,3 +1,6 @@
+/* custom.module.css의 역할 */
+/* components/common/custom 폴더 컴포넌트들이 공통으로 쓰는 스타일 모음 */
+
 /* ===== CustomSearchbar ===== */
 .searchbarWrapper {
   display: flex;
@@ -26,6 +29,62 @@
   border-radius: 2px;
 }
 
+/* ===== WikiCategoryPanel ===== */
+.wikiPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.wikiCategoryHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fafafa;
+  cursor: pointer;
+}
+.wikiCategoryTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+}
+.wikiCategoryCount {
+  font-size: 12px;
+  color: #888;
+}
+.wikiChevron {
+  transition: transform 0.15s ease;
+}
+.wikiChevronOpen {
+  transform: rotate(180deg);
+}
+.wikiItemList {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 16px 8px 28px;
+}
+.wikiItem {
+  text-align: left;
+  border: none;
+  background: transparent;
+  padding: 6px 0;
+  cursor: pointer;
+  font-size: 14px;
+  color: #333;
+}
+.wikiItem:hover {
+  color: #4CAF50;
+}
+.wikiEmpty {
+  font-size: 13px;
+  color: #999;
+  padding: 6px 0;
+}
+
 /* WikiCategoryPanel 아이콘 */
 .wikiCategoryIcon {
   font-size: 18px;
@@ -34,4 +93,38 @@
   width: 20px;
   height: 20px;
   object-fit: contain;
+}
+
+/* ===== LoginWebviewEmbed ===== */
+/* height는 컴포넌트에서 style={{ height }}로 인라인 적용하므로
+   여기엔 고정 min-height를 넣지 않음 (쓰는 곳마다 크기가 달라서) */
+.webviewWrapper {
+  display: flex;
+  flex-direction: column;
+}
+.webviewGuide {
+  padding: 12px 16px;
+  font-size: 13px;
+  color: #555;
+  background: #f5f5f5;
+  border-bottom: 1px solid #eee;
+}
+.webviewFrame {
+  flex: 1;
+  width: 100%;
+  border: none;
+}
+.webviewPreviewImg {
+  width: 100%;
+  border-radius: 8px;
+  display: block;
+}
+.webviewFallback {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  font-size: 14px;
+  background: #fafafa;
 }

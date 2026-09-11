@@ -14,6 +14,8 @@ import BaseCheckbox from "../../components/common/base/BaseCheckbox";
 import AdminHeader from "../../components/common/layout/AdminHeader";
 import BottomTabNav from "../../components/common/layout/BottomTabNav";
 import ChatEntryButton from "../../components/common/layout/ChatEntryButton";
+import ChatEntryButton from "../../components/common/layout/ChatEntryButton";
+import LoginWebviewEmbed from "../../components/common/custom/LoginWebviewEmbed";
 
 const ADMIN_TABS = [
   { icon: "user", label: "입사자", path: "/admin/employee" },
@@ -94,6 +96,22 @@ export default function ComponentListPage() {
         <h3>ChatEntryButton</h3>
         <p className="muted">화면 우측 하단에 플로팅으로 떠있습니다.</p>
         <ChatEntryButton onClick={() => alert("챗봇 열기")} unreadCount={2} />
+      </BaseCard>
+
+      <BaseCard>
+        <h3>ChatEntryButton</h3>
+        <p className="muted">화면 우측 하단에 플로팅으로 떠있습니다.</p>
+        <ChatEntryButton onClick={() => alert("챗봇 열기")} unreadCount={2} />
+      </BaseCard>
+
+      <BaseCard>
+        <h3>LoginWebviewEmbed</h3>
+        <LoginWebviewEmbed
+          src="https://gw.fingerservice.co.kr/"
+          title="ERP 로그인"
+          guideText="아래 화면에서 로그인을 완료해주세요."
+          height={220}
+        />
       </BaseCard>
     </div>
   );
