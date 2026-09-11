@@ -17,6 +17,7 @@ import ChatEntryButton from "../../components/common/layout/ChatEntryButton";
 import LoginWebviewEmbed from "../../components/common/custom/LoginWebviewEmbed";
 import CustomSearchbar, { highlightText } from "../../components/common/custom/CustomSearchbar";
 import WikiCategoryPanel from "../../components/common/custom/WikiCategoryPanel";
+import AcrosticInputForm from "../../components/common/custom/AcrosticInputForm";
 
 const ADMIN_TABS = [
   { icon: "user", label: "입사자", path: "/admin/employee" },
@@ -148,6 +149,14 @@ export default function ComponentListPage() {
             },
           ]}
           onItemClick={(item) => alert(`선택: ${item.title}`)}
+        />
+      </BaseCard>
+
+      <BaseCard>
+        <h3>AcrosticInputForm</h3>
+        <AcrosticInputForm
+          name="김핑거"
+          onSuccess={(lines) => alert(`저장됨: ${lines.join(' / ')}`)}
         />
       </BaseCard>
     </div>

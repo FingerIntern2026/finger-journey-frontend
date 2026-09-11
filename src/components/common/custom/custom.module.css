@@ -128,3 +128,57 @@
   font-size: 14px;
   background: #fafafa;
 }
+
+/* ===== AcrosticInputForm ===== */
+.acrosticForm {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.acrosticRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.acrosticChar {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: #6fc667;
+  color: white;
+  font-weight: 600;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.acrosticInput {
+  flex: 1;
+  height: 50px;
+  padding: 0 16px;
+  border: 1px solid #bcbcbc;
+  border-radius: 10px;
+  background: #f2f2f2;
+  font-size: 14px;
+}
+.acrosticErrorText {
+  color: #ff383c;
+  font-size: 12px;
+  margin: 4px 0 0;
+}
+.acrosticSubmitBtn {
+  height: 62px;
+  border: none;
+  border-radius: 10px;
+  background: #6fc667;
+  color: white;
+  font-weight: 700;
+  font-size: 20px;
+  cursor: pointer;
+  margin-top: 8px;
+}
+.acrosticSubmitBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
