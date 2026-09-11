@@ -49,7 +49,8 @@ export default function ComponentListPage() {
 
   return (
     <div style={{ padding: "24px" }}>
-      <h2>공통 컴포넌트 목록</h2>
+      <h2>공통 컴포넌트 (base/)</h2>
+      <p className="muted">범용 UI 원자단위 — 특정 화면/기능에 종속되지 않음</p>
 
       <BaseCard>
         <h3>BaseButton</h3>
@@ -92,6 +93,9 @@ export default function ComponentListPage() {
         <h3>BaseProgressBar</h3>
         <BaseProgressBar current={4} total={10} />
       </BaseCard>
+
+      <h2>일반 컴포넌트 (layout/, custom/)</h2>
+      <p className="muted">핑거저니 화면 전용으로 조합된 컴포넌트</p>
 
       <BaseCard>
         <h3>CustomProgressIndicator</h3>
