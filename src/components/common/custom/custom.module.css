@@ -1,0 +1,61 @@
+/* custom.module.css */
+
+/* CustomAuthForm 관련 */
+.authForm {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.formErrorText {
+  color: red;
+  font-size: 14px;
+  margin: 0;
+}
+
+.submitButton {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* IntroScreen 관련 */
+.introBadge {
+  display: inline-block;
+  color: #4caf50;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.introTitle {
+  font-size: 22px;
+  font-weight: bold;
+  white-space: pre-line; /* 문자열 안에 \n 넣으면 줄바꿈 되게 해줌 */
+}
+
+.introDescription {
+  color: #666;
+  font-size: 14px;
+}
+
+.introPlaceholder {
+  width: 150px;
+  height: 150px;
+  background-color: #d9d9d9;
+  margin: 0 auto;
+}
+
+.introButton {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 16px;
+  width: 100%;
+  cursor: pointer;
+}
