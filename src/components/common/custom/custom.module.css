@@ -72,3 +72,21 @@
   color: #999;
   cursor: pointer;
 }
+/* custom.module.css의 역할 */
+/* custom 폴더 컴포넌트들이 공통으로 쓰는 스타일 모음 (base.module.css와 같은 컨벤션) */
+
+/* ===== CustomProgressIndicator ===== */
+.progressIndicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.progressIndicatorBar {
+  flex: 1;
+}
+
+.progressIndicatorIcon {
+  width: 20px;
+  height: 20px;
+}
