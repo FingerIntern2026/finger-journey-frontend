@@ -1,0 +1,27 @@
+/* ===== CustomSearchbar ===== */
+.searchbarWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+.searchbarInput {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+.searchbarIconBtn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+.highlight {
+  background: #fff59d;
+  border-radius: 2px;
+}
