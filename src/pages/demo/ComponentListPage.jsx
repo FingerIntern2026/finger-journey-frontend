@@ -102,18 +102,8 @@ export default function ComponentListPage() {
       </BaseCard>
 
       <BaseCard>
-        <h3>ContentCarousel (핑거이야기 세트)</h3>
+        <h3>ContentCarousel</h3>
         <ContentCarousel imageSrc={PLACEHOLDER_IMG} imageAlt="씨앗 2010" />
-      </BaseCard>
-
-      <BaseCard>
-        <h3>ContentCarousel (법인카드 세트)</h3>
-        <ContentCarousel imageSrc={PLACEHOLDER_IMG} imageAlt="카드를 받았어요" />
-      </BaseCard>
-
-      <BaseCard>
-        <h3>ContentCarousel (포레스트 세트)</h3>
-        <ContentCarousel imageSrc={PLACEHOLDER_IMG} imageAlt="매일 업무일지를 작성해요" />
       </BaseCard>
 
       <BaseCard>
