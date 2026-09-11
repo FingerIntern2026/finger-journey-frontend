@@ -12,8 +12,9 @@
  */
 import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-// PageLayout: 공통 헤더+틀을 씌워주는 컴포넌트 (지연님이 만든 그 파일)
+// PageLayout: 공통 틀을 씌워주는 컴포넌트 (지연님이 만든 그 파일)
 import PageLayout from '../../components/common/layout/PageLayout.jsx';
+import Header from '../../components/common/layout/Header.jsx';
 import BaseButton from '../../components/common/base/BaseButton.jsx';
 
 const MoveGuidePage = () => {
@@ -43,9 +44,9 @@ const MoveGuidePage = () => {
   };
 
   return (
-    // PageLayout으로 전체 틀 씌우기. label엔 화면 제목, onBack엔 뒤로가기 동작 전달
+    // PageLayout으로 전체 틀 씌우기. header에 넘긴 Header가 제목+뒤로가기를 그림
     // navigate(-1) = "브라우저 뒤로가기 버튼 누른 것"과 같은 효과 (한 페이지 전으로 이동)
-    <PageLayout label="화면이동 예제" onBack={() => navigate(-1)}>
+    <PageLayout header={<Header label="화면이동 예제" onBack={() => navigate(-1)} />}>
       <div style={{ padding: 16, display: 'flex', flexDirection: 'column', gap: 14 }}>
 
         {/* 화면 설명 문구 */}
