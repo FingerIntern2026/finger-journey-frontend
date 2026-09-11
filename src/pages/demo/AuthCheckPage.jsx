@@ -7,8 +7,9 @@
  * 토글은 MoveGuidePage에 있음
  */
 import { useNavigate } from 'react-router-dom';
-// PageLayout: 공통 헤더+틀을 씌워주는 컴포넌트
+// PageLayout: 공통 틀을 씌워주는 컴포넌트
 import PageLayout from '../../components/common/layout/PageLayout.jsx';
+import Header from '../../components/common/layout/Header.jsx';
 // useAuth: 파트A(재웅님)가 만든 훅. localStorage의 로그인 상태를 읽어서
 // { isLoggedIn: true/false } 형태로 돌려줌
 import { useAuth } from '../../hooks/useAuth.js';
@@ -25,7 +26,7 @@ const AuthCheckPage = () => {
 
   return (
     // PageLayout으로 전체 틀 씌우기. onBack에는 뒤로가기 동작 연결
-    <PageLayout label="권한검사 예제" onBack={() => navigate(-1)}>
+    <PageLayout header={<Header label="권한검사 예제" onBack={() => navigate(-1)} />}>
       <div style={{ padding: 16, display: 'flex', flexDirection: 'column', gap: 12 }}>
 
         {/* isLoggedIn 값에 따라 초록/회색 뱃지를 다르게 보여줌 */}
