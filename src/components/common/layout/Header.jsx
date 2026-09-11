@@ -10,13 +10,15 @@
  * 역할만 함. (예: 체크인 화면="가방 싸는 중", 오솔길 화면="온보딩 진행 중")
  *
  * ⚠️ 오솔길 메인맵 전용 헤더(FINGER ONBOARDING 배지 있는 것)는 구조가 달라서
- *    이 컴포넌트가 아니라 별도 컴포넌트(PathMapHeader 등)로 만들어야 함.
+ *    이 컴포넌트가 아니라 별도 컴포넌트(PathMapHeader)로 만듦. 관리자 화면도
+ *    별도 컴포넌트(AdminHeader)임 — PageLayout이 header prop으로 받아 조합함.
  *
  * ※ 스타일은 layout.module.css의 CSS Modules 클래스를 사용함
  *    (팀 컨벤션: 폴더 단위 CSS Modules 방식)
  */
 import { ChevronLeft } from 'lucide-react';
 // ↑ 왼쪽 화살표 아이콘. lucide-react 라이브러리에서 가져와요.
+import BaseProgressBar from '../base/BaseProgressBar';
 import styles from './layout.module.css';
 
 const Header = ({ label, current, total, onBack }) => {
@@ -25,10 +27,7 @@ const Header = ({ label, current, total, onBack }) => {
   //                 체크인 화면에서는 안 넘기면 자동으로 숨겨짐
   // onBack: 뒤로가기 버튼 눌렀을 때 실행할 함수. 실제 동작(라우팅 방식)은
   //         나중에 사수님 컨펌 후 쓰는 쪽에서 넘겨주면 됨 (아직 미확정)
-
-  // current, total이 둘 다 있으면 (현재/전체)*100으로 진행률(%) 계산
-  // 둘 중 하나라도 없으면 0으로 처리
-  const progress = current && total ? (current / total) * 100 : 0;
+  // 진행률(%) 계산 자체는 BaseProgressBar(3.1.9)에 위임 — 여기선 current/total만 넘김
 
   return (
     // 헤더 전체를 감싸는 영역
@@ -43,23 +42,23 @@ const Header = ({ label, current, total, onBack }) => {
         )}
       </div>
 
-      {/* 하단 줄: 뒤로가기 버튼 + 진행률 바 + 새싹 아이콘 */}
+      {/* 하단 줄: onBack 없으면 뒤로가기 버튼 자체를 안 그림 (예: 최상위 허브 화면).
+          total 있으면 진행률 바+새싹까지 추가로 그림 */}
       <div className={styles.headerRow}>
-        {/* 뒤로가기 버튼: 클릭하면 onBack 함수 실행 (내용은 밖에서 결정) */}
-        <button className={styles.headerBackBtn} onClick={onBack} aria-label="뒤로가기">
-          <ChevronLeft size={20} />
-        </button>
+        {onBack && (
+          <button className={styles.headerBackBtn} onClick={onBack} aria-label="뒤로가기">
+            <ChevronLeft size={20} />
+          </button>
+        )}
 
-        {/* 진행률 바: 회색 트랙 위에 초록색 바가 progress%만큼 채워짐 */}
-        <div className={styles.headerProgressTrack}>
-          <div
-            className={styles.headerProgressFill}
-            style={{ width: `${progress}%` }}
-          />
-        </div>
+        {total && (
+          <>
+            <BaseProgressBar current={current} total={total} className={styles.headerProgressTrack} />
 
-        {/* 오른쪽 새싹 아이콘 (경로는 실제 파일 확정되면 교체 필요) */}
-        <img src="/icons/sprout.svg" alt="새싹" className={styles.headerIcon} />
+            {/* 오른쪽 새싹 아이콘 (경로는 실제 파일 확정되면 교체 필요) */}
+            <img src="/icons/sprout.svg" alt="새싹" className={styles.headerIcon} />
+          </>
+        )}
       </div>
     </div>
   );

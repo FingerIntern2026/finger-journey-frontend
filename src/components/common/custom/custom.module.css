@@ -48,6 +48,25 @@
   background-color: #d9d9d9;
   margin: 0 auto;
 }
+/* OfficeFloorMap 관련 */
+.officeFloorMap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+}
+
+.officeTitle {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.officeMapPlaceholder {
+  width: 100%;
+  height: 400px;
+  background-color: #d9d9d9;
+  border-radius: 12px;
+}
 
 .introButton {
   background-color: #4caf50;
@@ -228,4 +247,65 @@
 .checklistLabel {
   font-size: 14px;
   color: #333;
+}
+/* CustomImageUploader 관련 */
+.imageUploaderRow {
+  display: flex;
+  gap: 8px;
+}
+
+.imageSlot {
+  position: relative;
+  width: 70px;
+  height: 70px;
+}
+
+.imagePreview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.imageRemoveButton {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #333;
+  color: white;
+  border: none;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.imageAddButton {
+  width: 70px;
+  height: 70px;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  background: none;
+  font-size: 24px;
+  color: #999;
+  cursor: pointer;
+}
+/* custom.module.css의 역할 */
+/* custom 폴더 컴포넌트들이 공통으로 쓰는 스타일 모음 (base.module.css와 같은 컨벤션) */
+
+/* ===== CustomProgressIndicator ===== */
+.progressIndicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.progressIndicatorBar {
+  flex: 1;
+}
+
+.progressIndicatorIcon {
+  width: 20px;
+  height: 20px;
 }
