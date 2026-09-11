@@ -15,6 +15,8 @@ import AdminHeader from "../../components/common/layout/AdminHeader";
 import BottomTabNav from "../../components/common/layout/BottomTabNav";
 import ChatEntryButton from "../../components/common/layout/ChatEntryButton";
 import LoginWebviewEmbed from "../../components/common/custom/LoginWebviewEmbed";
+import CustomSearchbar, { highlightText } from "../../components/common/custom/CustomSearchbar";
+import WikiCategoryPanel from "../../components/common/custom/WikiCategoryPanel";
 
 const ADMIN_TABS = [
   { icon: "user", label: "입사자", path: "/admin/employee" },
@@ -39,6 +41,8 @@ export default function ComponentListPage() {
     { value: "dev2", label: "개발2팀" },
     { value: "hr", label: "인사팀" },
   ];
+
+  const [searchKeyword, setSearchKeyword] = useState("");
 
   return (
     <div style={{ padding: "24px" }}>
@@ -110,6 +114,40 @@ export default function ComponentListPage() {
           title="ERP 로그인"
           guideText="아래 화면에서 로그인을 완료해주세요."
           height={220}
+        />
+      </BaseCard>
+
+      <BaseCard>
+        <h3>CustomSearchbar</h3>
+        <CustomSearchbar
+          value={searchKeyword}
+          onChange={setSearchKeyword}
+          onSearch={setSearchKeyword}
+        />
+        <p className="muted">검색 결과 하이라이트 예시:</p>
+        <p>{highlightText("회의실 예약하는 법", searchKeyword)}</p>
+      </BaseCard>
+
+      <BaseCard>
+        <h3>WikiCategoryPanel</h3>
+        <WikiCategoryPanel
+          categories={[
+            {
+              id: 'company-map',
+              name: '회사 지도',
+              icon: { type: 'emoji', emoji: '🗺️' },
+              count: 6,
+              items: [{ id: 1, title: '2층 회의실 위치' }],
+            },
+            {
+              id: 'welfare',
+              name: '복지제도',
+              icon: null,
+              count: 0,
+              items: [],
+            },
+          ]}
+          onItemClick={(item) => alert(`선택: ${item.title}`)}
         />
       </BaseCard>
     </div>
