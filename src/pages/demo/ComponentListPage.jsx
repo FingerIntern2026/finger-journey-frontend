@@ -102,37 +102,18 @@ export default function ComponentListPage() {
       </BaseCard>
 
       <BaseCard>
-        <h3>ContentCarousel (핑거이야기 세트 — year)</h3>
-        <ContentCarousel
-          year="2010"
-          title="씨앗"
-          illustrationSrc={PLACEHOLDER_IMG}
-          description="금융과 기술을 연결하기 위한 핑거의 첫걸음이 시작되었습니다."
-        />
+        <h3>ContentCarousel (핑거이야기 세트)</h3>
+        <ContentCarousel imageSrc={PLACEHOLDER_IMG} imageAlt="씨앗 2010" />
       </BaseCard>
 
       <BaseCard>
-        <h3>ContentCarousel (법인카드 세트 — footnote)</h3>
-        <ContentCarousel
-          title="카드를 받았어요!"
-          illustrationSrc={PLACEHOLDER_IMG}
-          description="카드 뒷면에 서명(싸인)을 해주세요."
-          footnote="아직 미수령 시 HR 담당자님께 문의해주세요"
-        />
+        <h3>ContentCarousel (법인카드 세트)</h3>
+        <ContentCarousel imageSrc={PLACEHOLDER_IMG} imageAlt="카드를 받았어요" />
       </BaseCard>
 
       <BaseCard>
-        <h3>ContentCarousel (포레스트 세트 — steps)</h3>
-        <ContentCarousel
-          title="매일 업무일지를 작성해요!"
-          illustrationSrc={PLACEHOLDER_IMG}
-          description="포레스트에서 업무일지를 작성하면 동료들과 공유할 수 있어요."
-          steps={[
-            { icon: "1", label: "작성" },
-            { icon: "2", label: "제출" },
-            { icon: "3", label: "승인" },
-          ]}
-        />
+        <h3>ContentCarousel (포레스트 세트)</h3>
+        <ContentCarousel imageSrc={PLACEHOLDER_IMG} imageAlt="매일 업무일지를 작성해요" />
       </BaseCard>
 
       <BaseCard>
