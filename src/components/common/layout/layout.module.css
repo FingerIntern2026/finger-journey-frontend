@@ -161,9 +161,8 @@
   font-weight: 700;
 }
 
-.pathMapStep {
-  font-size: 13px;
-  color: #888;
+.pathMapProgress {
+  width: 100%;
 }
 
 /* ===== ContentCarousel ===== */

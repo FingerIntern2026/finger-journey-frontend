@@ -11,6 +11,8 @@ import BaseSelect from "../../components/common/base/BaseSelect";
 import BaseTextArea from "../../components/common/base/BaseTextArea";
 import BaseCard from "../../components/common/base/BaseCard";
 import BaseCheckbox from "../../components/common/base/BaseCheckbox";
+import BaseProgressBar from "../../components/common/base/BaseProgressBar";
+import CustomProgressIndicator from "../../components/common/custom/CustomProgressIndicator";
 import AdminHeader from "../../components/common/layout/AdminHeader";
 import BottomTabNav from "../../components/common/layout/BottomTabNav";
 import ChatEntryButton from "../../components/common/layout/ChatEntryButton";
@@ -87,6 +89,16 @@ export default function ComponentListPage() {
       </BaseCard>
 
       <BaseCard>
+        <h3>BaseProgressBar</h3>
+        <BaseProgressBar current={4} total={10} />
+      </BaseCard>
+
+      <BaseCard>
+        <h3>CustomProgressIndicator</h3>
+        <CustomProgressIndicator current={7} total={10} />
+      </BaseCard>
+
+      <BaseCard>
         <h3>AdminHeader</h3>
         <AdminHeader onLogout={() => alert("로그아웃")} />
       </BaseCard>
@@ -98,7 +110,7 @@ export default function ComponentListPage() {
 
       <BaseCard>
         <h3>PathMapHeader</h3>
-        <PathMapHeader title="오솔길" currentStep={4} totalStep={10} />
+        <PathMapHeader title="오솔길" currentStep={7} totalStep={10} />
       </BaseCard>
 
       <BaseCard>
