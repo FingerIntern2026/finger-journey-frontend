@@ -44,31 +44,30 @@ const Header = ({ label, current, total, onBack }) => {
         )}
       </div>
 
-      {/* 하단 줄: total 있을 때만 진행률 바+새싹까지 그림. 없으면 뒤로가기만 있는 심플한 헤더 */}
-      {total ? (
-        <div className={styles.headerRow}>
+      {/* 하단 줄: onBack 없으면 뒤로가기 버튼 자체를 안 그림 (예: 최상위 허브 화면).
+          total 있으면 진행률 바+새싹까지 추가로 그림 */}
+      <div className={styles.headerRow}>
+        {onBack && (
           <button className={styles.headerBackBtn} onClick={onBack} aria-label="뒤로가기">
             <ChevronLeft size={20} />
           </button>
+        )}
 
-          {/* 진행률 바: 회색 트랙 위에 초록색 바가 progress%만큼 채워짐 */}
-          <div className={styles.headerProgressTrack}>
-            <div
-              className={styles.headerProgressFill}
-              style={{ width: `${progress}%` }}
-            />
-          </div>
+        {total && (
+          <>
+            {/* 진행률 바: 회색 트랙 위에 초록색 바가 progress%만큼 채워짐 */}
+            <div className={styles.headerProgressTrack}>
+              <div
+                className={styles.headerProgressFill}
+                style={{ width: `${progress}%` }}
+              />
+            </div>
 
-          {/* 오른쪽 새싹 아이콘 (경로는 실제 파일 확정되면 교체 필요) */}
-          <img src="/icons/sprout.svg" alt="새싹" className={styles.headerIcon} />
-        </div>
-      ) : (
-        <div className={styles.headerRow}>
-          <button className={styles.headerBackBtn} onClick={onBack} aria-label="뒤로가기">
-            <ChevronLeft size={20} />
-          </button>
-        </div>
-      )}
+            {/* 오른쪽 새싹 아이콘 (경로는 실제 파일 확정되면 교체 필요) */}
+            <img src="/icons/sprout.svg" alt="새싹" className={styles.headerIcon} />
+          </>
+        )}
+      </div>
     </div>
   );
 };
