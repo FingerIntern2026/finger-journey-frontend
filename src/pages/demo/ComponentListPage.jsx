@@ -14,6 +14,7 @@ import BaseCheckbox from "../../components/common/base/BaseCheckbox";
 import AdminHeader from "../../components/common/layout/AdminHeader";
 import BottomTabNav from "../../components/common/layout/BottomTabNav";
 import ChatEntryButton from "../../components/common/layout/ChatEntryButton";
+import PathMapHeader from "../../components/common/layout/PathMapHeader";
 
 const ADMIN_TABS = [
   { icon: "user", label: "입사자", path: "/admin/employee" },
@@ -88,6 +89,11 @@ export default function ComponentListPage() {
       <BaseCard>
         <h3>BottomTabNav</h3>
         <BottomTabNav tabs={ADMIN_TABS} active={activeTab} onChange={setActiveTab} />
+      </BaseCard>
+
+      <BaseCard>
+        <h3>PathMapHeader</h3>
+        <PathMapHeader title="오솔길" currentStep={4} totalStep={10} />
       </BaseCard>
 
       <BaseCard>

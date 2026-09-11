@@ -137,6 +137,35 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
+/* ===== PathMapHeader ===== */
+.pathMapHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 20px 16px;
+}
+
+.pathMapBadge {
+  background: #1b1b1b;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.pathMapTitle {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.pathMapStep {
+  font-size: 13px;
+  color: #888;
+}
+
 .chatEntryBadge {
   position: absolute;
   top: -2px;
