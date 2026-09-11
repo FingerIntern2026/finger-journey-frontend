@@ -114,7 +114,7 @@ export default function ComponentListPage() {
           src="https://gw.fingerservice.co.kr/"
           title="ERP 로그인"
           guideText="아래 화면에서 로그인을 완료해주세요."
-          height={220}
+          height={420}
         />
       </BaseCard>
 
@@ -137,7 +137,7 @@ export default function ComponentListPage() {
               id: 'company-map',
               name: '회사 지도',
               icon: { type: 'emoji', emoji: '🗺️' },
-              count: 6,
+              count: 1,
               items: [{ id: 1, title: '2층 회의실 위치' }],
             },
             {

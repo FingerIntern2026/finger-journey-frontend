@@ -96,8 +96,6 @@
 }
 
 /* ===== LoginWebviewEmbed ===== */
-/* height는 컴포넌트에서 style={{ height }}로 인라인 적용하므로
-   여기엔 고정 min-height를 넣지 않음 (쓰는 곳마다 크기가 달라서) */
 .webviewWrapper {
   display: flex;
   flex-direction: column;
@@ -109,10 +107,16 @@
   background: #f5f5f5;
   border-bottom: 1px solid #eee;
 }
+.webviewScaleOuter {
+  position: relative;
+  overflow: hidden;
+}
+.webviewScaleInner {
+  transform-origin: top left;
+}
 .webviewFrame {
-  flex: 1;
-  width: 100%;
   border: none;
+  display: block;
 }
 .webviewPreviewImg {
   width: 100%;
