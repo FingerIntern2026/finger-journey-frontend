@@ -10,7 +10,8 @@
  * 역할만 함. (예: 체크인 화면="가방 싸는 중", 오솔길 화면="온보딩 진행 중")
  *
  * ⚠️ 오솔길 메인맵 전용 헤더(FINGER ONBOARDING 배지 있는 것)는 구조가 달라서
- *    이 컴포넌트가 아니라 별도 컴포넌트(PathMapHeader 등)로 만들어야 함.
+ *    이 컴포넌트가 아니라 별도 컴포넌트(PathMapHeader)로 만듦. 관리자 화면도
+ *    별도 컴포넌트(AdminHeader)임 — PageLayout이 header prop으로 받아 조합함.
  *
  * ※ 스타일은 layout.module.css의 CSS Modules 클래스를 사용함
  *    (팀 컨벤션: 폴더 단위 CSS Modules 방식)
@@ -43,24 +44,31 @@ const Header = ({ label, current, total, onBack }) => {
         )}
       </div>
 
-      {/* 하단 줄: 뒤로가기 버튼 + 진행률 바 + 새싹 아이콘 */}
-      <div className={styles.headerRow}>
-        {/* 뒤로가기 버튼: 클릭하면 onBack 함수 실행 (내용은 밖에서 결정) */}
-        <button className={styles.headerBackBtn} onClick={onBack} aria-label="뒤로가기">
-          <ChevronLeft size={20} />
-        </button>
+      {/* 하단 줄: total 있을 때만 진행률 바+새싹까지 그림. 없으면 뒤로가기만 있는 심플한 헤더 */}
+      {total ? (
+        <div className={styles.headerRow}>
+          <button className={styles.headerBackBtn} onClick={onBack} aria-label="뒤로가기">
+            <ChevronLeft size={20} />
+          </button>
 
-        {/* 진행률 바: 회색 트랙 위에 초록색 바가 progress%만큼 채워짐 */}
-        <div className={styles.headerProgressTrack}>
-          <div
-            className={styles.headerProgressFill}
-            style={{ width: `${progress}%` }}
-          />
+          {/* 진행률 바: 회색 트랙 위에 초록색 바가 progress%만큼 채워짐 */}
+          <div className={styles.headerProgressTrack}>
+            <div
+              className={styles.headerProgressFill}
+              style={{ width: `${progress}%` }}
+            />
+          </div>
+
+          {/* 오른쪽 새싹 아이콘 (경로는 실제 파일 확정되면 교체 필요) */}
+          <img src="/icons/sprout.svg" alt="새싹" className={styles.headerIcon} />
         </div>
-
-        {/* 오른쪽 새싹 아이콘 (경로는 실제 파일 확정되면 교체 필요) */}
-        <img src="/icons/sprout.svg" alt="새싹" className={styles.headerIcon} />
-      </div>
+      ) : (
+        <div className={styles.headerRow}>
+          <button className={styles.headerBackBtn} onClick={onBack} aria-label="뒤로가기">
+            <ChevronLeft size={20} />
+          </button>
+        </div>
+      )}
     </div>
   );
 };
