@@ -1,5 +1,5 @@
 /* dialog.module.css의 역할 */
-/* DialogAlert, DialogConfirm 등 dialog 폴더 컴포넌트들이 공통으로 쓰는 스타일 모음 */
+/* DialogAlert, DialogConfirm, DialogQuiz 등 dialog 폴더 컴포넌트들이 공통으로 쓰는 스타일 모음 */
 /* CSS Modules 방식이라 클래스명이 빌드 시 자동으로 고유화되어 다른 폴더 스타일과 충돌하지 않음 */
 
 /* 화면 전체를 덮는 반투명 배경 (다이얼로그 뒤 어둡게 처리) */
@@ -22,10 +22,57 @@
   max-width: 90%;
 }
 
-/* 확인/취소 버튼 등 액션 버튼들을 가로로 배치하는 영역 (DialogConfirm에서 사용) */
+/* 확인/취소 버튼 등 액션 버튼들을 가로로 배치하는 영역 (DialogConfirm, DialogQuiz에서 사용) */
 .actions {
   display: flex;
   gap: 8px;
   justify-content: flex-end;
   margin-top: 16px;
+}
+
+/* ===== DialogQuiz 전용 =====
+   Figma 실제 디자인(PTH_QUZ_C01~C04) 기준 색상/레이아웃 */
+
+/* 문항 카드 상단 타이틀 (예: "징검다리 퀴즈") */
+.quizTitle {
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+/* 문항 아래 보조 설명 (예: "어떤 커피를 좋아하시나요?") */
+.quizSubtitle {
+  color: #555;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+/* 4지선다 옵션 2x2 그리드 배치 (디자인상 세로 나열이 아니라 2열 배치임) */
+.quizOptions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+/* 옵션 버튼 — 정답/오답 구분 없이 다 같은 스타일 (채점 안 하니까) */
+.quizOption {
+  padding: 10px 8px;
+  border: 1px solid #41943a;
+  border-radius: 10px;
+  background: #d2f3cf;
+  cursor: pointer;
+  font-size: 13px;
+  text-align: center;
+}
+.quizOption:hover {
+  background: #c1ecbc;
+}
+
+/* 마지막 문항까지 답했을 때 뜨는 "퀴즈 CLEAR!" 문구 */
+.quizClearText {
+  font-weight: 700;
+  font-size: 20px;
+  text-align: center;
+  margin: 12px 0 20px;
 }

@@ -1,6 +1,230 @@
-/* custom.module.css */
 
-/* CustomAuthForm 관련 */
+/* custom.module.css의 역할 */
+/* components/common/custom 폴더 컴포넌트들이 공통으로 쓰는 스타일 모음 */
+
+
+/* ===== CustomSearchbar ===== */
+
+.searchbarWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+
+.searchbarInput {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+
+.searchbarIconBtn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.highlight {
+  background: #fff59d;
+  border-radius: 2px;
+}
+
+
+/* ===== WikiCategoryPanel ===== */
+
+.wikiPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.wikiCategoryHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fafafa;
+  cursor: pointer;
+}
+
+.wikiCategoryTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+}
+
+.wikiCategoryCount {
+  font-size: 12px;
+  color: #888;
+}
+
+.wikiChevron {
+  transition: transform 0.15s ease;
+}
+
+.wikiChevronOpen {
+  transform: rotate(180deg);
+}
+
+.wikiItemList {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 16px 8px 28px;
+}
+
+.wikiItem {
+  text-align: left;
+  border: none;
+  background: transparent;
+  padding: 6px 0;
+  cursor: pointer;
+  font-size: 14px;
+  color: #333;
+}
+
+.wikiItem:hover {
+  color: #4caf50;
+}
+
+.wikiEmpty {
+  font-size: 13px;
+  color: #999;
+  padding: 6px 0;
+}
+
+/* WikiCategoryPanel 아이콘 */
+
+.wikiCategoryIcon {
+  font-size: 18px;
+}
+
+.wikiCategoryIconImg {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+
+/* ===== LoginWebviewEmbed ===== */
+
+.webviewWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.webviewGuide {
+  padding: 12px 16px;
+  font-size: 13px;
+  color: #555;
+  background: #f5f5f5;
+  border-bottom: 1px solid #eee;
+}
+
+.webviewScaleOuter {
+  position: relative;
+  overflow: hidden;
+}
+
+.webviewScaleInner {
+  transform-origin: top left;
+}
+
+.webviewFrame {
+  border: none;
+  display: block;
+}
+
+.webviewPreviewImg {
+  width: 100%;
+  border-radius: 8px;
+  display: block;
+}
+
+.webviewFallback {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  font-size: 14px;
+  background: #fafafa;
+}
+
+
+/* ===== AcrosticInputForm ===== */
+
+.acrosticForm {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.acrosticRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.acrosticChar {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: #6fc667;
+  color: white;
+  font-weight: 600;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.acrosticInput {
+  flex: 1;
+  height: 50px;
+  padding: 0 16px;
+  border: 1px solid #bcbcbc;
+  border-radius: 10px;
+  background: #f2f2f2;
+  font-size: 14px;
+}
+
+.acrosticErrorText {
+  color: #ff383c;
+  font-size: 12px;
+  margin: 4px 0 0;
+}
+
+.acrosticSubmitBtn {
+  height: 62px;
+  border: none;
+  border-radius: 10px;
+  background: #6fc667;
+  color: white;
+  font-weight: 700;
+  font-size: 20px;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.acrosticSubmitBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+
+/* ===== CustomAuthForm ===== */
+
 .authForm {
   display: flex;
   flex-direction: column;
@@ -23,7 +247,9 @@
   cursor: pointer;
 }
 
-/* IntroScreen 관련 */
+
+/* ===== IntroScreen ===== */
+
 .introBadge {
   display: inline-block;
   color: #4caf50;
@@ -48,7 +274,21 @@
   background-color: #d9d9d9;
   margin: 0 auto;
 }
-/* OfficeFloorMap 관련 */
+
+.introButton {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 16px;
+  width: 100%;
+  cursor: pointer;
+}
+
+
+/* ===== OfficeFloorMap ===== */
+
 .officeFloorMap {
   display: flex;
   flex-direction: column;
@@ -68,18 +308,9 @@
   border-radius: 12px;
 }
 
-.introButton {
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 14px;
-  font-size: 16px;
-  width: 100%;
-  cursor: pointer;
-}
 
-/* StageClearBanner 관련 */
+/* ===== StageClearBanner ===== */
+
 .stageClearBanner {
   display: flex;
   flex-direction: column;
@@ -151,7 +382,9 @@
   cursor: pointer;
 }
 
-/* QuizClearScreen 관련 */
+
+/* ===== QuizClearScreen ===== */
+
 .quizClearScreen {
   display: flex;
   flex-direction: column;
@@ -176,7 +409,9 @@
   max-width: 300px;
 }
 
-/* AcrosticResultScreen 관련 */
+
+/* ===== AcrosticResultScreen ===== */
+
 .acrosticResultScreen {
   display: flex;
   flex-direction: column;
@@ -230,7 +465,9 @@
   flex: 1;
 }
 
-/* CustomChecklist 관련 */
+
+/* ===== CustomChecklist ===== */
+
 .checklistCard {
   display: flex;
   flex-direction: column;
@@ -248,7 +485,10 @@
   font-size: 14px;
   color: #333;
 }
-/* CustomImageUploader 관련 */
+
+
+/* ===== CustomImageUploader ===== */
+
 .imageUploaderRow {
   display: flex;
   gap: 8px;
@@ -291,10 +531,10 @@
   color: #999;
   cursor: pointer;
 }
-/* custom.module.css의 역할 */
-/* custom 폴더 컴포넌트들이 공통으로 쓰는 스타일 모음 (base.module.css와 같은 컨벤션) */
+
 
 /* ===== CustomProgressIndicator ===== */
+
 .progressIndicator {
   display: flex;
   align-items: center;
