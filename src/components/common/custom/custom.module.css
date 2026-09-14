@@ -1,7 +1,10 @@
+
 /* custom.module.css의 역할 */
 /* components/common/custom 폴더 컴포넌트들이 공통으로 쓰는 스타일 모음 */
 
+
 /* ===== CustomSearchbar ===== */
+
 .searchbarWrapper {
   display: flex;
   align-items: center;
@@ -10,12 +13,14 @@
   border-radius: 8px;
   padding: 8px 12px;
 }
+
 .searchbarInput {
   flex: 1;
   border: none;
   outline: none;
   font-size: 14px;
 }
+
 .searchbarIconBtn {
   border: none;
   background: transparent;
@@ -24,17 +29,21 @@
   display: flex;
   align-items: center;
 }
+
 .highlight {
   background: #fff59d;
   border-radius: 2px;
 }
 
+
 /* ===== WikiCategoryPanel ===== */
+
 .wikiPanel {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
+
 .wikiCategoryHeader {
   display: flex;
   align-items: center;
@@ -45,28 +54,34 @@
   background: #fafafa;
   cursor: pointer;
 }
+
 .wikiCategoryTitle {
   display: flex;
   align-items: center;
   gap: 8px;
   font-weight: 600;
 }
+
 .wikiCategoryCount {
   font-size: 12px;
   color: #888;
 }
+
 .wikiChevron {
   transition: transform 0.15s ease;
 }
+
 .wikiChevronOpen {
   transform: rotate(180deg);
 }
+
 .wikiItemList {
   display: flex;
   flex-direction: column;
   gap: 4px;
   padding: 8px 16px 8px 28px;
 }
+
 .wikiItem {
   text-align: left;
   border: none;
@@ -76,9 +91,11 @@
   font-size: 14px;
   color: #333;
 }
+
 .wikiItem:hover {
-  color: #4CAF50;
+  color: #4caf50;
 }
+
 .wikiEmpty {
   font-size: 13px;
   color: #999;
@@ -86,20 +103,25 @@
 }
 
 /* WikiCategoryPanel 아이콘 */
+
 .wikiCategoryIcon {
   font-size: 18px;
 }
+
 .wikiCategoryIconImg {
   width: 20px;
   height: 20px;
   object-fit: contain;
 }
 
+
 /* ===== LoginWebviewEmbed ===== */
+
 .webviewWrapper {
   display: flex;
   flex-direction: column;
 }
+
 .webviewGuide {
   padding: 12px 16px;
   font-size: 13px;
@@ -107,22 +129,27 @@
   background: #f5f5f5;
   border-bottom: 1px solid #eee;
 }
+
 .webviewScaleOuter {
   position: relative;
   overflow: hidden;
 }
+
 .webviewScaleInner {
   transform-origin: top left;
 }
+
 .webviewFrame {
   border: none;
   display: block;
 }
+
 .webviewPreviewImg {
   width: 100%;
   border-radius: 8px;
   display: block;
 }
+
 .webviewFallback {
   flex: 1;
   display: flex;
@@ -133,17 +160,21 @@
   background: #fafafa;
 }
 
+
 /* ===== AcrosticInputForm ===== */
+
 .acrosticForm {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
+
 .acrosticRow {
   display: flex;
   align-items: center;
   gap: 8px;
 }
+
 .acrosticChar {
   width: 42px;
   height: 42px;
@@ -157,6 +188,7 @@
   justify-content: center;
   flex-shrink: 0;
 }
+
 .acrosticInput {
   flex: 1;
   height: 50px;
@@ -166,11 +198,13 @@
   background: #f2f2f2;
   font-size: 14px;
 }
+
 .acrosticErrorText {
   color: #ff383c;
   font-size: 12px;
   margin: 4px 0 0;
 }
+
 .acrosticSubmitBtn {
   height: 62px;
   border: none;
@@ -182,7 +216,336 @@
   cursor: pointer;
   margin-top: 8px;
 }
+
 .acrosticSubmitBtn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+
+/* ===== CustomAuthForm ===== */
+
+.authForm {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.formErrorText {
+  color: red;
+  font-size: 14px;
+  margin: 0;
+}
+
+.submitButton {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+
+/* ===== IntroScreen ===== */
+
+.introBadge {
+  display: inline-block;
+  color: #4caf50;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.introTitle {
+  font-size: 22px;
+  font-weight: bold;
+  white-space: pre-line; /* 문자열 안에 \n 넣으면 줄바꿈 되게 해줌 */
+}
+
+.introDescription {
+  color: #666;
+  font-size: 14px;
+}
+
+.introPlaceholder {
+  width: 150px;
+  height: 150px;
+  background-color: #d9d9d9;
+  margin: 0 auto;
+}
+
+.introButton {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 16px;
+  width: 100%;
+  cursor: pointer;
+}
+
+
+/* ===== OfficeFloorMap ===== */
+
+.officeFloorMap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+}
+
+.officeTitle {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.officeMapPlaceholder {
+  width: 100%;
+  height: 400px;
+  background-color: #d9d9d9;
+  border-radius: 12px;
+}
+
+
+/* ===== StageClearBanner ===== */
+
+.stageClearBanner {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  text-align: center;
+}
+
+.stageHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.stageIconImage {
+  width: 40px;
+  height: 40px;
+}
+
+.stageTitle {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.stageSubtitle {
+  color: #666;
+  font-size: 14px;
+}
+
+.clearBox {
+  border: 2px dashed #4caf50;
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.confettiImage {
+  width: 150px;
+  height: 150px;
+}
+
+.clearText {
+  color: #4caf50;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.clearCaption {
+  color: #333;
+  font-size: 14px;
+}
+
+.linkArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 13px;
+  color: #888;
+}
+
+.linkText {
+  color: #4caf50;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+
+/* ===== QuizClearScreen ===== */
+
+.quizClearScreen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.quizClearBox {
+  border: 2px dashed #4caf50;
+  border-radius: 12px;
+  padding: 16px 24px;
+}
+
+.quizClearText {
+  color: #4caf50;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.quizIllustration {
+  width: 100%;
+  max-width: 300px;
+}
+
+
+/* ===== AcrosticResultScreen ===== */
+
+.acrosticResultScreen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.acrosticCompleteText {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.userBadgeCard {
+  background-color: #f0f9f0;
+  border-radius: 20px;
+  padding: 8px 20px;
+  font-size: 13px;
+  color: #4caf50;
+}
+
+.acrosticLines {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.acrosticLineRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.acrosticLetter {
+  background-color: #4caf50;
+  color: white;
+  border-radius: 8px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.acrosticText {
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  padding: 8px 12px;
+  flex: 1;
+}
+
+
+/* ===== CustomChecklist ===== */
+
+.checklistCard {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 0;
+}
+
+.checklistRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+}
+
+.checklistLabel {
+  font-size: 14px;
+  color: #333;
+}
+
+
+/* ===== CustomImageUploader ===== */
+
+.imageUploaderRow {
+  display: flex;
+  gap: 8px;
+}
+
+.imageSlot {
+  position: relative;
+  width: 70px;
+  height: 70px;
+}
+
+.imagePreview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.imageRemoveButton {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #333;
+  color: white;
+  border: none;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.imageAddButton {
+  width: 70px;
+  height: 70px;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  background: none;
+  font-size: 24px;
+  color: #999;
+  cursor: pointer;
+}
+
+
+/* ===== CustomProgressIndicator ===== */
+
+.progressIndicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.progressIndicatorBar {
+  flex: 1;
+}
+
+.progressIndicatorIcon {
+  width: 20px;
+  height: 20px;
 }

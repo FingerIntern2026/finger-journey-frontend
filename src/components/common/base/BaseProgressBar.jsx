@@ -1,4 +1,10 @@
-// TODO: 데모 범위 제외 - 실서비스 본개발 때 구현
-export default function BaseProgressBar() {
-  return null;
+import styles from './base.module.css';
+
+export default function BaseProgressBar({ current, total, className = '' }) {
+  const percent = total ? (current / total) * 100 : 0;
+  return (
+    <div className={`${styles.progressTrack} ${className}`}>
+      <div className={styles.progressFill} style={{ width: `${percent}%` }} />
+    </div>
+  );
 }
