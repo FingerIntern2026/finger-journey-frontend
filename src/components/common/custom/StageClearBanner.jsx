@@ -4,6 +4,7 @@
 // 컨페티 이미지는 8개 스테이지 전부 똑같아서 고정으로 넣어두고,
 // 제목/부제목/아이콘/캡션/링크는 스테이지마다 달라서 props로 받아요.
 
+import BaseButton from '../base/BaseButton';
 import styles from './custom.module.css';
 
 const StageClearBanner = ({
@@ -40,9 +41,7 @@ const StageClearBanner = ({
         )}
       </div>
 
-      <button className={styles.introButton} onClick={onButtonClick}>
-        완료·맵으로 돌아가기
-      </button>
+      <BaseButton label="완료·맵으로 돌아가기" onClick={onButtonClick} fullWidth />
     </div>
   );
 };
