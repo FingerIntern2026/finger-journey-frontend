@@ -3,6 +3,7 @@
 // 일러스트만 세트마다 다르고 나머지(CLEAR!문구, 버튼)는 다 똑같아요.
 // 뱃지+제목+진행률바는 Header 컴포넌트(재웅님 담당)가 그리는 영역이라 여긴 포함 안 시켜요.
 
+import BaseButton from '../base/BaseButton';
 import styles from './custom.module.css';
 
 const QuizClearScreen = ({
@@ -19,9 +20,7 @@ const QuizClearScreen = ({
       {/* 일러스트만 세트마다 바뀜 */}
       <img src={illustrationSrc} alt="" className={styles.quizIllustration} />
 
-      <button className={styles.introButton} onClick={onButtonClick}>
-        완료·맵으로 돌아가기
-      </button>
+      <BaseButton label="완료·맵으로 돌아가기" onClick={onButtonClick} fullWidth />
     </div>
   );
 };

@@ -4,6 +4,7 @@
 // 3개 화면에서 재사용해요.
 // 상단 뱃지는 화면마다 다르지 않고 "핑거저니"로 통일해서 고정했어요.
 
+import BaseButton from '../base/BaseButton';
 import styles from './custom.module.css';
 
 const IntroScreen = ({
@@ -26,9 +27,7 @@ const IntroScreen = ({
           나중에 이미지 받으면 이 div를 <img src={...} /> 로 바꾸면 됨 */}
       <div className={styles.introPlaceholder} />
 
-      <button className={styles.introButton} onClick={onButtonClick}>
-        {buttonLabel}
-      </button>
+      <BaseButton label={buttonLabel} onClick={onButtonClick} fullWidth />
     </div>
   );
 };

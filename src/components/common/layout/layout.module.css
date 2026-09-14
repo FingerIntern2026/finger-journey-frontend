@@ -42,11 +42,6 @@
   flex: 1;
 }
 
-.headerIcon {
-  width: 20px;
-  height: 20px;
-}
-
 /* ===== PageLayout ===== */
 .pageLayout {
   display: flex;

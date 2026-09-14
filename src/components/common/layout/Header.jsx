@@ -18,7 +18,7 @@
  */
 import { ChevronLeft } from 'lucide-react';
 // ↑ 왼쪽 화살표 아이콘. lucide-react 라이브러리에서 가져와요.
-import BaseProgressBar from '../base/BaseProgressBar';
+import CustomProgressIndicator from '../custom/CustomProgressIndicator';
 import styles from './layout.module.css';
 
 const Header = ({ label, current, total, onBack }) => {
@@ -27,7 +27,8 @@ const Header = ({ label, current, total, onBack }) => {
   //                 체크인 화면에서는 안 넘기면 자동으로 숨겨짐
   // onBack: 뒤로가기 버튼 눌렀을 때 실행할 함수. 실제 동작(라우팅 방식)은
   //         나중에 사수님 컨펌 후 쓰는 쪽에서 넘겨주면 됨 (아직 미확정)
-  // 진행률(%) 계산 자체는 BaseProgressBar(3.1.9)에 위임 — 여기선 current/total만 넘김
+  // 진행률 바+새싹 아이콘은 CustomProgressIndicator(3.4.9)로 분리돼 있어 그대로 조합해서 씀
+  // (배지는 headerCount에서 이미 n/10을 보여주므로 showBadge={false}로 중복 표시 방지)
 
   return (
     // 헤더 전체를 감싸는 영역
@@ -52,12 +53,12 @@ const Header = ({ label, current, total, onBack }) => {
         )}
 
         {total && (
-          <>
-            <BaseProgressBar current={current} total={total} className={styles.headerProgressTrack} />
-
-            {/* 오른쪽 새싹 아이콘 (경로는 실제 파일 확정되면 교체 필요) */}
-            <img src="/icons/sprout.svg" alt="새싹" className={styles.headerIcon} />
-          </>
+          <CustomProgressIndicator
+            current={current}
+            total={total}
+            showBadge={false}
+            className={styles.headerProgressTrack}
+          />
         )}
       </div>
     </div>

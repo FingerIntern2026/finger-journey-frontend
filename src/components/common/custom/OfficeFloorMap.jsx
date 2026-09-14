@@ -3,6 +3,7 @@
 // 평면도는 마커까지 이미 합성된 완성 이미지를 통째로 받아서 보여주는 방식인데,
 // 실제 이미지 나오기 전까지는 회색 박스로 임시 채워둬요.
 
+import BaseButton from '../base/BaseButton';
 import styles from './custom.module.css';
 
 const OfficeFloorMap = ({
@@ -17,9 +18,7 @@ const OfficeFloorMap = ({
           나중에 이미지 받으면 이 div를 <img src={...} /> 로 바꾸면 됨 */}
       <div className={styles.officeMapPlaceholder} />
 
-      <button className={styles.introButton} onClick={onBackClick}>
-        뒤로 가기
-      </button>
+      <BaseButton label="뒤로 가기" onClick={onBackClick} fullWidth />
     </div>
   );
 };
