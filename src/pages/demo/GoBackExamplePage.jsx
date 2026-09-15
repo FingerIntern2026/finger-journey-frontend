@@ -5,6 +5,7 @@
 // 페이지 이동은 반드시 이 훅을 통해서만 수행 (React Router 원본 함수 직접 사용 금지)
 
 import useNavigation from "../../hooks/useNavigation";
+import { ROUTE_PATHS } from "../../config/routeConfig";
 
 export default function GoBackExamplePage() {
   const { goBack, goTo } = useNavigation();
@@ -22,7 +23,7 @@ export default function GoBackExamplePage() {
         (만약 이 페이지에 직접 들어와서 뒤로 갈 곳이 없다면, 아래 버튼으로
         데모 목록으로 이동하세요.)
       </p>
-      <button onClick={() => goTo("/demo")}>데모 목록으로</button>
+      <button onClick={() => goTo(ROUTE_PATHS.DEMO_HOME)}>데모 목록으로</button>
     </div>
   );
 }
