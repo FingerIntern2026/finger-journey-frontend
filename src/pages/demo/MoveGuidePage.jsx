@@ -16,6 +16,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import PageLayout from '../../components/common/layout/PageLayout.jsx';
 import Header from '../../components/common/layout/Header.jsx';
 import BaseButton from '../../components/common/base/BaseButton.jsx';
+import { ROUTE_PATHS } from '../../config/routeConfig';
 
 const MoveGuidePage = () => {
   // navigate: 버튼 눌렀을 때 다른 경로로 이동시켜주는 함수
@@ -74,19 +75,19 @@ const MoveGuidePage = () => {
             label={<>권한검사 <span>›</span></>}
             variant="ghost"
             fullWidth
-            onClick={() => navigate('/demo/move/auth-check')}
+            onClick={() => navigate(ROUTE_PATHS.DEMO_MOVE_AUTH_CHECK)}
           />
           <BaseButton
             label={<>파라미터전달 <span>›</span></>}
             variant="ghost"
             fullWidth
-            onClick={() => navigate('/demo/move/param')}
+            onClick={() => navigate(ROUTE_PATHS.DEMO_MOVE_PARAM)}
           />
           <BaseButton
             label={<>뒤로가기 <span>›</span></>}
             variant="ghost"
             fullWidth
-            onClick={() => navigate('/demo/move/go-back')}
+            onClick={() => navigate(ROUTE_PATHS.DEMO_MOVE_GO_BACK)}
           />
         </div>
 

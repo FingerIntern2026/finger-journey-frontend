@@ -5,6 +5,7 @@
 // 실제 값 대신 데모용 임시 사원 데이터를 사용
 
 import useNavigation from "../../hooks/useNavigation";
+import { ROUTE_PATHS } from "../../config/routeConfig";
 
 // 데모용 임시 데이터 (나중에 실제로는 API로 받아올 목록)
 const dummyEmployees = [
@@ -18,7 +19,7 @@ export default function ParamPassPage() {
 
   // 항목 클릭 시 해당 employeeId를 들고 상세 페이지로 이동
   const handleClick = (employeeId) => {
-    goTo("/demo/param-detail", { employeeId });
+    goTo(ROUTE_PATHS.DEMO_PARAM_DETAIL, { employeeId });
   };
 
   return (
