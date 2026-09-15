@@ -9,9 +9,18 @@ src/
 ├─ components/
 │  └─ common/
 │     ├─ base/       # 기본 UI 컴포넌트
+│     │  ├─ base.module.css   # base 폴더 공통 스타일 (CSS Modules)
+│     │  ├─ BaseButton.jsx
+│     │  └─ ...
 │     ├─ custom/     # 공통 커스텀 컴포넌트
+│     │  ├─ custom.module.css
+│     │  └─ ...
 │     ├─ dialog/     # Alert, Confirm, Modal
+│     │  ├─ dialog.module.css
+│     │  └─ ...
 │     └─ layout/     # 공통 레이아웃
+│        ├─ layout.module.css
+│        └─ ...
 │
 ├─ config/
 │  ├─ apiConfig.js
@@ -63,6 +72,10 @@ src/
 
 특정 페이지에서만 사용하는 컴포넌트는 해당 `pages/` 폴더 내부에서 관리하고,
 여러 페이지에서 재사용하게 되면 `components/common/`으로 이동합니다.
+
+스타일은 폴더 단위 CSS Modules(`{폴더명}.module.css`)로 관리하며,
+컴포넌트별로 별도 CSS 파일을 만들지 않습니다.
+(예: `components/common/base/base.module.css`)
 
 ### `config/`
 
@@ -162,3 +175,4 @@ Route Path는 `config/routeConfig.js`에서 관리합니다.
 - 접근 권한 검사는 `ProtectedRoute.jsx`에서 처리합니다.
 - Custom Hook은 역할별로 분리합니다.
 - 공통으로 사용할 수 있는 코드는 중복 작성하지 않습니다.
+- 컴포넌트 스타일은 폴더 단위 CSS Modules(`{폴더명}.module.css`)로 관리하며, 컴포넌트별 개별 CSS 파일은 만들지 않습니다.

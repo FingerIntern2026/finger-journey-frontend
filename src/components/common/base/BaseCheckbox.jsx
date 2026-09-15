@@ -1,19 +1,23 @@
-function BaseCheckbox({ checked, onClick }) {
+import styles from './base.module.css';
+
+function BaseCheckbox({ checked, onChange, className = '' }) {
+    // role="checkbox"를 쓰는 이상 키보드로도 포커스/토글이 가능해야 함
+    // (마우스 클릭만 지원하면 스크린리더/키보드 사용자가 조작 불가)
+    const handleKeyDown = (e) => {
+        if (e.key === ' ' || e.key === 'Enter') {
+            e.preventDefault();
+            onChange(e);
+        }
+    };
+
     return (
         <div
-            onClick={onClick}
-            style={{
-                width: "24px",
-                height: "24px",
-                border: "1px solid #999",
-                borderRadius: "6px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                cursor: "pointer",
-                backgroundColor: checked ? "#4CAF50" : "white",
-                color: "white",
-            }}
+            role="checkbox"
+            aria-checked={checked}
+            tabIndex={0}
+            onClick={onChange}
+            onKeyDown={handleKeyDown}
+            className={`${styles.checkbox} ${checked ? styles.checkboxChecked : ''} ${className}`}
         >
             {checked ? "✓" : ""}
         </div>

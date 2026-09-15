@@ -1,17 +1,18 @@
 import { forwardRef } from 'react';
+import styles from './base.module.css';
 
 const BaseInput = forwardRef(
   ({ label, error, type = 'text', className = '', ...rest }, ref) => {
     return (
-      <div className="base-input-wrapper">
-        {label && <label className="base-input-label">{label}</label>}
+      <div className={styles.inputWrapper}>
+        {label && <label className={styles.inputLabel}>{label}</label>}
         <input
           ref={ref}
           type={type}
-          className={`base-input ${className}`}
+          className={`${styles.input} ${className}`}
           {...rest}
         />
-        {error && <p className="base-input-error-text">{error}</p>}
+        {error && <p className={styles.inputErrorText}>{error}</p>}
       </div>
     );
   }

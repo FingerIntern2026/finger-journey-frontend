@@ -4,6 +4,7 @@
 
 import { Routes, Route, Navigate } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute';
+import { ROUTE_PATHS } from '../config/routeConfig';
 
 import DemoIndexPage from '../pages/demo/DemoIndexPage';
 import MoveGuidePage from '../pages/demo/MoveGuidePage';
@@ -19,33 +20,33 @@ export default function AppRoutes() {
   return (
     <Routes>
       {/* 루트로 접속하면 데모 첫 화면으로 보냄 */}
-      <Route path="/" element={<Navigate to="/demo" replace />} />
+      <Route path="/" element={<Navigate to={ROUTE_PATHS.DEMO_HOME} replace />} />
 
       {/* 버튼①②③④가 있는 첫 화면 */}
-      <Route path="/demo" element={<DemoIndexPage />} />
+      <Route path={ROUTE_PATHS.DEMO_HOME} element={<DemoIndexPage />} />
 
       {/* 버튼① 화면이동 하위 흐름 */}
-      <Route path="/demo/move" element={<MoveGuidePage />} />
+      <Route path={ROUTE_PATHS.DEMO_MOVE} element={<MoveGuidePage />} />
       <Route
-        path="/demo/move/auth-check"
+        path={ROUTE_PATHS.DEMO_MOVE_AUTH_CHECK}
         element={
           <ProtectedRoute>
             <AuthCheckPage />
           </ProtectedRoute>
         }
       />
-      <Route path="/demo/move/param" element={<ParamPassPage />} />
-      <Route path="/demo/param-detail" element={<ParamDetailPage />} />
-      <Route path="/demo/move/go-back" element={<GoBackExamplePage />} />
+      <Route path={ROUTE_PATHS.DEMO_MOVE_PARAM} element={<ParamPassPage />} />
+      <Route path={ROUTE_PATHS.DEMO_PARAM_DETAIL} element={<ParamDetailPage />} />
+      <Route path={ROUTE_PATHS.DEMO_MOVE_GO_BACK} element={<GoBackExamplePage />} />
 
       {/* 버튼② 컴포넌트리스트 */}
-      <Route path="/demo/components" element={<ComponentListPage />} />
+      <Route path={ROUTE_PATHS.DEMO_COMPONENTS} element={<ComponentListPage />} />
 
       {/* 버튼③ 다이얼로그예제 */}
-      <Route path="/demo/dialog" element={<DialogExamplePage />} />
+      <Route path={ROUTE_PATHS.DEMO_DIALOG} element={<DialogExamplePage />} />
 
       {/* 버튼④ API통신 */}
-      <Route path="/demo/api" element={<ApiExamplePage />} />
+      <Route path={ROUTE_PATHS.DEMO_API} element={<ApiExamplePage />} />
     </Routes>
   );
 }

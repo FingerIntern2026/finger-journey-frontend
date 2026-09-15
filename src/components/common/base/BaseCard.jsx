@@ -1,12 +1,8 @@
-function BaseCard({ children }) {
+import styles from './base.module.css';
+
+function BaseCard({ children, className = '' }) {
     return (
-        <div
-            style={{
-                border: "1px solid #ddd",
-                borderRadius: "12px",
-                padding: "16px",
-            }}
-        >
+        <div className={`${styles.card} ${className}`}>
             {children}
         </div>
     );

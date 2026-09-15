@@ -3,19 +3,21 @@
 // 하위 페이지로 이동시킴 (화면이동/컴포넌트리스트/다이얼로그예제/API통신)
 
 import PageLayout from '../../components/common/layout/PageLayout.jsx';
+import Header from '../../components/common/layout/Header.jsx';
 import BaseButton from '../../components/common/base/BaseButton';
 import useNavigation from '../../hooks/useNavigation';
+import { ROUTE_PATHS } from '../../config/routeConfig';
 
 const DemoIndexPage = () => {
   const { goTo } = useNavigation();
 
   return (
-    <PageLayout label="핑거저니 프레임워크 데모">
+    <PageLayout header={<Header label="핑거저니 프레임워크 데모" />}>
       <div style={{ padding: 24, display: 'flex', flexDirection: 'column', gap: 12 }}>
-        <BaseButton label="① 화면이동" onClick={() => goTo('/demo/move')} />
-        <BaseButton label="② 컴포넌트리스트" onClick={() => goTo('/demo/components')} />
-        <BaseButton label="③ 다이얼로그예제" onClick={() => goTo('/demo/dialog')} />
-        <BaseButton label="④ API통신" onClick={() => goTo('/demo/api')} />
+        <BaseButton label="① 화면이동" onClick={() => goTo(ROUTE_PATHS.DEMO_MOVE)} />
+        <BaseButton label="② 컴포넌트리스트" onClick={() => goTo(ROUTE_PATHS.DEMO_COMPONENTS)} />
+        <BaseButton label="③ 다이얼로그예제" onClick={() => goTo(ROUTE_PATHS.DEMO_DIALOG)} />
+        <BaseButton label="④ API통신" onClick={() => goTo(ROUTE_PATHS.DEMO_API)} />
       </div>
     </PageLayout>
   );

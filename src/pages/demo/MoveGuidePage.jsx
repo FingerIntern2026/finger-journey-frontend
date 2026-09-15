@@ -12,8 +12,11 @@
  */
 import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-// PageLayout: 공통 헤더+틀을 씌워주는 컴포넌트 (지연님이 만든 그 파일)
+// PageLayout: 공통 틀을 씌워주는 컴포넌트 (지연님이 만든 그 파일)
 import PageLayout from '../../components/common/layout/PageLayout.jsx';
+import Header from '../../components/common/layout/Header.jsx';
+import BaseButton from '../../components/common/base/BaseButton.jsx';
+import { ROUTE_PATHS } from '../../config/routeConfig';
 
 const MoveGuidePage = () => {
   // navigate: 버튼 눌렀을 때 다른 경로로 이동시켜주는 함수
@@ -42,9 +45,9 @@ const MoveGuidePage = () => {
   };
 
   return (
-    // PageLayout으로 전체 틀 씌우기. label엔 화면 제목, onBack엔 뒤로가기 동작 전달
+    // PageLayout으로 전체 틀 씌우기. header에 넘긴 Header가 제목+뒤로가기를 그림
     // navigate(-1) = "브라우저 뒤로가기 버튼 누른 것"과 같은 효과 (한 페이지 전으로 이동)
-    <PageLayout label="화면이동 예제" onBack={() => navigate(-1)}>
+    <PageLayout header={<Header label="화면이동 예제" onBack={() => navigate(-1)} />}>
       <div style={{ padding: 16, display: 'flex', flexDirection: 'column', gap: 14 }}>
 
         {/* 화면 설명 문구 */}
@@ -68,30 +71,24 @@ const MoveGuidePage = () => {
 
         {/* 3개 링크 버튼 목록 */}
         <div className="link-list">
-          {/* 권한검사로 이동 - 지연님이 만든 AuthCheckPage로 연결 */}
-          <button
-            className="base-button base-button--ghost base-button--full"
-            onClick={() => navigate('/demo/move/auth-check')}
-          >
-            권한검사 <span>›</span>
-          </button>
-
-          {/* 파라미터전달로 이동 - ParamPassPage(목록)에서 클릭하면 state로 값을 넘겨서
-              ParamDetailPage로 이동하는 방식이라 URL에 값을 직접 안 넣음 */}
-          <button
-            className="base-button base-button--ghost base-button--full"
-            onClick={() => navigate('/demo/move/param')}
-          >
-            파라미터전달 <span>›</span>
-          </button>
-
-          {/* 뒤로가기로 이동 - 파트C가 만든 페이지로 연결만 함 */}
-          <button
-            className="base-button base-button--ghost base-button--full"
-            onClick={() => navigate('/demo/move/go-back')}
-          >
-            뒤로가기 <span>›</span>
-          </button>
+          <BaseButton
+            label={<>권한검사 <span>›</span></>}
+            variant="ghost"
+            fullWidth
+            onClick={() => navigate(ROUTE_PATHS.DEMO_MOVE_AUTH_CHECK)}
+          />
+          <BaseButton
+            label={<>파라미터전달 <span>›</span></>}
+            variant="ghost"
+            fullWidth
+            onClick={() => navigate(ROUTE_PATHS.DEMO_MOVE_PARAM)}
+          />
+          <BaseButton
+            label={<>뒤로가기 <span>›</span></>}
+            variant="ghost"
+            fullWidth
+            onClick={() => navigate(ROUTE_PATHS.DEMO_MOVE_GO_BACK)}
+          />
         </div>
 
       </div>
