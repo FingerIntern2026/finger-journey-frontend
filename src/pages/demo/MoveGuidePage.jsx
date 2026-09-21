@@ -17,6 +17,7 @@ import PageLayout from '../../components/common/layout/PageLayout.jsx';
 import Header from '../../components/common/layout/Header.jsx';
 import BaseButton from '../../components/common/base/BaseButton.jsx';
 import { ROUTE_PATHS } from '../../config/routeConfig';
+import { getIsLoggedIn, setIsLoggedIn as saveIsLoggedIn } from '../../utils/authStorage';
 
 const MoveGuidePage = () => {
   // navigate: 버튼 눌렀을 때 다른 경로로 이동시켜주는 함수
@@ -29,19 +30,16 @@ const MoveGuidePage = () => {
   const blockedReason = location.state?.blockedReason;
 
   // isLoggedIn: 지금 로그인된 걸로 칠지 아닐지 저장하는 상태값
-  // 처음 화면 켤 때, localStorage에 이미 저장된 값이 있으면 그걸로 시작함
-  // (useAuth.js가 읽는 것과 똑같은 'isLoggedIn'이라는 이름을 써야 서로 연동됨)
-  const [isLoggedIn, setIsLoggedIn] = useState(
-    localStorage.getItem('isLoggedIn') === 'true'
-  );
+  // 처음 화면 켤 때, authStorage에 이미 저장된 값이 있으면 그걸로 시작함
+  // (useAuth.js가 읽는 것과 같은 authStorage를 거쳐야 서로 연동됨)
+  const [isLoggedIn, setIsLoggedIn] = useState(getIsLoggedIn());
 
   // 토글 스위치를 켜거나 끌 때 실행되는 함수
   const handleToggle = (e) => {
     const next = e.target.checked; // 스위치를 켰으면 true, 껐으면 false
     setIsLoggedIn(next); // 화면에 보이는 상태 업데이트
-    // localStorage에도 저장해야 useAuth.js, ProtectedRoute가 같은 값을 보고 판단할 수 있음
-    // (localStorage는 문자열만 저장 가능해서 true/false를 String()으로 감싸줌)
-    localStorage.setItem('isLoggedIn', String(next));
+    // authStorage에도 저장해야 useAuth.js, ProtectedRoute가 같은 값을 보고 판단할 수 있음
+    saveIsLoggedIn(next);
   };
 
   return (

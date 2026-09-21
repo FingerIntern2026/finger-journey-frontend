@@ -3,6 +3,7 @@
 // 위키 목록(WIK_LIS_P01), 관리자 입사자 목록(ADM_EMP_P01) 화면에서 공통으로 씀
 
 import styles from './custom.module.css';
+import { getHighlightSegments } from '../../../utils/highlight';
 
 export default function CustomSearchbar({
     value,
@@ -41,19 +42,15 @@ export default function CustomSearchbar({
 }
 
 // 검색 결과 목록에서 검색어와 일치하는 부분만 <mark>로 감싸는 헬퍼.
-// 정규식 특수문자(.*+? 등)가 검색어에 섞여 들어오면 정규식이 깨지므로 이스케이프 처리함
+// 실제 텍스트 조각내기는 utils/highlight.js(getHighlightSegments)가 담당하고,
+// 여기서는 그 결과를 JSX(<mark>)로 그리기만 함
+// (SearchHighlight 컴포넌트도 같은 getHighlightSegments를 가져다 쓰면 됨)
 export function highlightText(text, keyword) {
-    if (!keyword) return text;
-
-    const escaped = keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    const regex = new RegExp(`(${escaped})`, 'gi');
-    const parts = String(text).split(regex);
-
-    return parts.map((part, i) =>
-        regex.test(part) ? (
-            <mark key={i} className={styles.highlight}>{part}</mark>
+    return getHighlightSegments(text, keyword).map((segment, i) =>
+        segment.matched ? (
+            <mark key={i} className={styles.highlight}>{segment.text}</mark>
         ) : (
-            part
+            <span key={i}>{segment.text}</span>
         )
     );
 }
