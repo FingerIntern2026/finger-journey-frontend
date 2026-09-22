@@ -1,8 +1,8 @@
-// apiError.js의 역할
-// 백엔드는 실패 시 항상 { success:false, code, message } 형태로 응답하기로 정했음
-// (finger-journey-backend의 GlobalExceptionHandler, ErrorResponse 참고)
-// 지금은 페이지마다 err.response?.data ?? err.message 를 각자 따로 쓰고 있어서
-// (예: ApiExamplePage.jsx, AcrosticInputForm.jsx) 이 함수 하나로 통일
+// 역할: 백엔드는 실패 시 항상 { success:false, code, message } 형태로 응답하기로 정했음
+//       (finger-journey-backend의 GlobalExceptionHandler, ErrorResponse 참고). 페이지마다
+//       err.response?.data ?? err.message 를 각자 따로 처리하지 않도록 이 함수 하나로 통일
+// 사용처: screenConfig.js, ReportExamplePage.jsx, ReportResultPage.jsx
+// 담당자:
 
 import { traced } from '../devtrace/traced';
 

@@ -1,3 +1,9 @@
+// 역할: label, variant(색상), disabled, fullWidth 등을 받아 공통 버튼 UI를 그리는 컴포넌트
+// 사용처: ComponentListPage.jsx, DemoIndexPage.jsx, ReportExamplePage.jsx, DialogExamplePage.jsx,
+//        ApiExamplePage.jsx, MoveGuidePage.jsx, DialogQuiz.jsx, DialogAlert.jsx, DialogConfirm.jsx,
+//        AcrosticResultScreen.jsx, IntroScreen.jsx, OfficeFloorMap.jsx, QuizClearScreen.jsx, StageClearBanner.jsx
+// 담당자:
+
 import styles from './base.module.css';
 
 export default function BaseButton({

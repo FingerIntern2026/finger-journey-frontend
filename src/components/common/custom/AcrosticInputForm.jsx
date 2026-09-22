@@ -1,7 +1,8 @@
-// AcrosticInputForm.jsx의 역할
-// 완주 3행시 입력 화면(PTH_CPL_P01) 전용 폼
-//    * "3줄 다 비어있지 않은지"만 체크하 -> 필수 입력 검증이었음.
-//    * 이름 글자는 placeholder(안내 문구)로만 쓰이고 강제 검증 대상이 아님
+// 역할: 완주 3행시 입력 화면(PTH_CPL_P01) 전용 폼. "3줄 다 비어있지 않은지"만
+//       필수 입력으로 체크하고, 이름 글자는 placeholder(안내 문구)로만 쓰여 강제
+//       검증 대상은 아님
+// 사용처: ReportExamplePage.jsx, ComponentListPage.jsx(데모)
+// 담당자:
 
 import { useState } from 'react';
 import { sendPost } from '../../../api/client';

@@ -1,7 +1,8 @@
-// CustomAuthForm.jsx
-// 사원번호+생년월일(프리보딩), 관리자ID+PW(관리자), 암호 1개(체크인)
-// 이렇게 필드 개수가 다른 3개 화면을 전부 커버하는 공용 인증 폼이에요.
-// input 태그는 직접 안 만들고, 팀이 이미 만든 BaseInput 부품을 갖다 써요.
+// 역할: 사원번호+생년월일(프리보딩), 관리자ID+PW(관리자), 암호 1개(체크인)
+//       이렇게 필드 개수가 다른 3개 화면을 전부 커버하는 공용 인증 폼.
+//       input 태그는 직접 안 만들고 팀이 이미 만든 BaseInput 부품을 사용
+// 사용처: ComponentListPage.jsx(데모)
+// 담당자:
 
 import { useState } from 'react';
 import BaseInput from '../base/BaseInput';

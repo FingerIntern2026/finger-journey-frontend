@@ -1,8 +1,9 @@
-// StageClearBanner.jsx
-// ContentCarousel 8개 스테이지(핑거이야기, 취업규칙, 인사규정, 윤리규정,
-// 이메일안내, 법인카드안내, 포레스트, 레벨업) 완료 화면 전용 컴포넌트예요.
-// 컨페티 이미지는 8개 스테이지 전부 똑같아서 고정으로 넣어두고,
-// 제목/부제목/아이콘/캡션/링크는 스테이지마다 달라서 props로 받아요.
+// 역할: ContentCarousel 8개 스테이지(핑거이야기, 취업규칙, 인사규정, 윤리규정,
+//       이메일안내, 법인카드안내, 포레스트, 레벨업) 완료 화면 전용 컴포넌트.
+//       컨페티 이미지는 8개 스테이지 전부 동일해서 고정으로 넣어두고,
+//       제목/부제목/아이콘/캡션/링크는 스테이지마다 달라서 props로 받음
+// 사용처: ComponentListPage.jsx(데모)
+// 담당자:
 
 import BaseButton from '../base/BaseButton';
 import styles from './custom.module.css';

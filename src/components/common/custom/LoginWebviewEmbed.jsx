@@ -1,18 +1,13 @@
-// LoginWebviewEmbed.jsx의 역할
-// 외부 시스템(ERP, 포레스트 등) 로그인 화면을 감싸는 래퍼 + 안내 텍스트
-// ERP 로그인확인, 포레스트 로그인확인(CHK_ACC_P01) 두 화면에서 공통으로 씀
-//
-// 두 가지 모드 지원:
-// - src가 있으면 실제 iframe으로 라이브 웹뷰를 띄움 (ERP URL 확정 후)
-// - src가 없고 previewImage만 있으면 정적 스크린샷을 보여줌 (지금 단계, 디자인과 동일)
-// - 둘 다 없으면 최소한의 안내 문구만 보여주는 fallback
-//
-// gw.fingerservice.co.kr 같은 외부 사이트는 PC 전체 화면 기준으로 레이아웃이
-// 짜여있어서, iframe 자체를 작게(height=220 같은) 눌러버리면 그 사이트의 CSS가
-// 비정상적인 화면 비율로 착각해서 내부 요소 위치가 다 틀어짐(로그인 박스가
-// 구석에 몰리는 등). 그래서 iframe은 "실제 크기(nativeWidth x nativeHeight)"
-// 그대로 렌더링하고, 그 결과물을 CSS transform: scale()로 통째로 축소해서 보여줌
-// → 내부 사이트는 항상 정상 비율의 큰 화면으로 착각한 채 레이아웃을 그림
+// 역할: 외부 시스템(ERP, 포레스트 등) 로그인 화면을 감싸는 래퍼 + 안내 텍스트.
+//       ERP 로그인확인, 포레스트 로그인확인(CHK_ACC_P01) 두 화면에서 공통으로 쓸 예정.
+//       src가 있으면 실제 iframe으로 라이브 웹뷰를 띄우고(ERP URL 확정 후),
+//       src 없이 previewImage만 있으면 정적 스크린샷을 보여주며(지금 단계),
+//       둘 다 없으면 최소한의 안내 문구만 보여주는 fallback으로 동작함.
+//       외부 사이트는 PC 전체 화면 기준 레이아웃이라 iframe을 작게 누르면
+//       내부 요소 위치가 틀어지므로, iframe은 실제 크기(nativeWidth x
+//       nativeHeight)로 렌더링한 뒤 CSS transform: scale()로 통째로 축소함
+// 사용처: ComponentListPage.jsx(데모)
+// 담당자:
 
 import { useMemo } from 'react';
 import styles from './custom.module.css';

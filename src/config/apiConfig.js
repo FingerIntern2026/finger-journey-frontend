@@ -1,3 +1,7 @@
+// 역할: 백엔드 서버 기본 주소를 한 곳에 상수로 모아둠
+// 사용처: client.js, ChatPanel.jsx
+// 담당자:
+
 export const API_BASE_URL = "http://localhost:8080";
 
 // 챗봇(/api/chat)은 Spring을 거치지 않고 finger-journey-ai(FastAPI) 서버에 직접 요청함

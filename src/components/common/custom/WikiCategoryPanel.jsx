@@ -1,14 +1,12 @@
-// WikiCategoryPanel.jsx의 역할
-// 카테고리(항목 수 표시) 목록을 보여주고, 클릭하면 펼침/접힘으로 하위 항목을 보여주는 패널
-// 위키 목록(WIK_LIS_P01), 위키 관리 메인 화면에서 공통으로 씀
-//
-// ※ wikiApi.js가 아직 없어서, 서버 통신을 직접 하지 않는 순수 프레젠테이션 컴포넌트로 만듦.
-//    categories 데이터를 props로만 받고, 실제 데이터 로딩(fetch)은 이 컴포넌트를 쓰는
-//    페이지 쪽 책임 — wikiApi.js가 생기면 페이지에서 데이터만 바꿔 넣으면 됨
-//
-// ※ 아이콘 구조는 Notion API의 icon 객체 방식을 따름 (관리자 페이지에서 나중에
-//    이모지든 업로드 이미지든 종류가 늘어나도 이 컴포넌트를 안 고치고 확장하기 위함)
-//    { type: 'emoji', emoji: '🗺️' } 또는 { type: 'image', url: '...' }
+// 역할: 카테고리(항목 수 표시) 목록을 보여주고, 클릭하면 펼침/접힘으로 하위
+//       항목을 보여주는 패널. 위키 목록(WIK_LIS_P01), 위키 관리 메인 화면에서
+//       공통으로 쓸 예정. wikiApi.js가 아직 없어서 서버 통신을 직접 하지 않는
+//       순수 프레젠테이션 컴포넌트로 만듦 — categories 데이터를 props로만 받고
+//       실제 데이터 로딩(fetch)은 쓰는 쪽 페이지 책임. 아이콘 구조는 Notion API의
+//       icon 객체 방식을 따름: { type: 'emoji', emoji: '🗺️' } 또는
+//       { type: 'image', url: '...' }
+// 사용처: ComponentListPage.jsx(데모)
+// 담당자:
 
 import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
