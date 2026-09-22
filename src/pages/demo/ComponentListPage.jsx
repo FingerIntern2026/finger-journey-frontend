@@ -15,6 +15,7 @@ import BaseTextArea from "../../components/common/base/BaseTextArea";
 import BaseCard from "../../components/common/base/BaseCard";
 import BaseCheckbox from "../../components/common/base/BaseCheckbox";
 import BaseProgressBar from "../../components/common/base/BaseProgressBar";
+import { startLoading, stopLoading } from "../../utils/loadingStore";
 
 import CustomAuthForm from "../../components/common/custom/CustomAuthForm";
 import IntroScreen from "../../components/common/custom/IntroScreen";
@@ -155,6 +156,17 @@ export default function ComponentListPage() {
       <BaseCard>
         <h3>BaseProgressBar</h3>
         <BaseProgressBar current={4} total={10} />
+      </BaseCard>
+
+      <BaseCard>
+        <h3>GlobalLoading</h3>
+        <BaseButton
+          label="로딩 테스트"
+          onClick={() => {
+            startLoading();
+            setTimeout(() => stopLoading(), 2000);
+          }}
+        />
       </BaseCard>
 
       <FlowSection

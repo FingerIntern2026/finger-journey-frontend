@@ -538,3 +538,32 @@
   width: 20px;
   height: 20px;
 }
+
+/* ===== GlobalLoading ===== */
+
+/* 화면 전체를 덮는 반투명 배경 — dialog.module.css의 overlay와 같은 패턴이지만
+   다이얼로그보다 위에 떠야 할 수도 있어서(요청 중엔 다른 상호작용도 막아야 함) z-index를 더 높게 줌 */
+.loadingOverlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+/* 뱅글뱅글 도는 원 — border 한쪽만 색을 줘서 회전시키는 가장 기본적인 방식 */
+.spinner {
+  width: 48px;
+  height: 48px;
+  border: 5px solid #eee;
+  border-top: 5px solid #999;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
