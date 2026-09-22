@@ -6,13 +6,15 @@
 
 import useNavigation from "../../hooks/useNavigation";
 import { ROUTE_PATHS } from "../../config/routeConfig";
+import PageLayout from "../../components/common/layout/PageLayout.jsx";
+import Header from "../../components/common/layout/Header.jsx";
 
 export default function GoBackExamplePage() {
   const { goBack, goTo } = useNavigation();
 
   return (
-    <div>
-      <h2>뒤로가기 데모</h2>
+    <PageLayout header={<Header label="뒤로가기 데모" onBack={goBack} />}>
+    <div style={{ padding: 24 }}>
       <p>
         아래 버튼을 누르면 이 화면으로 들어오기 직전 페이지로 돌아갑니다.
       </p>
@@ -25,5 +27,6 @@ export default function GoBackExamplePage() {
       </p>
       <button onClick={() => goTo(ROUTE_PATHS.DEMO_HOME)}>데모 목록으로</button>
     </div>
+    </PageLayout>
   );
 }

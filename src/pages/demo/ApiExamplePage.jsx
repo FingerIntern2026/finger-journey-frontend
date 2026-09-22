@@ -9,8 +9,12 @@ import { sendPost } from "../../api/client";
 import BaseButton from "../../components/common/base/BaseButton";
 import BaseInput from "../../components/common/base/BaseInput";
 import BaseCard from "../../components/common/base/BaseCard";
+import PageLayout from "../../components/common/layout/PageLayout.jsx";
+import Header from "../../components/common/layout/Header.jsx";
+import useNavigation from "../../hooks/useNavigation";
 
 export default function ApiExamplePage() {
+  const { goBack } = useNavigation();
   // API 호출 결과를 화면에 찍어보기 위한 state
   const [result, setResult] = useState(null);
   const [error, setError] = useState(null);
@@ -77,9 +81,8 @@ export default function ApiExamplePage() {
   };
 
   return (
+    <PageLayout header={<Header label="API 통신 데모" onBack={goBack} />}>
     <div style={{ padding: "24px" }}>
-      <h2>API 통신 데모 (사원 관리)</h2>
-
       <BaseCard>
         <h3>공통 입력값</h3>
         <BaseInput label="사원 ID (상세/수정/삭제용)" value={employeeId} onChange={(e) => setEmployeeId(e.target.value)} />
@@ -110,5 +113,6 @@ export default function ApiExamplePage() {
         {!error && !result && <p style={{ color: "gray" }}>버튼을 눌러 결과를 확인하세요.</p>}
       </BaseCard>
     </div>
+    </PageLayout>
   );
 }

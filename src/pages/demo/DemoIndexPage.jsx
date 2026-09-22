@@ -13,12 +13,12 @@ const DemoIndexPage = () => {
 
   return (
     <PageLayout header={<Header label="핑거저니 프레임워크 데모" />}>
-      <div style={{ padding: 24, display: 'flex', flexDirection: 'column', gap: 12 }}>
-        <BaseButton label="① 화면이동" onClick={() => goTo(ROUTE_PATHS.DEMO_MOVE)} />
-        <BaseButton label="② 컴포넌트리스트" onClick={() => goTo(ROUTE_PATHS.DEMO_COMPONENTS)} />
-        <BaseButton label="③ 다이얼로그예제" onClick={() => goTo(ROUTE_PATHS.DEMO_DIALOG)} />
-        <BaseButton label="④ API통신" onClick={() => goTo(ROUTE_PATHS.DEMO_API)} />
-        <BaseButton label="⑤ 완주 여정 데모 (퀴즈→3행시→리포트)" onClick={() => goTo(ROUTE_PATHS.DEMO_REPORT)} />
+      <div style={{ padding: '16px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+        <BaseButton fullWidth label="① 화면이동" onClick={() => goTo(ROUTE_PATHS.DEMO_MOVE)} />
+        <BaseButton fullWidth label="② 컴포넌트리스트" onClick={() => goTo(ROUTE_PATHS.DEMO_COMPONENTS)} />
+        <BaseButton fullWidth label="③ 다이얼로그예제" onClick={() => goTo(ROUTE_PATHS.DEMO_DIALOG)} />
+        <BaseButton fullWidth label="④ API통신" onClick={() => goTo(ROUTE_PATHS.DEMO_API)} />
+        <BaseButton fullWidth label="⑤ 완주 여정 데모" onClick={() => goTo(ROUTE_PATHS.DEMO_REPORT)} />
       </div>
     </PageLayout>
   );
