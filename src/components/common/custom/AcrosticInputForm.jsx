@@ -9,10 +9,12 @@ import styles from './custom.module.css';
 
 // name: 3행시를 만들 기준 이름 (예: "김핑거") — name.length줄만큼 입력칸이 생김
 // apiUrl: 저장 요청 보낼 엔드포인트 (백엔드 확정 전이라 기본값은 더미 경로)
+// extraBody: 요청 body에 {name, lines}와 함께 추가로 얹을 필드 (예: { employeeId: 4 })
 // onSuccess: 저장 성공 시 호출 (예: 삼행시2 화면(PTH_CPL_P02)으로 이동)
 export default function AcrosticInputForm({
     name = '',
     apiUrl = '/path/acrostic',
+    extraBody = {},
     onSuccess,
     className = '',
 }) {
@@ -47,7 +49,7 @@ export default function AcrosticInputForm({
 
         setSubmitting(true);
         try {
-            await sendPost(apiUrl, { name, lines });
+            await sendPost(apiUrl, { name, lines, ...extraBody });
             onSuccess?.(lines);
         } catch (err) {
             // 저장 자체가 실패한 경우(네트워크/서버 에러)는 디자인에 명시된 케이스는

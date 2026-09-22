@@ -22,4 +22,8 @@ export const ROUTE_PATHS = {
 
   // 버튼④ API통신
   DEMO_API: '/demo/api',
+
+  // AI 완주 리포트 데모
+  DEMO_REPORT: '/demo/report',
+  DEMO_REPORT_RESULT: '/demo/report/result',
 };

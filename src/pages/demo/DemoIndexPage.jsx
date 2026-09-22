@@ -18,6 +18,7 @@ const DemoIndexPage = () => {
         <BaseButton label="② 컴포넌트리스트" onClick={() => goTo(ROUTE_PATHS.DEMO_COMPONENTS)} />
         <BaseButton label="③ 다이얼로그예제" onClick={() => goTo(ROUTE_PATHS.DEMO_DIALOG)} />
         <BaseButton label="④ API통신" onClick={() => goTo(ROUTE_PATHS.DEMO_API)} />
+        <BaseButton label="⑤ 완주 여정 데모 (퀴즈→3행시→리포트)" onClick={() => goTo(ROUTE_PATHS.DEMO_REPORT)} />
       </div>
     </PageLayout>
   );
