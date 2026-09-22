@@ -1,0 +1,283 @@
+/* devTracePanel.module.css의 역할 */
+/* DevTrace 패널 스타일. 1024px 이상에선 좌측 고정 패널, 그 아래선 좌하단 토글 버튼 +
+   바텀시트. 앱 본체는 480px 폰 프레임으로 화면 가운데 있어서 좌측 여백이 비어있음 —
+   그 공간을 씀. z-index는 챗봇 오버레이(1000)보다 낮은 900으로 둬서 챗봇이 항상 위에 오게 함 */
+
+.toggleButton {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  z-index: 900;
+  padding: 10px 16px;
+  border-radius: 100px;
+  border: 1px solid #2f6fed;
+  background: #ffffff;
+  color: #2f6fed;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.panel {
+  position: fixed;
+  z-index: 900;
+  background: #12141c;
+  color: #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  font-family: ui-monospace, Consolas, monospace;
+  overflow: hidden; /* 내부 flowList만 스크롤되게, 패널 자체는 절대 커지지 않음 */
+}
+
+/* 데스크톱: 좌측 고정 패널 */
+@media (min-width: 1024px) {
+  .panel {
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 380px;
+  }
+
+  .toggleButton {
+    display: none;
+  }
+}
+
+/* 모바일/좁은 화면: 바텀시트 */
+@media (max-width: 1023.98px) {
+  .panel {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 60vh;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  border-bottom: 1px solid #2a2d3a;
+  flex-shrink: 0;
+}
+
+.title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #9ec1ff;
+}
+
+.headerActions {
+  display: flex;
+  gap: 8px;
+}
+
+.headerButton {
+  background: none;
+  border: 1px solid #3a3d4a;
+  color: #9ca3af;
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.headerButtonActive {
+  border-color: #2f6fed;
+  color: #9ec1ff;
+}
+
+.flowList {
+  flex: 1;
+  min-height: 0; /* flex 컨테이너는 기본적으로 자식 콘텐츠만큼 늘어나려 해서, 스크롤되려면 명시적으로 0을 줘야 함 */
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  scroll-behavior: smooth;
+}
+
+.emptyHint {
+  padding: 24px 12px;
+  text-align: center;
+  color: #6b7280;
+  font-size: 12px;
+}
+
+.flowCard {
+  background: #1a1d29;
+  border: 1px solid #2a2d3a;
+  border-radius: 8px;
+  overflow: hidden;
+  /* flex column(.flowList) 안에서 기본 flex-shrink:1 때문에 카드가 40여 개씩 쌓이면
+     스크롤되는 대신 컨테이너 안에 다 우겨넣으려고 하나하나 짜부라짐(9px까지 눌림).
+     shrink를 0으로 막아야 flowList가 대신 넘쳐서(overflow) 스크롤이 실제로 생김 */
+  flex-shrink: 0;
+}
+
+.flowHeader {
+  width: 100%;
+  min-width: 0; /* flex row 안이라 콘텐츠가 길면 이 값 없이는 안 줄어들고 옆으로 밀어냄 */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 10px;
+  background: none;
+  border: none;
+  color: #e5e7eb;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.flowLabel {
+  flex: 1;
+  min-width: 0; /* ellipsis가 실제로 동작하려면 필수 (기본값 auto는 텍스트 전체 너비를 고집함) */
+  font-size: 12px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.flowMeta {
+  font-size: 10px;
+  color: #6b7280;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.statusDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.statusRunning {
+  background: #f59e0b;
+}
+
+.statusDone {
+  background: #22c55e;
+}
+
+.statusError {
+  background: #ef4444;
+}
+
+.stepList {
+  padding: 0 10px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.step {
+  border-left: 2px solid #3a3d4a;
+  padding: 4px 0 4px 8px;
+}
+
+.stepError {
+  border-left-color: #ef4444;
+}
+
+.stepTop {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  cursor: pointer;
+  min-width: 0;
+}
+
+.layerBadge {
+  font-size: 9px;
+  font-weight: 700;
+  padding: 1px 5px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  text-transform: uppercase;
+}
+
+.layerApi {
+  background: #1e3a8a;
+  color: #93c5fd;
+}
+
+.layerUtil {
+  background: #3730a3;
+  color: #c4b5fd;
+}
+
+.layerNav {
+  background: #14532d;
+  color: #86efac;
+}
+
+.layerDialog {
+  background: #78350f;
+  color: #fcd34d;
+}
+
+.layerGuard {
+  background: #7f1d1d;
+  color: #fca5a5;
+}
+
+.layerState {
+  background: #1f2937;
+  color: #9ca3af;
+}
+
+.stepLabel {
+  font-size: 11px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+  min-width: 0;
+}
+
+.stepDuration {
+  font-size: 10px;
+  color: #6b7280;
+  flex-shrink: 0;
+}
+
+.stepDetail {
+  margin-top: 4px;
+  padding: 6px 8px;
+  background: #0d0f16;
+  border-radius: 6px;
+  font-size: 10.5px;
+  color: #d1d5db;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.stepDetailRow {
+  margin-bottom: 4px;
+}
+
+.stepDetailKey {
+  color: #6b7280;
+}
+
+.stepErrorText {
+  color: #fca5a5;
+}
+
+.stepSource {
+  color: #6b7280;
+  font-size: 9.5px;
+}

@@ -9,6 +9,8 @@
 import { useNavigate } from "react-router-dom";
 import { push, pop, peek, clear } from "../utils/historyStack";
 import { ROUTE_PATHS } from "../config/routeConfig";
+import { addStep, safeSerialize } from "../devtrace/traceContext";
+import { findRouteKnowledge } from "../devtrace/knowledge";
 
 export default function useNavigation() {
   const navigate = useNavigate();
@@ -18,17 +20,38 @@ export default function useNavigation() {
     // 메인 화면으로 가는 거면 지금까지 쌓인 이동 기록은 더 이상 의미가 없으므로 초기화
     if (path === ROUTE_PATHS.DEMO_HOME) {
       clear();
+      addStep({ layer: "nav", label: "historyStack.clear()", source: "src/utils/historyStack.js" });
     } else {
       // prevParams: 지금 쌓기 직전까지 맨 위에 있던 기록의 params (= 방금 있던 화면이 들고 있던 값)
       const prevParams = peek()?.params;
       push({ path, params: state, prevParams });
+      addStep({
+        layer: "nav",
+        label: "historyStack.push()",
+        source: "src/utils/historyStack.js",
+        output: safeSerialize({ path, params: state }),
+      });
     }
+    addStep({
+      layer: "nav",
+      label: `goTo(${path})`,
+      source: "src/hooks/useNavigation.js",
+      note: findRouteKnowledge(path),
+    });
     navigate(path, { state });
   };
 
   // 이전 페이지로 돌아가기
   const goBack = () => {
-    pop();
+    const popped = pop();
+    addStep({
+      layer: "nav",
+      label: "historyStack.pop()",
+      source: "src/utils/historyStack.js",
+      output: safeSerialize(popped),
+      note: "prevParams는 저장은 되지만 goBack이 실제로 읽어서 쓰진 않음 (미완성 기능)",
+    });
+    addStep({ layer: "nav", label: "goBack()", source: "src/hooks/useNavigation.js" });
     navigate(-1);
   };
 
