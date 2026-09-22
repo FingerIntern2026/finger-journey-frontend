@@ -1,13 +1,8 @@
 // DialogContext.jsx의 역할
 // 앱 전역에서 다이얼로그 상태를 "배열(스택)"로 관리하는 Context.
-// 이제 하나만 뜨는 게 아니라 여러 개가 동시에 쌓일 수 있음 (예: Confirm 위에 Alert가 또 뜨는 경우).
-//
-// 핵심 진입점은 showDialog(type, content) — 호출하면 Promise를 반환하고,
-// 사용자가 버튼을 누르면(또는 배경을 클릭하면) 그 Promise가 resolve됨.
-// showAlert / showConfirm은 기존 호출부(showAlert('메시지'), showConfirm('메시지', onConfirm))가
-// 그대로 동작하도록 남겨둔 "showDialog를 감싼 편의 함수"임.
+// + 브라우저 뒤로가기를 누르면 스택의 가장 마지막(맨 위) 다이얼로그부터 순서대로 닫히게 처리.
 
-import { createContext, useContext, useRef, useState } from 'react';
+import { createContext, useContext, useEffect, useRef, useState } from 'react';
 import DialogShell from './DialogShell.jsx';
 import DialogAlert from './DialogAlert.jsx';
 import DialogConfirm from './DialogConfirm.jsx';
@@ -15,17 +10,36 @@ import DialogConfirm from './DialogConfirm.jsx';
 const DialogContext = createContext(null);
 
 export function DialogProvider({ children }) {
-  // dialog 하나만 들고 있던 것 -> 여러 개를 쌓을 수 있는 배열로 변경
   const [dialogStack, setDialogStack] = useState([]);
-
-  // showDialog가 반환한 Promise의 resolve 함수를, 어떤 다이얼로그(id)의 것인지 기억해두는 저장소
   const resolversRef = useRef(new Map());
   const nextIdRef = useRef(0);
 
-  // 스택에서 해당 id의 다이얼로그를 제거하고, 그 Promise를 result 값으로 resolve
-  const closeDialog = (id, result) => {
-    setDialogStack((prev) => prev.filter((dialog) => dialog.id !== id));
+  // 다음 popstate 이벤트를 "내가 직접 일으킨 것"으로 간주하고 무시할지 여부
+  // (버튼/배경 클릭으로 닫을 때 history.back()을 직접 호출하는데, 그때 생기는
+  //  popstate까지 "사용자가 뒤로가기 눌렀다"로 착각해서 또 닫으면 안 되니까)
+  const skipNextPopStateRef = useRef(false);
 
+  // 스택 맨 위(마지막) 다이얼로그를 찾아서 resolve + 제거하는 내부 헬퍼
+  const closeTopOfStack = (result) => {
+    setDialogStack((prev) => {
+      if (prev.length === 0) return prev;
+      const top = prev[prev.length - 1];
+      const resolve = resolversRef.current.get(top.id);
+      if (resolve) {
+        resolve(result);
+        resolversRef.current.delete(top.id);
+      }
+      return prev.slice(0, -1);
+    });
+  };
+
+  // 버튼 클릭 / 배경 클릭 등 "사용자 조작"으로 특정 id를 닫을 때
+  const closeDialog = (id, result) => {
+    // 이 다이얼로그가 열릴 때 history에 쌓아둔 항목 하나를 되돌림
+    skipNextPopStateRef.current = true;
+    window.history.back();
+
+    setDialogStack((prev) => prev.filter((dialog) => dialog.id !== id));
     const resolve = resolversRef.current.get(id);
     if (resolve) {
       resolve(result);
@@ -33,18 +47,35 @@ export function DialogProvider({ children }) {
     }
   };
 
-  // 회의에서 나온 핵심 함수: type(full/bottom/center)과 content를 받아서
-  // 다이얼로그를 스택에 추가하고, 사용자가 응답할 때까지 기다리는 Promise를 반환
+  // 다이얼로그가 열릴 때마다 history 항목을 하나 쌓아둠
+  // → 나중에 popstate 한 번 = 다이얼로그 하나 닫힘, 이 대응 관계가 핵심
   const showDialog = (type, content, options = {}) => {
     return new Promise((resolve) => {
       const id = `dialog-${++nextIdRef.current}`;
       resolversRef.current.set(id, resolve);
 
+      window.history.pushState({ dialogId: id }, '');
       setDialogStack((prev) => [...prev, { id, type, content, options }]);
     });
   };
 
-  // ── 기존 호출부 호환용 편의 함수 ──────────────────────────
+  // 실제 브라우저 뒤로가기(popstate)를 감지해서, 스택 맨 위 것만 닫음
+  useEffect(() => {
+    const handlePopState = () => {
+      if (skipNextPopStateRef.current) {
+        // closeDialog에서 우리가 직접 발생시킨 popstate → 무시
+        skipNextPopStateRef.current = false;
+        return;
+      }
+      // 진짜 사용자가 뒤로가기를 누른 경우 → 결과 없이(null) 닫음
+      closeTopOfStack(null);
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  // ── 편의 함수 (4단계와 동일) ──────────────────────────
 
   const showAlert = (message) => {
     return showDialog('center', ({ close }) => (
