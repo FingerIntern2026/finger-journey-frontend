@@ -1,0 +1,126 @@
+/* componentList.module.css의 역할 */
+/* 컴포넌트 목록 데모 페이지 전용 스타일. 기존엔 30개 가까운 컴포넌트가 스크롤 하나에
+   전부 펼쳐져 있어서 원하는 걸 찾기 불편했음 → 공통/커스텀 탭 + 아코디언으로 재구성 */
+
+.page {
+  padding: 16px 16px 40px;
+}
+
+.pageTitle {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 4px 0 4px;
+  text-align: left;
+}
+
+.pageHint {
+  font-size: 13px;
+  color: #888;
+  text-align: left;
+  margin-bottom: 16px;
+}
+
+/* 탭 */
+.tabRow {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  position: sticky;
+  top: 0;
+  background: #ffffff;
+  padding: 8px 0;
+  z-index: 1;
+}
+
+.tabButton {
+  flex: 1;
+  padding: 10px 0;
+  border: 1px solid #e5e4e7;
+  border-radius: 10px;
+  background: #f7f6f3;
+  color: #6b6375;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.tabButtonActive {
+  background: #2f6fed;
+  border-color: #2f6fed;
+  color: #ffffff;
+}
+
+/* 화면 흐름 그룹 제목 (커스텀 탭에서만 사용) */
+.groupTitle {
+  font-size: 12px;
+  font-weight: 700;
+  color: #9ca3af;
+  letter-spacing: 0.03em;
+  margin: 20px 0 8px;
+  text-align: left;
+}
+
+.groupTitle:first-child {
+  margin-top: 4px;
+}
+
+/* 아코디언 */
+.accordionList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.accordionItem {
+  border: 1px solid #e5e4e7;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.accordionHeader {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 14px 16px;
+  background: none;
+  border: none;
+  font-size: 15px;
+  font-weight: 600;
+  color: #08060d;
+  text-align: left;
+  cursor: pointer;
+  min-height: 48px;
+}
+
+.accordionHeaderOpen {
+  background: #f7f6f3;
+  border-bottom: 1px solid #e5e4e7;
+}
+
+.accordionChevron {
+  flex-shrink: 0;
+  font-size: 12px;
+  color: #9ca3af;
+  transition: transform 0.15s ease;
+}
+
+.accordionChevronOpen {
+  transform: rotate(180deg);
+}
+
+.accordionBody {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.accordionDescription {
+  font-size: 12.5px;
+  color: #888;
+  text-align: left;
+  margin: -4px 0 2px;
+}

@@ -6,6 +6,8 @@
 
 import useNavigation from "../../hooks/useNavigation";
 import { ROUTE_PATHS } from "../../config/routeConfig";
+import PageLayout from "../../components/common/layout/PageLayout.jsx";
+import Header from "../../components/common/layout/Header.jsx";
 
 // 데모용 임시 데이터 (나중에 실제로는 API로 받아올 목록)
 const dummyEmployees = [
@@ -15,7 +17,7 @@ const dummyEmployees = [
 ];
 
 export default function ParamPassPage() {
-  const { goTo } = useNavigation();
+  const { goTo, goBack } = useNavigation();
 
   // 항목 클릭 시 해당 employeeId를 들고 상세 페이지로 이동
   const handleClick = (employeeId) => {
@@ -23,8 +25,8 @@ export default function ParamPassPage() {
   };
 
   return (
-    <div>
-      <h2>파라미터 전달 데모</h2>
+    <PageLayout header={<Header label="파라미터 전달 데모" onBack={goBack} />}>
+    <div style={{ padding: 24 }}>
       <p>아래 목록에서 하나를 클릭하면, 해당 ID를 다음 페이지로 넘깁니다.</p>
 
       <ul>
@@ -37,5 +39,6 @@ export default function ParamPassPage() {
         ))}
       </ul>
     </div>
+    </PageLayout>
   );
 }

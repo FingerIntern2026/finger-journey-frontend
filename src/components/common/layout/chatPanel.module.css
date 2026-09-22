@@ -1,0 +1,227 @@
+/* chatPanel.module.css의 역할 */
+/* ChatEntryButton을 눌렀을 때 뜨는 챗봇 풀팝업 스타일
+   finger-journey-ai/frontend/src/App.css(어제 챗봇 데모 페이지)의 레이아웃/색상을 그대로 옮김
+   (작은 플로팅 패널이 아니라 화면 전체를 덮는 오버레이 + 원본과 동일한 카드 크기로 복원) */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.panel {
+  width: 100%;
+  max-width: 720px;
+  height: 85vh;
+  background-color: #ffffff;
+  border: 1px solid #e5e5e5;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  position: relative;
+  padding-top: 24px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #eeeeee;
+  text-align: center;
+}
+
+.title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+  color: #111111;
+}
+
+.subtitle {
+  margin: 5px 0 0;
+  font-size: 13px;
+  color: #8e8e93;
+}
+
+.closeButton {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  color: #8e8e93;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+}
+
+.messages {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 24px 20px;
+  overflow-y: auto;
+}
+
+.emptyHint {
+  margin: auto;
+  font-size: 14px;
+  text-align: center;
+  color: #a0a0a0;
+}
+
+.messageRow {
+  display: flex;
+  width: 100%;
+  margin-bottom: 4px;
+}
+
+.messageRow.assistant {
+  justify-content: flex-start;
+}
+
+.messageRow.user {
+  justify-content: flex-end;
+}
+
+.bubble {
+  max-width: 70%;
+  padding: 10px 14px;
+  font-size: 15px;
+  line-height: 1.45;
+  word-break: break-word;
+  white-space: pre-wrap;
+  border-radius: 19px;
+}
+
+.messageRow.assistant .bubble {
+  background-color: #eeeeef;
+  color: #111111;
+  border-bottom-left-radius: 6px;
+}
+
+.messageRow.user .bubble {
+  background-color: #34c759;
+  color: #ffffff;
+  border-bottom-right-radius: 6px;
+}
+
+.chipRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0 16px 12px;
+}
+
+.chip {
+  flex-shrink: 0;
+  padding: 8px 14px;
+  border: 1px solid #d1d1d6;
+  border-radius: 100px;
+  background-color: #ffffff;
+  font-family: inherit;
+  font-size: 13px;
+  color: #34c759;
+  cursor: pointer;
+  transition: background-color 0.15s, border-color 0.15s;
+}
+
+.chip:hover {
+  background-color: #eafaf0;
+  border-color: #34c759;
+}
+
+.inputRow {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  padding: 12px 16px 16px;
+  border-top: 1px solid #eeeeee;
+}
+
+.textarea {
+  flex: 1;
+  min-height: 42px;
+  max-height: 120px;
+  padding: 10px 16px;
+  box-sizing: border-box;
+  border: 1px solid #d1d1d6;
+  border-radius: 21px;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 20px;
+  color: #111111;
+  outline: none;
+  resize: none;
+  overflow-y: auto;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.textarea::placeholder {
+  color: #aaaaaa;
+}
+
+.textarea:focus {
+  border-color: #34c759;
+  box-shadow: 0 0 0 3px rgba(52, 199, 89, 0.1);
+}
+
+.sendButton {
+  position: relative;
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background-color: #34c759;
+  color: transparent;
+  cursor: pointer;
+  transition: transform 0.15s, background-color 0.15s;
+}
+
+.sendButton::after {
+  content: "↑";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -53%);
+  font-size: 22px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.sendButton:hover:not(:disabled) {
+  background-color: #2db84d;
+  transform: scale(1.05);
+}
+
+.sendButton:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.sendButton:disabled {
+  background-color: #b7dfc1;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .overlay {
+    padding: 0;
+  }
+
+  .panel {
+    max-width: none;
+    height: 100vh;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}

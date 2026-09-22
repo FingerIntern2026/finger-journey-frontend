@@ -36,28 +36,38 @@ export default function ReportResultPage() {
       return;
     }
 
+    // StrictMode(개발 모드)는 effect를 마운트 시 일부러 두 번 실행함 — 첫 번째 실행이
+    // "취소"됐다는 걸 표시해두고, 그 응답이 나중에 와도 state에 반영하지 않게 막음
+    // (막아도 네트워크 요청 자체는 두 번 나감 — DevTrace 패널에 API가 2번 찍히는 게 정상)
+    let cancelled = false;
+
     const load = async () => {
       setLoading(true);
       setError(null);
       try {
         const reportResponse = await sendPost("/api/reports/detail", { employeeId });
+        if (cancelled) return;
         setReport(reportResponse.data);
 
         // 3행시는 있으면 보여주고, 없으면 그냥 생략 (리포트 화면이 3행시 유무로 실패하면 안 됨)
         try {
           const poemResponse = await sendPost("/complete/poem/my", { employeeId });
+          if (cancelled) return;
           setPoemLines(poemResponse.data.lines);
         } catch {
-          setPoemLines([]);
+          if (!cancelled) setPoemLines([]);
         }
       } catch (err) {
-        setError(parseApiError(err));
+        if (!cancelled) setError(parseApiError(err));
       } finally {
-        setLoading(false);
+        if (!cancelled) setLoading(false);
       }
     };
 
     load();
+    return () => {
+      cancelled = true;
+    };
   }, [employeeId]);
 
   return (

@@ -6,6 +6,7 @@ import { createContext, useContext, useEffect, useRef, useState } from 'react';
 import DialogShell from './DialogShell.jsx';
 import DialogAlert from './DialogAlert.jsx';
 import DialogConfirm from './DialogConfirm.jsx';
+import { addStep } from '../../../devtrace/traceContext';
 
 const DialogContext = createContext(null);
 
@@ -39,6 +40,14 @@ export function DialogProvider({ children }) {
     skipNextPopStateRef.current = true;
     window.history.back();
 
+    addStep({
+      layer: 'dialog',
+      label: `closeDialog(${id})`,
+      source: 'src/components/common/dialog/DialogContext.jsx',
+      output: { result },
+      note: 'history.back()으로 pushState했던 항목을 되돌림 (skipNextPopStateRef로 popstate 핸들러 중복 실행 방지)',
+    });
+
     setDialogStack((prev) => prev.filter((dialog) => dialog.id !== id));
     const resolve = resolversRef.current.get(id);
     if (resolve) {
@@ -55,6 +64,12 @@ export function DialogProvider({ children }) {
       resolversRef.current.set(id, resolve);
 
       window.history.pushState({ dialogId: id }, '');
+      addStep({
+        layer: 'dialog',
+        label: `showDialog('${type}')`,
+        source: 'src/components/common/dialog/DialogContext.jsx',
+        note: 'history.pushState로 히스토리 항목을 하나 쌓음 — 이후 popstate 한 번 = 다이얼로그 하나 닫힘',
+      });
       setDialogStack((prev) => [...prev, { id, type, content, options }]);
     });
   };
@@ -68,6 +83,12 @@ export function DialogProvider({ children }) {
         return;
       }
       // 진짜 사용자가 뒤로가기를 누른 경우 → 결과 없이(null) 닫음
+      addStep({
+        layer: 'dialog',
+        label: 'popstate → closeTopOfStack(null)',
+        source: 'src/components/common/dialog/DialogContext.jsx',
+        note: '물리적 뒤로가기 버튼 — DOM 클릭이 아니라 브라우저 이벤트로 다이얼로그가 닫힘',
+      }, { fallbackOrigin: 'popstate' });
       closeTopOfStack(null);
     };
 

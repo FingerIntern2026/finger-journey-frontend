@@ -10,6 +10,7 @@
 
 import { sendPost } from '../api/client';
 import { parseApiError } from './apiError';
+import { traced } from '../devtrace/traced';
 
 const SCREEN_LIST_API = '/admin/screen/list';
 
@@ -18,7 +19,7 @@ let cachedScreens = null;
 
 // 화면정보 테이블 목록을 가져옴
 // 반환 형태 예시 : [{ screenId: 'DEMO_HOME', url: '/demo', loginRequired: false }, ...]
-export async function fetchScreenList() {
+async function _fetchScreenList() {
     if (cachedScreens) {
         return cachedScreens;
     }
@@ -35,7 +36,7 @@ export async function fetchScreenList() {
 
 // screenId 하나로 화면 정보를 찾을 때 사용 (예: 특정 화면이 로그인 필요한지 확인)
 // fetchScreenList()가 먼저 한 번 호출돼서 캐시가 채워져 있어야 함
-export function findScreenById(screenId) {
+function _findScreenById(screenId) {
     return cachedScreens?.find((screen) => screen.screenId === screenId) ?? null;
 }
 
@@ -43,3 +44,6 @@ export function findScreenById(screenId) {
 export function clearScreenCache() {
     cachedScreens = null;
 }
+
+export const fetchScreenList = traced('fetchScreenList', 'src/utils/screenConfig.js', _fetchScreenList);
+export const findScreenById = traced('findScreenById', 'src/utils/screenConfig.js', _findScreenById);

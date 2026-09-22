@@ -6,6 +6,8 @@
 
 import { useLocation } from "react-router-dom";
 import useNavigation from "../../hooks/useNavigation";
+import PageLayout from "../../components/common/layout/PageLayout.jsx";
+import Header from "../../components/common/layout/Header.jsx";
 
 export default function ParamDetailPage() {
   const location = useLocation();
@@ -15,16 +17,14 @@ export default function ParamDetailPage() {
   const employeeId = location.state?.employeeId;
 
   return (
-    <div>
-      <h2>파라미터 전달 데모 (상세)</h2>
-
+    <PageLayout header={<Header label="파라미터 전달 데모 (상세)" onBack={goBack} />}>
+    <div style={{ padding: 24 }}>
       {employeeId ? (
         <p>이전 화면에서 넘어온 사원 ID: {employeeId}</p>
       ) : (
         <p>전달받은 값이 없습니다. 목록 화면에서 항목을 클릭해서 들어와주세요.</p>
       )}
-
-      <button onClick={goBack}>뒤로가기</button>
     </div>
+    </PageLayout>
   );
 }

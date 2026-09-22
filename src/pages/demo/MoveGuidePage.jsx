@@ -62,7 +62,12 @@ const MoveGuidePage = () => {
           <label className="switch">
             {/* checked={isLoggedIn}: 지금 상태값에 맞춰 스위치 위치를 보여줌 */}
             {/* onChange={handleToggle}: 스위치 클릭하면 위에서 만든 함수 실행 */}
-            <input type="checkbox" checked={isLoggedIn} onChange={handleToggle} />
+            <input
+              type="checkbox"
+              checked={isLoggedIn}
+              onChange={handleToggle}
+              data-trace="로그인 토글 → authStorage.setIsLoggedIn()"
+            />
             <span className="slider"></span>
           </label>
         </div>
@@ -74,18 +79,21 @@ const MoveGuidePage = () => {
             variant="ghost"
             fullWidth
             onClick={() => navigate(ROUTE_PATHS.DEMO_MOVE_AUTH_CHECK)}
+            data-trace="navigate() 직접 호출 — useNavigation/historyStack 미경유"
           />
           <BaseButton
             label={<>파라미터전달 <span>›</span></>}
             variant="ghost"
             fullWidth
             onClick={() => navigate(ROUTE_PATHS.DEMO_MOVE_PARAM)}
+            data-trace="navigate() 직접 호출 — useNavigation/historyStack 미경유"
           />
           <BaseButton
             label={<>뒤로가기 <span>›</span></>}
             variant="ghost"
             fullWidth
             onClick={() => navigate(ROUTE_PATHS.DEMO_MOVE_GO_BACK)}
+            data-trace="navigate() 직접 호출 — useNavigation/historyStack 미경유"
           />
         </div>
 

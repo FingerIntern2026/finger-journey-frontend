@@ -54,16 +54,18 @@ body {
   margin: 0;
 }
 
+/* #root — 원래 데스크톱 소개 페이지 템플릿(1126px 고정폭 + text-align:center)이 그대로 남아있던 부분.
+   핑거저니는 모바일 온보딩 앱이라 폭을 폰 화면 크기로 맞추고, 정렬은 각 컴포넌트가 알아서 하게 비움 */
 #root {
-  width: 1126px;
-  max-width: 100%;
+  width: 100%;
+  max-width: 480px;
   margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
   min-height: 100svh;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+  background: #ffffff;
+  box-shadow: 0 0 0 1px var(--border);
 }
 
 h1,

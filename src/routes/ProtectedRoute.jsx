@@ -2,13 +2,27 @@
 // 로그인 안 된 사용자가 보호된 페이지에 접근하면 다른 경로로 리다이렉트시키는 라우트 가드
 // useAuth로 로그인 여부만 확인하고, 실제 리다이렉트는 react-router-dom의 Navigate가 처리
 
+import { useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { ROUTE_PATHS } from '../config/routeConfig';
+import { addStep } from '../devtrace/traceContext';
 
 // children: 이 컴포넌트로 감싼 실제 보호 대상 페이지 (예: <AuthCheckPage />)
 export default function ProtectedRoute({ children }) {
     const { isLoggedIn } = useAuth();
+
+    // 렌더링 중이 아니라 effect에서 기록 (렌더 중 부수효과는 StrictMode에서 문제될 수 있음)
+    useEffect(() => {
+        if (!isLoggedIn) {
+            addStep({
+                layer: 'guard',
+                label: 'ProtectedRoute 차단',
+                source: 'src/routes/ProtectedRoute.jsx',
+                note: '로그인 안 된 상태라 /demo/move로 리다이렉트',
+            });
+        }
+    }, [isLoggedIn]);
 
     // 로그인 안 됐으면 children을 그리지 않고 로그인 토글이 있는 MoveGuidePage로 돌려보냄
     // replace: 브라우저 히스토리에 남기지 않음 (뒤로가기 눌러도 보호된 페이지로 안 돌아감)
