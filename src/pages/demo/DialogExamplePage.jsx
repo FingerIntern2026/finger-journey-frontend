@@ -1,10 +1,9 @@
 // DialogExamplePage.jsx의 역할
-// 다이얼로그(버튼③) 데모 페이지. DialogContext의 showAlert/showConfirm을 호출해서
-// Alert/Confirm이 실제로 뜨는 걸 보여줌.
-// DialogQuiz는 useDialog Context에 안 묶여있는 독립 컴포넌트라 (지난번에 설명드린 이유),
-// 별도 useState(quizOpen)로 open 상태를 직접 관리함
+// 다이얼로그(버튼③) 데모 페이지. DialogContext의 showAlert/showConfirm/showDialog를 호출해서
+// Alert/Confirm/Quiz가 실제로 뜨는 걸 보여줌.
+// 리팩토링 이후로는 Quiz도 showDialog를 통해 열리므로, 이 페이지가 따로 open 상태를
+// 관리할 필요가 없어짐 (기존엔 useState(quizOpen)으로 직접 관리했음)
 
-import { useState } from 'react';
 import BaseButton from '../../components/common/base/BaseButton.jsx';
 import { useDialog } from '../../components/common/dialog/DialogContext.jsx';
 import DialogQuiz from '../../components/common/dialog/DialogQuiz.jsx';
@@ -16,9 +15,17 @@ const foodQuestions = [
 ];
 
 export default function DialogExamplePage() {
-    const { showAlert, showConfirm } = useDialog();
-    // DialogQuiz는 Context가 아니라 이 페이지가 직접 open 상태를 들고 있어야 함
-    const [quizOpen, setQuizOpen] = useState(false);
+    const { showAlert, showConfirm, showDialog } = useDialog();
+
+    const handleOpenQuiz = () => {
+        showDialog('center', ({ close }) => (
+            <DialogQuiz
+                questions={foodQuestions}
+                onComplete={() => console.log('퀴즈 클리어!')}
+                onClose={() => close()}
+            />
+        ));
+    };
 
     return (
         <div>
@@ -33,14 +40,7 @@ export default function DialogExamplePage() {
             />
             <BaseButton
                 label="Quiz 열기"
-                onClick={() => setQuizOpen(true)}
-            />
-
-            <DialogQuiz
-                open={quizOpen}
-                questions={foodQuestions}
-                onComplete={() => console.log('퀴즈 클리어!')}
-                onClose={() => setQuizOpen(false)}
+                onClick={handleOpenQuiz}
             />
         </div>
     );
