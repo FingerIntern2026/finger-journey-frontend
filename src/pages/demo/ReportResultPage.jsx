@@ -1,10 +1,12 @@
-// ReportResultPage.jsx의 역할
-// "완주 여정 데모"에서 리포트 생성/조회 버튼을 누르면 넘어오는 결과 전용 화면
-// 9/21 Claude 아티팩트("핑거 첫걸음 리포트") 원본 HTML을 그대로 이식함
-// (마크업 구조·클래스명·색상 토큰 전부 원본과 동일 — reportResult.module.css 참고)
-//
-// ReportExamplePage에서 goTo(ROUTE_PATHS.DEMO_REPORT_RESULT, { employeeId })로 넘어오고,
-// 이 화면은 employeeId만 받아서 자체적으로 리포트/3행시를 조회함
+// 페이지명: ReportResultPage (TODO: 정식 화면명 확정되면 교체)
+// 역할: "완주 여정 데모"에서 리포트 생성/조회 버튼을 누르면 넘어오는 결과 전용 화면.
+//       9/21 Claude 아티팩트("핑거 첫걸음 리포트") 원본 HTML을 마크업 구조·클래스명·색상
+//       토큰까지 그대로 이식함 (reportResult.module.css 참고). employeeId만 받아서
+//       자체적으로 리포트/3행시를 조회함
+// 사용처: ReportExamplePage에서 리포트 생성/조회 시
+//         goTo(ROUTE_PATHS.DEMO_REPORT_RESULT, { employeeId })로 진입
+// url: /demo/report/result
+// 담당자:
 
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";

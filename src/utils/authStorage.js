@@ -1,8 +1,8 @@
-// authStorage.js의 역할
-// 로그인 상태를 localStorage에 읽고 쓰는 로직을 한 곳으로 모음
-// 지금은 useAuth.js와 MoveGuidePage.jsx 두 곳에서 각자 'isLoggedIn' 키 문자열을
-// 직접 쓰고 있어서, 키 이름이 어긋나면 두 곳이 서로 다른 값을 보게 되는 위험이 있었음
-// 앞으로는 이 두 함수만 거쳐서 localStorage에 접근하도록 통일
+// 역할: 로그인 상태를 localStorage에 읽고 쓰는 로직을 한 곳으로 모음. useAuth.js와
+//       MoveGuidePage.jsx가 각자 'isLoggedIn' 키 문자열을 직접 쓰면 키 이름이 어긋날 때
+//       두 곳이 서로 다른 값을 보게 되는 위험이 있어, 이 두 함수만 거쳐서 접근하도록 통일
+// 사용처: useAuth.js, MoveGuidePage.jsx
+// 담당자:
 
 const LOGIN_KEY = 'isLoggedIn';
 

@@ -1,7 +1,8 @@
-// OfficeFloorMap.jsx
-// 종로/여의도 포레스트 약도 화면이에요.
-// 평면도는 마커까지 이미 합성된 완성 이미지를 통째로 받아서 보여주는 방식인데,
-// 실제 이미지 나오기 전까지는 회색 박스로 임시 채워둬요.
+// 역할: 종로/여의도 포레스트 약도 화면. 평면도는 마커까지 이미 합성된 완성
+//       이미지를 통째로 받아서 보여주는 방식인데, 실제 이미지 나오기 전까지는
+//       회색 박스로 임시 채워둠
+// 사용처: ComponentListPage.jsx(데모)
+// 담당자:
 
 import BaseButton from '../base/BaseButton';
 import styles from './custom.module.css';

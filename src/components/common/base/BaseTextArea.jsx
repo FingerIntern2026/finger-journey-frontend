@@ -1,3 +1,7 @@
+// 역할: label/rows 등을 받아 textarea UI를 그리는 공통 컴포넌트. forwardRef로 ref 전달 지원
+// 사용처: ComponentListPage.jsx
+// 담당자:
+
 import { forwardRef } from 'react';
 import styles from './base.module.css';
 

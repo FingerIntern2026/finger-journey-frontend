@@ -1,15 +1,9 @@
-// DialogShell.jsx의 역할
-// Alert / Confirm / Quiz 등 다이얼로그 "내용물"을 감싸서,
-// type(full/bottom/center)에 따라 오버레이(배경)와 박스의 위치·애니메이션만
-// 다르게 그려주는 공통 껍데기.
-//
-// 내용물이 무엇이든(Alert 메시지든, Confirm 버튼이든, Quiz 문항이든)
-// 이 컴포넌트는 "어디에 어떻게 뜨는지"만 책임지고, "무엇을 보여줄지"는 전혀 모름
-// (children이 결정).
-//
-// ※ open 여부를 스스로 판단하지 않음 — 기존 DialogAlert/DialogConfirm처럼
-//   `if (!open) return null`을 여기서 하지 않고, "지금 이걸 그릴지 말지"는
-//   이 컴포넌트를 호출하는 쪽(4단계에서 만들 DialogContext의 스택)이 결정함.
+// 역할: Alert/Confirm/Quiz 등 다이얼로그 내용물을 감싸서, type(full/bottom/center)에 따라
+//      오버레이(배경)와 박스의 위치·애니메이션만 다르게 그려주는 공통 껍데기. 내용물이 무엇이든
+//      "어디에 어떻게 뜨는지"만 책임지고 "무엇을 보여줄지"는 children이 결정. open 여부도
+//      스스로 판단하지 않고, 그릴지 말지는 호출하는 쪽(DialogContext의 스택)이 결정함.
+// 사용처: DialogContext.jsx
+// 담당자:
 
 import styles from './dialog.module.css';
 

@@ -1,6 +1,7 @@
-// ProtectedRoute.jsx의 역할
-// 로그인 안 된 사용자가 보호된 페이지에 접근하면 다른 경로로 리다이렉트시키는 라우트 가드
-// useAuth로 로그인 여부만 확인하고, 실제 리다이렉트는 react-router-dom의 Navigate가 처리
+// 역할: 로그인 안 된 사용자가 보호된 페이지에 접근하면 다른 경로로 리다이렉트시키는 라우트 가드.
+//       useAuth로 로그인 여부만 확인하고, 실제 리다이렉트는 react-router-dom의 Navigate가 처리
+// 사용처: AppRoutes.jsx
+// 담당자:
 
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';

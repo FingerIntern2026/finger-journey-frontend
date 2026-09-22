@@ -1,3 +1,7 @@
+// 역할: checked/onChange를 받아 체크박스 UI를 그리는 공통 컴포넌트. 키보드(Space/Enter)로도 토글 가능하도록 처리
+// 사용처: ComponentListPage.jsx, CustomChecklist.jsx
+// 담당자:
+
 import styles from './base.module.css';
 
 function BaseCheckbox({ checked, onChange, className = '' }) {

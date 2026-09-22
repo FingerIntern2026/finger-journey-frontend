@@ -1,7 +1,8 @@
-// AcrosticResultScreen.jsx
-// 3행시 완료 화면이에요. 이름 글자 수에 따라 2줄/3줄/4줄로 달라질 수 있어서,
-// 고정 3줄이 아니라 lines 배열 길이만큼 자동으로 줄이 그려지게 만들었어요.
-// 뱃지+진행률바는 Header 영역이라 여긴 포함 안 시켜요.
+// 역할: 3행시 완료 화면. 이름 글자 수에 따라 2줄/3줄/4줄로 달라질 수 있어서,
+//       고정 3줄이 아니라 lines 배열 길이만큼 자동으로 줄이 그려짐.
+//       뱃지+진행률바는 Header 영역이라 여긴 포함 안 함
+// 사용처: ComponentListPage.jsx(데모)
+// 담당자:
 
 import BaseButton from '../base/BaseButton';
 import styles from './custom.module.css';

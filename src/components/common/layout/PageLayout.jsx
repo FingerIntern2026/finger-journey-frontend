@@ -1,18 +1,9 @@
-/**
- * PageLayout (공통 페이지 레이아웃)
- *
- * 대부분의 화면에서 쓰는 전체 틀 컴포넌트.
- * 어떤 헤더를 쓸지는 모르고, header로 받은 걸 위에 그려주고
- * 그 아래에 각 화면의 실제 내용(children)을 넣어주는 역할만 함.
- *
- * - 화면 종류에 맞는 헤더를 쓰는 쪽에서 조합해서 넘김:
- *   <PageLayout header={<Header label="..." onBack={...} />}>       (일반 화면)
- *   <PageLayout header={<AdminHeader onLogout={...} />}>            (관리자 화면)
- *   <PageLayout>                                                     (헤더 불필요)
- *
- * ※ 스타일은 layout.module.css의 CSS Modules 클래스를 사용함
- *    (팀 컨벤션: 폴더 단위 CSS Modules 방식)
- */
+// 역할: 대부분의 화면에서 쓰는 전체 틀 컴포넌트. 어떤 헤더를 쓸지는 모르고, header로 받은 걸
+//       위에 그려주고 그 아래에 각 화면의 실제 내용(children)을 넣어주는 역할만 함.
+//       화면 종류에 맞는 헤더(Header/AdminHeader/헤더 없음)는 쓰는 쪽에서 조합해서 넘김
+// 사용처: AuthCheckPage.jsx, DemoIndexPage.jsx, MoveGuidePage.jsx, ReportExamplePage.jsx,
+//         ReportResultPage.jsx
+// 담당자:
 import styles from './layout.module.css';
 
 const PageLayout = ({
