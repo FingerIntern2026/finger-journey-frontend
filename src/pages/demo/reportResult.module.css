@@ -1,0 +1,314 @@
+/* reportResult.module.css의 역할 */
+/* 완주 리포트 "결과" 화면 전용 스타일.
+   9/21 Claude 아티팩트(핑거 첫걸음 리포트) 원본 HTML/CSS를 그대로 이식함
+   (색상 토큰, 폰트, 클래스 구조 전부 원본 그대로 — 임의로 바꾸지 않음) */
+
+.page {
+  --bg: #F6F3EA;
+  --surface: #FFFFFF;
+  --surface-2: #EFEADC;
+  --text: #232B1F;
+  --muted: #6C6650;
+  --faint: #9B937A;
+  --line: #E4DDC9;
+  --accent: #3E8F52;
+  --accent-soft: #E3F3E2;
+  --accent-strong: #2E7340;
+
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+  display: flex;
+  justify-content: center;
+  padding-block: 32px;
+}
+
+.phone {
+  width: 100%;
+  max-width: 400px;
+  background: var(--surface);
+  border-radius: 28px;
+  border: 1px solid var(--line);
+  overflow: hidden;
+  box-shadow: 0 20px 50px -25px rgba(30, 40, 20, .35);
+}
+
+/* progress header */
+.progressHead {
+  padding: 16px 20px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid var(--line);
+}
+
+.progressHead .back {
+  font-size: 16px;
+  color: var(--muted);
+}
+
+.bar {
+  flex: 1;
+  height: 6px;
+  border-radius: 100px;
+  background: var(--surface-2);
+  overflow: hidden;
+}
+
+.barFill {
+  height: 100%;
+  width: 100%;
+  background: var(--accent);
+  border-radius: 100px;
+}
+
+.num {
+  font-size: 11.5px;
+  color: var(--muted);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.sprout {
+  font-size: 15px;
+}
+
+/* hero */
+.hero {
+  background: linear-gradient(160deg, var(--accent-soft), var(--surface) 80%);
+  padding: 22px 22px 8px;
+  text-align: center;
+}
+
+.eyebrowBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent-strong);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  padding: 4px 10px;
+  border-radius: 100px;
+  margin-bottom: 12px;
+}
+
+.hero h1 {
+  font-family: 'Gowun Batang', serif;
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0 0 4px;
+  text-wrap: balance;
+}
+
+.subhead {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.section {
+  padding: 18px 22px;
+}
+
+.divider {
+  height: 1px;
+  background: var(--line);
+  margin: 0 22px;
+}
+
+/* headline */
+.nickTitle {
+  text-align: center;
+  font-family: 'Gowun Batang', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--accent-strong);
+  margin-bottom: 14px;
+}
+
+.story p {
+  font-size: 13px;
+  line-height: 1.75;
+  color: var(--text);
+  margin: 0 0 12px;
+  white-space: pre-wrap;
+}
+
+/* quote box */
+.taglineCard {
+  background: var(--surface);
+  border: 1.5px solid var(--accent);
+  border-radius: 16px;
+  padding: 16px 18px;
+  margin: 14px 0;
+}
+
+.taglineCard .line {
+  font-family: 'Gowun Batang', serif;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  text-wrap: balance;
+}
+
+.taglineCard .desc {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* trait chips */
+.chipGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 14px 0;
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 9px 12px;
+  border-radius: 12px;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+.title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--faint);
+  letter-spacing: .02em;
+  margin: 0 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* quiz evidence */
+.evidenceGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.evCard {
+  background: var(--surface-2);
+  border-radius: 12px;
+  padding: 10px 11px;
+}
+
+.evCard .q {
+  font-size: 10.5px;
+  color: var(--faint);
+  margin-bottom: 3px;
+}
+
+.evCard .a {
+  font-size: 12.5px;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.evCard .pct {
+  font-size: 10px;
+  color: var(--accent-strong);
+  font-weight: 600;
+}
+
+/* acrostic */
+.acrosticCard {
+  background: var(--surface-2);
+  border-radius: 16px;
+  padding: 16px 18px;
+}
+
+.acrosticTag {
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+.acrosticRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.acrosticRow:last-child {
+  margin-bottom: 0;
+}
+
+.acrosticLetter {
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.acrosticText {
+  font-size: 13px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 7px 12px;
+  flex: 1;
+}
+
+.footer {
+  padding: 18px 22px 22px;
+  text-align: center;
+}
+
+.footer .q {
+  font-size: 12.5px;
+  color: var(--muted);
+  margin-bottom: 2px;
+}
+
+.errorCard {
+  background: #fbe7de;
+  border: 1px solid #d9704f;
+  border-radius: 18px;
+  padding: 18px 20px;
+  margin: 16px;
+}
+
+.errorCode {
+  font-weight: 700;
+  color: #b03a1f;
+  margin: 0 0 4px;
+}
+
+.errorMessage {
+  font-size: 13px;
+  color: #6c3020;
+  margin: 0;
+}
+
+.loadingText {
+  font-size: 13px;
+  color: var(--muted);
+  padding: 24px;
+  text-align: center;
+}

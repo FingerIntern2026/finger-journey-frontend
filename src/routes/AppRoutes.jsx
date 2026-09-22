@@ -15,6 +15,8 @@ import GoBackExamplePage from '../pages/demo/GoBackExamplePage';
 import ComponentListPage from '../pages/demo/ComponentListPage';
 import DialogExamplePage from '../pages/demo/DialogExamplePage';
 import ApiExamplePage from '../pages/demo/ApiExamplePage';
+import ReportExamplePage from '../pages/demo/ReportExamplePage';
+import ReportResultPage from '../pages/demo/ReportResultPage';
 
 export default function AppRoutes() {
   return (
@@ -47,6 +49,10 @@ export default function AppRoutes() {
 
       {/* 버튼④ API통신 */}
       <Route path={ROUTE_PATHS.DEMO_API} element={<ApiExamplePage />} />
+
+      {/* 버튼⑤ AI 완주 리포트 */}
+      <Route path={ROUTE_PATHS.DEMO_REPORT} element={<ReportExamplePage />} />
+      <Route path={ROUTE_PATHS.DEMO_REPORT_RESULT} element={<ReportResultPage />} />
     </Routes>
   );
 }
