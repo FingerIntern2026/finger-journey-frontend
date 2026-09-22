@@ -1,6 +1,7 @@
-// CustomSearchbar.jsx의 역할
-// 검색어 입력 + 검색 트리거를 담당하는 공통 검색창
-// 위키 목록(WIK_LIS_P01), 관리자 입사자 목록(ADM_EMP_P01) 화면에서 공통으로 씀
+// 역할: 검색어 입력 + 검색 트리거를 담당하는 공통 검색창. 위키 목록(WIK_LIS_P01),
+//       관리자 입사자 목록(ADM_EMP_P01) 화면에서 공통으로 쓸 예정
+// 사용처: ComponentListPage.jsx(데모)
+// 담당자:
 
 import styles from './custom.module.css';
 import { getHighlightSegments } from '../../../utils/highlight';

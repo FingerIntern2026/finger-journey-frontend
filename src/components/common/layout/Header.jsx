@@ -1,21 +1,11 @@
-/**
- * Header (공통 헤더)
- *
- * 체크인(가방싸기)~오솔길 세부 화면 등, 대부분의 화면 상단에 공통으로 쓰이는 헤더.
- * - 왼쪽: 뒤로가기 버튼
- * - 가운데: 상태 텍스트(label) + 진행률 바 (+ 오솔길 화면에서는 n/10 숫자도 표시)
- * - 오른쪽: 새싹 아이콘
- *
- * 화면마다 텍스트/진행률만 다르고 구조는 동일해서, props로 값만 받아 그려주는
- * 역할만 함. (예: 체크인 화면="가방 싸는 중", 오솔길 화면="온보딩 진행 중")
- *
- * ⚠️ 오솔길 메인맵 전용 헤더(FINGER ONBOARDING 배지 있는 것)는 구조가 달라서
- *    이 컴포넌트가 아니라 별도 컴포넌트(PathMapHeader)로 만듦. 관리자 화면도
- *    별도 컴포넌트(AdminHeader)임 — PageLayout이 header prop으로 받아 조합함.
- *
- * ※ 스타일은 layout.module.css의 CSS Modules 클래스를 사용함
- *    (팀 컨벤션: 폴더 단위 CSS Modules 방식)
- */
+// 역할: 체크인(가방싸기)~오솔길 세부 화면 등 대부분의 화면 상단에 공통으로 쓰이는 헤더.
+//       왼쪽 뒤로가기 버튼, 가운데 상태 텍스트+진행률 바(+n/10), 오른쪽 새싹 아이콘으로 구성되며
+//       화면마다 텍스트/진행률만 다르고 구조는 동일해서 props로 값만 받아 그려줌.
+//       ⚠️ 오솔길 메인맵 전용 헤더는 PathMapHeader, 관리자 화면은 AdminHeader로 별도 분리되어
+//       있고, PageLayout이 header prop으로 받아 조합함
+// 사용처: AuthCheckPage.jsx, DemoIndexPage.jsx, MoveGuidePage.jsx, ReportExamplePage.jsx,
+//         ReportResultPage.jsx, ComponentListPage.jsx (PageLayout의 header prop으로 전달)
+// 담당자:
 import { ChevronLeft } from 'lucide-react';
 // ↑ 왼쪽 화살표 아이콘. lucide-react 라이브러리에서 가져와요.
 import CustomProgressIndicator from '../custom/CustomProgressIndicator';

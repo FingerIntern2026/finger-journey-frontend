@@ -1,7 +1,7 @@
-// DialogQuiz.jsx의 역할
-// 징검다리 퀴즈(음식/휴식/협업 3세트)의 "내용물"만 담당.
-// currentIndex로 문항을 순환시키는 내부 로직은 그대로 유지.
-// overlay/box는 DialogShell이 그려주므로, 이제 문항 화면/클리어 화면 내용만 return함.
+// 역할: 징검다리 퀴즈(음식/휴식/협업 3세트)의 내용물만 담당. currentIndex로 문항을 순환시키고,
+//      overlay/box는 DialogShell이 그려주므로 문항 화면/클리어 화면 내용만 반환함.
+// 사용처: DialogExamplePage.jsx
+// 담당자:
 
 import { useState } from 'react';
 import BaseButton from '../base/BaseButton';

@@ -1,8 +1,9 @@
-// IntroScreen.jsx
-// "안내 문구 + 일러스트 + 진입 버튼 1개" 구조를 재사용하는 컴포넌트예요.
-// 가방싸기 설명(CHK_EXP_P01), 위키 인트로(WIK_INT_P01), 체크인 마지막 화면(CHK_FIN_P01)
-// 3개 화면에서 재사용해요.
-// 상단 뱃지는 화면마다 다르지 않고 "핑거저니"로 통일해서 고정했어요.
+// 역할: "안내 문구 + 일러스트 + 진입 버튼 1개" 구조를 재사용하는 컴포넌트.
+//       가방싸기 설명(CHK_EXP_P01), 위키 인트로(WIK_INT_P01), 체크인 마지막
+//       화면(CHK_FIN_P01) 3개 화면에서 재사용 예정. 상단 뱃지는 화면마다
+//       다르지 않고 "핑거저니"로 통일해서 고정함
+// 사용처: ComponentListPage.jsx(데모)
+// 담당자:
 
 import BaseButton from '../base/BaseButton';
 import styles from './custom.module.css';

@@ -1,6 +1,7 @@
-// AppRoutes.jsx의 역할
-// 데모 전체 URL과 페이지 컴포넌트를 연결하는 라우팅 표
-// BrowserRouter는 main.jsx에서 앱 전체를 감싸고 있고, 여기서는 <Routes>만 정의함
+// 역할: 데모 전체 URL과 페이지 컴포넌트를 연결하는 라우팅 표. BrowserRouter는 main.jsx에서
+//       앱 전체를 감싸고 있고, 여기서는 <Routes>만 정의함
+// 사용처: App.jsx
+// 담당자:
 
 import { Routes, Route, Navigate } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute';

@@ -1,6 +1,7 @@
-// DialogContext.jsx의 역할
-// 앱 전역에서 다이얼로그 상태를 "배열(스택)"로 관리하는 Context.
-// + 브라우저 뒤로가기를 누르면 스택의 가장 마지막(맨 위) 다이얼로그부터 순서대로 닫히게 처리.
+// 역할: 앱 전역에서 다이얼로그 상태를 "배열(스택)"로 관리하는 Context.
+//      브라우저 뒤로가기를 누르면 스택의 가장 마지막(맨 위) 다이얼로그부터 순서대로 닫히게 처리.
+// 사용처: App.jsx (DialogProvider로 앱 전체를 감쌈), DialogExamplePage.jsx (useDialog)
+// 담당자:
 
 import { createContext, useContext, useEffect, useRef, useState } from 'react';
 import DialogShell from './DialogShell.jsx';

@@ -1,7 +1,8 @@
-// QuizClearScreen.jsx
-// 퀴즈 3세트(음식/휴식/협업) 클리어 화면 전용 컴포넌트예요.
-// 일러스트만 세트마다 다르고 나머지(CLEAR!문구, 버튼)는 다 똑같아요.
-// 뱃지+제목+진행률바는 Header 컴포넌트(재웅님 담당)가 그리는 영역이라 여긴 포함 안 시켜요.
+// 역할: 퀴즈 3세트(음식/휴식/협업) 클리어 화면 전용 컴포넌트. 일러스트만
+//       세트마다 다르고 나머지(CLEAR!문구, 버튼)는 동일함. 뱃지+제목+진행률바는
+//       Header 컴포넌트가 그리는 영역이라 여긴 포함 안 함
+// 사용처: ComponentListPage.jsx(데모)
+// 담당자:
 
 import BaseButton from '../base/BaseButton';
 import styles from './custom.module.css';

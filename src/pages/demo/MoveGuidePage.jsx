@@ -1,15 +1,16 @@
-/**
- * MoveGuidePage (이동안내 페이지, "/demo/move")
- *
- * "화면이동" 패턴을 보여주는 3개 하위 예제로 가는 진입 화면.
- * - 권한검사 → 지연님(파트B) 담당, AuthCheckPage.jsx
- * - 파라미터전달 / 뒤로가기 → 파트C 담당 페이지로 연결만 함
- *
- * 로그인 상태 토글이 AuthCheckPage가 아니라 여기 있는 이유 (재웅/규원님 피드백):
- * AuthCheckPage는 ProtectedRoute로 감싸여 있어서, 로그인 안 된 상태면 화면
- * 자체가 안 그려지고 여기로 돌아와버림 → 토글은 "들어가기 전" 화면에 있어야
- * 로그인 O/X 두 경우 다 테스트 가능함
- */
+// 페이지명: MoveGuidePage (TODO: 정식 화면명 확정되면 교체)
+// 역할: "화면이동" 패턴을 보여주는 3개 하위 예제(권한검사/파라미터전달/뒤로가기)로 가는 진입 화면.
+//       - 권한검사(AuthCheckPage.jsx)는 지연님(파트B), 파라미터전달/뒤로가기는 파트C 담당 페이지로 연결만 함
+//       - 로그인 상태 토글이 AuthCheckPage가 아니라 여기 있는 이유(재웅/규원님 피드백):
+//         AuthCheckPage는 ProtectedRoute로 감싸여 있어서 로그인 안 된 상태면 화면 자체가
+//         안 그려지고 여기로 돌아와버림 → 토글은 "들어가기 전" 화면에 있어야 로그인 O/X
+//         두 경우 다 테스트 가능함
+// 사용처: DemoIndexPage에서 "① 화면이동" 버튼(goTo(ROUTE_PATHS.DEMO_MOVE))으로 진입.
+//         권한검사/파라미터전달/뒤로가기 3개 버튼으로 하위 페이지로 이동시키며,
+//         ProtectedRoute에 막힌 AuthCheckPage 접근도 blockedReason state와 함께 이 화면으로 돌아옴
+// url: /demo/move
+// 담당자:
+
 import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 // PageLayout: 공통 틀을 씌워주는 컴포넌트 (지연님이 만든 그 파일)

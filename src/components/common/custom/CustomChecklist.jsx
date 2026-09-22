@@ -1,8 +1,9 @@
-// CustomChecklist.jsx
-// 체크박스+라벨 여러 개를 세로로 묶어서 보여주는 컴포넌트예요.
-// HR 관리(ADM_HRC_P01, 5항목), 업무장비 지급 확인 화면에서 재사용해요.
-// 각 항목이 실제로 체크됐는지는 부모(페이지)가 관리하고,
-// 여긴 "배열 개수만큼 줄을 그려주는 일"만 해요.
+// 역할: 체크박스+라벨 여러 개를 세로로 묶어서 보여주는 컴포넌트.
+//       HR 관리(ADM_HRC_P01, 5항목), 업무장비 지급 확인 화면에서 재사용 예정.
+//       각 항목이 실제로 체크됐는지는 부모(페이지)가 관리하고,
+//       여긴 "배열 개수만큼 줄을 그려주는 일"만 함
+// 사용처: ComponentListPage.jsx(데모)
+// 담당자:
 
 import BaseCheckbox from '../base/BaseCheckbox';
 import BaseCard from '../base/BaseCard';

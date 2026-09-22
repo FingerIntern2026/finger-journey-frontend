@@ -1,8 +1,8 @@
-// useGlobalLoading.js의 역할
-// utils/loadingStore.js가 들고 있는 "지금 로딩 중인지" 값을
-// React 컴포넌트가 구독해서 쓸 수 있게 이어주는 커스텀 훅
-// useAuth.js가 authStorage.js를 읽어오는 것과 같은 역할이지만,
-// 이건 값이 바뀔 때마다 컴포넌트가 다시 그려져야 해서 구독(subscribe) 방식을 씀
+// 역할: utils/loadingStore.js가 들고 있는 "지금 로딩 중인지" 값을 React 컴포넌트가 구독해서
+//       쓸 수 있게 이어주는 커스텀 훅. useAuth.js가 authStorage.js를 읽어오는 것과 같은 역할이지만,
+//       이건 값이 바뀔 때마다 컴포넌트가 다시 그려져야 해서 구독(subscribe) 방식을 씀
+// 사용처: GlobalLoading.jsx
+// 담당자:
 
 import { useSyncExternalStore } from "react";
 import { subscribe, isLoading } from "../utils/loadingStore";
