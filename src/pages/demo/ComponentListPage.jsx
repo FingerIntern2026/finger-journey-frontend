@@ -57,7 +57,12 @@ const ADMIN_TABS = [
 ];
 
 // 한 번 눌러서 펼치고, 다시 누르면 접히는 아코디언 항목
-function AccordionItem({ id, title, description, isOpen, onToggle, children }) {
+// render를 children이 아니라 함수(prop)로 받는 이유:
+// {item.render()}처럼 JSX children으로 미리 호출해서 넘기면, 그 호출 자체는
+// "부모(ComponentListPage)가 리렌더될 때" 일어나 버려서 이 아코디언이 닫혀있어도
+// 매번 실행됨 (React는 프로퍼티/children을 넘기기 전에 이미 평가를 끝냄).
+// isOpen일 때만 실제로 호출해야 닫힌 항목의 render는 아예 실행되지 않음
+function AccordionItem({ id, title, description, isOpen, onToggle, render }) {
   return (
     <div className={styles.accordionItem}>
       <button
@@ -74,7 +79,7 @@ function AccordionItem({ id, title, description, isOpen, onToggle, children }) {
       {isOpen && (
         <div className={styles.accordionBody}>
           {description && <p className={styles.accordionDescription}>{description}</p>}
-          {children}
+          {render()}
         </div>
       )}
     </div>
@@ -164,19 +169,6 @@ export default function ComponentListPage() {
     {
       id: "BaseProgressBar",
       render: () => <BaseProgressBar current={4} total={10} />,
-    },
-    {
-      id: "GlobalLoading",
-      description: "규원님 작업 — 전역 로딩 오버레이. startLoading()/stopLoading() 카운터로 여러 요청이 겹쳐도 하나만 뜸",
-      render: () => (
-        <BaseButton
-          label="로딩 테스트"
-          onClick={() => {
-            startLoading();
-            setTimeout(() => stopLoading(), 2000);
-          }}
-        />
-      ),
     },
   ];
 
@@ -408,6 +400,20 @@ export default function ComponentListPage() {
           description: "실제로는 모든 데모 화면 우측 하단에 항상 떠 있음",
           render: () => <ChatEntryButton onClick={() => alert("챗봇 열기")} unreadCount={2} />,
         },
+        {
+          id: "GlobalLoading",
+          title: "GlobalLoading",
+          description: "규원님 작업 — 전역 로딩 오버레이. startLoading()/stopLoading() 카운터로 여러 요청이 겹쳐도 하나만 뜸 (App.jsx 최상단에 항상 마운트돼 있음)",
+          render: () => (
+            <BaseButton
+              label="로딩 테스트"
+              onClick={() => {
+                startLoading();
+                setTimeout(() => stopLoading(), 2000);
+              }}
+            />
+          ),
+        },
       ],
     },
   ];
@@ -446,9 +452,8 @@ export default function ComponentListPage() {
               description={item.description}
               isOpen={openIds.has(item.id)}
               onToggle={toggleOpen}
-            >
-              {item.render()}
-            </AccordionItem>
+              render={item.render}
+            />
           ))}
         </div>
       )}
@@ -466,9 +471,8 @@ export default function ComponentListPage() {
                   description={item.description}
                   isOpen={openIds.has(item.id)}
                   onToggle={toggleOpen}
-                >
-                  {item.render()}
-                </AccordionItem>
+                  render={item.render}
+                />
               ))}
             </div>
           </div>
