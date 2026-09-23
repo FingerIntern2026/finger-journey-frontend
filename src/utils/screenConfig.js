@@ -5,6 +5,7 @@ import { traced } from '../devtrace/traced';
 import { parseApiError } from './apiError';
 
 const SCREEN_LIST_API = '/admin/screen/list';
+const BACK_ACTIONS = new Set(['TARGET', 'EXIT', 'BLOCK']);
 
 let cachedScreens = null;
 
@@ -15,6 +16,15 @@ function validateScreens(screens) {
   for (const screen of screens) {
     if (!screen.screenCode || !screen.routePath) {
       throw new Error('화면정보에 screenCode와 routePath가 필요합니다.');
+    }
+    if (!BACK_ACTIONS.has(screen.backAction)) {
+      throw new Error(`지원하지 않는 뒤로가기 동작입니다: ${screen.backAction}`);
+    }
+    if (screen.backAction === 'TARGET' && !screen.backScreenCode) {
+      throw new Error(`뒤로가기 대상 화면 코드가 없습니다: ${screen.screenCode}`);
+    }
+    if (screen.backAction === 'EXIT' && !screen.exitScreenCode) {
+      throw new Error(`업무 종료 화면 코드가 없습니다: ${screen.screenCode}`);
     }
     if (codes.has(screen.screenCode)) {
       throw new Error(`중복된 화면 코드입니다: ${screen.screenCode}`);
@@ -60,6 +70,10 @@ function _findScreenByCode(screenCode) {
   return _getScreenList().find((screen) => screen.screenCode === screenCode) ?? null;
 }
 
+function _findScreenByPath(routePath) {
+  return _getScreenList().find((screen) => screen.routePath === routePath) ?? null;
+}
+
 function _getRoutePath(screenCode) {
   const screen = _findScreenByCode(screenCode);
   if (!screen) {
@@ -75,4 +89,5 @@ export function clearScreenCache() {
 export const fetchScreenList = traced('fetchScreenList', 'src/utils/screenConfig.js', _fetchScreenList);
 export const getScreenList = traced('getScreenList', 'src/utils/screenConfig.js', _getScreenList);
 export const findScreenByCode = traced('findScreenByCode', 'src/utils/screenConfig.js', _findScreenByCode);
+export const findScreenByPath = traced('findScreenByPath', 'src/utils/screenConfig.js', _findScreenByPath);
 export const getRoutePath = traced('getRoutePath', 'src/utils/screenConfig.js', _getRoutePath);

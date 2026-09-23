@@ -145,6 +145,11 @@ export const UTIL_KNOWLEDGE = {
     role: '화면 코드로 화면정보를 찾기',
     why: '페이지가 URL을 직접 사용하지 않고 화면 코드로 이동하기 위한 공통 조회 함수',
   },
+  findScreenByPath: {
+    source: 'src/utils/screenConfig.js',
+    role: '현재 URL 경로에 해당하는 화면정보를 찾기',
+    why: '뒤로가기 시 현재 화면의 backAction과 대상 화면 코드를 조회하기 위해 사용',
+  },
   'historyStack.push': {
     source: 'src/utils/historyStack.js',
     role: '화면 이동 기록을 쌓음',
@@ -153,7 +158,7 @@ export const UTIL_KNOWLEDGE = {
   'historyStack.pop': {
     source: 'src/utils/historyStack.js',
     role: '마지막 이동 기록을 꺼내면서 제거',
-    why: 'goBack이 호출하지만, 반환값(prevParams)은 현재 아무도 안 읽어서 절반만 완성된 기능',
+    why: 'DB 뒤로가기 대상 화면으로 이동할 때 이전 화면 파라미터를 함께 복원',
   },
 };
 
