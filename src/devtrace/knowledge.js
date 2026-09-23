@@ -8,6 +8,11 @@
 // url은 접두사 매칭(예: "/admin/employee"로 시작하면 매칭)
 export const ENDPOINT_KNOWLEDGE = [
   {
+    url: '/admin/screen/list',
+    backend: 'ScreenInfoController.getScreenList() → ScreenInfoService',
+    note: 'DB의 화면 코드·routePath·뒤로가기 규칙을 조회',
+  },
+  {
     url: '/admin/employee/list',
     backend: 'EmployeeController.getEmployeeList() → EmployeeService',
     note: '사원 전체 목록 조회',
@@ -132,8 +137,8 @@ export const UTIL_KNOWLEDGE = {
   },
   fetchScreenList: {
     source: 'src/utils/screenConfig.js',
-    role: '화면정보 목록을 앱 시작 시 불러와 메모리에 캐싱',
-    why: '현재는 백엔드 API와 같은 형태의 로컬 목록을 사용하고, API가 제공되면 데이터 공급부만 교체할 수 있게 분리',
+    role: '화면정보 목록을 백엔드에서 앱 시작 시 불러와 메모리에 캐싱',
+    why: 'DB의 화면 코드와 routePath를 라우팅과 화면 이동의 단일 기준으로 사용',
   },
   findScreenByCode: {
     source: 'src/utils/screenConfig.js',
