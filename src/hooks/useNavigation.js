@@ -6,15 +6,16 @@
 //         ParamPassPage.jsx, ParamDetailPage.jsx
 // 담당자:
 
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { push, pop, peek, clear } from "../utils/historyStack";
 import { SCREEN_CODES } from "../config/screenCodes";
-import { getRoutePath } from "../utils/screenConfig";
+import { findScreenByCode, findScreenByPath, getRoutePath } from "../utils/screenConfig";
 import { addStep, safeSerialize } from "../devtrace/traceContext";
 import { findRouteKnowledge } from "../devtrace/knowledge";
 
 export default function useNavigation() {
   const navigate = useNavigate();
+  const location = useLocation();
 
   // 화면 코드로 routePath를 조회한 뒤 이동한다. 페이지는 URL을 직접 알 필요가 없다.
   const goToScreen = (screenCode, state) => {
@@ -43,18 +44,51 @@ export default function useNavigation() {
     navigate(path, { state });
   };
 
-  // 이전 페이지로 돌아가기
+  // 현재 화면의 DB 뒤로가기 규칙에 따라 대상 화면 코드와 routePath를 결정한다.
   const goBack = () => {
+    const currentScreen = findScreenByPath(location.pathname);
+
+    if (!currentScreen) {
+      throw new Error(`현재 경로에 해당하는 화면정보가 없습니다: ${location.pathname}`);
+    }
+
+    if (currentScreen.backAction === "BLOCK") {
+      addStep({
+        layer: "nav",
+        label: `goBack(${currentScreen.screenCode}) 차단`,
+        source: "src/hooks/useNavigation.js",
+        note: "화면정보의 backAction이 BLOCK이므로 이동하지 않음",
+      });
+      return;
+    }
+
+    const targetCode = currentScreen.backAction === "TARGET"
+      ? currentScreen.backScreenCode
+      : currentScreen.exitScreenCode;
+    const targetScreen = findScreenByCode(targetCode);
+
+    if (!targetScreen) {
+      throw new Error(`뒤로가기 대상 화면정보가 없습니다: ${targetCode}`);
+    }
+
     const popped = pop();
+    if (targetCode === SCREEN_CODES.DEMO_HOME) {
+      clear();
+    }
+
     addStep({
       layer: "nav",
       label: "historyStack.pop()",
       source: "src/utils/historyStack.js",
       output: safeSerialize(popped),
-      note: "prevParams는 저장은 되지만 goBack이 실제로 읽어서 쓰진 않음 (미완성 기능)",
     });
-    addStep({ layer: "nav", label: "goBack()", source: "src/hooks/useNavigation.js" });
-    navigate(-1);
+    addStep({
+      layer: "nav",
+      label: `goBack(${currentScreen.screenCode} → ${targetCode})`,
+      source: "src/hooks/useNavigation.js",
+      note: `${currentScreen.backAction} 규칙으로 ${targetScreen.routePath} 이동`,
+    });
+    navigate(targetScreen.routePath, { replace: true, state: popped?.prevParams });
   };
 
   return { goToScreen, goBack };

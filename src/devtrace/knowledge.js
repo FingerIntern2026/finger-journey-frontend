@@ -8,6 +8,11 @@
 // url은 접두사 매칭(예: "/admin/employee"로 시작하면 매칭)
 export const ENDPOINT_KNOWLEDGE = [
   {
+    url: '/admin/screen/list',
+    backend: 'ScreenInfoController.getScreenList() → ScreenInfoService',
+    note: 'DB의 화면 코드·routePath·뒤로가기 규칙을 조회',
+  },
+  {
     url: '/admin/employee/list',
     backend: 'EmployeeController.getEmployeeList() → EmployeeService',
     note: '사원 전체 목록 조회',
@@ -132,13 +137,18 @@ export const UTIL_KNOWLEDGE = {
   },
   fetchScreenList: {
     source: 'src/utils/screenConfig.js',
-    role: '화면정보 목록을 앱 시작 시 불러와 메모리에 캐싱',
-    why: '현재는 백엔드 API와 같은 형태의 로컬 목록을 사용하고, API가 제공되면 데이터 공급부만 교체할 수 있게 분리',
+    role: '화면정보 목록을 백엔드에서 앱 시작 시 불러와 메모리에 캐싱',
+    why: 'DB의 화면 코드와 routePath를 라우팅과 화면 이동의 단일 기준으로 사용',
   },
   findScreenByCode: {
     source: 'src/utils/screenConfig.js',
     role: '화면 코드로 화면정보를 찾기',
     why: '페이지가 URL을 직접 사용하지 않고 화면 코드로 이동하기 위한 공통 조회 함수',
+  },
+  findScreenByPath: {
+    source: 'src/utils/screenConfig.js',
+    role: '현재 URL 경로에 해당하는 화면정보를 찾기',
+    why: '뒤로가기 시 현재 화면의 backAction과 대상 화면 코드를 조회하기 위해 사용',
   },
   'historyStack.push': {
     source: 'src/utils/historyStack.js',
@@ -148,7 +158,7 @@ export const UTIL_KNOWLEDGE = {
   'historyStack.pop': {
     source: 'src/utils/historyStack.js',
     role: '마지막 이동 기록을 꺼내면서 제거',
-    why: 'goBack이 호출하지만, 반환값(prevParams)은 현재 아무도 안 읽어서 절반만 완성된 기능',
+    why: 'DB 뒤로가기 대상 화면으로 이동할 때 이전 화면 파라미터를 함께 복원',
   },
 };
 
@@ -160,7 +170,7 @@ export function findUtilKnowledge(name) {
 export const ROUTE_KNOWLEDGE = {
   '/demo': '데모 허브 — 5개 기능 진입점',
   '/demo/move': '화면이동 예제 허브',
-  '/demo/move/auth-check': 'ProtectedRoute로 감싸인 화면. 로그인 안 돼있으면 /demo/move로 강제 리다이렉트',
+  '/demo/move/auth-check': '공유된 로그인 상태값을 확인하는 권한 상태 데모',
   '/demo/move/param': '파라미터 전달 데모 (목록)',
   '/demo/param-detail': '파라미터 전달 데모 (상세) — location.state로 값을 받음',
   '/demo/move/go-back': 'goBack/goTo 데모',
