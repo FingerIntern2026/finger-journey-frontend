@@ -4,7 +4,7 @@
 //       토큰까지 그대로 이식함 (reportResult.module.css 참고). employeeId만 받아서
 //       자체적으로 리포트/3행시를 조회함
 // 사용처: ReportExamplePage에서 리포트 생성/조회 시
-//         goTo(ROUTE_PATHS.DEMO_REPORT_RESULT, { employeeId })로 진입
+//         goToScreen(SCREEN_CODES.DEMO_REPORT_RESULT, { employeeId })로 진입
 // url: /demo/report/result
 // 담당자:
 

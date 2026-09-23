@@ -47,7 +47,7 @@ function App() {
   }
 
   if (!screens) {
-    return <GlobalLoading />;
+    return <main role="status" style={{ padding: 24 }}>화면정보를 불러오는 중입니다.</main>;
   }
 
   return (

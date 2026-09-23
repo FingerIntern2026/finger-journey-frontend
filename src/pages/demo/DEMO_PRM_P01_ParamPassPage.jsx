@@ -1,8 +1,8 @@
 // 페이지명: ParamPassPage (TODO: 정식 화면명 확정되면 교체)
 // 역할: "파라미터 전달" 데모. 목록에서 항목을 클릭하면 그 항목의 값을 다음 페이지
 //       (ParamDetailPage)로 넘기면서 이동하는 걸 보여주는 화면. hooks/useNavigation.js의
-//       goTo(path, state)를 사용하며, 실제 값 대신 데모용 임시 사원 데이터를 사용
-// 사용처: MoveGuidePage에서 "파라미터전달" 버튼(navigate(ROUTE_PATHS.DEMO_MOVE_PARAM))으로 진입.
+//       goToScreen(screenCode, state)를 사용하며, 실제 값 대신 데모용 임시 사원 데이터를 사용
+// 사용처: MoveGuidePage에서 "파라미터전달" 버튼(goToScreen(SCREEN_CODES.DEMO_PARAM_PASS))으로 진입.
 //         항목 클릭 시 ParamDetailPage로 employeeId를 넘기며 이동
 // url: /demo/move/param
 // 담당자:

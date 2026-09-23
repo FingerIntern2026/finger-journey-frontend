@@ -7,8 +7,8 @@
 //       요청 반영). 각 단계는 이전 단계 완료 여부와 무관하게 독립적으로 호출 가능
 //       (데모 편의를 위해). 데모용 사원(data.sql 시드 기준) 4/5/6번은 퀴즈·3행시는 있고
 //       리포트만 없음
-// 사용처: DemoIndexPage에서 "⑤ 완주 여정 데모" 버튼(goTo(ROUTE_PATHS.DEMO_REPORT))으로 진입.
-//         리포트 생성/조회 시 goTo(ROUTE_PATHS.DEMO_REPORT_RESULT, { employeeId })로
+// 사용처: DemoIndexPage에서 "⑤ 완주 여정 데모" 버튼(SCREEN_CODES.DEMO_REPORT)으로 진입.
+//         리포트 생성/조회 시 SCREEN_CODES.DEMO_REPORT_RESULT와 employeeId로
 //         ReportResultPage로 이동
 // url: /demo/report
 // 담당자:

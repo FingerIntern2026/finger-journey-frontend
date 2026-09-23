@@ -5,7 +5,7 @@
 //         AuthCheckPage는 ProtectedRoute로 감싸여 있어서 로그인 안 된 상태면 화면 자체가
 //         안 그려지고 여기로 돌아와버림 → 토글은 "들어가기 전" 화면에 있어야 로그인 O/X
 //         두 경우 다 테스트 가능함
-// 사용처: DemoIndexPage에서 "① 화면이동" 버튼(goTo(ROUTE_PATHS.DEMO_MOVE))으로 진입.
+// 사용처: DemoIndexPage에서 "① 화면이동" 버튼(goToScreen(SCREEN_CODES.DEMO_MOVE))으로 진입.
 //         권한검사/파라미터전달/뒤로가기 3개 버튼으로 하위 페이지로 이동시키며,
 //         ProtectedRoute에 막힌 AuthCheckPage 접근도 blockedReason state와 함께 이 화면으로 돌아옴
 // url: /demo/move

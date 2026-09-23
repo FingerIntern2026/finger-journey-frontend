@@ -5,7 +5,7 @@
 //       순서로 배치)" 두 탭 + 아코디언(버튼 눌러야 펼쳐짐) 구조로 재구성함.
 //       각 컴포넌트가 어떤 props를 받고 어떻게 동작하는지 확인하는 용도이며,
 //       실제 로직 없이 동작 확인용 임시 state만 사용
-// 사용처: DemoIndexPage에서 "② 컴포넌트리스트" 버튼(goTo(ROUTE_PATHS.DEMO_COMPONENTS))으로 진입
+// 사용처: DemoIndexPage에서 "② 컴포넌트리스트" 버튼(SCREEN_CODES.DEMO_COMPONENTS)으로 진입
 // url: /demo/components
 // 담당자:
 

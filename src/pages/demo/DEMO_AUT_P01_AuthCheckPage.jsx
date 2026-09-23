@@ -2,7 +2,7 @@
 // 역할: 권한검사 데모 화면. 로그인 안 됐으면 ProtectedRoute가 MoveGuidePage로 돌려보내기
 //       때문에, 이 화면이 보인다는 것 자체가 이미 로그인된 상태라는 뜻. 로그인 상태 토글은
 //       MoveGuidePage에 있음
-// 사용처: MoveGuidePage에서 "권한검사" 버튼(navigate(ROUTE_PATHS.DEMO_MOVE_AUTH_CHECK))으로 진입.
+// 사용처: MoveGuidePage에서 "권한검사" 버튼(goToScreen(SCREEN_CODES.DEMO_AUTH_CHECK))으로 진입.
 //         ProtectedRoute로 감싸여 있어 로그인 안 된 상태로 접근하면 MoveGuidePage로 리다이렉트됨
 // url: /demo/move/auth-check
 // 담당자:
