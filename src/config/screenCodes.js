@@ -1,0 +1,15 @@
+// 데모 화면을 URL 대신 식별하기 위한 화면 코드.
+// 실제 서비스 화면 코드(PB_*, PTH_* 등)와 겹치지 않도록 DEMO_* 네임스페이스를 사용한다.
+export const SCREEN_CODES = Object.freeze({
+  DEMO_HOME: 'DEMO_HOM_P01',
+  DEMO_MOVE: 'DEMO_MOV_P01',
+  DEMO_AUTH_CHECK: 'DEMO_AUT_P01',
+  DEMO_PARAM_PASS: 'DEMO_PRM_P01',
+  DEMO_PARAM_DETAIL: 'DEMO_PRM_P02',
+  DEMO_GO_BACK: 'DEMO_MOV_P02',
+  DEMO_COMPONENTS: 'DEMO_CMP_P01',
+  DEMO_DIALOG: 'DEMO_DLG_P01',
+  DEMO_API: 'DEMO_API_P01',
+  DEMO_REPORT: 'DEMO_RPT_P01',
+  DEMO_REPORT_RESULT: 'DEMO_RPT_P02',
+});

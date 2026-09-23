@@ -1,46 +1,75 @@
-// 역할: 백엔드 화면정보 테이블(url, 화면아이디, 로그인 필수 여부)을 가져오는 유틸
-//       (5·6주차 피드백의 "커스텀 가져오는 유틸", 9/21 회의에서 확정). 앱이 시작될 때 한 번
-//       이 목록을 받아와서, AppRoutes.jsx가 화면아이디↔URL을 하드코딩된 <Route> 대신 이
-//       데이터로 동적으로 등록하는 데 씀. apiUrl은 파트A가 실제 API를 만들기 전까지 쓰는 더미 경로
-// 사용처: 현재 사용하는 곳 없음 (AppRoutes.jsx 동적 등록에 연동 예정)
-// 담당자:
+// 화면 코드와 URL의 연결을 관리한다.
+// 백엔드 화면 목록 API가 제공되기 전까지는 동일한 응답 형태의 로컬 목록을 사용한다.
+// 이후 fetchScreenList()의 데이터 공급부만 API 호출로 교체하면 소비 코드는 유지할 수 있다.
 
-import { sendPost } from '../api/client';
-import { parseApiError } from './apiError';
+import { SCREEN_CODES } from '../config/screenCodes';
 import { traced } from '../devtrace/traced';
 
-const SCREEN_LIST_API = '/admin/screen/list';
+const LOCAL_SCREENS = Object.freeze([
+  { screenCode: SCREEN_CODES.DEMO_HOME, screenName: '데모 메인', routePath: '/demo', loginRequired: false },
+  { screenCode: SCREEN_CODES.DEMO_MOVE, screenName: '화면 이동', routePath: '/demo/move', loginRequired: false },
+  { screenCode: SCREEN_CODES.DEMO_AUTH_CHECK, screenName: '권한 검사', routePath: '/demo/move/auth-check', loginRequired: true },
+  { screenCode: SCREEN_CODES.DEMO_PARAM_PASS, screenName: '파라미터 전달', routePath: '/demo/move/param', loginRequired: false },
+  { screenCode: SCREEN_CODES.DEMO_PARAM_DETAIL, screenName: '파라미터 상세', routePath: '/demo/param-detail', loginRequired: false },
+  { screenCode: SCREEN_CODES.DEMO_GO_BACK, screenName: '뒤로가기', routePath: '/demo/move/go-back', loginRequired: false },
+  { screenCode: SCREEN_CODES.DEMO_COMPONENTS, screenName: '컴포넌트 목록', routePath: '/demo/components', loginRequired: false },
+  { screenCode: SCREEN_CODES.DEMO_DIALOG, screenName: '다이얼로그', routePath: '/demo/dialog', loginRequired: false },
+  { screenCode: SCREEN_CODES.DEMO_API, screenName: 'API 통신', routePath: '/demo/api', loginRequired: false },
+  { screenCode: SCREEN_CODES.DEMO_REPORT, screenName: '완주 리포트', routePath: '/demo/report', loginRequired: false },
+  { screenCode: SCREEN_CODES.DEMO_REPORT_RESULT, screenName: '완주 리포트 결과', routePath: '/demo/report/result', loginRequired: false },
+]);
 
-// 한 번 받아온 목록을 메모리에 캐싱 (앱 켜져 있는 동안은 매번 다시 요청 안 함)
 let cachedScreens = null;
 
-// 화면정보 테이블 목록을 가져옴
-// 반환 형태 예시 : [{ screenId: 'DEMO_HOME', url: '/demo', loginRequired: false }, ...]
+function validateScreens(screens) {
+  const codes = new Set();
+  const paths = new Set();
+
+  for (const screen of screens) {
+    if (!screen.screenCode || !screen.routePath) {
+      throw new Error('화면정보에 screenCode와 routePath가 필요합니다.');
+    }
+    if (codes.has(screen.screenCode)) {
+      throw new Error(`중복된 화면 코드입니다: ${screen.screenCode}`);
+    }
+    if (paths.has(screen.routePath)) {
+      throw new Error(`중복된 화면 경로입니다: ${screen.routePath}`);
+    }
+    codes.add(screen.screenCode);
+    paths.add(screen.routePath);
+  }
+
+  return screens;
+}
+
 async function _fetchScreenList() {
-    if (cachedScreens) {
-        return cachedScreens;
-    }
-
-    try {
-        const data = await sendPost(SCREEN_LIST_API, {});
-        cachedScreens = data;
-        return cachedScreens;
-    } catch (err) {
-        const { message } = parseApiError(err);
-        throw new Error(`화면정보를 불러오지 못했습니다: ${message}`);
-    }
+  if (!cachedScreens) {
+    cachedScreens = validateScreens([...LOCAL_SCREENS]);
+  }
+  return cachedScreens;
 }
 
-// screenId 하나로 화면 정보를 찾을 때 사용 (예: 특정 화면이 로그인 필요한지 확인)
-// fetchScreenList()가 먼저 한 번 호출돼서 캐시가 채워져 있어야 함
-function _findScreenById(screenId) {
-    return cachedScreens?.find((screen) => screen.screenId === screenId) ?? null;
+function _getScreenList() {
+  return cachedScreens ?? validateScreens([...LOCAL_SCREENS]);
 }
 
-// 테스트/개발 중 캐시를 강제로 비우고 싶을 때 사용
+function _findScreenByCode(screenCode) {
+  return _getScreenList().find((screen) => screen.screenCode === screenCode) ?? null;
+}
+
+function _getRoutePath(screenCode) {
+  const screen = _findScreenByCode(screenCode);
+  if (!screen) {
+    throw new Error(`등록되지 않은 화면 코드입니다: ${screenCode}`);
+  }
+  return screen.routePath;
+}
+
 export function clearScreenCache() {
-    cachedScreens = null;
+  cachedScreens = null;
 }
 
 export const fetchScreenList = traced('fetchScreenList', 'src/utils/screenConfig.js', _fetchScreenList);
-export const findScreenById = traced('findScreenById', 'src/utils/screenConfig.js', _findScreenById);
+export const getScreenList = traced('getScreenList', 'src/utils/screenConfig.js', _getScreenList);
+export const findScreenByCode = traced('findScreenByCode', 'src/utils/screenConfig.js', _findScreenByCode);
+export const getRoutePath = traced('getRoutePath', 'src/utils/screenConfig.js', _getRoutePath);
