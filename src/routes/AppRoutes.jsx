@@ -11,6 +11,7 @@ function renderScreen(screen) {
     throw new Error(`컴포넌트가 등록되지 않은 화면 코드입니다: ${screen.screenCode}`);
   }
 
+  // loginRequired는 화면정보와 함께 보관하되 실제 인증 구현 전까지 접근을 제한하지 않는다.
   return <Component />;
 }
 

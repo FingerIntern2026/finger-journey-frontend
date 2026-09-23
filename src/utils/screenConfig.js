@@ -20,6 +20,9 @@ function validateScreens(screens) {
     if (!BACK_ACTIONS.has(screen.backAction)) {
       throw new Error(`지원하지 않는 뒤로가기 동작입니다: ${screen.backAction}`);
     }
+    if (typeof screen.loginRequired !== 'boolean') {
+      throw new Error(`로그인 필요 여부가 올바르지 않습니다: ${screen.screenCode}`);
+    }
     if (screen.backAction === 'TARGET' && !screen.backScreenCode) {
       throw new Error(`뒤로가기 대상 화면 코드가 없습니다: ${screen.screenCode}`);
     }
@@ -39,6 +42,14 @@ function validateScreens(screens) {
   return screens;
 }
 
+function normalizeScreens(screens) {
+  return screens.map((screen) => ({
+    ...screen,
+    // 이전 버전 API와도 호환되도록 필드가 없으면 공개 화면으로 취급한다.
+    loginRequired: screen.loginRequired ?? false,
+  }));
+}
+
 async function _fetchScreenList() {
   if (cachedScreens) {
     return cachedScreens;
@@ -51,7 +62,7 @@ async function _fetchScreenList() {
       throw new Error('화면정보 응답 형식이 올바르지 않습니다.');
     }
 
-    cachedScreens = validateScreens(response.data);
+    cachedScreens = validateScreens(normalizeScreens(response.data));
     return cachedScreens;
   } catch (error) {
     const { message } = parseApiError(error);
