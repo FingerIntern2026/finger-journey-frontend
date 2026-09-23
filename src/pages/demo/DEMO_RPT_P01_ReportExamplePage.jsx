@@ -23,7 +23,7 @@ import PageLayout from "../../components/common/layout/PageLayout.jsx";
 import Header from "../../components/common/layout/Header.jsx";
 import useNavigation from "../../hooks/useNavigation";
 import { ROUTE_PATHS } from "../../config/routeConfig";
-import styles from "./reportExample.module.css";
+import styles from "./DEMO_RPT_P01_ReportExample.module.css";
 
 export default function ReportExamplePage() {
   const { goBack, goTo } = useNavigation();

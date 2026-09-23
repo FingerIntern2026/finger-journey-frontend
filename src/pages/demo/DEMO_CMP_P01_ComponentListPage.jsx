@@ -44,7 +44,7 @@ import Header from "../../components/common/layout/Header";
 import PageLayout from "../../components/common/layout/PageLayout.jsx";
 import useNavigation from "../../hooks/useNavigation";
 
-import styles from "./componentList.module.css";
+import styles from "./DEMO_CMP_P01_ComponentList.module.css";
 
 const PLACEHOLDER_IMG =
   "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Crect width='160' height='160' fill='%23eee'/%3E%3C/svg%3E";

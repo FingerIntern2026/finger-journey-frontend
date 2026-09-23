@@ -7,17 +7,17 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute';
 import { ROUTE_PATHS } from '../config/routeConfig';
 
-import DemoIndexPage from '../pages/demo/DemoIndexPage';
-import MoveGuidePage from '../pages/demo/MoveGuidePage';
-import AuthCheckPage from '../pages/demo/AuthCheckPage';
-import ParamPassPage from '../pages/demo/ParamPassPage';
-import ParamDetailPage from '../pages/demo/ParamDetailPage';
-import GoBackExamplePage from '../pages/demo/GoBackExamplePage';
-import ComponentListPage from '../pages/demo/ComponentListPage';
-import DialogExamplePage from '../pages/demo/DialogExamplePage';
-import ApiExamplePage from '../pages/demo/ApiExamplePage';
-import ReportExamplePage from '../pages/demo/ReportExamplePage';
-import ReportResultPage from '../pages/demo/ReportResultPage';
+import DemoIndexPage from '../pages/demo/DEMO_HOM_P01_DemoIndexPage';
+import MoveGuidePage from '../pages/demo/DEMO_MOV_P01_MoveGuidePage';
+import AuthCheckPage from '../pages/demo/DEMO_AUT_P01_AuthCheckPage';
+import ParamPassPage from '../pages/demo/DEMO_PRM_P01_ParamPassPage';
+import ParamDetailPage from '../pages/demo/DEMO_PRM_P02_ParamDetailPage';
+import GoBackExamplePage from '../pages/demo/DEMO_MOV_P02_GoBackExamplePage';
+import ComponentListPage from '../pages/demo/DEMO_CMP_P01_ComponentListPage';
+import DialogExamplePage from '../pages/demo/DEMO_DLG_P01_DialogExamplePage';
+import ApiExamplePage from '../pages/demo/DEMO_API_P01_ApiExamplePage';
+import ReportExamplePage from '../pages/demo/DEMO_RPT_P01_ReportExamplePage';
+import ReportResultPage from '../pages/demo/DEMO_RPT_P02_ReportResultPage';
 
 export default function AppRoutes() {
   return (
