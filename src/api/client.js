@@ -41,6 +41,30 @@ instance.interceptors.request.use((config) => {
 instance.interceptors.response.use(
   (response) => {
     const { __devtraceStepId, __devtraceStartedAt, __devtraceRelease } = response.config;
+
+    // 9/23 백엔드 변경: 업무 흐름상 실패(CPL_003/CPL_005/QUZ_002 등)는 이제 HTTP 200 +
+    // { success:false, errorCode, message }로 내려옴. axios는 2xx면 무조건 성공(then)으로
+    // 보내버려서 이 상태로 두면 화면이 "성공"으로 착각하고 다음 단계로 진행해버림.
+    // 그래서 여기서 success:false를 감지하면 강제로 reject해서, 어떤 HTTP 상태로 오든
+    // 프론트 전역에서 항상 catch/parseApiError로 통일해서 처리되게 만듦
+    if (response.data && response.data.success === false) {
+      const knowledge = findEndpointKnowledge(response.config.url);
+      const backendCode = response.data.errorCode;
+      updateStep(__devtraceStepId, {
+        output: safeSerialize(response.data),
+        error: backendCode
+          ? `${backendCode} (HTTP 200)${knowledge?.errors?.[backendCode] ? " — " + knowledge.errors[backendCode] : ""}`
+          : safeSerialize(response.data.message),
+        durationMs: Date.now() - __devtraceStartedAt,
+      });
+      __devtraceRelease?.();
+
+      const businessError = new Error(response.data.message || "요청이 거부되었습니다.");
+      businessError.response = response; // parseApiError가 err.response.data를 그대로 읽을 수 있게
+      businessError.isBusinessLogicError = true;
+      return Promise.reject(businessError);
+    }
+
     updateStep(__devtraceStepId, {
       output: safeSerialize(response.data),
       durationMs: Date.now() - __devtraceStartedAt,
@@ -53,7 +77,7 @@ instance.interceptors.response.use(
     const { __devtraceStepId, __devtraceStartedAt, __devtraceRelease } = config;
     if (__devtraceStepId) {
       const knowledge = findEndpointKnowledge(config.url);
-      const backendCode = error.response?.data?.code;
+      const backendCode = error.response?.data?.errorCode;
       updateStep(__devtraceStepId, {
         output: safeSerialize(error.response?.data),
         error: backendCode

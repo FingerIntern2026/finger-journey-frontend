@@ -1,6 +1,9 @@
-// 역할: 백엔드는 실패 시 항상 { success:false, code, message } 형태로 응답하기로 정했음
-//       (finger-journey-backend의 GlobalExceptionHandler, ErrorResponse 참고). 페이지마다
-//       err.response?.data ?? err.message 를 각자 따로 처리하지 않도록 이 함수 하나로 통일
+// 역할: 백엔드는 실패 시 { success:false, data:null, errorCode, message } 형태로 응답함
+//       (finger-journey-backend의 GlobalExceptionHandler, ErrorResponseDto 참고).
+//       9/23부터 업무 흐름상 실패(CPL_003/CPL_005/QUZ_002 등)는 HTTP 200으로도 내려오는데,
+//       api/client.js의 axios 인터셉터가 success:false를 감지해 강제로 reject 처리해두므로
+//       이 함수 입장에서는 HTTP 상태와 무관하게 항상 err.response.data를 읽으면 됨.
+//       필드명이 원래 code였다가 errorCode로 바뀌어서 구버전 응답도 대비해 둘 다 확인
 // 사용처: screenConfig.js, ReportExamplePage.jsx, ReportResultPage.jsx
 // 담당자:
 
@@ -14,7 +17,7 @@ function _parseApiError(err) {
 
     if (data) {
         return {
-            code: data.code ?? null,
+            code: data.errorCode ?? data.code ?? null,
             message: data.message ?? '알 수 없는 오류가 발생했습니다.',
         };
     }
