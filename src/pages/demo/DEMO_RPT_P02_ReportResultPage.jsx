@@ -4,7 +4,7 @@
 //       토큰까지 그대로 이식함 (reportResult.module.css 참고). employeeId만 받아서
 //       자체적으로 리포트/3행시를 조회함
 // 사용처: ReportExamplePage에서 리포트 생성/조회 시
-//         goTo(ROUTE_PATHS.DEMO_REPORT_RESULT, { employeeId })로 진입
+//         goToScreen(SCREEN_CODES.DEMO_REPORT_RESULT, { employeeId })로 진입
 // url: /demo/report/result
 // 담당자:
 
@@ -15,7 +15,7 @@ import { parseApiError } from "../../utils/apiError";
 import PageLayout from "../../components/common/layout/PageLayout.jsx";
 import Header from "../../components/common/layout/Header.jsx";
 import useNavigation from "../../hooks/useNavigation";
-import styles from "./reportResult.module.css";
+import styles from "./DEMO_RPT_P02_ReportResult.module.css";
 
 // reportContent는 AI가 \n\n으로 문단을 구분해서 주므로, 원본 아티팩트처럼 <p>를 여러 개로 쪼갬
 function splitParagraphs(text) {

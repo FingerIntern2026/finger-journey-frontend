@@ -34,11 +34,6 @@ export const ENDPOINT_KNOWLEDGE = [
     note: '사원 삭제',
   },
   {
-    url: '/admin/screen/list',
-    backend: '(미구현 — 더미 경로)',
-    note: '파트A가 화면정보 API를 아직 안 만들어서 screenConfig.js가 호출은 하지만 실제로는 404가 남',
-  },
-  {
     url: '/quiz/questions',
     backend: 'QuizController.getQuestions() → QuizService',
     note: '징검다리 퀴즈 9문항을 displayOrder 순으로 조회',
@@ -137,13 +132,13 @@ export const UTIL_KNOWLEDGE = {
   },
   fetchScreenList: {
     source: 'src/utils/screenConfig.js',
-    role: '화면정보 목록을 서버에서 받아와 메모리에 캐싱',
-    why: '매 화면 진입마다 재요청하지 않도록 한 번 받은 걸 재사용. 의존하는 백엔드 API가 아직 없어 호출부 자체가 없음',
+    role: '화면정보 목록을 앱 시작 시 불러와 메모리에 캐싱',
+    why: '현재는 백엔드 API와 같은 형태의 로컬 목록을 사용하고, API가 제공되면 데이터 공급부만 교체할 수 있게 분리',
   },
-  findScreenById: {
+  findScreenByCode: {
     source: 'src/utils/screenConfig.js',
-    role: '캐시된 화면정보 목록에서 하나 찾기',
-    why: 'fetchScreenList가 먼저 호출돼서 캐시가 채워져 있어야 동작 (현재 실제 호출부는 없음)',
+    role: '화면 코드로 화면정보를 찾기',
+    why: '페이지가 URL을 직접 사용하지 않고 화면 코드로 이동하기 위한 공통 조회 함수',
   },
   'historyStack.push': {
     source: 'src/utils/historyStack.js',
@@ -161,7 +156,7 @@ export function findUtilKnowledge(name) {
   return UTIL_KNOWLEDGE[name] ?? null;
 }
 
-// key는 ROUTE_PATHS 값 (실제 경로 문자열)
+// key는 화면 목록의 routePath 값
 export const ROUTE_KNOWLEDGE = {
   '/demo': '데모 허브 — 5개 기능 진입점',
   '/demo/move': '화면이동 예제 허브',

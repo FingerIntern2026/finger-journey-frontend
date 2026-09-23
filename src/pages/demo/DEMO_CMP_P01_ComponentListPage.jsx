@@ -5,7 +5,7 @@
 //       순서로 배치)" 두 탭 + 아코디언(버튼 눌러야 펼쳐짐) 구조로 재구성함.
 //       각 컴포넌트가 어떤 props를 받고 어떻게 동작하는지 확인하는 용도이며,
 //       실제 로직 없이 동작 확인용 임시 state만 사용
-// 사용처: DemoIndexPage에서 "② 컴포넌트리스트" 버튼(goTo(ROUTE_PATHS.DEMO_COMPONENTS))으로 진입
+// 사용처: DemoIndexPage에서 "② 컴포넌트리스트" 버튼(SCREEN_CODES.DEMO_COMPONENTS)으로 진입
 // url: /demo/components
 // 담당자:
 
@@ -44,7 +44,7 @@ import Header from "../../components/common/layout/Header";
 import PageLayout from "../../components/common/layout/PageLayout.jsx";
 import useNavigation from "../../hooks/useNavigation";
 
-import styles from "./componentList.module.css";
+import styles from "./DEMO_CMP_P01_ComponentList.module.css";
 
 const PLACEHOLDER_IMG =
   "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Crect width='160' height='160' fill='%23eee'/%3E%3C/svg%3E";

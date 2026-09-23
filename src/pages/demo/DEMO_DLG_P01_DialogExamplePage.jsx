@@ -3,7 +3,7 @@
 //       호출해서 Alert/Confirm/Quiz가 실제로 뜨는 걸 보여줌. 리팩토링 이후로는 Quiz도
 //       showDialog를 통해 열리므로, 이 페이지가 따로 open 상태를 관리할 필요가 없어짐
 //       (기존엔 useState(quizOpen)으로 직접 관리했음)
-// 사용처: DemoIndexPage에서 "③ 다이얼로그예제" 버튼(goTo(ROUTE_PATHS.DEMO_DIALOG))으로 진입
+// 사용처: DemoIndexPage에서 "③ 다이얼로그예제" 버튼(SCREEN_CODES.DEMO_DIALOG)으로 진입
 // url: /demo/dialog
 // 담당자:
 

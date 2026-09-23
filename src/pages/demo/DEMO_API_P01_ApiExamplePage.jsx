@@ -2,7 +2,7 @@
 // 역할: api/client.js의 sendPost를 사용해 실제 서버 API를 호출해보는 데모 화면. API 명세서
 //       기준 사원(입사자) CRUD 5개(API-ADM-001~005: 목록조회/상세조회/등록/수정/삭제, 전부 POST)를
 //       각각 버튼으로 테스트하고, 호출 결과는 화면 하단에 그대로 찍어서 눈으로 확인
-// 사용처: DemoIndexPage에서 "④ API통신" 버튼(goTo(ROUTE_PATHS.DEMO_API))으로 진입
+// 사용처: DemoIndexPage에서 "④ API통신" 버튼(SCREEN_CODES.DEMO_API)으로 진입
 // url: /demo/api
 // 담당자:
 

@@ -5,25 +5,24 @@
 //         AuthCheckPage는 ProtectedRoute로 감싸여 있어서 로그인 안 된 상태면 화면 자체가
 //         안 그려지고 여기로 돌아와버림 → 토글은 "들어가기 전" 화면에 있어야 로그인 O/X
 //         두 경우 다 테스트 가능함
-// 사용처: DemoIndexPage에서 "① 화면이동" 버튼(goTo(ROUTE_PATHS.DEMO_MOVE))으로 진입.
+// 사용처: DemoIndexPage에서 "① 화면이동" 버튼(goToScreen(SCREEN_CODES.DEMO_MOVE))으로 진입.
 //         권한검사/파라미터전달/뒤로가기 3개 버튼으로 하위 페이지로 이동시키며,
 //         ProtectedRoute에 막힌 AuthCheckPage 접근도 blockedReason state와 함께 이 화면으로 돌아옴
 // url: /demo/move
 // 담당자:
 
 import { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 // PageLayout: 공통 틀을 씌워주는 컴포넌트 (지연님이 만든 그 파일)
 import PageLayout from '../../components/common/layout/PageLayout.jsx';
 import Header from '../../components/common/layout/Header.jsx';
 import BaseButton from '../../components/common/base/BaseButton.jsx';
-import { ROUTE_PATHS } from '../../config/routeConfig';
+import { SCREEN_CODES } from '../../config/screenCodes';
+import useNavigation from '../../hooks/useNavigation';
 import { getIsLoggedIn, setIsLoggedIn as saveIsLoggedIn } from '../../utils/authStorage';
 
 const MoveGuidePage = () => {
-  // navigate: 버튼 눌렀을 때 다른 경로로 이동시켜주는 함수
-  // (예: navigate('/demo/move/auth-check') → 그 경로로 화면 전환)
-  const navigate = useNavigate();
+  const { goBack, goToScreen } = useNavigation();
 
   // ProtectedRoute가 로그인 안 된 상태에서 이 화면으로 돌려보낼 때
   // state에 blockedReason을 실어서 넘겨줌 -> 그 값을 꺼내서 안내 문구로 보여줌
@@ -45,8 +44,7 @@ const MoveGuidePage = () => {
 
   return (
     // PageLayout으로 전체 틀 씌우기. header에 넘긴 Header가 제목+뒤로가기를 그림
-    // navigate(-1) = "브라우저 뒤로가기 버튼 누른 것"과 같은 효과 (한 페이지 전으로 이동)
-    <PageLayout header={<Header label="화면이동 예제" onBack={() => navigate(-1)} />}>
+    <PageLayout header={<Header label="화면이동 예제" onBack={goBack} />}>
       <div style={{ padding: 16, display: 'flex', flexDirection: 'column', gap: 14 }}>
 
         {/* 화면 설명 문구 */}
@@ -79,22 +77,22 @@ const MoveGuidePage = () => {
             label={<>권한검사 <span>›</span></>}
             variant="ghost"
             fullWidth
-            onClick={() => navigate(ROUTE_PATHS.DEMO_MOVE_AUTH_CHECK)}
-            data-trace="navigate() 직접 호출 — useNavigation/historyStack 미경유"
+            onClick={() => goToScreen(SCREEN_CODES.DEMO_AUTH_CHECK)}
+            data-trace="goToScreen(DEMO_AUT_P01)"
           />
           <BaseButton
             label={<>파라미터전달 <span>›</span></>}
             variant="ghost"
             fullWidth
-            onClick={() => navigate(ROUTE_PATHS.DEMO_MOVE_PARAM)}
-            data-trace="navigate() 직접 호출 — useNavigation/historyStack 미경유"
+            onClick={() => goToScreen(SCREEN_CODES.DEMO_PARAM_PASS)}
+            data-trace="goToScreen(DEMO_PRM_P01)"
           />
           <BaseButton
             label={<>뒤로가기 <span>›</span></>}
             variant="ghost"
             fullWidth
-            onClick={() => navigate(ROUTE_PATHS.DEMO_MOVE_GO_BACK)}
-            data-trace="navigate() 직접 호출 — useNavigation/historyStack 미경유"
+            onClick={() => goToScreen(SCREEN_CODES.DEMO_GO_BACK)}
+            data-trace="goToScreen(DEMO_MOV_P02)"
           />
         </div>
 

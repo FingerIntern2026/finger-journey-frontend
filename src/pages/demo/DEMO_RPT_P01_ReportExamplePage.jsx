@@ -7,8 +7,8 @@
 //       요청 반영). 각 단계는 이전 단계 완료 여부와 무관하게 독립적으로 호출 가능
 //       (데모 편의를 위해). 데모용 사원(data.sql 시드 기준) 4/5/6번은 퀴즈·3행시는 있고
 //       리포트만 없음
-// 사용처: DemoIndexPage에서 "⑤ 완주 여정 데모" 버튼(goTo(ROUTE_PATHS.DEMO_REPORT))으로 진입.
-//         리포트 생성/조회 시 goTo(ROUTE_PATHS.DEMO_REPORT_RESULT, { employeeId })로
+// 사용처: DemoIndexPage에서 "⑤ 완주 여정 데모" 버튼(SCREEN_CODES.DEMO_REPORT)으로 진입.
+//         리포트 생성/조회 시 SCREEN_CODES.DEMO_REPORT_RESULT와 employeeId로
 //         ReportResultPage로 이동
 // url: /demo/report
 // 담당자:
@@ -22,11 +22,11 @@ import AcrosticInputForm from "../../components/common/custom/AcrosticInputForm"
 import PageLayout from "../../components/common/layout/PageLayout.jsx";
 import Header from "../../components/common/layout/Header.jsx";
 import useNavigation from "../../hooks/useNavigation";
-import { ROUTE_PATHS } from "../../config/routeConfig";
-import styles from "./reportExample.module.css";
+import { SCREEN_CODES } from "../../config/screenCodes";
+import styles from "./DEMO_RPT_P01_ReportExample.module.css";
 
 export default function ReportExamplePage() {
-  const { goBack, goTo } = useNavigation();
+  const { goBack, goToScreen } = useNavigation();
 
   const [employeeId, setEmployeeId] = useState("4");
   const [employeeName, setEmployeeName] = useState("");
@@ -97,7 +97,7 @@ export default function ReportExamplePage() {
     setLoading(true);
     try {
       await sendPost("/api/reports/generate", { employeeId: Number(employeeId) });
-      goTo(ROUTE_PATHS.DEMO_REPORT_RESULT, { employeeId: Number(employeeId) });
+      goToScreen(SCREEN_CODES.DEMO_REPORT_RESULT, { employeeId: Number(employeeId) });
     } catch (err) {
       setReportError(parseApiError(err));
     } finally {
@@ -107,7 +107,7 @@ export default function ReportExamplePage() {
 
   // 4단계: 이미 생성된 리포트가 있는지 확인만 하고, 있으면 바로 결과 화면으로 이동
   const handleViewReport = () => {
-    goTo(ROUTE_PATHS.DEMO_REPORT_RESULT, { employeeId: Number(employeeId) });
+    goToScreen(SCREEN_CODES.DEMO_REPORT_RESULT, { employeeId: Number(employeeId) });
   };
 
   const allAnswered = quizQuestions.length > 0 && quizQuestions.every((q) => answers[q.quizId]);
