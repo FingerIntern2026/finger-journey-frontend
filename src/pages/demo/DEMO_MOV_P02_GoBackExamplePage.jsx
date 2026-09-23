@@ -7,12 +7,12 @@
 // 담당자:
 
 import useNavigation from "../../hooks/useNavigation";
-import { ROUTE_PATHS } from "../../config/routeConfig";
+import { SCREEN_CODES } from "../../config/screenCodes";
 import PageLayout from "../../components/common/layout/PageLayout.jsx";
 import Header from "../../components/common/layout/Header.jsx";
 
 export default function GoBackExamplePage() {
-  const { goBack, goTo } = useNavigation();
+  const { goBack, goToScreen } = useNavigation();
 
   return (
     <PageLayout header={<Header label="뒤로가기 데모" onBack={goBack} />}>
@@ -27,7 +27,7 @@ export default function GoBackExamplePage() {
         (만약 이 페이지에 직접 들어와서 뒤로 갈 곳이 없다면, 아래 버튼으로
         데모 목록으로 이동하세요.)
       </p>
-      <button onClick={() => goTo(ROUTE_PATHS.DEMO_HOME)}>데모 목록으로</button>
+      <button onClick={() => goToScreen(SCREEN_CODES.DEMO_HOME)}>데모 목록으로</button>
     </div>
     </PageLayout>
   );

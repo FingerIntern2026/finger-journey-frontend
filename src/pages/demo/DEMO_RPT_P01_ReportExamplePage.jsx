@@ -22,11 +22,11 @@ import AcrosticInputForm from "../../components/common/custom/AcrosticInputForm"
 import PageLayout from "../../components/common/layout/PageLayout.jsx";
 import Header from "../../components/common/layout/Header.jsx";
 import useNavigation from "../../hooks/useNavigation";
-import { ROUTE_PATHS } from "../../config/routeConfig";
+import { SCREEN_CODES } from "../../config/screenCodes";
 import styles from "./DEMO_RPT_P01_ReportExample.module.css";
 
 export default function ReportExamplePage() {
-  const { goBack, goTo } = useNavigation();
+  const { goBack, goToScreen } = useNavigation();
 
   const [employeeId, setEmployeeId] = useState("4");
   const [employeeName, setEmployeeName] = useState("");
@@ -97,7 +97,7 @@ export default function ReportExamplePage() {
     setLoading(true);
     try {
       await sendPost("/api/reports/generate", { employeeId: Number(employeeId) });
-      goTo(ROUTE_PATHS.DEMO_REPORT_RESULT, { employeeId: Number(employeeId) });
+      goToScreen(SCREEN_CODES.DEMO_REPORT_RESULT, { employeeId: Number(employeeId) });
     } catch (err) {
       setReportError(parseApiError(err));
     } finally {
@@ -107,7 +107,7 @@ export default function ReportExamplePage() {
 
   // 4단계: 이미 생성된 리포트가 있는지 확인만 하고, 있으면 바로 결과 화면으로 이동
   const handleViewReport = () => {
-    goTo(ROUTE_PATHS.DEMO_REPORT_RESULT, { employeeId: Number(employeeId) });
+    goToScreen(SCREEN_CODES.DEMO_REPORT_RESULT, { employeeId: Number(employeeId) });
   };
 
   const allAnswered = quizQuestions.length > 0 && quizQuestions.every((q) => answers[q.quizId]);

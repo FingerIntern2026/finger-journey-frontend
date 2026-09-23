@@ -10,19 +10,19 @@ import PageLayout from '../../components/common/layout/PageLayout.jsx';
 import Header from '../../components/common/layout/Header.jsx';
 import BaseButton from '../../components/common/base/BaseButton';
 import useNavigation from '../../hooks/useNavigation';
-import { ROUTE_PATHS } from '../../config/routeConfig';
+import { SCREEN_CODES } from '../../config/screenCodes';
 
 const DemoIndexPage = () => {
-  const { goTo } = useNavigation();
+  const { goToScreen } = useNavigation();
 
   return (
     <PageLayout header={<Header label="핑거저니 프레임워크 데모" />}>
       <div style={{ padding: '16px', display: 'flex', flexDirection: 'column', gap: 10 }}>
-        <BaseButton fullWidth label="① 화면이동" onClick={() => goTo(ROUTE_PATHS.DEMO_MOVE)} />
-        <BaseButton fullWidth label="② 컴포넌트리스트" onClick={() => goTo(ROUTE_PATHS.DEMO_COMPONENTS)} />
-        <BaseButton fullWidth label="③ 다이얼로그예제" onClick={() => goTo(ROUTE_PATHS.DEMO_DIALOG)} />
-        <BaseButton fullWidth label="④ API통신" onClick={() => goTo(ROUTE_PATHS.DEMO_API)} />
-        <BaseButton fullWidth label="⑤ 완주 여정 데모" onClick={() => goTo(ROUTE_PATHS.DEMO_REPORT)} />
+        <BaseButton fullWidth label="① 화면이동" onClick={() => goToScreen(SCREEN_CODES.DEMO_MOVE)} />
+        <BaseButton fullWidth label="② 컴포넌트리스트" onClick={() => goToScreen(SCREEN_CODES.DEMO_COMPONENTS)} />
+        <BaseButton fullWidth label="③ 다이얼로그예제" onClick={() => goToScreen(SCREEN_CODES.DEMO_DIALOG)} />
+        <BaseButton fullWidth label="④ API통신" onClick={() => goToScreen(SCREEN_CODES.DEMO_API)} />
+        <BaseButton fullWidth label="⑤ 완주 여정 데모" onClick={() => goToScreen(SCREEN_CODES.DEMO_REPORT)} />
       </div>
     </PageLayout>
   );

@@ -7,18 +7,17 @@
 // url: /demo/move/auth-check
 // 담당자:
 
-import { useNavigate } from 'react-router-dom';
 // PageLayout: 공통 틀을 씌워주는 컴포넌트
 import PageLayout from '../../components/common/layout/PageLayout.jsx';
 import Header from '../../components/common/layout/Header.jsx';
 // useAuth: 파트A(재웅님)가 만든 훅. localStorage의 로그인 상태를 읽어서
 // { isLoggedIn: true/false } 형태로 돌려줌
 import { useAuth } from '../../hooks/useAuth.js';
+import useNavigation from '../../hooks/useNavigation';
 import BaseBadge from '../../components/common/base/BaseBadge.jsx';
 
 const AuthCheckPage = () => {
-  // navigate: 뒤로가기 버튼 눌렀을 때 이전 화면으로 이동시키는 함수
-  const navigate = useNavigate();
+  const { goBack } = useNavigation();
 
   // 지금 로그인 상태를 useAuth 훅으로 읽어옴
   // (여기까지 화면이 보였다는 건 ProtectedRoute를 이미 통과했다는 뜻이라
@@ -27,7 +26,7 @@ const AuthCheckPage = () => {
 
   return (
     // PageLayout으로 전체 틀 씌우기. onBack에는 뒤로가기 동작 연결
-    <PageLayout header={<Header label="권한검사 예제" onBack={() => navigate(-1)} />}>
+    <PageLayout header={<Header label="권한검사 예제" onBack={goBack} />}>
       <div style={{ padding: 16, display: 'flex', flexDirection: 'column', gap: 12 }}>
 
         {/* isLoggedIn 값에 따라 초록/회색 뱃지를 다르게 보여줌 */}

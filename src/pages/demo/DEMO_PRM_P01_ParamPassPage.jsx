@@ -8,7 +8,7 @@
 // 담당자:
 
 import useNavigation from "../../hooks/useNavigation";
-import { ROUTE_PATHS } from "../../config/routeConfig";
+import { SCREEN_CODES } from "../../config/screenCodes";
 import PageLayout from "../../components/common/layout/PageLayout.jsx";
 import Header from "../../components/common/layout/Header.jsx";
 
@@ -20,11 +20,11 @@ const dummyEmployees = [
 ];
 
 export default function ParamPassPage() {
-  const { goTo, goBack } = useNavigation();
+  const { goToScreen, goBack } = useNavigation();
 
   // 항목 클릭 시 해당 employeeId를 들고 상세 페이지로 이동
   const handleClick = (employeeId) => {
-    goTo(ROUTE_PATHS.DEMO_PARAM_DETAIL, { employeeId });
+    goToScreen(SCREEN_CODES.DEMO_PARAM_DETAIL, { employeeId });
   };
 
   return (
