@@ -1,7 +1,7 @@
 // 역할: 현재 로그인 여부를 확인하는 커스텀 훅. 실제 서버 인증이 아니라 localStorage에 저장된
 //       값을 읽어 로그인 상태를 흉내내는 데모용 로직. localStorage 읽기/쓰기 자체는
 //       utils/authStorage.js로 통일
-// 사용처: ProtectedRoute.jsx, MoveGuidePage.jsx, AuthCheckPage.jsx
+// 사용처: MoveGuidePage.jsx, AuthCheckPage.jsx
 // 담당자:
 
 import { getIsLoggedIn } from '../utils/authStorage';

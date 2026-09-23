@@ -165,7 +165,7 @@ export function findUtilKnowledge(name) {
 export const ROUTE_KNOWLEDGE = {
   '/demo': '데모 허브 — 5개 기능 진입점',
   '/demo/move': '화면이동 예제 허브',
-  '/demo/move/auth-check': 'ProtectedRoute로 감싸인 화면. 로그인 안 돼있으면 /demo/move로 강제 리다이렉트',
+  '/demo/move/auth-check': '공유된 로그인 상태값을 확인하는 권한 상태 데모',
   '/demo/move/param': '파라미터 전달 데모 (목록)',
   '/demo/param-detail': '파라미터 전달 데모 (상세) — location.state로 값을 받음',
   '/demo/move/go-back': 'goBack/goTo 데모',

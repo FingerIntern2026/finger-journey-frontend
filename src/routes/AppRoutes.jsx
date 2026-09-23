@@ -3,7 +3,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { SCREEN_COMPONENTS } from '../config/screenComponents';
 import { SCREEN_CODES } from '../config/screenCodes';
-import ProtectedRoute from './ProtectedRoute';
 
 function renderScreen(screen) {
   const Component = SCREEN_COMPONENTS[screen.screenCode];
@@ -12,10 +11,7 @@ function renderScreen(screen) {
     throw new Error(`컴포넌트가 등록되지 않은 화면 코드입니다: ${screen.screenCode}`);
   }
 
-  const element = <Component />;
-  return screen.loginRequired
-    ? <ProtectedRoute>{element}</ProtectedRoute>
-    : element;
+  return <Component />;
 }
 
 export default function AppRoutes({ screens }) {

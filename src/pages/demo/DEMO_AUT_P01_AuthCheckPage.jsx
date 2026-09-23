@@ -1,9 +1,6 @@
 // 페이지명: AuthCheckPage (TODO: 정식 화면명 확정되면 교체)
-// 역할: 권한검사 데모 화면. 로그인 안 됐으면 ProtectedRoute가 MoveGuidePage로 돌려보내기
-//       때문에, 이 화면이 보인다는 것 자체가 이미 로그인된 상태라는 뜻. 로그인 상태 토글은
-//       MoveGuidePage에 있음
+// 역할: MoveGuidePage에서 설정한 로그인 상태값을 같은 저장소에서 읽는 권한 상태 확인 데모.
 // 사용처: MoveGuidePage에서 "권한검사" 버튼(goToScreen(SCREEN_CODES.DEMO_AUTH_CHECK))으로 진입.
-//         ProtectedRoute로 감싸여 있어 로그인 안 된 상태로 접근하면 MoveGuidePage로 리다이렉트됨
 // url: /demo/move/auth-check
 // 담당자:
 
@@ -20,8 +17,6 @@ const AuthCheckPage = () => {
   const { goBack } = useNavigation();
 
   // 지금 로그인 상태를 useAuth 훅으로 읽어옴
-  // (여기까지 화면이 보였다는 건 ProtectedRoute를 이미 통과했다는 뜻이라
-  //  사실상 항상 true겠지만, "진짜 값을 잘 읽어오는지" 눈으로 보여주기 위해 표시함)
   const { isLoggedIn } = useAuth();
 
   return (
@@ -40,8 +35,8 @@ const AuthCheckPage = () => {
         {/* 상태에 맞는 설명 문구도 같이 보여줌 (디버깅/데모 목적) */}
         <p className="muted">
           {isLoggedIn
-            ? 'ProtectedRoute 통과 — 이 화면이 정상 노출됩니다.'
-            : 'useAuth가 false를 반환 → ProtectedRoute가 화면 진입을 막습니다.'}
+            ? 'useAuth가 로그인 상태를 true로 읽었습니다.'
+            : 'useAuth가 로그인 상태를 false로 읽었습니다.'}
         </p>
 
       </div>
