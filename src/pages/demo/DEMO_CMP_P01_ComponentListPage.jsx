@@ -18,6 +18,7 @@ import BaseSelect from "../../components/common/base/BaseSelect";
 import BaseTextArea from "../../components/common/base/BaseTextArea";
 import BaseCheckbox from "../../components/common/base/BaseCheckbox";
 import BaseProgressBar from "../../components/common/base/BaseProgressBar";
+import BaseErrorCard from "../../components/common/base/BaseErrorCard";
 import { startLoading, stopLoading } from "../../utils/loadingStore";
 
 import CustomAuthForm from "../../components/common/custom/CustomAuthForm";
@@ -169,6 +170,12 @@ export default function ComponentListPage() {
     {
       id: "BaseProgressBar",
       render: () => <BaseProgressBar current={4} total={10} />,
+    },
+    {
+      id: "BaseErrorCard",
+      render: () => (
+        <BaseErrorCard code="CPL_005" message="이미 생성된 리포트가 있어 다시 생성할 수 없습니다." />
+      ),
     },
   ];
 

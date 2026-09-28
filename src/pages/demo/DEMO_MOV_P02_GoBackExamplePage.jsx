@@ -12,7 +12,7 @@ import PageLayout from "../../components/common/layout/PageLayout.jsx";
 import Header from "../../components/common/layout/Header.jsx";
 
 export default function GoBackExamplePage() {
-  const { goBack, goToScreen } = useNavigation();
+  const { goBack, goToScreen, goBackN } = useNavigation();
 
   return (
     <PageLayout header={<Header label="뒤로가기 데모" onBack={goBack} />}>
@@ -28,6 +28,15 @@ export default function GoBackExamplePage() {
         데모 목록으로 이동하세요.)
       </p>
       <button onClick={() => goToScreen(SCREEN_CODES.DEMO_HOME)}>데모 목록으로</button>
+
+      <hr style={{ margin: "20px 0" }} />
+
+      <p>
+        아래 버튼은 화면정보 규칙(TARGET/EXIT/BLOCK)과 무관하게, 히스토리 기록을
+        한 번에 2칸 되돌립니다. 이 화면은 항상 홈→화면이동→여기(2단계)로
+        들어오므로, 누르면 중간(화면이동)을 건너뛰고 홈으로 바로 이동합니다.
+      </p>
+      <button onClick={() => goBackN(2)}>2칸 한번에 뒤로가기 (goBackN)</button>
     </div>
     </PageLayout>
   );
