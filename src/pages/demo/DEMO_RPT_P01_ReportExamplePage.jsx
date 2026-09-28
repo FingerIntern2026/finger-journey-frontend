@@ -18,6 +18,7 @@ import { sendPost } from "../../api/client";
 import { parseApiError } from "../../utils/apiError";
 import BaseButton from "../../components/common/base/BaseButton";
 import BaseInput from "../../components/common/base/BaseInput";
+import BaseErrorCard from "../../components/common/base/BaseErrorCard";
 import AcrosticInputForm from "../../components/common/custom/AcrosticInputForm";
 import PageLayout from "../../components/common/layout/PageLayout.jsx";
 import Header from "../../components/common/layout/Header.jsx";
@@ -169,10 +170,7 @@ export default function ReportExamplePage() {
 
           {quizMessage && <p className={styles.controlHint}>✓ {quizMessage}</p>}
           {quizError && (
-            <div className={styles.errorCard} style={{ marginTop: 10 }}>
-              <p className={styles.errorCode}>{quizError.code}</p>
-              <p className={styles.errorMessage}>{quizError.message}</p>
-            </div>
+            <BaseErrorCard code={quizError.code} message={quizError.message} style={{ marginTop: 10 }} />
           )}
         </div>
 
@@ -191,9 +189,7 @@ export default function ReportExamplePage() {
           )}
           {poemMessage && <p className={styles.controlHint}>✓ {poemMessage}</p>}
           {poemError && (
-            <div className={styles.errorCard} style={{ marginTop: 10 }}>
-              <p className={styles.errorMessage}>{poemError.message}</p>
-            </div>
+            <BaseErrorCard message={poemError.message} style={{ marginTop: 10 }} />
           )}
         </div>
 
@@ -216,10 +212,7 @@ export default function ReportExamplePage() {
         </div>
 
         {reportError && (
-          <div className={styles.errorCard}>
-            <p className={styles.errorCode}>{reportError.code}</p>
-            <p className={styles.errorMessage}>{reportError.message}</p>
-          </div>
+          <BaseErrorCard code={reportError.code} message={reportError.message} />
         )}
 
       </div>

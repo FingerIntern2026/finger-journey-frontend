@@ -111,3 +111,23 @@
   background: #4CAF50;
   transition: width 0.2s ease;
 }
+
+/* ===== BaseErrorCard ===== */
+/* ReportExamplePage/ReportResultPage에 복붙돼있던 에러 카드 마크업을 공통화 (기존 값 그대로 이식) */
+.errorCard {
+  background: #fbe7de;
+  border: 1px solid #d9704f;
+  border-radius: 18px;
+  padding: 18px 20px;
+  margin: 16px;
+}
+.errorCode {
+  font-weight: 700;
+  color: #b03a1f;
+  margin: 0 0 4px;
+}
+.errorMessage {
+  font-size: 13px;
+  color: #6c3020;
+  margin: 0;
+}
