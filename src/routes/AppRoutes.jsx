@@ -3,6 +3,7 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { SCREEN_COMPONENTS } from '../config/screenComponents';
 import { SCREEN_CODES } from '../config/screenCodes';
+import ProtectedRoute from './ProtectedRoute';
 
 function renderScreen(screen) {
   const Component = SCREEN_COMPONENTS[screen.screenCode];
@@ -11,8 +12,10 @@ function renderScreen(screen) {
     throw new Error(`컴포넌트가 등록되지 않은 화면 코드입니다: ${screen.screenCode}`);
   }
 
-  // loginRequired는 화면정보와 함께 보관하되 실제 인증 구현 전까지 접근을 제한하지 않는다.
-  return <Component />;
+  // loginRequired는 화면정보 테이블(screen_info.login_required)에서 내려오는 값.
+  // 개별 페이지는 이 값을 신경 쓸 필요 없이 여기서 ProtectedRoute로 감싸는 걸로 통일한다.
+  const element = <Component />;
+  return screen.loginRequired ? <ProtectedRoute>{element}</ProtectedRoute> : element;
 }
 
 export default function AppRoutes({ screens }) {

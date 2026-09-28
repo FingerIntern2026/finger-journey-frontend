@@ -149,6 +149,27 @@ Route Path는 `config/routeConfig.js`에서 관리합니다.
 
 추후 상태 관리가 복잡해질 경우 별도 상태 관리 라이브러리 도입을 검토합니다.
 
+### Context를 쓰는 이유
+
+Context는 값을 컴포넌트 트리 아래로 prop을 일일이 넘기지 않고 전달하는 방법입니다.
+`<Provider>`로 감싼 트리 **내부에서만** 값을 읽을 수 있다는 점이 핵심입니다 — 전역 변수처럼
+"어디서든 접근 가능"한 게 아니라, "이 트리 범위 안에서만 접근 가능"하게 범위가 제한됩니다.
+그래서 이 트리 밖의 다른 컴포넌트가 실수로 값을 건드릴 수 없고, 어떤 값이 어디까지 영향을
+미치는지가 JSX 구조만 봐도 드러납니다.
+
+실제 사용 예시: `src/components/common/dialog/DialogContext.jsx`
+- `DialogProvider`가 `App.jsx` 최상단을 감싸고, 다이얼로그 스택(`dialogStack`)을 Context 값으로 관리합니다.
+- 하위 컴포넌트는 `useDialog()`로 `showDialog`/`showAlert`/`showConfirm`만 꺼내 쓰고, 스택 자체를
+  직접 조작하지 않습니다 — 다이얼로그를 열고 닫는 방법이 이 파일 하나로 통일됩니다.
+
+### Context를 안 쓰는 경우
+
+이 프로젝트의 `historyStack.js`(화면 이동 기록), `loadingStore.js`(전역 로딩 카운트)는
+Context가 아니라 **모듈 스코프 변수**로 관리합니다. 이유는:
+- 값이 바뀔 때마다 화면을 다시 그릴 필요가 없는 값이라 (React state로 들고 있을 이유가 없음)
+- `src/api/client.js`의 axios 인터셉터처럼 **컴포넌트 트리 바깥**(React 렌더링 범위 밖)에서도
+  값을 읽고 바꿔야 하는데, Context는 트리 안에서만 접근 가능하므로 이런 곳엔 애초에 쓸 수 없음
+
 ---
 
 ## 4. Naming Convention
@@ -172,7 +193,11 @@ Route Path는 `config/routeConfig.js`에서 관리합니다.
 - API 공통 설정은 `api/client.js`에서 관리합니다.
 - Route Path는 `config/routeConfig.js`에서 관리합니다.
 - 전체 Route 연결은 `routes/AppRoutes.jsx`에서 관리합니다.
-- 접근 권한 검사는 `ProtectedRoute.jsx`에서 처리합니다.
+- 접근 권한 검사(게이트)는 `ProtectedRoute.jsx`에서 처리합니다. `AppRoutes.jsx`가 화면정보 테이블의
+  `screen_info.login_required` 값을 보고 필요한 화면만 자동으로 `ProtectedRoute`로 감싸주므로,
+  개별 페이지 컴포넌트는 로그인 여부를 신경 쓸 필요가 없습니다.
+  **`ProtectedRoute.jsx` 내부 로직(인증/인가 방식)은 업무 화면 개발자가 직접 수정하지 않습니다.**
+  인증 방식 자체를 바꿔야 하면 이 파일 담당자(현재 재웅)와 먼저 상의합니다.
 - Custom Hook은 역할별로 분리합니다.
 - 공통으로 사용할 수 있는 코드는 중복 작성하지 않습니다.
 - 컴포넌트 스타일은 폴더 단위 CSS Modules(`{폴더명}.module.css`)로 관리하며, 컴포넌트별 개별 CSS 파일은 만들지 않습니다.
