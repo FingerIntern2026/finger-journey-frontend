@@ -20,6 +20,13 @@ import BaseCheckbox from "../../components/common/base/BaseCheckbox";
 import BaseProgressBar from "../../components/common/base/BaseProgressBar";
 import BaseErrorCard from "../../components/common/base/BaseErrorCard";
 import { startLoading, stopLoading } from "../../utils/loadingStore";
+import { formatDate, daysSince } from "../../utils/date";
+import { checkDuplicateEmployeeNo } from "../../utils/checkDuplicateEmployeeNo";
+import { getHighlightSegments } from "../../utils/highlight";
+import { getIsLoggedIn } from "../../utils/authStorage";
+import { parseApiError } from "../../utils/apiError";
+import { getRoutePath, getScreenList } from "../../utils/screenConfig";
+import { SCREEN_CODES } from "../../config/screenCodes";
 
 import CustomAuthForm from "../../components/common/custom/CustomAuthForm";
 import IntroScreen from "../../components/common/custom/IntroScreen";
@@ -89,8 +96,10 @@ function AccordionItem({ id, title, description, isOpen, onToggle, render }) {
 
 export default function ComponentListPage() {
   const { goBack } = useNavigation();
-  const [tab, setTab] = useState("base"); // "base" | "custom"
+  const [tab, setTab] = useState("base"); // "base" | "custom" | "util"
   const [openIds, setOpenIds] = useState(new Set());
+  const [utilResults, setUtilResults] = useState({});
+  const [highlightSegments, setHighlightSegments] = useState(null);
 
   const toggleOpen = (id) => {
     setOpenIds((prev) => {
@@ -98,6 +107,17 @@ export default function ComponentListPage() {
       next.has(id) ? next.delete(id) : next.add(id);
       return next;
     });
+  };
+
+  // 화면에 렌더링할 게 없는 순수 유틸 함수들을 "버튼 누르면 실행하고 결과를 텍스트로 보여주는"
+  // 방식으로 데모. fn()이 Promise를 반환해도(fetchScreenList 등) 그대로 처리되도록 await 사용
+  const runUtil = async (id, fn) => {
+    try {
+      const result = await fn();
+      setUtilResults((prev) => ({ ...prev, [id]: JSON.stringify(result, null, 2) }));
+    } catch (err) {
+      setUtilResults((prev) => ({ ...prev, [id]: `에러: ${err.message}` }));
+    }
   };
 
   // ── 데모용 임시 state (기존 컴포넌트 그대로) ──
@@ -176,6 +196,116 @@ export default function ComponentListPage() {
       render: () => (
         <BaseErrorCard code="CPL_005" message="이미 생성된 리포트가 있어 다시 생성할 수 없습니다." />
       ),
+    },
+  ];
+
+  // ── 공통 유틸 (utils/) : 화면에 렌더링할 게 없는 순수 함수라, "버튼 눌러 실행 →
+  // 결과를 텍스트로 확인" 방식으로 데모. 대부분 "현재 사용하는 곳 없음"이라고 각 파일에
+  // 적혀있는 유틸이라, 실제 호출부가 생기기 전까지는 여기가 유일한 동작 확인 창구
+  const utilItems = [
+    {
+      id: "formatDate",
+      description: "ISO 날짜 문자열 → '2026년 9월 21일' 형태 (src/utils/date.js)",
+      render: () => (
+        <>
+          <BaseButton label="formatDate('2026-09-21') 실행" onClick={() => runUtil("formatDate", () => formatDate("2026-09-21"))} />
+          {utilResults.formatDate && <pre className={styles.utilResult}>{utilResults.formatDate}</pre>}
+        </>
+      ),
+    },
+    {
+      id: "daysSince",
+      description: "ISO 날짜 문자열 → 오늘 기준 며칠 지났는지 (src/utils/date.js)",
+      render: () => (
+        <>
+          <BaseButton label="daysSince('2026-09-01') 실행" onClick={() => runUtil("daysSince", () => daysSince("2026-09-01"))} />
+          {utilResults.daysSince && <pre className={styles.utilResult}>{utilResults.daysSince}</pre>}
+        </>
+      ),
+    },
+    {
+      id: "checkDuplicateEmployeeNo",
+      description: "사번 중복 여부 확인, true면 중복 (src/utils/checkDuplicateEmployeeNo.js)",
+      render: () => (
+        <>
+          <BaseButton
+            label="checkDuplicateEmployeeNo('12609001', [...]) 실행"
+            onClick={() => runUtil("checkDuplicateEmployeeNo", () =>
+              checkDuplicateEmployeeNo("12609001", [{ employeeNo: "12609001" }, { employeeNo: "12609002" }])
+            )}
+          />
+          {utilResults.checkDuplicateEmployeeNo && <pre className={styles.utilResult}>{utilResults.checkDuplicateEmployeeNo}</pre>}
+        </>
+      ),
+    },
+    {
+      id: "getHighlightSegments",
+      description: "검색어와 일치하는 부분을 조각내서 반환, <mark>는 호출부(컴포넌트)가 붙임 (src/utils/highlight.js)",
+      render: () => (
+        <>
+          <BaseButton
+            label="getHighlightSegments('핑거저니 온보딩 서비스', '핑거') 실행"
+            onClick={() => setHighlightSegments(getHighlightSegments("핑거저니 온보딩 서비스", "핑거"))}
+          />
+          {highlightSegments && (
+            <p className={styles.utilResult}>
+              {highlightSegments.map((seg, i) =>
+                seg.matched ? <mark key={i}>{seg.text}</mark> : <span key={i}>{seg.text}</span>
+              )}
+            </p>
+          )}
+        </>
+      ),
+    },
+    {
+      id: "getIsLoggedIn",
+      description: "localStorage의 로그인 상태 읽기 (읽기 전용) — MoveGuidePage 토글과 값 공유함 (src/utils/authStorage.js)",
+      render: () => (
+        <>
+          <BaseButton label="getIsLoggedIn() 실행" onClick={() => runUtil("getIsLoggedIn", () => getIsLoggedIn())} />
+          {utilResults.getIsLoggedIn !== undefined && <pre className={styles.utilResult}>{utilResults.getIsLoggedIn}</pre>}
+        </>
+      ),
+    },
+    {
+      id: "parseApiError",
+      description: "axios 에러 객체 → {code, message}로 정규화 (src/utils/apiError.js)",
+      render: () => (
+        <>
+          <BaseButton
+            label="parseApiError(가짜 CPL_005 에러) 실행"
+            onClick={() => runUtil("parseApiError", () =>
+              parseApiError({ response: { data: { errorCode: "CPL_005", message: "이미 생성된 리포트가 있어 다시 생성할 수 없습니다." } } })
+            )}
+          />
+          {utilResults.parseApiError && <pre className={styles.utilResult}>{utilResults.parseApiError}</pre>}
+        </>
+      ),
+    },
+    {
+      id: "getRoutePath",
+      description: "화면코드 → routePath 조회, 앱 시작 시 캐시된 화면정보 목록에서 찾음 (src/utils/screenConfig.js)",
+      render: () => (
+        <>
+          <BaseButton label="getRoutePath('DEMO_HOM_P01') 실행" onClick={() => runUtil("getRoutePath", () => getRoutePath(SCREEN_CODES.DEMO_HOME))} />
+          {utilResults.getRoutePath && <pre className={styles.utilResult}>{utilResults.getRoutePath}</pre>}
+        </>
+      ),
+    },
+    {
+      id: "getScreenList",
+      description: "앱 시작 시 백엔드에서 받아 캐시해둔 화면정보 전체 목록 (src/utils/screenConfig.js)",
+      render: () => (
+        <>
+          <BaseButton label="getScreenList() 실행 — 캐시된 화면 개수 확인" onClick={() => runUtil("getScreenList", () => getScreenList().length)} />
+          {utilResults.getScreenList && <pre className={styles.utilResult}>{utilResults.getScreenList}개</pre>}
+        </>
+      ),
+    },
+    {
+      id: "historyStack",
+      description: "push/pop/popN/peek/clear — 이 페이지에서 직접 실행하면 실제 화면이동 기록이 깨지므로, goBack/goBackN 데모 화면(뒤로가기 예제)에서 실제 동작으로 확인",
+      render: () => <p className={styles.pageHint}>/demo/move/go-back 에서 확인하세요.</p>,
     },
   ];
 
@@ -447,11 +577,35 @@ export default function ComponentListPage() {
         >
           커스텀 컴포넌트
         </button>
+        <button
+          type="button"
+          className={`${styles.tabButton} ${tab === "util" ? styles.tabButtonActive : ""}`}
+          onClick={() => setTab("util")}
+          data-trace="탭 전환: 공통 유틸 (tab state = 'util')"
+        >
+          공통 유틸
+        </button>
       </div>
 
       {tab === "base" && (
         <div className={styles.accordionList}>
           {baseItems.map((item) => (
+            <AccordionItem
+              key={item.id}
+              id={item.id}
+              title={item.id}
+              description={item.description}
+              isOpen={openIds.has(item.id)}
+              onToggle={toggleOpen}
+              render={item.render}
+            />
+          ))}
+        </div>
+      )}
+
+      {tab === "util" && (
+        <div className={styles.accordionList}>
+          {utilItems.map((item) => (
             <AccordionItem
               key={item.id}
               id={item.id}
