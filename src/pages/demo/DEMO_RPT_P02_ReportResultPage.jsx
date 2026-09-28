@@ -14,6 +14,7 @@ import { sendPost } from "../../api/client";
 import { parseApiError } from "../../utils/apiError";
 import PageLayout from "../../components/common/layout/PageLayout.jsx";
 import Header from "../../components/common/layout/Header.jsx";
+import BaseErrorCard from "../../components/common/base/BaseErrorCard.jsx";
 import useNavigation from "../../hooks/useNavigation";
 import styles from "./DEMO_RPT_P02_ReportResult.module.css";
 
@@ -77,20 +78,13 @@ export default function ReportResultPage() {
       <div className={styles.page}>
 
         {!employeeId && (
-          <div className={styles.errorCard}>
-            <p className={styles.errorMessage}>
-              전달받은 사원 정보가 없습니다. 완주 여정 데모 화면에서 다시 시도해주세요.
-            </p>
-          </div>
+          <BaseErrorCard message="전달받은 사원 정보가 없습니다. 완주 여정 데모 화면에서 다시 시도해주세요." />
         )}
 
         {loading && <p className={styles.loadingText}>리포트를 불러오는 중...</p>}
 
         {error && (
-          <div className={styles.errorCard}>
-            <p className={styles.errorCode}>{error.code}</p>
-            <p className={styles.errorMessage}>{error.message}</p>
-          </div>
+          <BaseErrorCard code={error.code} message={error.message} />
         )}
 
         {report && (
