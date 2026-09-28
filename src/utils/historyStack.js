@@ -22,6 +22,19 @@ export function pop() {
     return stack.pop();
 }
 
+// N칸 뒤로가기 할 때 마지막 N개 기록을 한 번에 꺼내면서 제거
+// count가 남은 기록 수보다 크면 있는 만큼만 지움
+// 반환값은 가장 마지막(가장 최근) 기록 하나 — pop()과 같은 모양으로 맞춤
+export function popN(count) {
+    let popped;
+    for (let i = 0; i < count; i++) {
+        const entry = stack.pop();
+        if (entry === undefined) break;
+        popped = entry;
+    }
+    return popped;
+}
+
 // 마지막 기록을 지우지 않고 읽기만 함 (직전 화면의 파라미터가 필요할 때)
 export function peek() {
     return stack[stack.length - 1];

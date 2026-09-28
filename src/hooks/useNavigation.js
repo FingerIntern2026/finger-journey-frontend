@@ -7,7 +7,7 @@
 // 담당자:
 
 import { useLocation, useNavigate } from "react-router-dom";
-import { push, pop, peek, clear } from "../utils/historyStack";
+import { push, pop, popN, peek, clear } from "../utils/historyStack";
 import { SCREEN_CODES } from "../config/screenCodes";
 import { findScreenByCode, findScreenByPath, getRoutePath } from "../utils/screenConfig";
 import { addStep, safeSerialize } from "../devtrace/traceContext";
@@ -91,5 +91,27 @@ export default function useNavigation() {
     navigate(targetScreen.routePath, { replace: true, state: popped?.prevParams });
   };
 
-  return { goToScreen, goBack };
+  // 화면정보 규칙과 무관하게, 히스토리 기록과 브라우저 히스토리를 한 번에 N칸 되돌린다.
+  // goBack()(TARGET/EXIT/BLOCK 규칙 기반)과는 별개의 기능 — 여러 단계를 한 번에 건너뛸 때 사용.
+  // goBack()을 N번 반복 호출하는 것과 다르다: location은 useLocation() 렌더 스냅샷이라
+  // 같은 이벤트 핸들러 안에서 goBack()을 연달아 부르면 location이 안 바뀐 채로 여러 번
+  // 실행돼 의도대로 동작하지 않음. navigate(-count)는 브라우저 히스토리를 직접 다루므로
+  // 이 문제가 없음.
+  const goBackN = (count) => {
+    const popped = popN(count);
+    addStep({
+      layer: "nav",
+      label: "historyStack.popN()",
+      source: "src/utils/historyStack.js",
+      output: safeSerialize({ count, popped }),
+    });
+    addStep({
+      layer: "nav",
+      label: `goBackN(${count})`,
+      source: "src/hooks/useNavigation.js",
+    });
+    navigate(-count);
+  };
+
+  return { goToScreen, goBack, goBackN };
 }
