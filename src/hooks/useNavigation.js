@@ -91,26 +91,50 @@ export default function useNavigation() {
     navigate(targetScreen.routePath, { replace: true, state: popped?.prevParams });
   };
 
-  // 화면정보 규칙과 무관하게, 히스토리 기록과 브라우저 히스토리를 한 번에 N칸 되돌린다.
+  // 화면정보 규칙과 무관하게, 히스토리 기록을 한 번에 N칸 되돌린다.
   // goBack()(TARGET/EXIT/BLOCK 규칙 기반)과는 별개의 기능 — 여러 단계를 한 번에 건너뛸 때 사용.
+  //
   // goBack()을 N번 반복 호출하는 것과 다르다: location은 useLocation() 렌더 스냅샷이라
   // 같은 이벤트 핸들러 안에서 goBack()을 연달아 부르면 location이 안 바뀐 채로 여러 번
-  // 실행돼 의도대로 동작하지 않음. navigate(-count)는 브라우저 히스토리를 직접 다루므로
-  // 이 문제가 없음.
+  // 실행돼 의도대로 동작하지 않음.
+  //
+  // navigate(-count)(브라우저 히스토리를 실제로 거슬러 올라가는 방식)는 쓰지 않는다.
+  // goBack()이 replace: true(칸을 덮어씀)로 이동하는 것과 방식이 달라서, 둘을 섞어 쓰면
+  // historyStack(우리 장부)과 브라우저 히스토리 칸 수가 어긋날 수 있기 때문
+  // (예: C에서 goBack()으로 B로 가면 브라우저는 칸이 안 줄고 덮어써지는데, historyStack은
+  // 실제로 1개 줄어듦 — 이 상태에서 navigate(-count)로 더 이동하면 두 장부가 안 맞게 됨).
+  // 그래서 goBack()과 똑같이 historyStack만 보고 replace로 이동해 항상 같은 방식으로 맞춘다.
   const goBackN = (count) => {
-    const popped = popN(count);
+    popN(count);
+    const remaining = peek();
+
     addStep({
       layer: "nav",
       label: "historyStack.popN()",
       source: "src/utils/historyStack.js",
-      output: safeSerialize({ count, popped }),
+      output: safeSerialize({ count, remaining }),
     });
+
+    if (!remaining) {
+      // 장부에 남은 기록이 없으면(N이 쌓인 기록보다 크거나 같으면) 홈으로 보낸다
+      clear();
+      addStep({
+        layer: "nav",
+        label: `goBackN(${count}) → 홈`,
+        source: "src/hooks/useNavigation.js",
+        note: "historyStack에 남은 기록이 없어 홈으로 이동",
+      });
+      navigate(getRoutePath(SCREEN_CODES.DEMO_HOME), { replace: true });
+      return;
+    }
+
     addStep({
       layer: "nav",
-      label: `goBackN(${count})`,
+      label: `goBackN(${count}) → ${remaining.path}`,
       source: "src/hooks/useNavigation.js",
+      note: "historyStack에 남은 마지막 기록으로 이동",
     });
-    navigate(-count);
+    navigate(remaining.path, { replace: true, state: remaining.params });
   };
 
   return { goToScreen, goBack, goBackN };
