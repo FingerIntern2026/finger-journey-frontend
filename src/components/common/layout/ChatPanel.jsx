@@ -14,9 +14,9 @@ import styles from "./chatPanel.module.css";
 
 const SUGGESTED_QUESTIONS = [
   "근무시간이 어떻게 되나요?",
-  "연차는 어떻게 신청하나요?",
-  "재택근무 가능한가요?",
-  "복장 규정이 있나요?",
+  "전자결재는 어떻게 상신하나요?",
+  "팀 회식비는 어떻게 신청하나요?",
+  "법인카드 사용내역은 어떻게 정산하나요?",
 ];
 
 export default function ChatPanel({ onClose }) {
