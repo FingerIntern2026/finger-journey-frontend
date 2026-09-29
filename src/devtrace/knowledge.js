@@ -81,7 +81,7 @@ export const ENDPOINT_KNOWLEDGE = [
     url: '/api/reports/generate',
     backend: 'ReportController.generate() → ReportService.generateReport()',
     note:
-      '퀴즈 9개+3행시 조회 → 부족하면 CPL_003 → GENERATING 저장 → finger-journey-ai(FastAPI) 호출 → COMPLETED/FAILED 저장. "근거가 된 퀴즈 답변" 비율은 AI가 아니라 여기서 QuizResponse를 직접 집계함',
+      '퀴즈 9개+3행시 조회 → 부족하면 CPL_003 → GENERATING 저장 → finger-journey-ai(FastAPI) 호출 → COMPLETED/FAILED 저장. (구) "근거가 된 퀴즈 답변" 비율 통계는 응답자가 적은 문항에서 개인 응답이 역산될 수 있어 제거함',
     errors: {
       CPL_003: '퀴즈 또는 3행시가 완료되지 않아 리포트를 생성할 수 없음',
       CPL_005: '이미 생성된 리포트가 있음',
