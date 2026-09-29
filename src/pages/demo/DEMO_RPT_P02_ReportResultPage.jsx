@@ -93,7 +93,8 @@ export default function ReportResultPage() {
             <div className={styles.progressHead}>
               <span className={styles.back}>‹</span>
               <div className={styles.bar}><div className={styles.barFill} /></div>
-              <span className={styles.num}>{report.quizEvidence?.length ?? 0}/9</span>
+              {/* 리포트 생성 자체가 퀴즈 9문항 완료를 전제조건으로 하므로 항상 9/9 */}
+              <span className={styles.num}>9/9</span>
               <span className={styles.sprout}>🌱</span>
             </div>
 
@@ -101,7 +102,7 @@ export default function ReportResultPage() {
               <div className={styles.eyebrowBadge}>✦ AI가 정리한 나의 첫 페이지</div>
               <h1>{report.employeeName}님의 첫걸음</h1>
               <div className={styles.subhead}>
-                오늘의 첫 페이지 · 취향 {report.quizEvidence?.length ?? 0}개로 완성
+                오늘의 첫 페이지 · 취향 9개로 완성
               </div>
             </div>
 
@@ -134,24 +135,6 @@ export default function ReportResultPage() {
                 </div>
               )}
             </section>
-
-            {report.quizEvidence?.length > 0 && (
-              <>
-                <div className={styles.divider} />
-                <section className={styles.section}>
-                  <h2 className={styles.title}>✦ 근거가 된 퀴즈 답변</h2>
-                  <div className={styles.evidenceGrid}>
-                    {report.quizEvidence.map((evidence, index) => (
-                      <div key={index} className={styles.evCard}>
-                        <div className={styles.q}>{evidence.question}</div>
-                        <div className={styles.a}>{evidence.answer}</div>
-                        <div className={styles.pct}>핑거 직원 {evidence.percentage}% 선택</div>
-                      </div>
-                    ))}
-                  </div>
-                </section>
-              </>
-            )}
 
             {poemLines.length > 0 && (
               <>
