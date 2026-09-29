@@ -8,6 +8,7 @@
 // (완주 리포트와 달리 챗봇은 DB 조회가 필요 없어서 지금은 프록시가 없음)
 
 import { useState } from "react";
+import ReactMarkdown from "react-markdown";
 import { AI_SERVER_URL } from "../../../config/apiConfig";
 import styles from "./chatPanel.module.css";
 
@@ -80,7 +81,13 @@ export default function ChatPanel({ onClose }) {
               key={index}
               className={`${styles.messageRow} ${message.role === "user" ? styles.user : styles.assistant}`}
             >
-              <div className={styles.bubble}>{message.text}</div>
+              <div className={styles.bubble}>
+                {message.role === "assistant" ? (
+                  <ReactMarkdown>{message.text}</ReactMarkdown>
+                ) : (
+                  message.text
+                )}
+              </div>
             </div>
           ))}
 
