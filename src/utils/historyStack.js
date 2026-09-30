@@ -49,3 +49,8 @@ export function clear() {
 export function size() {
     return stack.length;
 }
+
+// 현재 쌓인 기록 전체를 복사해서 반환 (DevTrace 패널의 히스토리스택 시각화용 — 읽기 전용)
+export function getStack() {
+    return [...stack];
+}
