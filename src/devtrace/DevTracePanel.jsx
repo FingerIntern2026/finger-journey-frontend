@@ -10,6 +10,7 @@ import { subscribe, getFlows, clearFlows } from './traceContext';
 import { addStep } from './traceContext';
 import { installDevTrace } from './instrument';
 import { findRouteKnowledge } from './knowledge';
+import { getStack } from '../utils/historyStack';
 import styles from './devTracePanel.module.css';
 
 const LAYER_LABEL = {
@@ -115,6 +116,47 @@ function FlowCard({ flow, defaultOpen }) {
   );
 }
 
+// historyStack.getStack()의 기록({path, params, prevParams})을 화면에 보여줌
+// flows가 갱신될 때(=addStep이 호출될 때)마다 DevTracePanel이 리렌더되므로,
+// historyStack 전용 구독 없이 렌더 시점에 getStack()을 읽는 것만으로 최신 상태를 반영함
+// (push/pop/popN/clear는 항상 addStep 호출을 동반하므로 타이밍이 어긋나지 않음)
+function HistoryStackView() {
+  const stack = getStack();
+
+  return (
+    <div className={styles.flowCard}>
+      <div className={styles.flowHeader} style={{ cursor: 'default' }}>
+        <span className={styles.flowLabel}>historyStack ({stack.length}개)</span>
+      </div>
+      <div className={styles.stepList}>
+        {stack.length === 0 ? (
+          <div className={styles.stepSource}>기록 없음 (메인 화면이거나 직전에 clear() 됨)</div>
+        ) : (
+          [...stack].reverse().map((entry, index) => (
+            <div key={stack.length - 1 - index} className={styles.step}>
+              <div className={styles.stepTop}>
+                <span className={styles.stepLabel} title={entry.path}>
+                  [{stack.length - index}] {entry.path}
+                </span>
+              </div>
+              <div className={styles.stepDetail}>
+                <div className={styles.stepDetailRow}>
+                  <span className={styles.stepDetailKey}>params: </span>
+                  {JSON.stringify(entry.params) ?? '—'}
+                </div>
+                <div className={styles.stepDetailRow}>
+                  <span className={styles.stepDetailKey}>prevParams: </span>
+                  {JSON.stringify(entry.prevParams) ?? '—'}
+                </div>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
+    </div>
+  );
+}
+
 export default function DevTracePanel() {
   const location = useLocation();
   const [flows, setFlows] = useState(getFlows());
@@ -122,6 +164,7 @@ export default function DevTracePanel() {
   // 패널이 하단 60%를 덮어버려서 데모 버튼을 가릴 수 있어 기본은 접어둠
   const [expanded, setExpanded] = useState(() => window.innerWidth >= 1024);
   const [networkOnly, setNetworkOnly] = useState(false);
+  const [showHistoryStack, setShowHistoryStack] = useState(false);
   const lastPathRef = useRef(null);
 
   // 계측 설치는 앱 전체에 한 번만 (installDevTrace 내부에서 중복 설치를 막음)
@@ -172,6 +215,12 @@ export default function DevTracePanel() {
           >
             네트워크만
           </button>
+          <button
+            className={`${styles.headerButton} ${showHistoryStack ? styles.headerButtonActive : ''}`}
+            onClick={() => setShowHistoryStack((v) => !v)}
+          >
+            히스토리스택
+          </button>
           <button className={styles.headerButton} onClick={clearFlows}>
             지우기
           </button>
@@ -182,6 +231,7 @@ export default function DevTracePanel() {
       </div>
 
       <div className={styles.flowList}>
+        {showHistoryStack && <HistoryStackView />}
         {visibleFlows.length === 0 && <div className={styles.emptyHint}>버튼을 눌러보면 여기 흐름이 쌓입니다.</div>}
         {visibleFlows.map((flow, index) => (
           <FlowCard key={flow.id} flow={flow} defaultOpen={index === 0} />
