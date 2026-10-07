@@ -7,7 +7,7 @@
 import { useEffect, useState } from 'react';
 import { DialogProvider } from './components/common/dialog/DialogContext';
 import AppRoutes from './routes/AppRoutes';
-import GlobalLoading from './components/common/custom/GlobalLoading';
+import GlobalLoading from './components/common/feedback/GlobalLoading';
 import ChatEntryButton from './components/common/layout/ChatEntryButton';
 import ChatPanel from './components/common/layout/ChatPanel';
 import { SCREEN_CODES } from './config/screenCodes';
