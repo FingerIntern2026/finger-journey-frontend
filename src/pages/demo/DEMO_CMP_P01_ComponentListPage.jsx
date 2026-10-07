@@ -50,7 +50,7 @@ import BottomTabNav from "../../components/common/layout/BottomTabNav";
 import ChatEntryButton from "../../components/common/layout/ChatEntryButton";
 import Header from "../../components/common/layout/Header";
 import PageLayout from "../../components/common/layout/PageLayout.jsx";
-import useNavigation from "../../hooks/useNavigation";
+import useNavigationStore from "../../stores/useNavigationStore";
 
 import styles from "./DEMO_CMP_P01_ComponentList.module.css";
 
@@ -77,7 +77,6 @@ function AccordionItem({ id, title, description, isOpen, onToggle, render }) {
         type="button"
         className={`${styles.accordionHeader} ${isOpen ? styles.accordionHeaderOpen : ""}`}
         onClick={() => onToggle(id)}
-        data-trace={`아코디언 ${isOpen ? "접기" : "펼치기"}: ${title} (openIds Set ${isOpen ? "삭제" : "추가"})`}
       >
         <span>{title}</span>
         <span className={`${styles.accordionChevron} ${isOpen ? styles.accordionChevronOpen : ""}`}>
@@ -95,7 +94,7 @@ function AccordionItem({ id, title, description, isOpen, onToggle, render }) {
 }
 
 export default function ComponentListPage() {
-  const { goBack } = useNavigation();
+  const goBack = useNavigationStore((state) => state.goBack);
   const [tab, setTab] = useState("base"); // "base" | "custom" | "util"
   const [openIds, setOpenIds] = useState(new Set());
   const [utilResults, setUtilResults] = useState({});
@@ -104,7 +103,11 @@ export default function ComponentListPage() {
   const toggleOpen = (id) => {
     setOpenIds((prev) => {
       const next = new Set(prev);
-      next.has(id) ? next.delete(id) : next.add(id);
+      if (next.has(id)) {
+        next.delete(id);
+      } else {
+        next.add(id);
+      }
       return next;
     });
   };
@@ -303,8 +306,8 @@ export default function ComponentListPage() {
       ),
     },
     {
-      id: "historyStack",
-      description: "push/pop/popN/peek/clear — 이 페이지에서 직접 실행하면 실제 화면이동 기록이 깨지므로, goBack/goBackN 데모 화면(뒤로가기 예제)에서 실제 동작으로 확인",
+      id: "useNavigationStore",
+      description: "historyStack과 nowPageParams를 전역 상태로 관리합니다. 실제 화면 이동은 goForward()와 goBack(num)으로만 수행합니다.",
       render: () => <p className={styles.pageHint}>/demo/move/go-back 에서 확인하세요.</p>,
     },
   ];
@@ -565,7 +568,6 @@ export default function ComponentListPage() {
           type="button"
           className={`${styles.tabButton} ${tab === "base" ? styles.tabButtonActive : ""}`}
           onClick={() => setTab("base")}
-          data-trace="탭 전환: 공통 컴포넌트 (tab state = 'base')"
         >
           공통 컴포넌트
         </button>
@@ -573,7 +575,6 @@ export default function ComponentListPage() {
           type="button"
           className={`${styles.tabButton} ${tab === "custom" ? styles.tabButtonActive : ""}`}
           onClick={() => setTab("custom")}
-          data-trace="탭 전환: 커스텀 컴포넌트 (tab state = 'custom')"
         >
           커스텀 컴포넌트
         </button>
@@ -581,7 +582,6 @@ export default function ComponentListPage() {
           type="button"
           className={`${styles.tabButton} ${tab === "util" ? styles.tabButtonActive : ""}`}
           onClick={() => setTab("util")}
-          data-trace="탭 전환: 공통 유틸 (tab state = 'util')"
         >
           공통 유틸
         </button>
