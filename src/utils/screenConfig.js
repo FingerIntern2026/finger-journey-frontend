@@ -2,6 +2,7 @@
 
 import { sendPost } from '../api/client';
 import { traced } from '../devtrace/traced';
+import { hasScreenModule } from '../routes/screenLoader';
 import { parseApiError } from './apiError';
 
 const SCREEN_LIST_API = '/admin/screen/list';
@@ -14,8 +15,8 @@ function validateScreens(screens) {
   const paths = new Set();
 
   for (const screen of screens) {
-    if (!screen.screenCode || !screen.routePath) {
-      throw new Error('화면정보에 screenCode와 routePath가 필요합니다.');
+    if (!screen.screenCode || !screen.routePath || !screen.filePath) {
+      throw new Error('화면정보에 screenCode, routePath, filePath가 필요합니다.');
     }
     if (!BACK_ACTIONS.has(screen.backAction)) {
       throw new Error(`지원하지 않는 뒤로가기 동작입니다: ${screen.backAction}`);
@@ -34,6 +35,9 @@ function validateScreens(screens) {
     }
     if (paths.has(screen.routePath)) {
       throw new Error(`중복된 화면 경로입니다: ${screen.routePath}`);
+    }
+    if (!hasScreenModule(screen.filePath)) {
+      throw new Error(`화면 파일을 찾을 수 없습니다: ${screen.filePath}`);
     }
     codes.add(screen.screenCode);
     paths.add(screen.routePath);
