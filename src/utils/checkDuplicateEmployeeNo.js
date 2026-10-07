@@ -4,8 +4,6 @@
 // 사용처: 현재 사용하는 곳 없음
 // 담당자:
 
-import { traced } from '../devtrace/traced';
-
 // employeeNo   : 사용자가 입력창에 방금 입력한 사번
 // existingList : 이미 등록된 사원 목록. [{ employeeNo: '...' }, ...] 형태
 //                (EmployeeListResponse를 그대로 넘기면 됨)
@@ -17,8 +15,4 @@ function _checkDuplicateEmployeeNo(employeeNo, existingList) {
     return existingList.some((employee) => employee.employeeNo === target);
 }
 
-export const checkDuplicateEmployeeNo = traced(
-    'checkDuplicateEmployeeNo',
-    'src/utils/checkDuplicateEmployeeNo.js',
-    _checkDuplicateEmployeeNo
-);
+export const checkDuplicateEmployeeNo = _checkDuplicateEmployeeNo;

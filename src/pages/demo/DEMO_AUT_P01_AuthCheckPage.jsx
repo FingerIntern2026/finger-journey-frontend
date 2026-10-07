@@ -1,6 +1,6 @@
 // 페이지명: AuthCheckPage (TODO: 정식 화면명 확정되면 교체)
 // 역할: MoveGuidePage에서 설정한 로그인 상태값을 같은 저장소에서 읽는 권한 상태 확인 데모.
-// 사용처: MoveGuidePage에서 "권한검사" 버튼(goToScreen(SCREEN_CODES.DEMO_AUTH_CHECK))으로 진입.
+// 사용처: MoveGuidePage에서 "권한검사" 버튼(goForward(SCREEN_CODES.DEMO_AUTH_CHECK))으로 진입.
 // url: /demo/move/auth-check
 // 담당자:
 
@@ -10,11 +10,11 @@ import Header from '../../components/common/layout/Header.jsx';
 // useAuth: 파트A(재웅님)가 만든 훅. localStorage의 로그인 상태를 읽어서
 // { isLoggedIn: true/false } 형태로 돌려줌
 import { useAuth } from '../../hooks/useAuth.js';
-import useNavigation from '../../hooks/useNavigation';
+import useNavigationStore from '../../stores/useNavigationStore';
 import BaseBadge from '../../components/common/base/BaseBadge.jsx';
 
 const AuthCheckPage = () => {
-  const { goBack } = useNavigation();
+  const goBack = useNavigationStore((state) => state.goBack);
 
   // 지금 로그인 상태를 useAuth 훅으로 읽어옴
   const { isLoggedIn } = useAuth();

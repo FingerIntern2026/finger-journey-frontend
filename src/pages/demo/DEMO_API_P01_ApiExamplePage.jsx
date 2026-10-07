@@ -13,10 +13,10 @@ import BaseInput from "../../components/common/base/BaseInput";
 import BaseCard from "../../components/common/base/BaseCard";
 import PageLayout from "../../components/common/layout/PageLayout.jsx";
 import Header from "../../components/common/layout/Header.jsx";
-import useNavigation from "../../hooks/useNavigation";
+import useNavigationStore from "../../stores/useNavigationStore";
 
 export default function ApiExamplePage() {
-  const { goBack } = useNavigation();
+  const goBack = useNavigationStore((state) => state.goBack);
   // API 호출 결과를 화면에 찍어보기 위한 state
   const [result, setResult] = useState(null);
   const [error, setError] = useState(null);

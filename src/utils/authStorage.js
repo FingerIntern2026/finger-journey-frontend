@@ -4,8 +4,6 @@
 // 사용처: useAuth.js, MoveGuidePage.jsx
 // 담당자:
 
-import { traced } from '../devtrace/traced';
-
 const LOGIN_KEY = 'isLoggedIn';
 
 // 로그인 여부 읽기
@@ -20,8 +18,5 @@ function _setIsLoggedIn(nextValue) {
     localStorage.setItem(LOGIN_KEY, String(nextValue));
 }
 
-// getIsLoggedIn은 useAuth()가 렌더마다(re-render마다) 호출하는 읽기 전용 함수라
-// traced()로 감싸면 클릭 한 번과 무관하게 로그가 계속 쌓임 → 추적 안 함
-// setIsLoggedIn은 토글 클릭 시에만 호출되는 실제 "쓰기" 동작이라 추적 대상으로 남김
 export const getIsLoggedIn = _getIsLoggedIn;
-export const setIsLoggedIn = traced('setIsLoggedIn', 'src/utils/authStorage.js', _setIsLoggedIn);
+export const setIsLoggedIn = _setIsLoggedIn;
