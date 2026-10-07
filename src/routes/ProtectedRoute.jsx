@@ -4,15 +4,16 @@
 // 담당자:
 
 import { useEffect } from 'react';
-import { Navigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { SCREEN_CODES } from '../config/screenCodes';
+import useNavigationStore from '../stores/useNavigationStore';
 import { getRoutePath } from '../utils/screenConfig';
 import { addStep } from '../devtrace/traceContext';
 
 // children: 이 컴포넌트로 감싼 실제 보호 대상 페이지 (예: <AuthCheckPage />)
 export default function ProtectedRoute({ children }) {
     const { isLoggedIn } = useAuth();
+    const goForward = useNavigationStore((state) => state.goForward);
     const fallbackPath = getRoutePath(SCREEN_CODES.DEMO_MOVE);
 
     // 렌더링 중이 아니라 effect에서 기록 (렌더 중 부수효과는 StrictMode에서 문제될 수 있음)
@@ -24,14 +25,15 @@ export default function ProtectedRoute({ children }) {
                 source: 'src/routes/ProtectedRoute.jsx',
                 note: '로그인 안 된 상태라 /demo/move로 리다이렉트',
             });
+            goForward({ path: fallbackPath, params: { blockedReason: '로그인이 필요한 페이지입니다.' } });
         }
-    }, [isLoggedIn]);
+    }, [fallbackPath, goForward, isLoggedIn]);
 
     // 로그인 안 됐으면 children을 그리지 않고 로그인 토글이 있는 MoveGuidePage로 돌려보냄
     // replace: 브라우저 히스토리에 남기지 않음 (뒤로가기 눌러도 보호된 페이지로 안 돌아감)
     // state로 "왜 튕겼는지" 이유를 같이 넘겨서, MoveGuidePage에서 안내 메시지를 보여줄 수 있게 함
     if (!isLoggedIn) {
-        return <Navigate to={fallbackPath} replace state={{ blockedReason: '로그인이 필요한 페이지입니다.' }} />;
+        return null;
     }
 
     // 로그인 됐으면 원래 보여주려던 페이지(children)를 그대로 렌더링

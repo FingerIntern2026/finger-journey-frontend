@@ -11,6 +11,8 @@ import GlobalLoading from './components/common/custom/GlobalLoading';
 import ChatEntryButton from './components/common/layout/ChatEntryButton';
 import ChatPanel from './components/common/layout/ChatPanel';
 import DevTracePanel from './devtrace/DevTracePanel';
+import { SCREEN_CODES } from './config/screenCodes';
+import useNavigationStore from './stores/useNavigationStore';
 import { fetchScreenList } from './utils/screenConfig';
 
 // 챗봇 진입 버튼/팝업은 데모 화면 어디서든 떠 있어야 해서 라우트 최상위인 여기서 관리함
@@ -20,13 +22,18 @@ function App() {
   const [chatOpen, setChatOpen] = useState(false);
   const [screens, setScreens] = useState(null);
   const [screenLoadError, setScreenLoadError] = useState(null);
+  const initializeNavigation = useNavigationStore((state) => state.initializeNavigation);
 
   useEffect(() => {
     let active = true;
 
     fetchScreenList()
       .then((loadedScreens) => {
-        if (active) setScreens(loadedScreens);
+        if (!active) return;
+        const homeScreen = loadedScreens.find((screen) => screen.screenCode === SCREEN_CODES.DEMO_HOME);
+        if (!homeScreen) throw new Error(`메인 화면정보를 찾을 수 없습니다: ${SCREEN_CODES.DEMO_HOME}`);
+        initializeNavigation({ path: homeScreen.routePath, params: {} });
+        setScreens(loadedScreens);
       })
       .catch((error) => {
         if (active) setScreenLoadError(error);
@@ -35,7 +42,7 @@ function App() {
     return () => {
       active = false;
     };
-  }, []);
+  }, [initializeNavigation]);
 
   if (screenLoadError) {
     return (
