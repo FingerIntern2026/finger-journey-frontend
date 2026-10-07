@@ -1,203 +1,253 @@
 # Frontend Project Structure
 
-본 프로젝트의 Frontend는 **React + Vite** 기반으로 구성합니다.
+본 프로젝트의 Frontend는 React + Vite 기반으로 구성합니다.
 
 ## 1. Project Structure
 
 ```text
 src/
+├─ api/
+│  ├─ client.js                 # 공통 HTTP 클라이언트
+│  └─ screenApi.js              # 화면정보 API 요청
+│
 ├─ components/
 │  └─ common/
-│     ├─ base/       # 기본 UI 컴포넌트
-│     │  ├─ base.module.css   # base 폴더 공통 스타일 (CSS Modules)
-│     │  ├─ BaseButton.jsx
-│     │  └─ ...
-│     ├─ custom/     # 공통 커스텀 컴포넌트
-│     │  ├─ custom.module.css
-│     │  └─ ...
-│     ├─ dialog/     # Alert, Confirm, Modal
-│     │  ├─ dialog.module.css
-│     │  └─ ...
-│     └─ layout/     # 공통 레이아웃
+│     ├─ base/                  # Button, Input 등 기본 UI
+│     │  ├─ button/
+│     │  └─ base.module.css
+│     ├─ custom/                # Base UI를 조합한 공통 UI
+│     │  ├─ button/
+│     │  └─ custom.module.css
+│     ├─ dialog/                # Alert, Confirm, Popup
+│     │  └─ dialog.module.css
+│     ├─ feedback/              # Loading 등 상태 안내 UI
+│     │  ├─ GlobalLoading.jsx
+│     │  └─ feedback.module.css
+│     └─ layout/                # Header, PageLayout 등 화면 배치
 │        ├─ layout.module.css
-│        └─ ...
+│        └─ chatPanel.module.css
 │
 ├─ config/
-│  ├─ apiConfig.js
-│  └─ routeConfig.js
+│  ├─ apiConfig.js              # 백엔드 및 AI 서버 주소
+│  └─ screenCodes.js            # 화면 식별 코드 상수
 │
 ├─ hooks/
-│  ├─ useDialog.js
-│  ├─ useAuth.js
-│  └─ ...
-│
-├─ api/
-│  ├─ client.js
-│  ├─ authApi.js
-│  ├─ onboardingApi.js
-│  ├─ wikiApi.js
-│  └─ ...
+│  ├─ useAuth.js                # 로그인 상태 조회
+│  ├─ useDialog.js              # DialogContext 사용
+│  └─ useGlobalLoading.js       # 전역 로딩 store 구독
 │
 ├─ pages/
-│  ├─ preboarding/
-│  ├─ onboarding/
-│  ├─ wiki/
-│  ├─ report/
-│  └─ ...
+│  └─ demo/                     # 데모 화면
 │
 ├─ routes/
-│  ├─ AppRoutes.jsx
-│  └─ ProtectedRoute.jsx
+│  ├─ AppRoutes.jsx             # 현재 경로에 맞는 화면 연결
+│  ├─ ProtectedRoute.jsx        # 로그인 필요 화면 접근 검사
+│  ├─ RouteErrorPage.jsx        # 공통 라우팅 오류 화면
+│  ├─ ScreenErrorBoundary.jsx   # 화면 로딩 및 렌더링 오류 처리
+│  ├─ ScreenRenderer.jsx        # 화면정보 기반 렌더링
+│  └─ screenLoader.js           # filePath 기반 동적 import
+│
+├─ services/
+│  └─ screenService.js          # 화면정보 검증, 캐시, 조회
+│
+├─ stores/
+│  ├─ loadingStore.js           # 전역 API 로딩 상태
+│  └─ useNavigationStore.js     # 내비게이션 전역 상태
+│
+├─ utils/
+│  ├─ apiError.js
+│  ├─ authStorage.js
+│  ├─ checkDuplicateEmployeeNo.js
+│  ├─ date.js
+│  └─ highlight.js
 │
 ├─ App.jsx
 └─ main.jsx
 ```
 
-> `features/` 디렉터리는 현재 사용하지 않으며, 추후 프로젝트 규모가 커질 경우 도입을 검토합니다.
-
----
-
 ## 2. Directory Convention
-
-### `components/`
-
-여러 페이지에서 공통으로 사용하는 UI 컴포넌트를 관리합니다.
-
-| Directory | Description |
-| --- | --- |
-| `base/` | Button, Input 등 기본 UI |
-| `custom/` | Base 컴포넌트를 조합한 공통 컴포넌트 |
-| `dialog/` | Alert, Confirm, Modal 등 |
-| `layout/` | PageLayout, Header 등 공통 레이아웃 |
-
-특정 페이지에서만 사용하는 컴포넌트는 해당 `pages/` 폴더 내부에서 관리하고,
-여러 페이지에서 재사용하게 되면 `components/common/`으로 이동합니다.
-
-스타일은 폴더 단위 CSS Modules(`{폴더명}.module.css`)로 관리하며,
-컴포넌트별로 별도 CSS 파일을 만들지 않습니다.
-(예: `components/common/base/base.module.css`)
-
-### `config/`
-
-프로젝트 공통 설정값을 관리합니다.
-
-```text
-apiConfig.js     # API Base URL 등 API 설정
-routeConfig.js   # Route Path 상수
-```
-
-### `hooks/`
-
-공통 로직을 Custom Hook으로 관리합니다.
-
-```text
-useDialog.js     # Dialog 관련 로직
-useAuth.js       # 로그인 및 인증 관련 로직
-```
-
-하나의 Hook에 여러 기능을 작성하지 않고 역할별로 분리합니다.
 
 ### `api/`
 
-Backend API 통신을 관리합니다.
+백엔드 HTTP 통신을 담당합니다.
 
 ```text
-client.js          # 공통 API 요청 설정
-authApi.js         # 인증 관련 API
-onboardingApi.js   # 온보딩 관련 API
-wikiApi.js         # 위키 관련 API
+client.js     # 공통 Axios 인스턴스와 GET/POST 요청 함수
+screenApi.js  # 화면정보 목록 API 호출
 ```
 
-페이지에서 API 요청 코드를 반복해서 작성하지 않고 `api/`에 정의된 함수를 사용합니다.
+API 파일은 요청 URL과 요청 데이터 전달까지만 담당합니다. 응답 검증, 캐시, 조회처럼 애플리케이션에서 데이터를 사용하는 로직은 `services/`에서 처리합니다.
+
+### `services/`
+
+API 응답을 애플리케이션에서 사용할 수 있도록 검증, 가공, 캐싱하는 로직을 관리합니다.
+
+`screenService.js`는 다음 역할을 담당합니다.
+
+- 화면정보 API 호출 요청
+- 화면정보 응답 형식 검사
+- 화면 코드와 경로 중복 검사
+- `filePath`에 대응하는 실제 화면 파일 검사
+- 화면 목록 캐시
+- 화면 코드 및 경로 기반 조회
+
+화면정보를 불러오는 흐름은 다음과 같습니다.
+
+```text
+App.jsx
+→ services/screenService.js
+→ api/screenApi.js
+→ api/client.js
+→ Backend
+```
+
+### `components/`
+
+여러 페이지에서 재사용하는 UI 컴포넌트를 관리합니다.
+
+| Directory | Description |
+| --- | --- |
+| `base/` | Button, Input 등 가장 작은 기본 UI |
+| `custom/` | Base 컴포넌트를 조합한 재사용 UI |
+| `dialog/` | Alert, Confirm, Popup 등 다이얼로그 UI |
+| `feedback/` | Loading, Error, Empty, Toast 등 상태 안내 UI |
+| `layout/` | PageLayout, Header 등 화면 배치 UI |
+
+특정 페이지에서만 사용하는 컴포넌트는 해당 `pages/` 폴더에서 관리하고, 여러 페이지에서 재사용하게 되면 `components/common/`으로 이동합니다.
+
+스타일은 폴더 단위 CSS Modules(`{폴더명}.module.css`)로 관리합니다.
+
+### `config/`
+
+실행 중에 거의 변경되지 않는 프로젝트 공통 설정과 상수를 관리합니다.
+
+```text
+apiConfig.js    # 백엔드 및 AI 서버 주소
+screenCodes.js  # 화면 식별 코드 상수
+```
+
+화면 코드는 `screenCodes.js`에서 관리하고, 실제 URL과 화면 파일 경로는 백엔드 화면정보의 `routePath`, `filePath`를 사용합니다.
+
+### `hooks/`
+
+React 컴포넌트에서 Context나 외부 상태를 쉽게 사용할 수 있도록 연결하는 커스텀 훅을 관리합니다.
+
+```text
+useAuth.js           # 로그인 상태 조회
+useDialog.js         # DialogContext의 다이얼로그 기능 사용
+useGlobalLoading.js  # loadingStore를 React에 연결
+```
+
+커스텀 훅은 `use`로 시작하며 `hooks/`에서 찾을 수 있도록 위치를 통일합니다. Zustand의 `create()`로 생성한 `useNavigationStore`도 Hook 형태로 호출하지만, 전역 상태 자체를 생성하고 관리하므로 `stores/`에 둡니다.
+
+### `stores/`
+
+여러 화면과 컴포넌트가 공유하는 전역 상태를 관리합니다.
+
+```text
+useNavigationStore.js  # 현재 화면, 화면 파라미터, 이동 기록 관리
+loadingStore.js        # 진행 중인 API 요청 개수와 로딩 상태 관리
+```
+
+`useNavigationStore.js`는 Zustand 기반 store이고, `loadingStore.js`는 모듈 상태와 구독 방식으로 만든 외부 store입니다.
+
+### `utils/`
+
+특정 화면 상태에 의존하지 않는 범용 변환 및 검사 함수를 관리합니다.
+
+```text
+apiError.js                  # API 오류 형식 변환
+authStorage.js               # 로그인 상태 저장 및 조회
+checkDuplicateEmployeeNo.js  # 사번 중복 검사
+date.js                      # 날짜 변환 및 계산
+highlight.js                 # 검색어 일치 구간 분리
+```
+
+React Hook, 전역 상태, 컴포넌트, API 요청, 화면정보 캐시는 `utils/`에 두지 않습니다.
 
 ### `pages/`
 
-실제 화면을 기능 또는 도메인별로 관리합니다.
-
-```text
-pages/preboarding/PreboardingPage.jsx
-pages/onboarding/OnboardingPage.jsx
-pages/wiki/WikiPage.jsx
-pages/report/ReportPage.jsx
-```
+실제 화면 컴포넌트를 화면 또는 도메인별로 관리합니다. 현재는 공통 기능을 확인하기 위한 데모 화면을 `pages/demo/`에서 관리합니다.
 
 ### `routes/`
 
-React Router 관련 코드를 관리합니다.
+DB 화면정보와 실제 React 페이지를 연결하고 화면 접근 및 오류를 처리합니다.
 
 ```text
-AppRoutes.jsx        # 전체 Route 구성
-ProtectedRoute.jsx   # 로그인 및 접근 권한 검사
+AppRoutes.jsx            # 현재 내비게이션 경로에 맞는 화면 연결
+ProtectedRoute.jsx       # 로그인 필요 화면 접근 검사
+ScreenRenderer.jsx       # routePath와 filePath 기반 화면 렌더링
+screenLoader.js          # filePath에 해당하는 페이지 동적 import
+ScreenErrorBoundary.jsx  # 화면 로딩 및 렌더링 오류 처리
+RouteErrorPage.jsx       # 공통 라우팅 오류 화면
 ```
 
-Route Path는 `config/routeConfig.js`에서 관리합니다.
+화면 렌더링 흐름은 다음과 같습니다.
 
----
+```text
+useNavigationStore의 현재 경로
+→ AppRoutes
+→ ScreenRenderer
+→ screenLoader
+→ pages의 화면 컴포넌트
+```
 
 ## 3. State Management
 
-초기에는 Redux, Zustand 등의 별도 상태 관리 라이브러리를 사용하지 않습니다.
+상태 범위와 사용 위치에 따라 다음 방식을 사용합니다.
 
 ```text
-컴포넌트 내부 상태     → useState
-공유 상태             → React Context
-공통 상태 처리 로직    → Custom Hook
+컴포넌트 내부 상태       → useState
+컴포넌트 트리 공유 상태  → React Context
+전역 내비게이션 상태     → Zustand
+React 외부 로딩 상태     → 모듈 store + useSyncExternalStore
 ```
 
-로그인 및 인증 관련 로직은 `useAuth`를 통해 관리하며,
-구체적인 인증 상태 저장 방식은 실제 인증 구현에 따라 결정합니다.
+현재 적용 사례는 다음과 같습니다.
 
-추후 상태 관리가 복잡해질 경우 별도 상태 관리 라이브러리 도입을 검토합니다.
+- `DialogContext`: 다이얼로그 스택과 실행 함수 공유
+- `useNavigationStore`: 현재 화면, 파라미터, 이동 기록 관리
+- `loadingStore`: 진행 중인 API 요청 개수 관리
+- `useGlobalLoading`: `loadingStore`를 React에 연결
 
-### Context를 쓰는 이유
+### Dialog Context
 
-Context는 값을 컴포넌트 트리 아래로 prop을 일일이 넘기지 않고 전달하는 방법입니다.
-`<Provider>`로 감싼 트리 **내부에서만** 값을 읽을 수 있다는 점이 핵심입니다 — 전역 변수처럼
-"어디서든 접근 가능"한 게 아니라, "이 트리 범위 안에서만 접근 가능"하게 범위가 제한됩니다.
-그래서 이 트리 밖의 다른 컴포넌트가 실수로 값을 건드릴 수 없고, 어떤 값이 어디까지 영향을
-미치는지가 JSX 구조만 봐도 드러납니다.
+`DialogProvider`가 `App.jsx`에서 전체 화면을 감싸고 다이얼로그 스택을 관리합니다. 하위 컴포넌트는 `hooks/useDialog.js`를 통해 `showDialog`, `showAlert`, `showConfirm`을 사용하며 스택을 직접 변경하지 않습니다.
 
-실제 사용 예시: `src/components/common/dialog/DialogContext.jsx`
-- `DialogProvider`가 `App.jsx` 최상단을 감싸고, 다이얼로그 스택(`dialogStack`)을 Context 값으로 관리합니다.
-- 하위 컴포넌트는 `useDialog()`로 `showDialog`/`showAlert`/`showConfirm`만 꺼내 쓰고, 스택 자체를
-  직접 조작하지 않습니다 — 다이얼로그를 열고 닫는 방법이 이 파일 하나로 통일됩니다.
+### Navigation Store
 
-### Context를 안 쓰는 경우
+`stores/useNavigationStore.js`가 현재 화면 경로, 현재 화면 파라미터와 화면 이동 기록을 관리합니다. 화면 컴포넌트는 `goForward`, `goBack` 액션을 통해서만 내비게이션 상태를 변경합니다.
 
-이 프로젝트의 `historyStack.js`(화면 이동 기록), `loadingStore.js`(전역 로딩 카운트)는
-Context가 아니라 **모듈 스코프 변수**로 관리합니다. 이유는:
-- 값이 바뀔 때마다 화면을 다시 그릴 필요가 없는 값이라 (React state로 들고 있을 이유가 없음)
-- `src/api/client.js`의 axios 인터셉터처럼 **컴포넌트 트리 바깥**(React 렌더링 범위 밖)에서도
-  값을 읽고 바꿔야 하는데, Context는 트리 안에서만 접근 가능하므로 이런 곳엔 애초에 쓸 수 없음
+### Loading Store
 
----
+`stores/loadingStore.js`는 API 요청 모듈처럼 React 컴포넌트 바깥에서도 상태를 변경해야 하므로 Context가 아닌 모듈 store로 관리합니다. React 컴포넌트는 `hooks/useGlobalLoading.js`를 통해 해당 상태를 구독합니다.
 
 ## 4. Naming Convention
 
 | Type | Convention | Example |
 | --- | --- | --- |
 | Component | PascalCase | `BaseButton.jsx` |
-| Page | PascalCase + Page | `OnboardingPage.jsx` |
+| Page | PascalCase + Page | `ReportExamplePage.jsx` |
 | Hook | use + PascalCase | `useAuth.js` |
+| Store Hook | use + PascalCase + Store | `useNavigationStore.js` |
 | Function / Variable | camelCase | `handleLogin` |
 | Constant | UPPER_SNAKE_CASE | `API_BASE_URL` |
-| URL | kebab-case | `/ai-report` |
-
----
+| URL | kebab-case | `/demo/report` |
 
 ## 5. Development Rules
 
 - 공통 UI는 `components/common/`에 작성합니다.
-- 페이지 전용 컴포넌트는 해당 `pages/` 폴더에서 관리합니다.
-- API 통신 코드는 `api/`에 작성합니다.
-- API 공통 설정은 `api/client.js`에서 관리합니다.
-- Route Path는 `config/routeConfig.js`에서 관리합니다.
-- 전체 Route 연결은 `routes/AppRoutes.jsx`에서 관리합니다.
-- 접근 권한 검사(게이트)는 `ProtectedRoute.jsx`에서 처리합니다. `AppRoutes.jsx`가 화면정보 테이블의
-  `screen_info.login_required` 값을 보고 필요한 화면만 자동으로 `ProtectedRoute`로 감싸주므로,
-  개별 페이지 컴포넌트는 로그인 여부를 신경 쓸 필요가 없습니다.
-  **`ProtectedRoute.jsx` 내부 로직(인증/인가 방식)은 업무 화면 개발자가 직접 수정하지 않습니다.**
-  인증 방식 자체를 바꿔야 하면 이 파일 담당자(현재 재웅)와 먼저 상의합니다.
-- Custom Hook은 역할별로 분리합니다.
-- 공통으로 사용할 수 있는 코드는 중복 작성하지 않습니다.
-- 컴포넌트 스타일은 폴더 단위 CSS Modules(`{폴더명}.module.css`)로 관리하며, 컴포넌트별 개별 CSS 파일은 만들지 않습니다.
+- 페이지 전용 UI는 해당 `pages/` 폴더에서 관리합니다.
+- 백엔드 HTTP 요청은 `api/`에 작성합니다.
+- API 응답 검증, 가공, 캐시 로직은 `services/`에 작성합니다.
+- 여러 화면에서 공유하는 전역 상태는 `stores/`에 작성합니다.
+- React 커스텀 훅은 `hooks/`에 작성합니다.
+- 범용 변환 및 검사 함수는 `utils/`에 작성합니다.
+- 정적인 설정과 상수는 `config/`에 작성합니다.
+- 화면 코드는 `config/screenCodes.js`에서 관리합니다.
+- 화면 경로와 파일 경로는 백엔드 화면정보의 `routePath`, `filePath`를 사용합니다.
+- 전체 화면 연결은 `routes/AppRoutes.jsx`와 `routes/ScreenRenderer.jsx`에서 처리합니다.
+- 화면 파일의 동적 import는 `routes/screenLoader.js`에서 처리합니다.
+- 로그인 필요 화면은 `routes/ProtectedRoute.jsx`에서 처리합니다.
+- 컴포넌트 스타일은 폴더 단위 CSS Modules로 관리합니다.
+- 파일을 이동할 때 모든 import, 주석, 문서 경로를 함께 수정합니다.
