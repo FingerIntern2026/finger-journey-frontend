@@ -1,5 +1,5 @@
 // 역할: DB 화면정보의 filePath를 Vite 동적 import 대상과 연결하고 화면 컴포넌트를 지연 로딩한다.
-// 사용처: AppRoutes.jsx, screenConfig.js
+// 사용처: AppRoutes.jsx, screenService.js
 // 담당자: 홍지연
 
 import { lazy } from 'react';

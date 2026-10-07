@@ -2,7 +2,7 @@
 //       설정(서버 주소, 헤더 등)해서 다른 파일에서는 sendGet/sendPost만 가져다 쓰면 됨.
 //       전역 로딩 처리: 요청 시작 시 startLoading, 끝나면(성공/실패 무관) stopLoading을
 //       try/finally로 감싸서 에러가 나도 로딩 카운트가 반드시 줄어들도록 보장
-// 사용처: ReportExamplePage.jsx, ReportResultPage.jsx, AcrosticInputForm.jsx, screenConfig.js,
+// 사용처: ReportExamplePage.jsx, ReportResultPage.jsx, AcrosticInputForm.jsx, screenApi.js,
 //         ApiExamplePage.jsx
 // 담당자:
 

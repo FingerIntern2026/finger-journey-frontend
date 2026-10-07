@@ -25,7 +25,7 @@ import { checkDuplicateEmployeeNo } from "../../utils/checkDuplicateEmployeeNo";
 import { getHighlightSegments } from "../../utils/highlight";
 import { getIsLoggedIn } from "../../utils/authStorage";
 import { parseApiError } from "../../utils/apiError";
-import { getRoutePath, getScreenList } from "../../utils/screenConfig";
+import { getRoutePath, getScreenList } from "../../services/screenService";
 import { SCREEN_CODES } from "../../config/screenCodes";
 
 import CustomAuthForm from "../../components/common/custom/CustomAuthForm";
@@ -287,7 +287,7 @@ export default function ComponentListPage() {
     },
     {
       id: "getRoutePath",
-      description: "화면코드 → routePath 조회, 앱 시작 시 캐시된 화면정보 목록에서 찾음 (src/utils/screenConfig.js)",
+      description: "화면코드 → routePath 조회, 앱 시작 시 캐시된 화면정보 목록에서 찾음 (src/services/screenService.js)",
       render: () => (
         <>
           <BaseButton label="getRoutePath('DEMO_HOM_P01') 실행" onClick={() => runUtil("getRoutePath", () => getRoutePath(SCREEN_CODES.DEMO_HOME))} />
@@ -297,7 +297,7 @@ export default function ComponentListPage() {
     },
     {
       id: "getScreenList",
-      description: "앱 시작 시 백엔드에서 받아 캐시해둔 화면정보 전체 목록 (src/utils/screenConfig.js)",
+      description: "앱 시작 시 백엔드에서 받아 캐시해둔 화면정보 전체 목록 (src/services/screenService.js)",
       render: () => (
         <>
           <BaseButton label="getScreenList() 실행 — 캐시된 화면 개수 확인" onClick={() => runUtil("getScreenList", () => getScreenList().length)} />
