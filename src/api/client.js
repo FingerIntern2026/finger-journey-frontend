@@ -8,7 +8,7 @@
 
 import axios from "axios";
 import { API_BASE_URL } from "../config/apiConfig";
-import { startLoading, stopLoading } from "../utils/loadingStore";
+import { startLoading, stopLoading } from "../stores/loadingStore";
 
 // axios 인스턴스 생성 (기본 주소 미리 설정해둠)
 const instance = axios.create({

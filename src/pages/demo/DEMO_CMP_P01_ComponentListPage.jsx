@@ -19,7 +19,7 @@ import BaseTextArea from "../../components/common/base/BaseTextArea";
 import BaseCheckbox from "../../components/common/base/BaseCheckbox";
 import BaseProgressBar from "../../components/common/base/BaseProgressBar";
 import BaseErrorCard from "../../components/common/base/BaseErrorCard";
-import { startLoading, stopLoading } from "../../utils/loadingStore";
+import { startLoading, stopLoading } from "../../stores/loadingStore.js";
 import { formatDate, daysSince } from "../../utils/date";
 import { checkDuplicateEmployeeNo } from "../../utils/checkDuplicateEmployeeNo";
 import { getHighlightSegments } from "../../utils/highlight";
