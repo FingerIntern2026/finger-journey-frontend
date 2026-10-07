@@ -8,7 +8,7 @@
 // 담당자:
 
 import BaseButton from '../../components/common/base/BaseButton.jsx';
-import { useDialog } from '../../components/common/dialog/DialogContext.jsx';
+import { useDialog } from '../../hooks/useDialog';
 import DialogQuiz from '../../components/common/dialog/DialogQuiz.jsx';
 import PageLayout from '../../components/common/layout/PageLayout.jsx';
 import Header from '../../components/common/layout/Header.jsx';

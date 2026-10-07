@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { findScreenByCode } from "../utils/screenConfig";
+import { findScreenByCode } from "../services/screenService";
 
 const useNavigationStore = create((set, get) => ({
     historyStack: [],

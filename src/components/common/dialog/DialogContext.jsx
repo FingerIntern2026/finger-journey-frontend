@@ -1,14 +1,14 @@
-// 역할: 앱 전역에서 다이얼로그 상태를 "배열(스택)"로 관리하는 Context.
-//      브라우저 뒤로가기를 누르면 스택의 가장 마지막(맨 위) 다이얼로그부터 순서대로 닫히게 처리.
-// 사용처: App.jsx (DialogProvider로 앱 전체를 감쌈), DialogExamplePage.jsx (useDialog)
+// 역할: 앱 전역에서 다이얼로그 상태를 배열(스택)로 관리하는 Context와 Provider.
+// 브라우저 뒤로가기를 누르면 가장 위의 다이얼로그부터 닫는다.
+// 사용처: App.jsx, hooks/useDialog.js
 // 담당자:
 
-import { createContext, useContext, useEffect, useRef, useState } from 'react';
+import { createContext, useEffect, useRef, useState } from "react";
 import DialogShell from './DialogShell.jsx';
 import DialogAlert from './DialogAlert.jsx';
 import DialogConfirm from './DialogConfirm.jsx';
 
-const DialogContext = createContext(null);
+export const DialogContext = createContext(null);
 
 export function DialogProvider({ children }) {
   const [dialogStack, setDialogStack] = useState([]);
@@ -113,8 +113,4 @@ export function DialogProvider({ children }) {
       ))}
     </DialogContext.Provider>
   );
-}
-
-export function useDialog() {
-  return useContext(DialogContext);
 }

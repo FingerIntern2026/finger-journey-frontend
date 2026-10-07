@@ -7,12 +7,12 @@
 import { useEffect, useState } from 'react';
 import { DialogProvider } from './components/common/dialog/DialogContext';
 import AppRoutes from './routes/AppRoutes';
-import GlobalLoading from './components/common/custom/GlobalLoading';
+import GlobalLoading from './components/common/feedback/GlobalLoading';
 import ChatEntryButton from './components/common/layout/ChatEntryButton';
 import ChatPanel from './components/common/layout/ChatPanel';
 import { SCREEN_CODES } from './config/screenCodes';
 import useNavigationStore from './stores/useNavigationStore';
-import { fetchScreenList } from './utils/screenConfig';
+import { fetchScreenList } from './services/screenService';
 
 // 챗봇 진입 버튼/팝업은 데모 화면 어디서든 떠 있어야 해서 라우트 최상위인 여기서 관리함
 // (페이지마다 각자 붙이면 빠뜨리는 화면이 생기기 쉬움)
