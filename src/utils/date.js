@@ -3,8 +3,6 @@
 // 사용처: 현재 사용하는 곳 없음
 // 담당자:
 
-import { traced } from '../devtrace/traced';
-
 // "2026-09-21" 같은 ISO 날짜 문자열을 "2026년 9월 21일" 형태로 바꿔줌
 // 값이 없거나 형식이 이상하면 빈 문자열을 돌려줌 (화면에 "Invalid Date" 같은 게 그대로 노출되지 않게)
 function _formatDate(isoString) {
@@ -28,5 +26,5 @@ function _daysSince(isoString) {
     return Math.floor(diffMs / (1000 * 60 * 60 * 24));
 }
 
-export const formatDate = traced('formatDate', 'src/utils/date.js', _formatDate);
-export const daysSince = traced('daysSince', 'src/utils/date.js', _daysSince);
+export const formatDate = _formatDate;
+export const daysSince = _daysSince;

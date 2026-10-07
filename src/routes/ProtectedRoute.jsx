@@ -1,5 +1,4 @@
-// 역할: 로그인 안 된 사용자가 보호된 페이지에 접근하면 다른 경로로 리다이렉트시키는 라우트 가드.
-//       useAuth로 로그인 여부만 확인하고, 실제 리다이렉트는 react-router-dom의 Navigate가 처리
+// 역할: 로그인 안 된 사용자가 보호된 페이지에 접근하면 지정된 화면으로 이동시키는 화면 가드.
 // 사용처: AppRoutes.jsx
 // 담당자:
 
@@ -7,27 +6,20 @@ import { useEffect } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import { SCREEN_CODES } from '../config/screenCodes';
 import useNavigationStore from '../stores/useNavigationStore';
-import { getRoutePath } from '../utils/screenConfig';
-import { addStep } from '../devtrace/traceContext';
 
 // children: 이 컴포넌트로 감싼 실제 보호 대상 페이지 (예: <AuthCheckPage />)
 export default function ProtectedRoute({ children }) {
     const { isLoggedIn } = useAuth();
     const goForward = useNavigationStore((state) => state.goForward);
-    const fallbackPath = getRoutePath(SCREEN_CODES.DEMO_MOVE);
 
-    // 렌더링 중이 아니라 effect에서 기록 (렌더 중 부수효과는 StrictMode에서 문제될 수 있음)
+    // 렌더링 중 상태 변경을 피하기 위해 effect에서 이동 처리한다.
     useEffect(() => {
         if (!isLoggedIn) {
-            addStep({
-                layer: 'guard',
-                label: 'ProtectedRoute 차단',
-                source: 'src/routes/ProtectedRoute.jsx',
-                note: '로그인 안 된 상태라 /demo/move로 리다이렉트',
+            goForward(SCREEN_CODES.DEMO_MOVE, {
+                blockedReason: '로그인이 필요한 페이지입니다.',
             });
-            goForward({ path: fallbackPath, params: { blockedReason: '로그인이 필요한 페이지입니다.' } });
         }
-    }, [fallbackPath, goForward, isLoggedIn]);
+    }, [goForward, isLoggedIn]);
 
     // 로그인 안 됐으면 children을 그리지 않고 로그인 토글이 있는 MoveGuidePage로 돌려보냄
     // replace: 브라우저 히스토리에 남기지 않음 (뒤로가기 눌러도 보호된 페이지로 안 돌아감)

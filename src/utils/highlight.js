@@ -5,8 +5,6 @@
 // 사용처: CustomSearchbar.jsx
 // 담당자:
 
-import { traced } from '../devtrace/traced';
-
 // text를 keyword 기준으로 잘라서 [{ text, matched }, ...] 배열로 돌려줌
 // matched가 true인 조각만 컴포넌트에서 강조 처리(<mark> 등)하면 됨
 function _getHighlightSegments(text, keyword) {
@@ -31,4 +29,4 @@ function _getHighlightSegments(text, keyword) {
         }));
 }
 
-export const getHighlightSegments = traced('getHighlightSegments', 'src/utils/highlight.js', _getHighlightSegments);
+export const getHighlightSegments = _getHighlightSegments;

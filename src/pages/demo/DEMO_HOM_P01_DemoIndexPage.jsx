@@ -9,20 +9,20 @@
 import PageLayout from '../../components/common/layout/PageLayout.jsx';
 import Header from '../../components/common/layout/Header.jsx';
 import BaseButton from '../../components/common/base/BaseButton';
-import useNavigation from '../../hooks/useNavigation';
+import useNavigationStore from '../../stores/useNavigationStore';
 import { SCREEN_CODES } from '../../config/screenCodes';
 
 const DemoIndexPage = () => {
-  const { goToScreen } = useNavigation();
+  const goForward = useNavigationStore((state) => state.goForward);
 
   return (
     <PageLayout header={<Header label="핑거저니 프레임워크 데모" />}>
       <div style={{ padding: '16px', display: 'flex', flexDirection: 'column', gap: 10 }}>
-        <BaseButton fullWidth label="① 화면이동" onClick={() => goToScreen(SCREEN_CODES.DEMO_MOVE)} />
-        <BaseButton fullWidth label="② 컴포넌트리스트" onClick={() => goToScreen(SCREEN_CODES.DEMO_COMPONENTS)} />
-        <BaseButton fullWidth label="③ 다이얼로그예제" onClick={() => goToScreen(SCREEN_CODES.DEMO_DIALOG)} />
-        <BaseButton fullWidth label="④ API통신" onClick={() => goToScreen(SCREEN_CODES.DEMO_API)} />
-        <BaseButton fullWidth label="⑤ 완주 여정 데모" onClick={() => goToScreen(SCREEN_CODES.DEMO_REPORT)} />
+        <BaseButton fullWidth label="① 화면이동" onClick={() => goForward(SCREEN_CODES.DEMO_MOVE)} />
+        <BaseButton fullWidth label="② 컴포넌트리스트" onClick={() => goForward(SCREEN_CODES.DEMO_COMPONENTS)} />
+        <BaseButton fullWidth label="③ 다이얼로그예제" onClick={() => goForward(SCREEN_CODES.DEMO_DIALOG)} />
+        <BaseButton fullWidth label="④ API통신" onClick={() => goForward(SCREEN_CODES.DEMO_API)} />
+        <BaseButton fullWidth label="⑤ 완주 여정 데모" onClick={() => goForward(SCREEN_CODES.DEMO_REPORT)} />
       </div>
     </PageLayout>
   );

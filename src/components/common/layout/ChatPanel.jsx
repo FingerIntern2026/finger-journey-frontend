@@ -106,7 +106,6 @@ export default function ChatPanel({ onClose }) {
                 type="button"
                 className={styles.chip}
                 onClick={() => handleSend(question)}
-                data-trace={`추천 질문 클릭: "${question}" → fetch(/api/chat)`}
               >
                 {question}
               </button>

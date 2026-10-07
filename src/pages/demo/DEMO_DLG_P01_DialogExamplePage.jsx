@@ -12,7 +12,7 @@ import { useDialog } from '../../components/common/dialog/DialogContext.jsx';
 import DialogQuiz from '../../components/common/dialog/DialogQuiz.jsx';
 import PageLayout from '../../components/common/layout/PageLayout.jsx';
 import Header from '../../components/common/layout/Header.jsx';
-import useNavigation from '../../hooks/useNavigation';
+import useNavigationStore from '../../stores/useNavigationStore';
 
 const foodQuestions = [
   { question: 'Q1 커피 취향', subtitle: '어떤 커피를 좋아하시나요?', options: ['아메리카노', '라떼', '달달한 음료', '커피 안 마셔요'] },
@@ -21,7 +21,7 @@ const foodQuestions = [
 ];
 
 export default function DialogExamplePage() {
-    const { goBack } = useNavigation();
+    const goBack = useNavigationStore((state) => state.goBack);
     const { showAlert, showConfirm, showDialog } = useDialog();
 
     const handleOpenQuiz = () => {
@@ -40,17 +40,14 @@ export default function DialogExamplePage() {
             <BaseButton
                 label="Alert 열기"
                 onClick={() => showAlert('저장이 완료되었습니다.')}
-                data-trace="showAlert() 호출"
             />
             <BaseButton
                 label="Confirm 열기"
                 onClick={() => showConfirm('정말 삭제하시겠습니까?', () => console.log('삭제 진행됨'))}
-                data-trace="showConfirm() 호출"
             />
             <BaseButton
                 label="Quiz 열기"
                 onClick={handleOpenQuiz}
-                data-trace="showDialog('center', DialogQuiz) 호출"
             />
         </div>
         </PageLayout>

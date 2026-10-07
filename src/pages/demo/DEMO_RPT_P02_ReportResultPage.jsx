@@ -4,18 +4,17 @@
 //       토큰까지 그대로 이식함 (reportResult.module.css 참고). employeeId만 받아서
 //       자체적으로 리포트/3행시를 조회함
 // 사용처: ReportExamplePage에서 리포트 생성/조회 시
-//         goToScreen(SCREEN_CODES.DEMO_REPORT_RESULT, { employeeId })로 진입
+//         goForward(SCREEN_CODES.DEMO_REPORT_RESULT, { employeeId })로 진입
 // url: /demo/report/result
 // 담당자:
 
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
 import { sendPost } from "../../api/client";
 import { parseApiError } from "../../utils/apiError";
 import PageLayout from "../../components/common/layout/PageLayout.jsx";
 import Header from "../../components/common/layout/Header.jsx";
 import BaseErrorCard from "../../components/common/base/BaseErrorCard.jsx";
-import useNavigation from "../../hooks/useNavigation";
+import useNavigationStore from "../../stores/useNavigationStore";
 import styles from "./DEMO_RPT_P02_ReportResult.module.css";
 
 // reportContent는 AI가 \n\n으로 문단을 구분해서 주므로, 원본 아티팩트처럼 <p>를 여러 개로 쪼갬
@@ -24,9 +23,8 @@ function splitParagraphs(text) {
 }
 
 export default function ReportResultPage() {
-  const location = useLocation();
-  const { goBack } = useNavigation();
-  const employeeId = location.state?.employeeId;
+  const goBack = useNavigationStore((state) => state.goBack);
+  const employeeId = useNavigationStore((state) => state.nowPageParams.params.employeeId);
 
   const [report, setReport] = useState(null);
   const [poemLines, setPoemLines] = useState([]);
@@ -41,7 +39,7 @@ export default function ReportResultPage() {
 
     // StrictMode(개발 모드)는 effect를 마운트 시 일부러 두 번 실행함 — 첫 번째 실행이
     // "취소"됐다는 걸 표시해두고, 그 응답이 나중에 와도 state에 반영하지 않게 막음
-    // (막아도 네트워크 요청 자체는 두 번 나감 — DevTrace 패널에 API가 2번 찍히는 게 정상)
+    // 네트워크 요청 자체는 개발 모드에서 두 번 발생할 수 있지만, 취소된 요청의 결과는 반영하지 않는다.
     let cancelled = false;
 
     const load = async () => {

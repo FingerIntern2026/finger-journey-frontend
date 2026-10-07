@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { findScreenByCode } from "../utils/screenConfig";
 
 const useNavigationStore = create((set, get) => ({
     historyStack: [],
@@ -27,10 +28,10 @@ const useNavigationStore = create((set, get) => ({
         return true;
     },
 
-    goForward: (nextPage) => {
+    goForward: (screenCode, params = {}) => {
 
-        // 화면경로없이 호출되는것 막음
-        if (!nextPage?.path) {
+        const targetScreen = findScreenByCode(screenCode);
+        if (!targetScreen) {
             return false;
         }
 
@@ -43,8 +44,8 @@ const useNavigationStore = create((set, get) => ({
             };
 
             const nextPageParams = {
-                path: nextPage.path,
-                params: { ...(nextPage.params ?? {}) },
+                path: targetScreen.routePath,
+                params: { ...params },
                 preParams: {},
             };
 

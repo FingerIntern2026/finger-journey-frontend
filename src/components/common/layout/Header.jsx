@@ -37,7 +37,7 @@ const Header = ({ label, current, total, onBack }) => {
           total 있으면 진행률 바+새싹까지 추가로 그림 */}
       <div className={styles.headerRow}>
         {onBack && (
-          <button className={styles.headerBackBtn} onClick={onBack} aria-label="뒤로가기">
+          <button className={styles.headerBackBtn} onClick={() => onBack()} aria-label="뒤로가기">
             <ChevronLeft size={20} />
           </button>
         )}

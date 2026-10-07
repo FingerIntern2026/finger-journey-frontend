@@ -2,7 +2,7 @@
 // 역할: "화면이동" 패턴을 보여주는 3개 하위 예제(권한검사/파라미터전달/뒤로가기)로 가는 진입 화면.
 //       - 권한검사(AuthCheckPage.jsx)는 지연님(파트B), 파라미터전달/뒤로가기는 파트C 담당 페이지로 연결만 함
 //       - 로그인 상태 토글로 권한 상태값이 화면 간에 공유되는지 확인함
-// 사용처: DemoIndexPage에서 "① 화면이동" 버튼(goToScreen(SCREEN_CODES.DEMO_MOVE))으로 진입.
+// 사용처: DemoIndexPage에서 "① 화면이동" 버튼(goForward(SCREEN_CODES.DEMO_MOVE))으로 진입.
 //         권한검사/파라미터전달/뒤로가기 3개 버튼으로 하위 페이지로 이동시키며,
 // url: /demo/move
 // 담당자:
@@ -13,11 +13,12 @@ import PageLayout from '../../components/common/layout/PageLayout.jsx';
 import Header from '../../components/common/layout/Header.jsx';
 import BaseButton from '../../components/common/base/BaseButton.jsx';
 import { SCREEN_CODES } from '../../config/screenCodes';
-import useNavigation from '../../hooks/useNavigation';
+import useNavigationStore from '../../stores/useNavigationStore';
 import { getIsLoggedIn, setIsLoggedIn as saveIsLoggedIn } from '../../utils/authStorage';
 
 const MoveGuidePage = () => {
-  const { goBack, goToScreen } = useNavigation();
+  const goBack = useNavigationStore((state) => state.goBack);
+  const goForward = useNavigationStore((state) => state.goForward);
 
   // isLoggedIn: 지금 로그인된 걸로 칠지 아닐지 저장하는 상태값
   // 처음 화면 켤 때, authStorage에 이미 저장된 값이 있으면 그걸로 시작함
@@ -50,7 +51,6 @@ const MoveGuidePage = () => {
               type="checkbox"
               checked={isLoggedIn}
               onChange={handleToggle}
-              data-trace="로그인 토글 → authStorage.setIsLoggedIn()"
             />
             <span className="slider"></span>
           </label>
@@ -62,22 +62,19 @@ const MoveGuidePage = () => {
             label={<>권한검사 <span>›</span></>}
             variant="ghost"
             fullWidth
-            onClick={() => goToScreen(SCREEN_CODES.DEMO_AUTH_CHECK)}
-            data-trace="goToScreen(DEMO_AUT_P01)"
+            onClick={() => goForward(SCREEN_CODES.DEMO_AUTH_CHECK)}
           />
           <BaseButton
             label={<>파라미터전달 <span>›</span></>}
             variant="ghost"
             fullWidth
-            onClick={() => goToScreen(SCREEN_CODES.DEMO_PARAM_PASS)}
-            data-trace="goToScreen(DEMO_PRM_P01)"
+            onClick={() => goForward(SCREEN_CODES.DEMO_PARAM_PASS)}
           />
           <BaseButton
             label={<>뒤로가기 <span>›</span></>}
             variant="ghost"
             fullWidth
-            onClick={() => goToScreen(SCREEN_CODES.DEMO_GO_BACK)}
-            data-trace="goToScreen(DEMO_MOV_P02)"
+            onClick={() => goForward(SCREEN_CODES.DEMO_GO_BACK)}
           />
         </div>
 

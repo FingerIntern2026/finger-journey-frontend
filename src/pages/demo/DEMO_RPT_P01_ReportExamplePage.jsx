@@ -22,12 +22,13 @@ import BaseErrorCard from "../../components/common/base/BaseErrorCard";
 import AcrosticInputForm from "../../components/common/custom/AcrosticInputForm";
 import PageLayout from "../../components/common/layout/PageLayout.jsx";
 import Header from "../../components/common/layout/Header.jsx";
-import useNavigation from "../../hooks/useNavigation";
+import useNavigationStore from "../../stores/useNavigationStore";
 import { SCREEN_CODES } from "../../config/screenCodes";
 import styles from "./DEMO_RPT_P01_ReportExample.module.css";
 
 export default function ReportExamplePage() {
-  const { goBack, goToScreen } = useNavigation();
+  const goBack = useNavigationStore((state) => state.goBack);
+  const goForward = useNavigationStore((state) => state.goForward);
 
   const [employeeId, setEmployeeId] = useState("4");
   const [employeeName, setEmployeeName] = useState("");
@@ -38,7 +39,6 @@ export default function ReportExamplePage() {
   const [quizError, setQuizError] = useState(null);
 
   const [poemMessage, setPoemMessage] = useState(null);
-  const [poemError, setPoemError] = useState(null);
 
   const [reportError, setReportError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -98,7 +98,7 @@ export default function ReportExamplePage() {
     setLoading(true);
     try {
       await sendPost("/api/reports/generate", { employeeId: Number(employeeId) });
-      goToScreen(SCREEN_CODES.DEMO_REPORT_RESULT, { employeeId: Number(employeeId) });
+      goForward(SCREEN_CODES.DEMO_REPORT_RESULT, { employeeId: Number(employeeId) });
     } catch (err) {
       setReportError(parseApiError(err));
     } finally {
@@ -108,7 +108,7 @@ export default function ReportExamplePage() {
 
   // 4단계: 이미 생성된 리포트가 있는지 확인만 하고, 있으면 바로 결과 화면으로 이동
   const handleViewReport = () => {
-    goToScreen(SCREEN_CODES.DEMO_REPORT_RESULT, { employeeId: Number(employeeId) });
+    goForward(SCREEN_CODES.DEMO_REPORT_RESULT, { employeeId: Number(employeeId) });
   };
 
   const allAnswered = quizQuestions.length > 0 && quizQuestions.every((q) => answers[q.quizId]);
@@ -188,9 +188,6 @@ export default function ReportExamplePage() {
             <p className={styles.controlHint}>먼저 ①에서 이름을 불러와주세요.</p>
           )}
           {poemMessage && <p className={styles.controlHint}>✓ {poemMessage}</p>}
-          {poemError && (
-            <BaseErrorCard message={poemError.message} style={{ marginTop: 10 }} />
-          )}
         </div>
 
         {/* 3단계: 리포트 생성/조회 (누르면 별도 화면으로 이동) */}

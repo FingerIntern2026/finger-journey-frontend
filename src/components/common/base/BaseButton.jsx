@@ -13,7 +13,7 @@ export default function BaseButton({
     disabled = false,
     fullWidth = false,
     className = '',
-    ...rest // data-trace 같은 임의 속성을 실제 <button> DOM까지 그대로 전달
+    ...rest // aria-* 등 추가 HTML 속성을 실제 <button> DOM까지 그대로 전달
 }) {
     return (
         <button

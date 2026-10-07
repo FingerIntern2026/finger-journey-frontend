@@ -6,8 +6,6 @@
 // 사용처: screenConfig.js, ReportExamplePage.jsx, ReportResultPage.jsx
 // 담당자:
 
-import { traced } from '../devtrace/traced';
-
 // axios가 던진 에러(err)를 받아서 { code, message } 형태로 정리해서 돌려줌
 // - 서버가 정상적으로 응답은 했지만 실패인 경우(err.response.data) -> 그 안의 code/message 그대로 사용
 // - 서버 응답 자체를 못 받은 경우(네트워크 끊김 등) -> code는 없고 err.message만 사용
@@ -27,4 +25,4 @@ function _parseApiError(err) {
     };
 }
 
-export const parseApiError = traced('parseApiError', 'src/utils/apiError.js', _parseApiError);
+export const parseApiError = _parseApiError;

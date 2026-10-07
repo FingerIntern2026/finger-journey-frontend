@@ -1,7 +1,6 @@
 // 백엔드 화면정보 테이블을 앱 시작 시 한 번 조회하고 화면 코드와 URL 연결을 캐싱한다.
 
 import { sendPost } from '../api/client';
-import { traced } from '../devtrace/traced';
 import { hasScreenModule } from '../routes/screenLoader';
 import { parseApiError } from './apiError';
 
@@ -101,8 +100,8 @@ export function clearScreenCache() {
   cachedScreens = null;
 }
 
-export const fetchScreenList = traced('fetchScreenList', 'src/utils/screenConfig.js', _fetchScreenList);
-export const getScreenList = traced('getScreenList', 'src/utils/screenConfig.js', _getScreenList);
-export const findScreenByCode = traced('findScreenByCode', 'src/utils/screenConfig.js', _findScreenByCode);
-export const findScreenByPath = traced('findScreenByPath', 'src/utils/screenConfig.js', _findScreenByPath);
-export const getRoutePath = traced('getRoutePath', 'src/utils/screenConfig.js', _getRoutePath);
+export const fetchScreenList = _fetchScreenList;
+export const getScreenList = _getScreenList;
+export const findScreenByCode = _findScreenByCode;
+export const findScreenByPath = _findScreenByPath;
+export const getRoutePath = _getRoutePath;
