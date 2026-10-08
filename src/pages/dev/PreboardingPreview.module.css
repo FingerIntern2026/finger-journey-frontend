@@ -1,0 +1,42 @@
+.previewShell {
+  min-height: 100svh;
+  background: #eef0f2;
+}
+
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  min-height: 48px;
+  padding: 8px 14px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: #20252a;
+  color: #fff;
+  font-size: 13px;
+}
+
+.toolbar div {
+  display: flex;
+  gap: 6px;
+}
+
+.toolbar button {
+  border: 1px solid #5d646b;
+  border-radius: 6px;
+  padding: 6px 8px;
+  background: transparent;
+  color: #fff;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.toolbar button.active {
+  border-color: #72cf69;
+  background: #72cf69;
+  color: #1b2a1c;
+  font-weight: 700;
+}

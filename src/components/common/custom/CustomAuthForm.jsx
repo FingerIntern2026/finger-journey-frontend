@@ -6,6 +6,7 @@
 
 import { useState } from 'react';
 import BaseInput from '../base/BaseInput';
+import BaseButton from '../base/BaseButton';
 import styles from './custom.module.css';
 
 const CustomAuthForm = ({
@@ -17,10 +18,16 @@ const CustomAuthForm = ({
   buttonLabel,        // 버튼 글자
   onSubmit,           // 버튼 눌렀을 때 실행할 함수
   serverError,        // 부모(페이지)가 API 결과로 넘겨주는 에러 문구
+  emptyMessage = '번호를 입력해주세요',
+  field1ErrorMessage = '입력값이 올바르지 않아요',
+  field2ErrorMessage = '입력값이 올바르지 않아요',
+  className = '',
+  inputClassName = '',
+  buttonClassName = '',
 }) => {
   const [field1Value, setField1Value] = useState('');
   const [field2Value, setField2Value] = useState('');
-  const [emptyError, setEmptyError] = useState('');
+  const [validationError, setValidationError] = useState('');
 
   // field2Label을 안 넘기면(undefined) 필드1개짜리 화면(체크인 암호 입력)으로 판단
   const isSingleField = !field2Label;
@@ -46,11 +53,21 @@ const CustomAuthForm = ({
       : field1Value === '' || field2Value === '';
 
     if (isEmpty) {
-      setEmptyError('번호를 입력해주세요');
+      setValidationError(emptyMessage);
       return; // 여기서 끝내버려서 onSubmit(API 호출)은 실행 안 시킴
     }
 
-    setEmptyError('');
+    if (field1Length && field1Value.length !== field1Length) {
+      setValidationError(field1ErrorMessage);
+      return;
+    }
+
+    if (!isSingleField && field2Length && field2Value.length !== field2Length) {
+      setValidationError(field2ErrorMessage);
+      return;
+    }
+
+    setValidationError('');
 
     // 필드 개수에 따라 onSubmit한테 넘겨주는 값 개수도 다르게
     if (isSingleField) {
@@ -60,17 +77,18 @@ const CustomAuthForm = ({
     }
   };
 
-  // 빈 값 에러가 있으면 그걸 먼저 보여주고, 없으면 서버 에러를 보여줌
-  const displayError = emptyError || serverError;
+  // 입력 검증 에러가 있으면 그걸 먼저 보여주고, 없으면 서버 에러를 보여줌
+  const displayError = validationError || serverError;
 
   return (
-    <div className={styles.authForm}>
+    <div className={`${styles.authForm} ${className}`}>
       {/* 필드1 - 사원번호 / 관리자ID / 체크인 암호, 항상 그려짐 */}
       <BaseInput
         placeholder={field1Label}
         value={field1Value}
         onChange={handleField1Change}
         inputMode="numeric"
+        className={inputClassName}
       />
 
       {/* 필드2 - field2Label이 있을 때만 그려짐 (없으면 이 블록 통째로 생략) */}
@@ -81,6 +99,7 @@ const CustomAuthForm = ({
           value={field2Value}
           onChange={handleField2Change}
           inputMode="numeric"
+          className={inputClassName}
         />
       )}
 
@@ -88,9 +107,12 @@ const CustomAuthForm = ({
       {displayError && <p className={styles.formErrorText}>{displayError}</p>}
 
       {/* 버튼 - 빈 값이어도 항상 눌림 (비활성화 안 함) */}
-      <button className={styles.submitButton} onClick={handleSubmit}>
-        {buttonLabel}
-      </button>
+      <BaseButton
+        label={buttonLabel}
+        onClick={handleSubmit}
+        fullWidth
+        className={buttonClassName}
+      />
     </div>
   );
 };
