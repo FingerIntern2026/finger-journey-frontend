@@ -13,16 +13,24 @@ import ChatPanel from './components/common/layout/ChatPanel';
 import { SCREEN_CODES } from './config/screenCodes';
 import useNavigationStore from './stores/useNavigationStore';
 import { fetchScreenList } from './services/screenService';
+import PreboardingPreview from './pages/dev/PreboardingPreview';
 
 // 챗봇 진입 버튼/팝업은 데모 화면 어디서든 떠 있어야 해서 라우트 최상위인 여기서 관리함
 // (페이지마다 각자 붙이면 빠뜨리는 화면이 생기기 쉬움)
 function App() {
+  const isPreboardingPreview = import.meta.env.DEV
+    && new URLSearchParams(window.location.search).get('preview') === 'preboarding';
   const [chatOpen, setChatOpen] = useState(false);
   const [screens, setScreens] = useState(null);
   const [screenLoadError, setScreenLoadError] = useState(null);
   const initializeNavigation = useNavigationStore((state) => state.initializeNavigation);
 
   useEffect(() => {
+    // 개발 중 화면 퍼블리싱만 확인할 때는 백엔드 화면목록 요청을 하지 않는다.
+    if (isPreboardingPreview) {
+      return undefined;
+    }
+
     let active = true;
 
     fetchScreenList()
@@ -30,6 +38,7 @@ function App() {
         if (!active) return;
         const homeScreen = loadedScreens.find((screen) => screen.screenCode === SCREEN_CODES.DEMO_HOME);
         if (!homeScreen) throw new Error(`메인 화면정보를 찾을 수 없습니다: ${SCREEN_CODES.DEMO_HOME}`);
+
         initializeNavigation({ path: homeScreen.routePath, params: {} });
         setScreens(loadedScreens);
       })
@@ -40,7 +49,11 @@ function App() {
     return () => {
       active = false;
     };
-  }, [initializeNavigation]);
+  }, [initializeNavigation, isPreboardingPreview]);
+
+  if (isPreboardingPreview) {
+    return <PreboardingPreview />;
+  }
 
   if (screenLoadError) {
     return (

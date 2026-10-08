@@ -1,0 +1,72 @@
+.page {
+  width: 100%;
+  min-height: 100svh;
+  box-sizing: border-box;
+  background: #fbfbfd;
+  color: #1f1f1f;
+}
+
+/* 개발용 미리보기 툴바(48px)를 제외한 영역에 맞춤 */
+.previewPage {
+  height: calc(100svh - 48px);
+  min-height: 0;
+  overflow: hidden;
+}
+
+.content {
+  width: 100%;
+  min-height: 100svh;
+  max-width: 480px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 30px 32px 34px;
+  display: flex;
+  flex-direction: column;
+}
+
+.previewPage .content {
+  height: 100%;
+  min-height: 0;
+}
+
+.formArea {
+  margin-top: auto;
+  padding-top: 58px;
+}
+
+.authForm {
+  gap: 0;
+}
+
+.authInput {
+  min-height: 56px;
+  box-sizing: border-box;
+  border: 0;
+  border-radius: 14px;
+  background: #f2f2f2;
+  color: #3c3c3c;
+  font-size: 15px;
+}
+
+.authInput::placeholder {
+  color: #a6a6a6;
+}
+
+.authButton {
+  min-height: 58px;
+  margin-top: 200px;
+  border-radius: 10px;
+  background: #6aca60;
+  font-size: 19px;
+  font-weight: 800;
+}
+
+@media (max-width: 360px) {
+  .content {
+    padding-inline: 24px;
+  }
+
+  .authButton {
+    margin-top: 72px;
+  }
+}
