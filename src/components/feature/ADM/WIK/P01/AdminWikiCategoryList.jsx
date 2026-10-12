@@ -1,3 +1,7 @@
+// 역할: 위키 카테고리와 하위 항목을 아코디언으로 표시하고 관리 동작을 연결한다.
+// 사용처: ADM_WIK_P01
+// 담당자: 김재웅
+
 import { useState } from "react";
 import { ChevronDown, ChevronUp, Plus } from "lucide-react";
 import BaseButton from "../../../../common/base/BaseButton";

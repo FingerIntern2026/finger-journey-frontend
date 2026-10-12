@@ -1,3 +1,7 @@
+// 역할: 입사자별 온보딩 진행 현황을 조회하는 관리자 화면.
+// 사용처: 화면 코드 ADM_PRG_P01
+// 담당자: 김재웅
+
 import { Leaf } from "lucide-react";
 import AdminHeader from "../../components/common/layout/AdminHeader";
 import BottomTabNav from "../../components/common/layout/BottomTabNav";

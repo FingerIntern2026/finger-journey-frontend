@@ -1,3 +1,7 @@
+// 역할: 사내 문서 기반 질문·답변과 추천 질문을 표시하는 AI 챗봇 패널.
+// 사용처: CHT_MAN_F01, WikiExplorer의 챗봇 진입 화면
+// 담당자: 김재웅
+
 import { useState } from "react";
 import { Leaf, Send, X } from "lucide-react";
 import { AI_SERVER_URL } from "../../../config/apiConfig";

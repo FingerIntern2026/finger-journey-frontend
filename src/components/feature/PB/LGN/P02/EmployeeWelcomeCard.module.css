@@ -1,7 +1,7 @@
 .celebration {
   position: relative;
   display: grid;
-  min-height: 300px;
+  min-height: 324px;
   place-items: center;
   overflow: hidden;
 }
@@ -11,7 +11,7 @@
   z-index: 1;
   display: grid;
   width: min(100%, 260px);
-  min-height: 250px;
+  min-height: 272px;
   place-items: center;
   align-content: center;
   gap: 12px;
@@ -45,36 +45,21 @@
 
 .confetti {
   position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 0;
   width: 9px;
-  height: 16px;
-  border-radius: 6px 1px 6px 1px;
-  transform: rotate(24deg);
+  height: 17px;
+  border-radius: 7px 1px 7px 1px;
+  background: var(--color);
   opacity: 0;
-  animation: confettiBurst 0.78s both ease-out;
+  animation: confettiBurst 1.1s var(--delay) both cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.confettiOne {
-  top: 40px;
-  left: 17%;
-  background: #ff9f43;
-  box-shadow: 46px 38px 0 #6478f5, 120px 5px 0 #f550a6;
-  animation-delay: 0.06s;
-}
-
-.confettiTwo {
-  top: 116px;
-  right: 12%;
-  background: #fb6370;
-  box-shadow: -36px 55px 0 #56c77a, -103px -37px 0 #8d6df2;
-  animation-delay: 0.12s;
-}
-
-.confettiThree {
-  bottom: 29px;
-  left: 20%;
-  background: #ffb132;
-  box-shadow: 58px 19px 0 #50a8fc, 131px -17px 0 #fa6ab0;
-  animation-delay: 0.2s;
+.confettiRound {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
 }
 
 @keyframes cardEnter {
@@ -92,15 +77,15 @@
 @keyframes confettiBurst {
   0% {
     opacity: 0;
-    transform: translateY(26px) scale(0.25) rotate(-30deg);
+    transform: translate(-50%, -50%) scale(0.2) rotate(0deg);
   }
 
-  42% {
+  38% {
     opacity: 1;
   }
 
   100% {
-    opacity: 0.88;
-    transform: translateY(0) scale(1) rotate(24deg);
+    opacity: 0.9;
+    transform: translate(-50%, -50%) translate(var(--x), var(--y)) scale(1) rotate(var(--rotate));
   }
 }

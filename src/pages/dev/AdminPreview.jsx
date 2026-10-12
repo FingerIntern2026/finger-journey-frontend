@@ -1,3 +1,7 @@
+// 역할: 관리자 화면을 한곳에서 확인하기 위한 개발용 미리보기.
+// 사용처: 개발 환경의 관리자 미리보기 경로
+// 담당자: 김재웅
+
 import { useState } from "react";
 import ADM_EMP_P01 from "../adm/ADM_EMP_P01";
 import ADM_HRC_P01 from "../adm/ADM_HRC_P01";

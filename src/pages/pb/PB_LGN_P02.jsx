@@ -1,3 +1,7 @@
+// 역할: 입사 축하 카드와 첫 출근 안내를 제공하는 프리보딩 완료 화면.
+// 사용처: 화면 코드 PB_LGN_P02
+// 담당자: 김재웅
+
 import { useMemo, useRef } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import BaseButton from "../../components/common/base/BaseButton";

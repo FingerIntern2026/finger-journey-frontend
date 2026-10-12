@@ -1,6 +1,6 @@
 // 역할: current/total 값을 받아 진행률 바(막대) UI를 그리는 공통 컴포넌트
 // 사용처: ComponentListPage.jsx, CustomProgressIndicator.jsx
-// 담당자:
+// 담당자: 김재웅
 
 import styles from './base.module.css';
 

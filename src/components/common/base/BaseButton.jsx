@@ -2,7 +2,7 @@
 // 사용처: ComponentListPage.jsx, DemoIndexPage.jsx, ReportExamplePage.jsx, DialogExamplePage.jsx,
 //        ApiExamplePage.jsx, MoveGuidePage.jsx, DialogQuiz.jsx, DialogAlert.jsx, DialogConfirm.jsx,
 //        AcrosticResultScreen.jsx, IntroScreen.jsx, OfficeFloorMap.jsx, QuizClearScreen.jsx, StageClearBanner.jsx
-// 담당자:
+// 담당자: 김재웅
 
 import styles from './base.module.css';
 

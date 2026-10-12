@@ -4,12 +4,12 @@
 //       api/client.js의 axios 인터셉터가 success:false를 감지해 강제로 reject 처리해두므로
 //       이 함수 입장에서는 HTTP 상태와 무관하게 항상 err.response.data를 읽으면 됨.
 // 사용처: screenService.js, ReportExamplePage.jsx, ReportResultPage.jsx
-// 담당자:
+// 담당자: 김재웅
 
 // axios가 던진 에러(err)를 받아서 { code, message } 형태로 정리해서 돌려줌
 // - 서버가 정상적으로 응답은 했지만 실패인 경우(err.response.data) -> 그 안의 code/message 그대로 사용
 // - 서버 응답 자체를 못 받은 경우(네트워크 끊김 등) -> code는 없고 err.message만 사용
-function _parseApiError(err) {
+export function parseApiError(err) {
     const data = err.response?.data;
 
     if (data) {
@@ -25,4 +25,3 @@ function _parseApiError(err) {
     };
 }
 
-export const parseApiError = _parseApiError;

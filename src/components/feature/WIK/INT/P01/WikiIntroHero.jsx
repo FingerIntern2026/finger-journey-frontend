@@ -1,3 +1,7 @@
+// 역할: 핑거 위키의 소개 문구와 대표 일러스트를 표시하는 인트로 영역.
+// 사용처: WIK_INT_P01
+// 담당자: 김재웅
+
 import wikiIntroForest from "../../../../../assets/wiki-intro-forest.png";
 import { House } from "lucide-react";
 import styles from "./WikiIntroHero.module.css";
