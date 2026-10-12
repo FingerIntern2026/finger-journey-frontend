@@ -1,3 +1,7 @@
+// 역할: 프리보딩 P01·P02를 전환하며 확인하는 개발용 미리보기.
+// 사용처: 개발 환경의 프리보딩 미리보기 경로
+// 담당자: 김재웅
+
 import { useState } from "react";
 import PB_LGN_P01 from "../pb/PB_LGN_P01";
 import PB_LGN_P02 from "../pb/PB_LGN_P02";

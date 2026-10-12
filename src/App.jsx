@@ -2,7 +2,7 @@
 //       AppRoutes로 라우팅을, GlobalLoading으로 전역 로딩 스피너를, ChatEntryButton/ChatPanel로
 //       챗봇을 최상단에 한 번씩 연결함
 // 사용처: main.jsx (앱 진입점)
-// 담당자:
+// 담당자: 김재웅
 
 import { useEffect, useState } from 'react';
 import { DialogProvider } from './components/common/dialog/DialogContext';

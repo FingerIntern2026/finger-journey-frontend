@@ -1,6 +1,6 @@
 // 역할: 로그인 안 된 사용자가 보호된 페이지에 접근하면 지정된 화면으로 이동시키는 화면 가드.
 // 사용처: AppRoutes.jsx
-// 담당자:
+// 담당자: 김재웅
 
 import { useEffect } from 'react';
 import { useAuth } from '../hooks/useAuth';

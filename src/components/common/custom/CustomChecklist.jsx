@@ -3,7 +3,7 @@
 //       각 항목이 실제로 체크됐는지는 부모(페이지)가 관리하고,
 //       여긴 "배열 개수만큼 줄을 그려주는 일"만 함
 // 사용처: ComponentListPage.jsx(데모)
-// 담당자:
+// 담당자: 김재웅
 
 import BaseCheckbox from '../base/BaseCheckbox';
 import BaseCard from '../base/BaseCard';

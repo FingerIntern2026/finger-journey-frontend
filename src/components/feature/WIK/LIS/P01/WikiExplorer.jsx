@@ -1,3 +1,7 @@
+// 역할: 위키 카테고리 검색·아코디언·하위 항목 탐색을 제공한다.
+// 사용처: WIK_LIS_P01
+// 담당자: 김재웅
+
 import { ChevronDown, ChevronUp } from "lucide-react";
 import BaseCard from "../../../../common/base/BaseCard";
 import { highlightText } from "../../../../common/custom/CustomSearchbar";

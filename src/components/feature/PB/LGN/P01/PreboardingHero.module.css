@@ -11,10 +11,9 @@
 }
 
 .brand {
-  color: #4f4f4f;
-  font-size: 14px;
-  font-weight: 800;
-  letter-spacing: -0.4px;
+  display: block;
+  width: 48px;
+  height: auto;
 }
 
 .title {
@@ -31,7 +30,7 @@
 }
 
 .description {
-  max-width: 240px;
+  max-width: 320px;
   margin-top: 16px;
   color: #777;
   font-size: 13px;
@@ -40,8 +39,8 @@
 
 .sprout {
   position: absolute;
-  right: 8px;
-  bottom: 17px;
-  width: 70px;
-  height: 70px;
+  right: 12px;
+  bottom: 13px;
+  width: 60px;
+  height: auto;
 }

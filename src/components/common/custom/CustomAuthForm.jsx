@@ -2,7 +2,7 @@
 //       이렇게 필드 개수가 다른 3개 화면을 전부 커버하는 공용 인증 폼.
 //       input 태그는 직접 안 만들고 팀이 이미 만든 BaseInput 부품을 사용
 // 사용처: ComponentListPage.jsx(데모)
-// 담당자:
+// 담당자: 김재웅
 
 import { useState } from 'react';
 import BaseInput from '../base/BaseInput';

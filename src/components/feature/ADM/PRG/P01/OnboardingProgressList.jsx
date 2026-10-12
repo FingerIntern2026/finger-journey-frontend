@@ -1,3 +1,7 @@
+// 역할: 입사자별 온보딩 진행률과 완료 스테이지를 카드 목록으로 표시한다.
+// 사용처: ADM_PRG_P01
+// 담당자: 김재웅
+
 import BaseCard from "../../../../common/base/BaseCard";
 import BaseProgressBar from "../../../../common/base/BaseProgressBar";
 import styles from "./OnboardingProgressList.module.css";

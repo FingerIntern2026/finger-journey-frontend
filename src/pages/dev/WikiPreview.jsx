@@ -1,3 +1,7 @@
+// 역할: 위키 화면을 전환하며 확인하는 개발용 미리보기.
+// 사용처: 개발 환경의 위키 미리보기 경로
+// 담당자: 김재웅
+
 import { useState } from "react";
 import WIK_INT_P01 from "../wik/WIK_INT_P01";
 import WIK_LIS_P01 from "../wik/WIK_LIS_P01";

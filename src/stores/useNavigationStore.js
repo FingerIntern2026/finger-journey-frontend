@@ -1,3 +1,7 @@
+// 역할: 화면 코드 기반 이동 이력과 현재 화면 상태를 전역으로 관리한다.
+// 사용처: AppRoutes와 화면 내 이전·다음 이동 처리
+// 담당자: 김재웅
+
 import { create } from "zustand";
 import { findScreenByCode } from "../services/screenService";
 

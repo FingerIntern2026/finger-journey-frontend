@@ -1,7 +1,7 @@
 // 역할: 앱 전역에서 다이얼로그 상태를 배열(스택)로 관리하는 Context와 Provider.
 // 브라우저 뒤로가기를 누르면 가장 위의 다이얼로그부터 닫는다.
 // 사용처: App.jsx, hooks/useDialog.js
-// 담당자:
+// 담당자: 김재웅
 
 import { createContext, useEffect, useRef, useState } from "react";
 import DialogShell from './DialogShell.jsx';

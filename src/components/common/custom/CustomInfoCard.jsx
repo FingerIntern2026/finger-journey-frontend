@@ -1,5 +1,6 @@
 // 역할: 아이콘, 제목, 설명으로 구성된 정보 안내 카드를 표시한다.
 // 사용처: 프리보딩 메인 등 안내 정보가 반복되는 화면
+// 담당자: 김재웅
 
 import BaseCard from "../base/BaseCard";
 import styles from "./custom.module.css";

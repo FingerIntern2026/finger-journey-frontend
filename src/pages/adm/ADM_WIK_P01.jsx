@@ -1,3 +1,7 @@
+// 역할: 위키 카테고리와 하위 항목을 등록·수정·삭제하는 관리자 화면.
+// 사용처: 화면 코드 ADM_WIK_P01
+// 담당자: 김재웅
+
 import { useState } from "react";
 import { Leaf, Plus } from "lucide-react";
 import BaseButton from "../../components/common/base/BaseButton";

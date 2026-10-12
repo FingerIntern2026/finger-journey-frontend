@@ -1,5 +1,7 @@
 // 역할: 신규 등록/정보 수정처럼 여러 입력 필드를 받는 공통 다이얼로그 폼.
 // 화면은 field 정의와 저장 콜백만 전달하고, 입력값·필수값 검사는 이 컴포넌트가 관리한다.
+// 사용처: 관리자 등록·수정 다이얼로그
+// 담당자: 김재웅
 
 import { useState } from "react";
 import BaseButton from "../base/BaseButton";

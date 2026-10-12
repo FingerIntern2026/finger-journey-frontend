@@ -1,3 +1,7 @@
+// 역할: 위키 하위 항목의 제목·본문·이미지를 등록·수정하는 바텀시트 폼.
+// 사용처: ADM_WIK_P01
+// 담당자: 김재웅
+
 import { useRef, useState } from "react";
 import BaseButton from "../../../../common/base/BaseButton";
 import BaseInput from "../../../../common/base/BaseInput";

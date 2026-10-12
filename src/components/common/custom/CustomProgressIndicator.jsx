@@ -3,7 +3,7 @@
 //       재사용하고 새싹 아이콘 + 배지(현재/전체 단계)를 덧붙임 —
 //       Header.jsx가 자체적으로 갖고 있던 진행률 로직을 분리한 것
 // 사용처: Header.jsx, PathMapHeader.jsx, ComponentListPage.jsx(데모)
-// 담당자:
+// 담당자: 김재웅
 import BaseProgressBar from '../base/BaseProgressBar';
 import BaseBadge from '../base/BaseBadge';
 import styles from './custom.module.css';

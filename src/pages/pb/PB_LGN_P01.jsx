@@ -1,3 +1,7 @@
+// 역할: 사번과 생년월일을 입력받아 프리보딩을 시작하는 인증 화면.
+// 사용처: 화면 코드 PB_LGN_P01
+// 담당자: 김재웅
+
 import { useState } from "react";
 import CustomAuthForm from "../../components/common/custom/CustomAuthForm";
 import PreboardingHero from "../../components/feature/PB/LGN/P01/PreboardingHero.jsx";
@@ -10,6 +14,7 @@ import styles from "./PB_LGN_P01.module.css";
  * 인증 API가 연결되기 전까지는 CustomAuthForm의 빈 값·숫자 형식 검증 후
  * 입력값을 다음 화면의 params로 전달한다.
  */
+
 export default function PB_LGN_P01({ preview = false }) {
   const goForward = useNavigationStore((state) => state.goForward);
   const [serverError, setServerError] = useState("");

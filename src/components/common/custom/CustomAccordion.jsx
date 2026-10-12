@@ -1,5 +1,6 @@
 // 역할: 제목을 누르면 내용이 펼쳐지는 아코디언 목록을 표시한다.
 // 사용처: 프리보딩 FAQ, 관리자 위키 카테고리 등
+// 담당자: 김재웅
 
 import { useId, useState } from "react";
 import styles from "./custom.module.css";

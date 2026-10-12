@@ -1,3 +1,7 @@
+// 역할: 핑거 위키 카테고리와 검색 결과를 탐색하는 목록 화면.
+// 사용처: 화면 코드 WIK_LIS_P01
+// 담당자: 김재웅
+
 import { useMemo, useState } from "react";
 import {BookOpen, Leaf, Sprout} from "lucide-react";
 import BaseButton from "../../components/common/base/BaseButton";

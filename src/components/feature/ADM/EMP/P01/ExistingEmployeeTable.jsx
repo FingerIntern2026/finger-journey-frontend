@@ -1,3 +1,7 @@
+// 역할: 기존 사원 목록을 검색·필터·페이지 이동할 수 있는 테이블로 표시한다.
+// 사용처: ADM_EMP_P01
+// 담당자: 김재웅
+
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import BaseBadge from "../../../../common/base/BaseBadge";
 import styles from "./ExistingEmployeeTable.module.css";

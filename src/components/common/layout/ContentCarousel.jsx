@@ -3,7 +3,7 @@
 //       텍스트로 재현하지 않고 디자이너가 내려주는 이미지 한 장(imageSrc)으로 처리함.
 //       ⚠️ 이번 스코프는 컴포넌트 껍데기 + 샘플 이미지 시연까지만 (8개 세트 실제 에셋은 스코프 밖)
 // 사용처: ComponentListPage.jsx (컴포넌트 데모)
-// 담당자:
+// 담당자: 김재웅
 import styles from './layout.module.css';
 
 const ContentCarousel = ({ imageSrc, imageAlt = '', className = '' }) => {
