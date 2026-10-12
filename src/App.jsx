@@ -17,6 +17,7 @@ import PreboardingPreview from './pages/dev/PreboardingPreview';
 import AdminPreview from './pages/dev/AdminPreview';
 import WikiPreview from './pages/dev/WikiPreview';
 import ChatPreview from './pages/dev/ChatPreview';
+import PTH_MAP_P01 from './pages/pth/PTH_MAP_P01';
 
 // 챗봇 진입 버튼/팝업은 데모 화면 어디서든 떠 있어야 해서 라우트 최상위인 여기서 관리함
 // (페이지마다 각자 붙이면 빠뜨리는 화면이 생기기 쉬움)
@@ -24,7 +25,8 @@ function App() {
   const previewType = import.meta.env.DEV
     ? new URLSearchParams(window.location.search).get('preview')
     : null;
-  const isPublishingPreview = previewType === 'preboarding' || previewType === 'admin' || previewType === 'wiki' || previewType === 'chat';
+  const isPathMapPreview = import.meta.env.DEV && window.location.pathname === '/pth/map';
+  const isPublishingPreview = previewType === 'preboarding' || previewType === 'admin' || previewType === 'wiki' || previewType === 'chat' || isPathMapPreview;
   const [chatOpen, setChatOpen] = useState(false);
   const [screens, setScreens] = useState(null);
   const [screenLoadError, setScreenLoadError] = useState(null);
@@ -55,6 +57,10 @@ function App() {
       active = false;
     };
   }, [initializeNavigation, isPublishingPreview]);
+
+  if (isPathMapPreview) {
+    return <PTH_MAP_P01 preview />;
+  }
 
   if (previewType === 'preboarding') {
     return <PreboardingPreview />;
