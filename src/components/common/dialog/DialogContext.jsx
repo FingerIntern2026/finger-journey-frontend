@@ -84,7 +84,7 @@ export function DialogProvider({ children }) {
     ));
   };
 
-  const showConfirm = (message, onConfirm) => {
+  const showConfirm = (message, onConfirm, options = {}) => {
     return showDialog('center', ({ close }) => (
       <DialogConfirm
         message={message}
@@ -93,6 +93,7 @@ export function DialogProvider({ children }) {
           close(true);
         }}
         onCancel={() => close(false)}
+        {...options}
       />
     ));
   };

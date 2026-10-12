@@ -1,0 +1,104 @@
+.tableScroll {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  min-width: 390px;
+  border-collapse: collapse;
+  table-layout: fixed;
+  color: #565b57;
+  font-size: 8px;
+}
+
+.table th,
+.table td {
+  padding: 8px 3px;
+  border-bottom: 1px solid #f0f1f0;
+  text-align: center;
+  vertical-align: middle;
+  overflow-wrap: anywhere;
+}
+
+.table th {
+  color: #969b97;
+  font-weight: 500;
+}
+
+.table th:first-child,
+.table td:first-child {
+  width: 20%;
+  text-align: left;
+}
+
+.table th:nth-child(2),
+.table td:nth-child(2) {
+  width: 20%;
+}
+
+.nameCell {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.nameCell > span {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #e7f7e4;
+  color: #66bd59;
+  font-weight: 700;
+}
+
+.nameCell strong {
+  color: #464b47;
+  font-size: 8px;
+}
+
+.statusBadge {
+  padding: 2px 5px;
+  font-size: 7px;
+}
+
+.empty {
+  height: 70px;
+  color: #999;
+  text-align: center !important;
+}
+
+.pagination {
+  margin-top: 14px;
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
+.pagination button {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border: 1px solid #edf0ed;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #8c928d;
+  font-size: 9px;
+  cursor: pointer;
+}
+
+.pagination button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.pagination .activePage {
+  border-color: #65c85c;
+  background: #65c85c;
+  color: #ffffff;
+}

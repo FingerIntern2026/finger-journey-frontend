@@ -14,12 +14,17 @@ import { SCREEN_CODES } from './config/screenCodes';
 import useNavigationStore from './stores/useNavigationStore';
 import { fetchScreenList } from './services/screenService';
 import PreboardingPreview from './pages/dev/PreboardingPreview';
+import AdminPreview from './pages/dev/AdminPreview';
+import WikiPreview from './pages/dev/WikiPreview';
+import ChatPreview from './pages/dev/ChatPreview';
 
 // 챗봇 진입 버튼/팝업은 데모 화면 어디서든 떠 있어야 해서 라우트 최상위인 여기서 관리함
 // (페이지마다 각자 붙이면 빠뜨리는 화면이 생기기 쉬움)
 function App() {
-  const isPreboardingPreview = import.meta.env.DEV
-    && new URLSearchParams(window.location.search).get('preview') === 'preboarding';
+  const previewType = import.meta.env.DEV
+    ? new URLSearchParams(window.location.search).get('preview')
+    : null;
+  const isPublishingPreview = previewType === 'preboarding' || previewType === 'admin' || previewType === 'wiki' || previewType === 'chat';
   const [chatOpen, setChatOpen] = useState(false);
   const [screens, setScreens] = useState(null);
   const [screenLoadError, setScreenLoadError] = useState(null);
@@ -27,7 +32,7 @@ function App() {
 
   useEffect(() => {
     // 개발 중 화면 퍼블리싱만 확인할 때는 백엔드 화면목록 요청을 하지 않는다.
-    if (isPreboardingPreview) {
+    if (isPublishingPreview) {
       return undefined;
     }
 
@@ -49,10 +54,26 @@ function App() {
     return () => {
       active = false;
     };
-  }, [initializeNavigation, isPreboardingPreview]);
+  }, [initializeNavigation, isPublishingPreview]);
 
-  if (isPreboardingPreview) {
+  if (previewType === 'preboarding') {
     return <PreboardingPreview />;
+  }
+
+  if (previewType === 'admin') {
+    return (
+      <DialogProvider>
+        <AdminPreview />
+      </DialogProvider>
+    );
+  }
+
+  if (previewType === 'wiki') {
+    return <WikiPreview />;
+  }
+
+  if (previewType === 'chat') {
+    return <ChatPreview />;
   }
 
   if (screenLoadError) {

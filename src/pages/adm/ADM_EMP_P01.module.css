@@ -1,0 +1,129 @@
+.page {
+  width: 100%;
+  max-width: 480px;
+  margin-inline: auto;
+  min-height: 100svh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  color: #252525;
+  background: #ffffff;
+  color-scheme: light;
+}
+
+/* 개발 미리보기에서는 공통 툴바 높이를 제외한 모바일 캔버스를 사용한다. */
+.previewPage {
+  height: 100svh;
+  min-height: 0;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #202020;
+}
+
+.brand svg {
+  color: #74bd53;
+  transform: rotate(-18deg);
+}
+
+.content {
+  flex: 1;
+  width: 100%;
+  padding: 18px 18px 24px;
+  box-sizing: border-box;
+}
+
+.sectionHeader,
+.listHeading,
+.filters {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sectionHeader {
+  margin-bottom: 12px;
+}
+
+.sectionHeader h1,
+.listHeading h2 {
+  margin: 0;
+  color: #1f1f1f;
+  font-weight: 750;
+  letter-spacing: -0.03em;
+}
+
+.sectionHeader h1 {
+  font-size: 19px;
+}
+
+.addButton {
+  min-height: 30px;
+  padding: 5px 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+.onboardingList {
+  display: grid;
+  gap: 9px;
+}
+
+.employeeSection {
+  margin-top: 18px;
+}
+
+.listHeading {
+  margin-bottom: 9px;
+}
+
+.listHeading h2 {
+  font-size: 16px;
+}
+
+.listHeading span {
+  color: #9a9a9a;
+  font-size: 11px;
+}
+
+.filters {
+  align-items: flex-start;
+  gap: 7px;
+  margin-bottom: 12px;
+}
+
+.searchbar {
+  flex: 1;
+  min-width: 0;
+}
+
+.filters > div:last-child {
+  flex: 0 0 74px;
+  margin-bottom: 0;
+}
+
+.statusSelect {
+  width: 100%;
+  min-height: 38px;
+  padding: 7px 8px;
+  border-color: #ebefec;
+  background: #f8faf8;
+  color: #4f5751;
+  font-size: 11px;
+}
+
+.deleteMessage {
+  color: #e84b49;
+}
+
+@media (max-width: 360px) {
+  .content {
+    padding-inline: 14px;
+  }
+}
