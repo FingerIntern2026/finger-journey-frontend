@@ -6,9 +6,9 @@ import { forwardRef } from 'react';
 import styles from './base.module.css';
 
 const BaseInput = forwardRef(
-  ({ label, error, type = 'text', className = '', ...rest }, ref) => {
+  ({ label, error, type = 'text', className = '', wrapperClassName = '', ...rest }, ref) => {
     return (
-      <div className={styles.inputWrapper}>
+      <div className={`${styles.inputWrapper} ${wrapperClassName}`}>
         {label && <label className={styles.inputLabel}>{label}</label>}
         <input
           ref={ref}
