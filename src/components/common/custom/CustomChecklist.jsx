@@ -12,17 +12,22 @@ import styles from './custom.module.css';
 const CustomChecklist = ({
   items,          // 필수. [{ id, label, checked }] 형태의 배열
   onToggle,       // 필수. 항목 하나 클릭했을 때 실행할 함수. (itemId)를 인자로 넘겨줌
+  className = '',
+  rowClassName = '',
+  labelClassName = '',
+  readOnly = false,
+  renderIndicator,
 }) => {
   return (
-    <BaseCard className={styles.checklistCard}>
+    <BaseCard className={`${styles.checklistCard} ${className}`}>
       {/* items 배열 길이만큼 자동으로 줄이 생김 - 5개든 3개든 코드 안 고쳐도 됨 */}
       {items.map((item) => (
-        <div key={item.id} className={styles.checklistRow}>
-          <BaseCheckbox
+        <div key={item.id} className={`${styles.checklistRow} ${rowClassName}`}>
+          {readOnly ? (renderIndicator ? renderIndicator(item) : <span aria-hidden="true">{item.checked ? '✓' : '□'}</span>) : <BaseCheckbox
             checked={item.checked}
             onChange={() => onToggle(item.id)}
-          />
-          <span className={styles.checklistLabel}>{item.label}</span>
+          />}
+          <span className={`${styles.checklistLabel} ${labelClassName}`}>{item.label}</span>
         </div>
       ))}
     </BaseCard>

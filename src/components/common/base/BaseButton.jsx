@@ -8,6 +8,7 @@ import styles from './base.module.css';
 
 export default function BaseButton({
     label,
+    children,
     onClick,
     variant = 'primary',
     disabled = false,
@@ -22,7 +23,7 @@ export default function BaseButton({
             disabled={disabled}
             {...rest}
         >
-            {label}
+            {label ?? children}
         </button>
     );
 }
