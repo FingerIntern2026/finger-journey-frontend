@@ -15,8 +15,8 @@ export default function PreboardingPreview() {
   const SelectedPage = previewPages[selectedScreenCode];
 
   return (
-    <div className={styles.previewShell}>
-      <nav className={styles.toolbar} aria-label="프리보딩 화면 미리보기">
+    <div className={styles.adminPreviewShell}>
+      <nav className={styles.adminToolbar} aria-label="프리보딩 화면 미리보기">
         <strong>프리보딩 미리보기</strong>
         <div>
           {Object.keys(previewPages).map((screenCode) => (

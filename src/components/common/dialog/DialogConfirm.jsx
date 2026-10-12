@@ -6,14 +6,22 @@
 import BaseButton from '../base/BaseButton';
 import styles from './dialog.module.css';
 
-export default function DialogConfirm({ message, onConfirm, onCancel }) {
+export default function DialogConfirm({
+  message,
+  onConfirm,
+  onCancel,
+  confirmLabel = "확인",
+  cancelLabel = "취소",
+  confirmVariant = "primary",
+  messageClassName = "",
+}) {
   return (
-    <>
-      <p>{message}</p>
-      <div className={styles.actions}>
-        <BaseButton label="취소" variant="secondary" onClick={onCancel} />
-        <BaseButton label="확인" onClick={onConfirm} />
+    <div className={styles.confirmPopup}>
+      <p className={`${styles.confirmMessage} ${messageClassName}`}>{message}</p>
+      <div className={styles.confirmActions}>
+        <BaseButton label={cancelLabel} variant="ghost" className={styles.confirmCancel} onClick={onCancel} />
+        <BaseButton label={confirmLabel} variant={confirmVariant} className={styles.confirmSubmit} onClick={onConfirm} />
       </div>
-    </>
+    </div>
   );
 }
