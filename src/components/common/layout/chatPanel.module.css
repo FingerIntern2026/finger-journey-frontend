@@ -1,86 +1,92 @@
-/* chatPanel.module.css의 역할 */
-/* ChatEntryButton을 눌렀을 때 뜨는 챗봇 풀팝업 스타일
-   finger-journey-ai/frontend/src/App.css(어제 챗봇 데모 페이지)의 레이아웃/색상을 그대로 옮김
-   (작은 플로팅 패널이 아니라 화면 전체를 덮는 오버레이 + 원본과 동일한 카드 크기로 복원) */
+.overlay,
+.embeddedPage {
+  display: grid;
+  min-height: 100svh;
+  place-items: center;
+  padding: 16px;
+  box-sizing: border-box;
+  background: rgba(17, 24, 18, 0.16);
+}
 
-.overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  padding: 20px;
+.embeddedPage {
+  width: 100%;
+  max-width: 480px;
+  margin-inline: auto;
+  background: #ffffff;
 }
 
 .panel {
-  width: 100%;
-  max-width: 720px;
-  height: 85vh;
-  background-color: #ffffff;
-  border: 1px solid #e5e5e5;
-  border-radius: 24px;
-  overflow: hidden;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
   display: flex;
+  width: min(100%, 335px);
+  height: min(740px, calc(100svh - 32px));
   flex-direction: column;
+  overflow: hidden;
+  border: 1px solid #c9c9c9;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
 }
 
 .header {
-  position: relative;
-  padding-top: 24px;
-  padding-bottom: 18px;
-  border-bottom: 1px solid #eeeeee;
-  text-align: center;
+  display: flex;
+  min-height: 64px;
+  align-items: center;
+  gap: 11px;
+  padding: 0 18px;
+  border-bottom: 1px solid #d9d9d9;
 }
 
-.title {
-  margin: 0;
-  font-size: 22px;
-  font-weight: 600;
-  color: #111111;
+.logo {
+  display: grid;
+  width: 35px;
+  height: 35px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 50%;
+  background: #dcf8cf;
+  color: #65a548;
 }
 
-.subtitle {
-  margin: 5px 0 0;
-  font-size: 13px;
-  color: #8e8e93;
+.headerText {
+  display: grid;
+  gap: 3px;
+  flex: 1;
+}
+
+.headerText strong {
+  color: #1c1c1c;
+  font-size: 15px;
+}
+
+.headerText span {
+  color: #ababab;
+  font-size: 10px;
 }
 
 .closeButton {
-  position: absolute;
-  top: 16px;
-  right: 20px;
-  border: none;
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  padding: 0;
+  border: 0;
   background: transparent;
-  font-size: 20px;
-  color: #8e8e93;
+  color: #c3c3c3;
   cursor: pointer;
-  padding: 4px;
-  line-height: 1;
 }
 
 .messages {
-  flex: 1;
   display: flex;
+  min-height: 0;
+  flex: 1;
   flex-direction: column;
-  gap: 8px;
-  padding: 24px 20px;
+  gap: 13px;
+  padding: 16px 17px;
   overflow-y: auto;
-}
-
-.emptyHint {
-  margin: auto;
-  font-size: 14px;
-  text-align: center;
-  color: #a0a0a0;
 }
 
 .messageRow {
   display: flex;
-  width: 100%;
-  margin-bottom: 4px;
 }
 
 .messageRow.assistant {
@@ -92,194 +98,140 @@
 }
 
 .bubble {
-  max-width: 78%;
-  padding: 12px 16px;
-  font-size: 15px;
-  line-height: 1.65;
-  word-break: break-word;
-  border-radius: 19px;
+  max-width: 79%;
+  padding: 11px 14px;
+  border-radius: 11px;
+  font-size: 11px;
+  line-height: 1.52;
+  word-break: keep-all;
 }
 
-.messageRow.assistant .bubble {
-  background-color: #eeeeef;
-  color: #111111;
-  text-align: left;
-  border-bottom-left-radius: 6px;
+.bubble p {
+  margin: 0;
 }
 
-.messageRow.assistant .bubble > :first-child {
-  margin-top: 0;
+.assistant .bubble {
+  border-bottom-left-radius: 2px;
+  background: #f3f3f3;
+  color: #292929;
 }
 
-.messageRow.assistant .bubble > :last-child {
-  margin-bottom: 0;
-}
-
-.messageRow.assistant .bubble p {
-  margin: 0 0 10px;
-}
-
-.messageRow.assistant .bubble h1,
-.messageRow.assistant .bubble h2,
-.messageRow.assistant .bubble h3,
-.messageRow.assistant .bubble h4 {
-  margin: 16px 0 7px;
-  color: #111111;
-  font-size: 15px;
-  font-weight: 700;
-  line-height: 1.45;
-  letter-spacing: 0;
-}
-
-.messageRow.assistant .bubble ul,
-.messageRow.assistant .bubble ol {
-  margin: 7px 0 11px;
-  padding-left: 22px;
-}
-
-.messageRow.assistant .bubble li {
-  margin: 4px 0;
-  padding-left: 2px;
-}
-
-.messageRow.assistant .bubble strong {
-  color: #0d4f25;
-  font-weight: 700;
-}
-
-.messageRow.assistant .bubble code {
-  display: inline;
-  padding: 2px 5px;
-  border-radius: 5px;
-  background-color: #dde3df;
-  color: #1f2937;
-  font-size: 0.9em;
-}
-
-.messageRow.assistant .bubble blockquote {
-  margin: 10px 0;
-  padding: 7px 11px;
-  border-left: 3px solid #34c759;
-  background-color: rgba(255, 255, 255, 0.65);
-  color: #4b5563;
-}
-
-.messageRow.user .bubble {
-  background-color: #34c759;
+.user .bubble {
+  border-bottom-right-radius: 2px;
+  background: #69c95f;
   color: #ffffff;
-  white-space: pre-wrap;
-  border-bottom-right-radius: 6px;
 }
 
-.chipRow {
+.source {
+  display: block;
+  margin-top: 5px;
+  color: #5ba84e;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.typingBubble {
+  display: inline-flex;
+  min-width: 42px;
+  min-height: 18px;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding-block: 8px;
+}
+
+.typingBubble span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #c4ccd3;
+  animation: typing 1.15s infinite ease-in-out;
+}
+
+.typingBubble span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.typingBubble span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.suggestionArea {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  padding: 0 16px 12px;
+  gap: 6px;
+  padding: 0 17px 12px;
 }
 
-.chip {
-  flex-shrink: 0;
-  padding: 8px 14px;
-  border: 1px solid #d1d1d6;
-  border-radius: 100px;
-  background-color: #ffffff;
-  font-family: inherit;
-  font-size: 13px;
-  color: #34c759;
+.suggestion {
+  padding: 5px 10px;
+  border: 0;
+  border-radius: 999px;
+  background: #d9facd;
+  color: #54a34b;
+  box-shadow: 0 1px 3px rgba(42, 97, 42, 0.22);
+  font-size: 9px;
   cursor: pointer;
-  transition: background-color 0.15s, border-color 0.15s;
 }
 
-.chip:hover {
-  background-color: #eafaf0;
-  border-color: #34c759;
+.suggestion:disabled {
+  opacity: 0.55;
+  cursor: wait;
 }
 
 .inputRow {
   display: flex;
-  align-items: flex-end;
-  gap: 8px;
-  padding: 12px 16px 16px;
-  border-top: 1px solid #eeeeee;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 17px;
+  border-top: 1px solid #d9d9d9;
 }
 
-.textarea {
+.input {
+  min-width: 0;
+  height: 35px;
   flex: 1;
-  min-height: 42px;
-  max-height: 120px;
-  padding: 10px 16px;
-  box-sizing: border-box;
-  border: 1px solid #d1d1d6;
-  border-radius: 21px;
-  font-family: inherit;
-  font-size: 14px;
-  line-height: 20px;
-  color: #111111;
-  outline: none;
-  resize: none;
-  overflow-y: auto;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 999px;
+  outline: 0;
+  background: #f3f3f3;
+  color: #2d2d2d;
+  font: inherit;
+  font-size: 10px;
 }
 
-.textarea::placeholder {
-  color: #aaaaaa;
-}
-
-.textarea:focus {
-  border-color: #34c759;
-  box-shadow: 0 0 0 3px rgba(52, 199, 89, 0.1);
+.input::placeholder {
+  color: #ababab;
 }
 
 .sendButton {
-  position: relative;
-  flex-shrink: 0;
-  width: 42px;
-  height: 42px;
+  display: grid;
+  width: 35px;
+  height: 35px;
+  flex: 0 0 auto;
+  place-items: center;
   padding: 0;
-  border: none;
+  border: 0;
   border-radius: 50%;
-  background-color: #34c759;
-  color: transparent;
-  cursor: pointer;
-  transition: transform 0.15s, background-color 0.15s;
-}
-
-.sendButton::after {
-  content: "↑";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -53%);
-  font-size: 22px;
-  font-weight: 700;
+  background: #6dcc66;
   color: #ffffff;
-}
-
-.sendButton:hover:not(:disabled) {
-  background-color: #2db84d;
-  transform: scale(1.05);
-}
-
-.sendButton:active:not(:disabled) {
-  transform: scale(0.95);
+  cursor: pointer;
 }
 
 .sendButton:disabled {
-  background-color: #b7dfc1;
+  background: #c5e7c2;
   cursor: not-allowed;
 }
 
-@media (max-width: 768px) {
-  .overlay {
-    padding: 0;
+@keyframes typing {
+  0%, 60%, 100% {
+    transform: translateY(0);
+    opacity: 0.45;
   }
 
-  .panel {
-    max-width: none;
-    height: 100vh;
-    border: none;
-    border-radius: 0;
-    box-shadow: none;
+  30% {
+    transform: translateY(-3px);
+    opacity: 1;
   }
 }

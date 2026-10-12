@@ -1,0 +1,5 @@
+.section { border-bottom: 1px solid #e8e8e8; }
+.row { min-height: 35px; display: flex; align-items: center; gap: 9px; border-top: 1px solid #e8e8e8; color: #454545; font-size: 12px; cursor: pointer; }
+.row input { position: absolute; opacity: 0; }
+.checkbox { width: 17px; height: 17px; display: grid; place-items: center; box-sizing: border-box; border: 1px solid #c5c5c5; border-radius: 50%; color: #ffffff; font-size: 11px; }
+.row input:checked + .checkbox { border-color: #69ca60; background: #69ca60; }

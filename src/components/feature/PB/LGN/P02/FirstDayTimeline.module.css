@@ -1,0 +1,21 @@
+.timeline {
+  margin: 18px 0 40px;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  display: flex;
+  min-height: 48px;
+  align-items: center;
+  gap: 13px;
+  border-bottom: 1px solid #e7e7e7;
+  color: #373737;
+  font-size: 14px;
+}
+
+.icon {
+  width: 22px;
+  font-size: 18px;
+  text-align: center;
+}

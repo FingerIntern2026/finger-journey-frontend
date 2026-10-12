@@ -1,0 +1,90 @@
+.list {
+  display: grid;
+  gap: 16px;
+}
+
+.card {
+  margin: 0;
+  padding: 12px 10px 11px;
+  border-color: #e6e9e6;
+  border-radius: 9px;
+  background: #fbfbfb;
+  box-shadow: 0 2px 8px rgba(28, 64, 38, 0.06);
+}
+
+.employeeRow {
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 9px;
+}
+
+.avatar {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #ddf5d8;
+  color: #69bd5b;
+  font-size: 18px;
+  font-weight: 750;
+}
+
+.employeeInfo {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.employeeInfo strong {
+  overflow: hidden;
+  color: #242424;
+  font-size: 13px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.employeeInfo small {
+  overflow: hidden;
+  color: #a3a3a3;
+  font-size: 8px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.counter {
+  align-self: start;
+  color: #438e3e;
+  font-size: 11px;
+}
+
+.progressBar {
+  height: 7px;
+  margin: 10px 0 8px;
+  background: #e7e7e7;
+}
+
+.progressBar > div {
+  background: #6aca60;
+}
+
+.stageList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.stage {
+  padding: 3px 5px;
+  border-radius: 4px;
+  background: #f1f1f1;
+  color: #a2a2a2;
+  font-size: 8px;
+  line-height: 1.15;
+}
+
+.completed {
+  background: #dff2dd;
+  color: #58a251;
+}

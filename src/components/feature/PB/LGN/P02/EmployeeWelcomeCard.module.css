@@ -1,0 +1,106 @@
+.celebration {
+  position: relative;
+  display: grid;
+  min-height: 300px;
+  place-items: center;
+  overflow: hidden;
+}
+
+.card {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  width: min(100%, 260px);
+  min-height: 250px;
+  place-items: center;
+  align-content: center;
+  gap: 12px;
+  border: 1px solid #e5e5e5;
+  border-radius: 24px;
+  background: #ffffff;
+  box-shadow: 0 7px 22px rgba(42, 71, 44, 0.1);
+  animation: cardEnter 0.55s 0.16s both cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cardLogo {
+  display: grid;
+  width: 68px;
+  height: 68px;
+  place-items: center;
+  border-radius: 20px;
+  background: #08b55a;
+  color: #ffffff;
+}
+
+.card strong {
+  margin-top: 8px;
+  color: #222222;
+  font-size: 25px;
+}
+
+.card > span:last-child {
+  color: #8b8b8b;
+  font-size: 14px;
+}
+
+.confetti {
+  position: absolute;
+  width: 9px;
+  height: 16px;
+  border-radius: 6px 1px 6px 1px;
+  transform: rotate(24deg);
+  opacity: 0;
+  animation: confettiBurst 0.78s both ease-out;
+}
+
+.confettiOne {
+  top: 40px;
+  left: 17%;
+  background: #ff9f43;
+  box-shadow: 46px 38px 0 #6478f5, 120px 5px 0 #f550a6;
+  animation-delay: 0.06s;
+}
+
+.confettiTwo {
+  top: 116px;
+  right: 12%;
+  background: #fb6370;
+  box-shadow: -36px 55px 0 #56c77a, -103px -37px 0 #8d6df2;
+  animation-delay: 0.12s;
+}
+
+.confettiThree {
+  bottom: 29px;
+  left: 20%;
+  background: #ffb132;
+  box-shadow: 58px 19px 0 #50a8fc, 131px -17px 0 #fa6ab0;
+  animation-delay: 0.2s;
+}
+
+@keyframes cardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(22px) scale(0.94);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes confettiBurst {
+  0% {
+    opacity: 0;
+    transform: translateY(26px) scale(0.25) rotate(-30deg);
+  }
+
+  42% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.88;
+    transform: translateY(0) scale(1) rotate(24deg);
+  }
+}

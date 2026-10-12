@@ -1,9 +1,11 @@
 import { useState } from "react";
 import PB_LGN_P01 from "../pb/PB_LGN_P01";
+import PB_LGN_P02 from "../pb/PB_LGN_P02";
 import styles from "./PreboardingPreview.module.css";
 
 const previewPages = {
   PB_LGN_P01,
+  PB_LGN_P02,
 };
 
 /**
