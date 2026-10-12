@@ -7,7 +7,7 @@ export default function EmploymentRuleClear({ onBack, onComplete }) {
   return (
     <PageLayout
       className={styles.page}
-      header={<Header label="온보딩 진행 중" current={2} total={10} onBack={onBack} />}
+      header={<Header label="온보딩 진행 중" current={2} total={9} onBack={onBack} />}
     >
       <div className={styles.pageBody}>
         <header className={styles.intro}>

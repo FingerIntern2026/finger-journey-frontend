@@ -12,13 +12,12 @@ const MAP_ITEMS = [
   { id: "hr", kind: "stage", stage: 3, label: "인사규정", icon: "hr-rules.png", screenCode: "PTH_HRP_P01", x: 23, y: 23, status: "locked" },
   { id: "ethics", kind: "stage", stage: 4, label: "윤리규정", icon: "ethics.png", screenCode: "PTH_ETH_P01", x: 70, y: 30, status: "locked" },
   { id: "quiz-2", kind: "quiz", label: "퀴즈", icon: "quiz.png", screenCode: "PTH_QUZ_C04", x: 65, y: 39.5, status: "locked" },
-  { id: "culture", kind: "stage", stage: 5, label: "문화제도", icon: "culture.png", screenCode: "PTH_CUL_P01", x: 22, y: 42, status: "locked" },
-  { id: "email", kind: "stage", stage: 6, label: "이메일", icon: "email.png", screenCode: "PTH_EML_P01", x: 70, y: 53.5, status: "locked" },
-  { id: "card", kind: "stage", stage: 7, label: "법인카드", icon: "corporate-card.png", screenCode: "PTH_CRD_P01", x: 23, y: 62, status: "locked" },
+  { id: "email", kind: "stage", stage: 5, label: "이메일", icon: "email.png", screenCode: "PTH_EML_P01", x: 22, y: 42, status: "locked" },
+  { id: "card", kind: "stage", stage: 6, label: "법인카드", icon: "corporate-card.png", screenCode: "PTH_CRD_P01", x: 70, y: 53.5, status: "locked" },
+  { id: "forest", kind: "stage", stage: 7, label: "포레스트", icon: "forest.png", screenCode: "PTH_FOR_P01", x: 23, y: 62, status: "locked" },
   { id: "quiz-3", kind: "quiz", label: "퀴즈", icon: "quiz.png", screenCode: "PTH_QUZ_C07", x: 74, y: 66.8, status: "locked" },
-  { id: "forest", kind: "stage", stage: 8, label: "포레스트", icon: "forest.png", screenCode: "PTH_FOR_P01", x: 70, y: 76.5, status: "locked" },
-  { id: "level", kind: "stage", stage: 9, label: "레벨업", icon: "level-up.png", screenCode: "PTH_LVL_P01", x: 22, y: 87, status: "locked" },
-  { id: "hidden", kind: "stage", stage: 10, label: "?", screenCode: "PTH_CPL_P01", x: 70, y: 96, status: "locked", hidden: true },
+  { id: "level", kind: "stage", stage: 8, label: "레벨업", icon: "level-up.png", screenCode: "PTH_LVL_P01", x: 70, y: 76.5, status: "locked" },
+  { id: "hidden", kind: "stage", stage: 9, label: "?", screenCode: "PTH_CPL_P01", x: 22, y: 87, status: "locked", hidden: true },
 ];
 
 const ASSET_PATH = "/assets/pth/map";
@@ -59,7 +58,7 @@ export default function PTH_MAP_P01({ preview = false }) {
 
   return (
     <main className={`${styles.page} ${preview ? styles.previewPage : ""}`}>
-      <PathMapHeader title="오솔길" currentStep={0} totalStep={10} />
+      <PathMapHeader title="오솔길" currentStep={0} totalStep={9} />
 
       <section className={styles.map} aria-label="온보딩 오솔길 지도">
         <img className={styles.trail} src={`${ASSET_PATH}/trail.png`} alt="" />

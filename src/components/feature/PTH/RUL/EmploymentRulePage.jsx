@@ -10,7 +10,7 @@ export default function EmploymentRulePage({ step, onBack, onNext }) {
   return (
     <PageLayout
       className={styles.page}
-      header={<Header label="온보딩 진행 중" current={1} total={10} onBack={onBack} />}
+      header={<Header label="온보딩 진행 중" current={1} total={9} onBack={onBack} />}
     >
       <div className={styles.pageBody}>
         <EmploymentRuleIntro step={step} />
