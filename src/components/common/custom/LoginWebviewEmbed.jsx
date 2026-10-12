@@ -23,6 +23,8 @@ export default function LoginWebviewEmbed({
     nativeWidth = 1280,
     nativeHeight = 800,
     className = '',
+    previewClassName = '',
+    previewObjectFit = 'cover',
 }) {
     // height(보여줄 높이) 대비 nativeHeight(실제 렌더 높이)의 비율을 계산
     // 예: height=220, nativeHeight=800 → scale=0.275 (27.5% 크기로 축소)
@@ -61,8 +63,8 @@ export default function LoginWebviewEmbed({
                 <img
                     src={previewImage}
                     alt={title}
-                    className={styles.webviewPreviewImg}
-                    style={{ height, objectFit: 'cover' }}
+                    className={`${styles.webviewPreviewImg} ${previewClassName}`}
+                    style={{ height, objectFit: previewObjectFit }}
                 />
             ) : (
                 <div className={styles.webviewFallback} style={{ height }}>
