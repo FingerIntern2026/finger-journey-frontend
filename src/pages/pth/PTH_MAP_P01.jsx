@@ -28,6 +28,7 @@ const PREVIEW_ROUTES = {
   PTH_ETH_P01: "/pth/rth",
   PTH_EML_P01: "/pth/eml",
   PTH_CRD_P01: "/pth/crd",
+  PTH_FOR_P01: "/pth/for",
 };
 
 export default function PTH_MAP_P01({ preview = false }) {
