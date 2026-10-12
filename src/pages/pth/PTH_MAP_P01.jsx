@@ -6,7 +6,7 @@ import useNavigationStore from "../../stores/useNavigationStore";
 import styles from "./PTH_MAP_P01.module.css";
 
 const MAP_ITEMS = [
-  { id: "story", kind: "stage", stage: 1, label: "평가 이야기", icon: "story.png", screenCode: "PTH_STR_P01", x: 22, y: 4, status: "current" },
+  { id: "story", kind: "stage", stage: 1, label: "핑거 이야기", icon: "story.png", screenCode: "PTH_STR_P01", x: 22, y: 4, status: "current" },
   { id: "rules", kind: "stage", stage: 2, label: "취업규칙", icon: "employment-rules.png", screenCode: "PTH_RUL_P01", x: 70, y: 10.5, status: "locked" },
   { id: "quiz-1", kind: "quiz", label: "퀴즈", icon: "quiz.png", screenCode: "PTH_QUZ_C01", x: 72, y: 18, status: "locked" },
   { id: "hr", kind: "stage", stage: 3, label: "인사규정", icon: "hr-rules.png", screenCode: "PTH_HRP_P01", x: 23, y: 23, status: "locked" },

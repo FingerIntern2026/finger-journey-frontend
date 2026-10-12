@@ -28,7 +28,7 @@ const Header = ({ label, current, total, onBack }) => {
         <span className={styles.headerLabel}>{label}</span>
 
         {/* current, total 둘 다 있을 때만 이 부분이 보임 (체크인 화면엔 안 보임) */}
-        {current && total && (
+        {current !== undefined && current !== null && total && (
           <span className={styles.headerCount}>{current}/{total}</span>
         )}
       </div>
