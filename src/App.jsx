@@ -22,6 +22,7 @@ import FingerStoryPreview from './pages/dev/FingerStoryPreview';
 import EmploymentRulePreview from './pages/dev/EmploymentRulePreview';
 import HrPolicyPreview from './pages/dev/HrPolicyPreview';
 import EthicsRulePreview from './pages/dev/EthicsRulePreview';
+import EmailGuidePreview from './pages/dev/EmailGuidePreview';
 
 // 챗봇 진입 버튼/팝업은 데모 화면 어디서든 떠 있어야 해서 라우트 최상위인 여기서 관리함
 // (페이지마다 각자 붙이면 빠뜨리는 화면이 생기기 쉬움)
@@ -34,7 +35,8 @@ function App() {
   const isEmploymentRulePreview = import.meta.env.DEV && window.location.pathname === '/pth/rul';
   const isHrPolicyPreview = import.meta.env.DEV && window.location.pathname === '/pth/hrp';
   const isEthicsRulePreview = import.meta.env.DEV && window.location.pathname === '/pth/rth';
-  const isPublishingPreview = previewType === 'preboarding' || previewType === 'admin' || previewType === 'wiki' || previewType === 'chat' || isPathMapPreview || isFingerStoryPreview || isEmploymentRulePreview || isHrPolicyPreview || isEthicsRulePreview;
+  const isEmailGuidePreview = import.meta.env.DEV && window.location.pathname === '/pth/eml';
+  const isPublishingPreview = previewType === 'preboarding' || previewType === 'admin' || previewType === 'wiki' || previewType === 'chat' || isPathMapPreview || isFingerStoryPreview || isEmploymentRulePreview || isHrPolicyPreview || isEthicsRulePreview || isEmailGuidePreview;
   const [chatOpen, setChatOpen] = useState(false);
   const [screens, setScreens] = useState(null);
   const [screenLoadError, setScreenLoadError] = useState(null);
@@ -65,6 +67,10 @@ function App() {
       active = false;
     };
   }, [initializeNavigation, isPublishingPreview]);
+
+  if (isEmailGuidePreview) {
+    return <EmailGuidePreview />;
+  }
 
   if (isEthicsRulePreview) {
     return <EthicsRulePreview />;

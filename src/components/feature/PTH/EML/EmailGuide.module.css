@@ -1,0 +1,73 @@
+.page { min-height: 100svh; background: #fff; color: #262626; }
+.pageBody { padding: 18px 24px 32px; box-sizing: border-box; }
+.intro { padding: 12px 2px 30px; }
+.titleRow { display: flex; align-items: center; gap: 10px; }
+.titleIcon { width: 42px; height: 42px; object-fit: contain; }
+.title { margin: 0; color: #222; font-size: 24px; line-height: 1.2; font-weight: 900; letter-spacing: -0.9px; }
+.subtitle { margin: 7px 0 0 52px; color: #777; font-size: 13px; font-weight: 550; letter-spacing: -0.35px; }
+
+.guideList { display: flex; flex-direction: column; gap: 28px; }
+.guideStep { padding-bottom: 28px; border-bottom: 1px solid #e8e8e8; }
+.guideStep:last-child { border-bottom: 0; padding-bottom: 0; }
+.stepHeading { margin-bottom: 16px; display: flex; align-items: flex-start; gap: 12px; }
+.stepNumber {
+  width: 28px;
+  height: 28px;
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #58c82b;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 850;
+}
+.stepHeading h2 { margin: 1px 0 5px; font-size: 16px; line-height: 1.35; font-weight: 850; letter-spacing: -0.5px; }
+.stepHeading p { margin: 0; color: #6c6c6c; font-size: 12px; line-height: 1.55; word-break: keep-all; }
+.screenshotFrame {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #e6e6e6;
+  border-radius: 12px;
+  background: #fafafa;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.screenshotFrame img { display: block; width: 100%; height: auto; object-fit: contain; }
+.endMarker { height: 2px; margin-top: 18px; }
+.actionArea { padding-top: 24px; }
+.nextButton {
+  min-height: 50px;
+  border-radius: 12px;
+  background: #39b54a;
+  font-size: 16px;
+  font-weight: 800;
+  box-shadow: 0 4px 10px rgba(57, 181, 74, 0.18);
+}
+
+.clearContent {
+  min-height: max(calc(100svh - 285px), 590px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.clearImage { width: min(75%, 300px); aspect-ratio: 1; object-fit: contain; animation: celebrate 850ms ease-out both; }
+.clearContent h2 { margin: -8px 0 14px; color: #38b84a; font-size: 27px; font-weight: 950; }
+.clearContent p { margin: 2px 0; color: #555; font-size: 13px; font-weight: 600; }
+
+@keyframes celebrate {
+  from { opacity: 0; transform: scale(0.72) rotate(-7deg); }
+  to { opacity: 1; transform: scale(1) rotate(0); }
+}
+
+@media (max-width: 380px) {
+  .pageBody { padding-inline: 18px; }
+  .screenshotFrame { padding: 7px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .clearImage { animation: none; }
+}
