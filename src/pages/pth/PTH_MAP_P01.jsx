@@ -24,6 +24,7 @@ const ASSET_PATH = "/assets/pth/map";
 const PREVIEW_ROUTES = {
   PTH_STR_P01: "/pth/str",
   PTH_RUL_P01: "/pth/rul",
+  PTH_HRP_P01: "/pth/hrp",
 };
 
 export default function PTH_MAP_P01({ preview = false }) {

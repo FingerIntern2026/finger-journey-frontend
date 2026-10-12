@@ -20,6 +20,7 @@ import ChatPreview from './pages/dev/ChatPreview';
 import PTH_MAP_P01 from './pages/pth/PTH_MAP_P01';
 import FingerStoryPreview from './pages/dev/FingerStoryPreview';
 import EmploymentRulePreview from './pages/dev/EmploymentRulePreview';
+import HrPolicyPreview from './pages/dev/HrPolicyPreview';
 
 // 챗봇 진입 버튼/팝업은 데모 화면 어디서든 떠 있어야 해서 라우트 최상위인 여기서 관리함
 // (페이지마다 각자 붙이면 빠뜨리는 화면이 생기기 쉬움)
@@ -30,7 +31,8 @@ function App() {
   const isPathMapPreview = import.meta.env.DEV && window.location.pathname === '/pth/map';
   const isFingerStoryPreview = import.meta.env.DEV && window.location.pathname === '/pth/str';
   const isEmploymentRulePreview = import.meta.env.DEV && window.location.pathname === '/pth/rul';
-  const isPublishingPreview = previewType === 'preboarding' || previewType === 'admin' || previewType === 'wiki' || previewType === 'chat' || isPathMapPreview || isFingerStoryPreview || isEmploymentRulePreview;
+  const isHrPolicyPreview = import.meta.env.DEV && window.location.pathname === '/pth/hrp';
+  const isPublishingPreview = previewType === 'preboarding' || previewType === 'admin' || previewType === 'wiki' || previewType === 'chat' || isPathMapPreview || isFingerStoryPreview || isEmploymentRulePreview || isHrPolicyPreview;
   const [chatOpen, setChatOpen] = useState(false);
   const [screens, setScreens] = useState(null);
   const [screenLoadError, setScreenLoadError] = useState(null);
@@ -61,6 +63,10 @@ function App() {
       active = false;
     };
   }, [initializeNavigation, isPublishingPreview]);
+
+  if (isHrPolicyPreview) {
+    return <HrPolicyPreview />;
+  }
 
   if (isEmploymentRulePreview) {
     return <EmploymentRulePreview />;
