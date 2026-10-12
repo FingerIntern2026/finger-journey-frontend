@@ -6,6 +6,7 @@
 
 import { useState } from 'react';
 import { sendPost } from '../../../api/client';
+import BaseButton from '../base/BaseButton';
 import styles from './custom.module.css';
 
 // name: 3행시를 만들 기준 이름 (예: "김핑거") — name.length줄만큼 입력칸이 생김
@@ -16,6 +17,7 @@ export default function AcrosticInputForm({
     name = '',
     apiUrl = '/path/acrostic',
     extraBody = {},
+    submitter,
     onSuccess,
     className = '',
 }) {
@@ -50,7 +52,11 @@ export default function AcrosticInputForm({
 
         setSubmitting(true);
         try {
-            await sendPost(apiUrl, { name, lines, ...extraBody });
+            if (submitter) {
+                await submitter({ name, lines, ...extraBody });
+            } else {
+                await sendPost(apiUrl, { name, lines, ...extraBody });
+            }
             onSuccess?.(lines);
         } catch (err) {
             // 저장 자체가 실패한 경우(네트워크/서버 에러)는 디자인에 명시된 케이스는
@@ -81,14 +87,13 @@ export default function AcrosticInputForm({
                 <p className={styles.acrosticErrorText}>⚠ {error}</p>
             )}
 
-            <button
-                type="button"
-                className={styles.acrosticSubmitBtn}
+            <BaseButton
+                label={submitting ? '저장 중...' : '저장하기'}
+                className={styles.acrosticActionButton}
                 onClick={handleSubmit}
                 disabled={submitting}
-            >
-                {submitting ? '저장 중...' : '저장하기'}
-            </button>
+                fullWidth
+            />
         </div>
     );
 }

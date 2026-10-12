@@ -11,11 +11,12 @@ const AcrosticResultScreen = ({
   userBadgeText,     // 필수. 사용자 뱃지 카드 문구 (예: "김핑거 #오솔길완주 #3행시")
   lines,             // 필수. [{ letter: '김', text: '김밥처럼' }, ...] 형태의 배열. 길이가 곧 줄 수
   onButtonClick,      // 필수. "AI 완주 리포트 보기" 버튼 눌렀을 때 실행할 함수
+  confettiSrc = "/images/confetti.svg",
 }) => {
   return (
     <div className={styles.acrosticResultScreen}>
       {/* 컨페티 - 모든 경우 공통이라 고정 이미지 */}
-      <img src="/images/confetti.svg" alt="" className={styles.confettiImage} />
+      <img src={confettiSrc} alt="" className={styles.confettiImage} />
 
       <p className={styles.acrosticCompleteText}>3행시가 저장됐어요!</p>
 
@@ -34,7 +35,7 @@ const AcrosticResultScreen = ({
         ))}
       </div>
 
-      <BaseButton label="AI 완주 리포트 보기" onClick={onButtonClick} fullWidth />
+      <BaseButton label="AI 완주 리포트 보기" onClick={onButtonClick} fullWidth className={styles.acrosticActionButton} />
     </div>
   );
 };

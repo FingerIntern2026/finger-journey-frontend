@@ -16,7 +16,7 @@ const MAP_ITEMS = [
   { id: "card", kind: "stage", stage: 6, label: "법인카드", icon: "corporate-card.png", screenCode: "PTH_CRD_P01", x: 70, y: 53.5, status: "locked" },
   { id: "forest", kind: "stage", stage: 7, label: "포레스트", icon: "forest.png", screenCode: "PTH_FOR_P01", x: 23, y: 62, status: "locked" },
   { id: "quiz-3", kind: "quiz", label: "퀴즈", icon: "quiz.png", screenCode: "PTH_QUZ_C07", x: 74, y: 66.8, status: "locked" },
-  { id: "level", kind: "stage", stage: 8, label: "레벨업", icon: "level-up.png", screenCode: "PTH_LVL_P01", x: 70, y: 76.5, status: "locked" },
+  { id: "level", kind: "stage", stage: 8, label: "레벨업", icon: "level-up.png", screenCode: "PTH_LEV_P01", x: 70, y: 76.5, status: "locked" },
   { id: "hidden", kind: "stage", stage: 9, label: "?", screenCode: "PTH_CPL_P01", x: 22, y: 87, status: "locked", hidden: true },
 ];
 
@@ -29,6 +29,8 @@ const PREVIEW_ROUTES = {
   PTH_EML_P01: "/pth/eml",
   PTH_CRD_P01: "/pth/crd",
   PTH_FOR_P01: "/pth/for",
+  PTH_LEV_P01: "/pth/lev",
+  PTH_CPL_P01: "/pth/cpl",
 };
 
 export default function PTH_MAP_P01({ preview = false }) {
