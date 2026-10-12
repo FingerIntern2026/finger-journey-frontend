@@ -22,6 +22,10 @@ const MAP_ITEMS = [
 ];
 
 const ASSET_PATH = "/assets/pth/map";
+const PREVIEW_ROUTES = {
+  PTH_STR_P01: "/pth/str",
+  PTH_RUL_P01: "/pth/rul",
+};
 
 export default function PTH_MAP_P01({ preview = false }) {
   const goForward = useNavigationStore((state) => state.goForward);
@@ -36,6 +40,12 @@ export default function PTH_MAP_P01({ preview = false }) {
 
   const handleItemClick = (item) => {
     if (preview) {
+      const previewRoute = PREVIEW_ROUTES[item.screenCode];
+      if (previewRoute) {
+        window.location.assign(previewRoute);
+        return;
+      }
+
       setMessage(`${item.label} · ${item.screenCode}`);
       return;
     }
