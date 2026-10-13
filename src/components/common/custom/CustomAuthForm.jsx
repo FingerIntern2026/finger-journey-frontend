@@ -21,6 +21,7 @@ const CustomAuthForm = ({
   emptyMessage = '번호를 입력해주세요',
   field1ErrorMessage = '입력값이 올바르지 않아요',
   field2ErrorMessage = '입력값이 올바르지 않아요',
+  skipValidation = false,
   className = '',
   inputClassName = '',
   buttonClassName = '',
@@ -47,6 +48,17 @@ const CustomAuthForm = ({
   };
 
   const handleSubmit = () => {
+    if (skipValidation) {
+      setValidationError('');
+
+      if (isSingleField) {
+        onSubmit(field1Value);
+      } else {
+        onSubmit(field1Value, field2Value);
+      }
+      return;
+    }
+
     // 필드1개짜리 화면이면 field1Value만 체크, 필드2개짜리면 둘 다 체크
     const isEmpty = isSingleField
       ? field1Value === ''

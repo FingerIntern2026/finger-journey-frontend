@@ -203,8 +203,6 @@ export default function WIK_LIS_P01({ preview = false }) {
         className={styles.reportButton}
         onClick={() => !preview && goForward("PTH_MAP_P01")}
       />
-
-      <button type="button" className={styles.chatButton} aria-label="챗봇 열기">●●●</button>
     </main>
   );
 }
