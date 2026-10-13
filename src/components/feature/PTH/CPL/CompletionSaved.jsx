@@ -1,6 +1,6 @@
 import AcrosticResultScreen from "../../../common/custom/AcrosticResultScreen";
-import Header from "../../../common/layout/Header";
-import PageLayout from "../../../common/layout/PageLayout";
+import Header from "../common/Header";
+import PageLayout from "../common/PageLayout";
 import styles from "./Completion.module.css";
 
 export default function CompletionSaved({ name, lines, onBack, onNext }) {

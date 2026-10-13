@@ -7,8 +7,8 @@
 // 담당자:
 import { ChevronLeft } from 'lucide-react';
 // ↑ 왼쪽 화살표 아이콘. lucide-react 라이브러리에서 가져와요.
-import CustomProgressIndicator from '../custom/CustomProgressIndicator';
-import styles from './layout.module.css';
+import CustomProgressIndicator from '../../../common/custom/CustomProgressIndicator';
+import styles from './PathLayout.module.css';
 
 const Header = ({ label, current, total, onBack }) => {
   // label: 상단에 보여줄 텍스트 (예: "가방 싸는 중", "온보딩 진행 중")

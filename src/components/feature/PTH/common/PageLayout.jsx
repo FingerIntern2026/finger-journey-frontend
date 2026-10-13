@@ -3,7 +3,7 @@
 //       화면 종류에 맞는 헤더(Header/AdminHeader/헤더 없음)는 쓰는 쪽에서 조합해서 넘김
 // 사용처: PTH 세부 화면 Feature
 // 담당자:
-import styles from './layout.module.css';
+import styles from './PathLayout.module.css';
 
 const PageLayout = ({
   header,          // 그릴 헤더 컴포넌트 (JSX). 안 넘기면 헤더 없이 렌더링

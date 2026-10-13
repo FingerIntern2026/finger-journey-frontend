@@ -1,6 +1,6 @@
 import BaseButton from "../../../common/base/BaseButton";
-import Header from "../../../common/layout/Header";
-import PageLayout from "../../../common/layout/PageLayout";
+import Header from "../common/Header";
+import PageLayout from "../common/PageLayout";
 import LevelUpIntro from "./LevelUpIntro";
 import styles from "./LevelUp.module.css";
 

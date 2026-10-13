@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import PathMapHeader from "../../../common/layout/PathMapHeader";
+import PathMapHeader from "../common/PathMapHeader";
 import { PATH_MAP_ITEMS } from "./pathMapData";
 import styles from "./PathMap.module.css";
 

@@ -1,6 +1,6 @@
 import BaseButton from "../../../common/base/BaseButton";
-import Header from "../../../common/layout/Header";
-import PageLayout from "../../../common/layout/PageLayout";
+import Header from "../common/Header";
+import PageLayout from "../common/PageLayout";
 import EthicsIntro from "./EthicsIntro";
 import styles from "./EthicsRule.module.css";
 

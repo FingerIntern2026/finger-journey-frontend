@@ -1,6 +1,6 @@
 import BaseButton from "../../../common/base/BaseButton";
-import Header from "../../../common/layout/Header";
-import PageLayout from "../../../common/layout/PageLayout";
+import Header from "../common/Header";
+import PageLayout from "../common/PageLayout";
 import ForestCard from "./ForestCard";
 import ForestIntro from "./ForestIntro";
 import { FOREST_GUIDES } from "./forestData";

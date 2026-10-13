@@ -3,8 +3,8 @@
 //       진행률 바+새싹 아이콘은 CustomProgressIndicator(3.4.9)를 그대로 조합해서 씀
 // 사용처: PTH 지도 Feature(PathMap.jsx)
 // 담당자: 김재웅
-import CustomProgressIndicator from '../custom/CustomProgressIndicator';
-import styles from './layout.module.css';
+import CustomProgressIndicator from '../../../common/custom/CustomProgressIndicator';
+import styles from './PathLayout.module.css';
 
 const PathMapHeader = ({
   badgeLabel = '✦ FINGER ONBOARDING',

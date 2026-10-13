@@ -1,6 +1,6 @@
 import BaseButton from "../../../common/base/BaseButton";
-import Header from "../../../common/layout/Header";
-import PageLayout from "../../../common/layout/PageLayout";
+import Header from "../common/Header";
+import PageLayout from "../common/PageLayout";
 import CorporateCardContent from "./CorporateCardContent";
 import CorporateCardIntro from "./CorporateCardIntro";
 import { CORPORATE_CARD_GUIDES } from "./corporateCardData";
