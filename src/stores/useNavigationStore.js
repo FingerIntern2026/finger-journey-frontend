@@ -89,16 +89,20 @@ const useNavigationStore = create((set, get) => ({
   },
 
   goBack: (num = 1, preParams = {}) => {
-    if (!Number.isInteger(num) || num < 1) {
+    // 버튼 핸들러에 goBack을 직접 넘긴 경우 React의 클릭 이벤트가 첫 인자로 올 수 있다.
+    // 이벤트 때문에 이전 화면 이동이 막히지 않도록 그런 경우에는 기본값(한 단계)을 사용한다.
+    const step = Number.isInteger(num) ? num : 1;
+
+    if (step < 1) {
       return false;
     }
 
-    if (get().historyIndex < num) {
+    if (get().historyIndex < step) {
       return false;
     }
 
     set({ pendingBackParams: { ...preParams } });
-    window.history.go(-num);
+    window.history.go(-step);
     return true;
   },
 }));

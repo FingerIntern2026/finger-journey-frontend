@@ -19,7 +19,7 @@ const OfficeFloorMap = ({
           나중에 이미지 받으면 이 div를 <img src={...} /> 로 바꾸면 됨 */}
       <div className={styles.officeMapPlaceholder} />
 
-      <BaseButton label="뒤로 가기" onClick={onBackClick} fullWidth />
+      <BaseButton label="뒤로 가기" onClick={() => onBackClick?.()} fullWidth />
     </div>
   );
 };
