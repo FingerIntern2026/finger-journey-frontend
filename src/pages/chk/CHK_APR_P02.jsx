@@ -1,14 +1,15 @@
 import BaseButton from '../../components/common/base/BaseButton';
 import useNavigationStore from '../../stores/useNavigationStore';
 import approvalGuide from '../../assets/checkin/approval-guide.png';
-import CheckinHeader from './CheckinHeader';
+import CheckinHeader from '../../components/feature/CHK/common/CheckinHeader';
 import CheckinArtwork from './CheckinArtwork';
 import styles from './checkin.module.css';
 
 export default function ApprovalGuidePage() {
+  const goBack = useNavigationStore((state) => state.goBack);
   const goForward = useNavigationStore((state) => state.goForward);
   return <main className={`${styles.page} ${styles.approvalGuidePage}`}>
-    <CheckinHeader progress={75} />
+    <CheckinHeader progress={75} onBack={goBack} />
     <section className={`${styles.content} ${styles.approvalSteps}`}>
       <article className={styles.approvalStep}>
         <span className={styles.approvalStepNumber}>1</span>

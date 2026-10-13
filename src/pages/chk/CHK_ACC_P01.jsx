@@ -3,13 +3,14 @@ import useNavigationStore from '../../stores/useNavigationStore';
 import forestLogin from '../../assets/checkin/forest-login.png';
 import forestLoginComplete from '../../assets/checkin/forest-login-complete.png';
 import employeeNumberTip from '../../assets/checkin/employee-number-tip.png';
-import CheckinHeader from './CheckinHeader';
+import CheckinHeader from '../../components/feature/CHK/common/CheckinHeader';
 import styles from './checkin.module.css';
 
 export default function ErpAccountPage() {
+  const goBack = useNavigationStore((state) => state.goBack);
   const goForward = useNavigationStore((state) => state.goForward);
   return <main className={`${styles.page} ${styles.accountPage}`}>
-    <CheckinHeader progress={48} />
+    <CheckinHeader progress={48} onBack={goBack} />
     <section className={styles.content}>
       <h1 className={`${styles.title} ${styles.center}`}>ERP에 접속해볼까요?</h1>
       <div className={styles.dualScreens}><img src={forestLogin} alt="ERP 로그인 전"/><img src={forestLoginComplete} alt="ERP 로그인 후"/></div>

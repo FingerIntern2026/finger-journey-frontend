@@ -1,9 +1,4 @@
 .page { box-sizing: border-box; width: 100%; min-height: 100svh; margin: 0 auto; padding: 28px 24px 24px; display: flex; flex-direction: column; background: #fff; color: #171717; }
-.journeyHeader { display: grid; grid-template-columns: 24px 1fr 34px; align-items: center; gap: 10px; margin: -4px 0 34px; }
-.headerBack { padding: 0; border: 0; background: none; color: #222; font-size: 30px; line-height: 1; cursor: pointer; }
-.headerProgress { height: 6px; overflow: hidden; border-radius: 999px; background: #e8e8e8; }
-.headerProgress div { height: 100%; border-radius: inherit; background: #63c657; }
-.headerSprout { width: 34px; height: 42px; object-fit: contain; }
 .logo { margin: 0 0 28px; color: #555; font-size: 15px; font-weight: 800; }
 .progress { height: 4px; margin-bottom: 34px; overflow: hidden; border-radius: 999px; background: #edf0ed; }
 .progressFill { height: 100%; border-radius: inherit; background: #68c85d; }
@@ -37,14 +32,6 @@
 .choice { width: 100%; padding: 18px; border: 1px solid #e3e5e3; border-radius: 15px; background: #fff; color: #282828; text-align: left; font-size: 15px; cursor: pointer; }
 .choiceSelected { border-color: #67c75d; background: #f0faef; color: #318b39; font-weight: 700; }
 .branchLine { width: 1px; height: 42px; margin: 0 auto; background: #222; }
-.branchChoices { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-.branchChoices::before { content: ''; position: absolute; top: -1px; left: 25%; right: 25%; height: 1px; background: #222; }
-.branchChoice { position: relative; min-height: 96px; margin-top: 20px; padding: 14px; border: 0; border-radius: 8px; background: #68c95d; color: #fff; font-weight: 800; cursor: pointer; }
-.branchChoice::before { content: ''; position: absolute; top: -20px; left: 50%; width: 1px; height: 20px; background: #222; }
-.branchChoice small { display: block; margin-top: 7px; font-weight: 500; }
-.checkList { display: grid; gap: 10px; margin-top: 24px; }
-.checkItem { display: flex; align-items: center; gap: 12px; padding: 16px; border: 1px solid #e7e8e7; border-radius: 14px; background: #fff; cursor: pointer; }
-.checkItem input { width: 20px; height: 20px; accent-color: #62c459; }
 .loginMock { margin-top: 24px; padding: 22px 18px; border-radius: 18px; background: #f3f6f3; }
 .screenImage { display: block; width: 100%; height: auto; border-radius: 12px; object-fit: contain; }
 .screenImageTall { max-height: 620px; }
@@ -88,12 +75,6 @@
 
 /* Definition-sheet layout: designed around the 390px mobile artboard. */
 .page { width: 100%; max-width: 480px; min-height: 820px; padding: 24px 7% 20px; }
-.journeyHeader { grid-template-columns: 18px 1fr 32px; grid-template-rows: 18px 32px; gap: 2px 8px; margin: 0 0 24px; }
-.headerLabel { grid-column: 2; grid-row: 1; align-self: end; color: #666; font-size: 10px; font-weight: 700; }
-.headerBack { font-size: 26px; }
-.headerBack { grid-column: 1; grid-row: 2; }
-.headerProgress { grid-column: 2; grid-row: 2; height: 7px; }
-.headerSprout { grid-column: 3; grid-row: 1 / 3; width: 32px; height: 42px; }
 .title { font-size: 22px; line-height: 1.35; letter-spacing: -.7px; }
 .page .button { min-height: 48px; margin-top: 18px; border-radius: 7px; font-size: 15px; }
 .circleIllustration { width: 142px; height: 142px; margin: 28px auto 18px; }
@@ -102,47 +83,9 @@
 .onboardingBadge { display: block; width: 118px; height: auto; margin: 0 0 12px; object-fit: contain; }
 
 .docPage .title, .equPage .title, .accountPage .title, .forestPage .title, .officePage .title, .mapPage .title { font-size: 21px; }
-.docPage .circleIllustration { margin-top: 24px; }
 .branchDiagram { display: block; width: 84%; height: 72px; margin: 0 auto -1px; overflow: visible; fill: none; stroke: #222; stroke-width: 3; stroke-linecap: square; stroke-linejoin: miter; }
-.branchChoices { gap: 18px; }
-.branchChoices::before { display: none; }
-.branchChoice { width: 100%; min-height: 122px; margin-top: 34px; padding: 12px 8px; border-radius: 7px; font-size: 17px; line-height: 1.45; }
-.branchChoice::before, .branchChoice::after { display: none; }
-.branchChoice { margin-top: 0; }
-.choiceCaption { margin: 10px 0 0; color: #777; text-align: center; font-size: 10px; line-height: 1.45; }
-.docStatus { margin-top: 14px; }
-.docPage .waitingBadgeImage { margin-top: 0; }
-
-.equPage { aspect-ratio: 511 / 1108; min-height: 0; padding-top: 9%; padding-bottom: 1%; }
-.equPage .title { font-size: clamp(21px, 5.8vw, 28px); }
-.equPage .circleIllustration { width: 58%; height: auto; aspect-ratio: 1; margin: 12% auto 2%; background: #bff5b5; }
-.equipmentIcons { position: relative; }
-.equipmentIcons img:first-child { width: 48%; max-height: none; margin: -5% 12% 0 0; }
-.equipmentIcons img:last-child { position: absolute; right: 17%; bottom: 18%; width: 23%; height: auto; }
-.equipmentArea { display: grid; grid-template-columns: 48% 52%; align-items: start; margin-top: 0; }
-.generalWrap { position: relative; align-self: start; overflow: hidden; }
-.generalWrap > span { position: absolute; top: 6px; left: 0; z-index: 1; padding: 3px 7px; border: 1px solid #777; border-radius: 4px; background: #fff; color: #666; font-size: 9px; }
-.generalImage { display: block; width: 155%; max-width: none; max-height: none; margin-left: -28%; object-fit: contain; }
-.equPage .checkList { display: flex; flex-direction: column; align-items: center; gap: 7px; padding-top: 20%; }
-.equipmentQuote { margin: 0 0 22px; color: #777; font-size: clamp(11px, 3vw, 14px); line-height: 1.7; text-align: center; }
-.equipmentPrompt { margin: 0 0 16px -8px; color: #777; font-size: clamp(10px, 2.8vw, 13px); line-height: 1.55; white-space: nowrap; }
-.checkTitle { display: block; margin-bottom: 8px; color: #777; text-align: center; font-size: 11px; }
-.checkList { gap: 8px; margin: 0; }
-.checkItem { gap: 7px; padding: 0; border: 0; border-radius: 0; font-size: 11px; }
-.checkItem input { position: absolute; width: 1px; height: 1px; opacity: 0; }
-.checkMark { width: 17px; flex: none; font-size: 14px; line-height: 1; }
-.equPage .waitingBadgeImage { margin-top: 24px; }
-.equPage .checkTitle { font-size: 14px; font-weight: 500; margin-bottom: 20px; }
-.equPage .checkItem { color: #777; font-size: clamp(11px, 3vw, 14px); cursor: default; gap: 4px; }
-.equPage .waitingBadgeImage { width: 31%; }
-.page.equPage > .button { background: #70c35f; }
-.equipmentFootnote { margin: 24px 0 0; text-align: center; color: #111; font-size: clamp(10px, 2.8vw, 13px); }
-.page .headerBack { padding: 0; border: 0; border-radius: 0; background: none; color: #222; }
 .page .waitingBadgeButton { padding: 0; border: 0; background: none; }
-.page .branchChoice, .page .officeButton { border: 0; border-radius: 7px; background: #68c95d; color: #fff; font-weight: 800; }
-.equPage .equipmentChecklist { display: flex; flex-direction: column; align-items: center; gap: 7px; width: 100%; margin: 0; padding: 0; border: 0; border-radius: 0; }
-.equPage .equipmentChecklist .checkItem { padding: 0; }
-.equPage .equipmentCheckLabel { color: #777; font-size: inherit; }
+.page .officeButton { border: 0; border-radius: 7px; background: #68c95d; color: #fff; font-weight: 800; }
 
 .accountPage .dualScreens { gap: 5px; margin-top: 24px; }
 .accountPage .accountInfo, .forestPage .accountInfo { margin-top: 12px; font-size: 11px; line-height: 1.55; }

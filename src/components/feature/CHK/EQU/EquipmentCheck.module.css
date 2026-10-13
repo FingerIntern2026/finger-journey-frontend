@@ -1,0 +1,27 @@
+.page { box-sizing: border-box; display: flex; width: 100%; max-width: 480px; min-height: 0; aspect-ratio: 511 / 1108; margin: 0 auto; padding: 9% 7% 1%; flex-direction: column; background: #fff; color: #171717; }
+.content { flex: 1; }
+.title { margin: 0; color: #141414; text-align: center; font-size: clamp(21px, 5.8vw, 28px); line-height: 1.35; letter-spacing: -.7px; font-weight: 800; }
+.equipmentIcons { position: relative; display: grid; width: 58%; height: auto; aspect-ratio: 1; margin: 12% auto 2%; place-items: center; border-radius: 50%; background: #bff5b5; }
+.equipmentIcons img:first-child { width: 48%; max-height: none; margin: -5% 12% 0 0; object-fit: contain; }
+.equipmentIcons img:last-child { position: absolute; right: 17%; bottom: 18%; width: 23%; height: auto; }
+.equipmentArea { display: grid; grid-template-columns: 48% 52%; align-items: start; }
+.generalWrap { position: relative; align-self: start; overflow: hidden; }
+.generalWrap > span { position: absolute; top: 6px; left: 0; z-index: 1; padding: 3px 7px; border: 1px solid #777; border-radius: 4px; background: #fff; color: #666; font-size: 9px; }
+.generalImage { display: block; width: 155%; max-width: none; max-height: none; margin-left: -28%; object-fit: contain; }
+.checkList { display: flex; flex-direction: column; align-items: center; gap: 7px; margin: 0; padding-top: 20%; }
+.quote { margin: 0 0 22px; color: #777; text-align: center; font-size: clamp(11px, 3vw, 14px); line-height: 1.7; }
+.prompt { margin: 0 0 16px -8px; color: #777; font-size: clamp(10px, 2.8vw, 13px); line-height: 1.55; white-space: nowrap; }
+.checkTitle { display: block; margin-bottom: 20px; color: #777; text-align: center; font-size: 14px; font-weight: 500; }
+.checklist { display: flex; width: 100%; margin: 0; padding: 0; flex-direction: column; align-items: center; gap: 7px; border: 0; border-radius: 0; }
+.checkItem { gap: 4px; padding: 0; border: 0; border-radius: 0; color: #777; font-size: clamp(11px, 3vw, 14px); cursor: default; }
+.checkItem input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.checkLabel { color: #777; font-size: inherit; }
+.checkMark { width: 17px; flex: none; font-size: 14px; line-height: 1; }
+.waiting { text-align: center; }
+.waiting img { width: 31%; height: auto; margin-top: 24px; object-fit: contain; }
+.page .nextButton { width: 100%; min-height: 48px; margin-top: 18px; padding: 14px 18px; border: 0; border-radius: 7px; background: #70c35f; color: #fff; font-size: 15px; font-weight: 800; cursor: pointer; }
+.footnote { margin: 24px 0 0; color: #111; text-align: center; font-size: clamp(10px, 2.8vw, 13px); }
+
+@media (max-width: 360px) {
+  .page { padding-right: 19px; padding-left: 19px; }
+}
