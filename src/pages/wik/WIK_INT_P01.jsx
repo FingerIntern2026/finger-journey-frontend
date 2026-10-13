@@ -8,17 +8,17 @@ import fingerLogo from "../../assets/finger-logo.png";
 import useNavigationStore from "../../stores/useNavigationStore";
 import styles from "./WIK_INT_P01.module.css";
 
-export default function WIK_INT_P01({ preview = false }) {
+export default function WIK_INT_P01() {
   const goForward = useNavigationStore((state) => state.goForward);
   return (
-    <main className={`${styles.page} ${preview ? styles.previewPage : ""}`}>
+    <main className={styles.page}>
       <div className={styles.content}>
         <header className={styles.header}>
           <img className={styles.brandLogo} src={fingerLogo} alt="Finger" />
-          <BaseButton label="관리자페이지 이동" variant="ghost" className={styles.adminButton} onClick={() => !preview && goForward("ADM_EMP_P01")} />
+          <BaseButton label="관리자페이지 이동" variant="ghost" className={styles.adminButton} onClick={() => goForward("ADM_EMP_P01")} />
         </header>
         <WikiIntroHero />
-        <BaseButton label="핑거 위키 둘러보기  →" fullWidth className={styles.exploreButton} onClick={() => !preview && goForward("WIK_LIS_P01")} />
+        <BaseButton label="핑거 위키 둘러보기  →" fullWidth className={styles.exploreButton} onClick={() => goForward("WIK_LIS_P01")} />
       </div>
     </main>
   );

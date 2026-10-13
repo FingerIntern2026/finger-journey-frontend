@@ -10,10 +10,6 @@
   color: #222222;
 }
 
-.previewPage {
-  min-height: 100svh;
-}
-
 .header {
   display: flex;
   align-items: flex-start;

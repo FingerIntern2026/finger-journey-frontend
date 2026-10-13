@@ -6,10 +6,6 @@
   color: #252525;
 }
 
-.previewPage {
-  min-height: calc(100svh - 48px);
-}
-
 .map {
   position: relative;
   width: 100%;
@@ -110,10 +106,6 @@
 
 .locked {
   cursor: default;
-}
-
-.previewPage .locked {
-  cursor: pointer;
 }
 
 .stage {

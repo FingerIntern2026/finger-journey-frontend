@@ -44,7 +44,7 @@ const FAQS = [
   { id: "dress", title: "복장은 어떻게 하나요?", content: "비즈니스 캐주얼을 기본으로 하며, 방문 일정이 있는 날은 별도 안내를 확인해주세요." },
 ];
 
-export default function PB_LGN_P02({ preview = false }) {
+export default function PB_LGN_P02() {
   const goForward = useNavigationStore((state) => state.goForward);
   const introRef = useRef(null);
   const detailsRef = useRef(null);
@@ -53,7 +53,7 @@ export default function PB_LGN_P02({ preview = false }) {
   const scrollTo = (target) => target.current?.scrollIntoView({ behavior: "smooth" });
 
   return (
-    <main className={`${styles.page} ${preview ? styles.previewPage : ""}`}>
+    <main className={styles.page}>
       <section className={styles.introSection} ref={introRef}>
         <div className={styles.introContent}>
           <PreboardingHero
@@ -95,7 +95,7 @@ export default function PB_LGN_P02({ preview = false }) {
           label="체크인 시작하기"
           fullWidth
           className={styles.checkInButton}
-          onClick={() => !preview && goForward("CHK_INT_P01")}
+          onClick={() => goForward("CHK_INT_P01")}
         />
         <button type="button" className={`${styles.scrollCue} ${styles.scrollCueUp}`} onClick={() => scrollTo(introRef)} aria-label="처음으로 이동">
           <i className={styles.scrollCueIcon}><ChevronUp size={22} aria-hidden="true" /></i>

@@ -116,7 +116,7 @@ const WIKI_CATEGORIES = [
   },
 ];
 
-export default function WIK_LIS_P01({ preview = false }) {
+export default function WIK_LIS_P01() {
   const goForward = useNavigationStore((state) => state.goForward);
   const [keyword, setKeyword] = useState("");
   const [searchedKeyword, setSearchedKeyword] = useState("");
@@ -160,7 +160,7 @@ export default function WIK_LIS_P01({ preview = false }) {
   };
 
   return (
-    <main className={`${styles.page} ${preview ? styles.previewPage : ""}`}>
+    <main className={styles.page}>
 
 
       <header className={styles.header}>
@@ -201,7 +201,7 @@ export default function WIK_LIS_P01({ preview = false }) {
         label={<>퀴즈풀고<br />AI 리포트 생성하러 가기!</>}
         fullWidth
         className={styles.reportButton}
-        onClick={() => !preview && goForward("PTH_MAP_P01")}
+        onClick={() => goForward("PTH_MAP_P01")}
       />
     </main>
   );

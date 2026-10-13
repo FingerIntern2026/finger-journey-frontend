@@ -1,5 +1,4 @@
 .page { width: 100%; max-width: 480px; min-height: 100svh; margin-inline: auto; display: flex; flex-direction: column; box-sizing: border-box; background: #ffffff; color: #222222; }
-.previewPage { height: 100svh; min-height: 0; }
 .brand { display: inline-flex; align-items: center; gap: 7px; }
 .brand svg { color: #74bd53; transform: rotate(-18deg); }
 .content { flex: 1; width: 100%; padding: 18px; box-sizing: border-box; overflow-y: auto; }

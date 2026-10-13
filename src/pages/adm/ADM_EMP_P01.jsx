@@ -46,7 +46,7 @@ const EMPLOYEE_FORM_FIELDS = [
   { name: "joinDate", label: "입사일", placeholder: "2026-08-01", required: true },
 ];
 
-export default function ADM_EMP_P01({ preview = false }) {
+export default function ADM_EMP_P01() {
   const goForward = useNavigationStore((state) => state.goForward);
   const { showConfirm, showDialog } = useDialog();
   const [onboardingEmployees, setOnboardingEmployees] = useState(ONBOARDING_EMPLOYEES);
@@ -67,9 +67,7 @@ export default function ADM_EMP_P01({ preview = false }) {
   }, [keyword, status]);
 
   const moveTo = (screenCode, params = {}) => {
-    if (!preview) {
-      goForward(screenCode, params);
-    }
+    goForward(screenCode, params);
   };
 
   const openEmployeeForm = (employee = null) => {
@@ -123,7 +121,7 @@ export default function ADM_EMP_P01({ preview = false }) {
   };
 
   return (
-    <div className={`${styles.page} ${preview ? styles.previewPage : ""}`}>
+    <div className={styles.page}>
       <AdminHeader
         title={(
           <span className={styles.brand}>

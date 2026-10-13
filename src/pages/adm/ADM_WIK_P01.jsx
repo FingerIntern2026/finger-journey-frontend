@@ -41,13 +41,13 @@ const INITIAL_CATEGORIES = [
   { id: "forest", icon: "🌲", name: "포레스트 & 레벨업", items: [] },
 ];
 
-export default function ADM_WIK_P01({ preview = false }) {
+export default function ADM_WIK_P01() {
   const goForward = useNavigationStore((state) => state.goForward);
   const { showConfirm, showDialog } = useDialog();
   const [categories, setCategories] = useState(INITIAL_CATEGORIES);
 
   const moveTo = (screenCode) => {
-    if (!preview) goForward(screenCode);
+    goForward(screenCode);
   };
 
   const openCategoryForm = () => {
@@ -99,7 +99,7 @@ export default function ADM_WIK_P01({ preview = false }) {
   };
 
   return (
-    <div className={`${styles.page} ${preview ? styles.previewPage : ""}`}>
+    <div className={styles.page}>
       <AdminHeader
         title={<span className={styles.brand}><Leaf size={22} aria-hidden="true" />핑거저니 관리자</span>}
         onLogout={() => {}}

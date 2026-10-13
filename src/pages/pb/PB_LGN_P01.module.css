@@ -8,13 +8,6 @@
   color: #1f1f1f;
 }
 
-/* 개발용 미리보기 툴바(48px)를 제외한 영역에 맞춤 */
-.previewPage {
-  height: 100svh;
-  min-height: 0;
-  overflow: hidden;
-}
-
 .content {
   width: 100%;
   min-height: 100svh;
@@ -24,11 +17,6 @@
   padding: 30px 32px 34px;
   display: flex;
   flex-direction: column;
-}
-
-.previewPage .content {
-  height: 100%;
-  min-height: 0;
 }
 
 .formArea {

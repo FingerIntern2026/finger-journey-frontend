@@ -35,11 +35,11 @@ const EMPLOYEES = [
   },
 ];
 
-export default function ADM_PRG_P01({ preview = false }) {
+export default function ADM_PRG_P01() {
   const goForward = useNavigationStore((state) => state.goForward);
 
   return (
-    <div className={`${styles.page} ${preview ? styles.previewPage : ""}`}>
+    <div className={styles.page}>
       <AdminHeader
         title={<span className={styles.brand}><Leaf size={22} aria-hidden="true" />핑거저니 관리자</span>}
         onLogout={() => {}}
@@ -51,9 +51,7 @@ export default function ADM_PRG_P01({ preview = false }) {
       <BottomTabNav
         tabs={ADMIN_TABS}
         active="ADM_PRG_P01"
-        onChange={(screenCode) => {
-          if (!preview) goForward(screenCode);
-        }}
+        onChange={(screenCode) => goForward(screenCode)}
       />
     </div>
   );

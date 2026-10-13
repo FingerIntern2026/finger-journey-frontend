@@ -15,7 +15,7 @@ import styles from "./PB_LGN_P01.module.css";
  * 입력값을 다음 화면의 params로 전달한다.
  */
 
-export default function PB_LGN_P01({ preview = false }) {
+export default function PB_LGN_P01() {
   const goForward = useNavigationStore((state) => state.goForward);
   const [serverError, setServerError] = useState("");
 
@@ -37,7 +37,7 @@ export default function PB_LGN_P01({ preview = false }) {
   };
 
   return (
-    <section className={`${styles.page} ${preview ? styles.previewPage : ""}`}>
+    <section className={styles.page}>
       <div className={styles.content}>
         <PreboardingHero
           name="???"

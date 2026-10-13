@@ -29,7 +29,7 @@ const INITIAL_CHECKLIST = [
   { id: "seat", label: "좌석 배정 확인", checked: false },
 ];
 
-export default function ADM_HRC_P01({ preview = false }) {
+export default function ADM_HRC_P01() {
   const goForward = useNavigationStore((state) => state.goForward);
   const [selectedEmployee, setSelectedEmployee] = useState(EMPLOYEES[0]);
   const [checklist, setChecklist] = useState(INITIAL_CHECKLIST);
@@ -45,7 +45,7 @@ export default function ADM_HRC_P01({ preview = false }) {
   };
 
   return (
-    <div className={`${styles.page} ${preview ? styles.previewPage : ""}`}>
+    <div className={styles.page}>
       <AdminHeader title={<span className={styles.brand}><Leaf size={22} aria-hidden="true" />핑거저니 관리자</span>} onLogout={() => {}} />
       <main className={styles.content}>
         <h1>HR관리</h1>
@@ -66,7 +66,7 @@ export default function ADM_HRC_P01({ preview = false }) {
           {savedMessage && <p className={styles.savedMessage}>{savedMessage}</p>}
         </section>
       </main>
-      <BottomTabNav tabs={ADMIN_TABS} active="ADM_HRC_P01" onChange={(screenCode) => { if (!preview) goForward(screenCode); }} />
+      <BottomTabNav tabs={ADMIN_TABS} active="ADM_HRC_P01" onChange={(screenCode) => goForward(screenCode)} />
     </div>
   );
 }
