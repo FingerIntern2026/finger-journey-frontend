@@ -31,7 +31,7 @@ const CONFETTI = [
 export default function EmployeeWelcomeCard({ name, department, className = "" }) {
   return (
     <section className={`${styles.celebration} ${className}`} aria-label={`${name}님의 사원증`}>
-      {CONFETTI.map((piece, index) => (
+      {CONFETTI.map((piece) => (
         <span
           key={`${piece.x}-${piece.y}`}
           className={`${styles.confetti} ${piece.round ? styles.confettiRound : ""}`}

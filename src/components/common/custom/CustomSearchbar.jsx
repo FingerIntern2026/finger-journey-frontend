@@ -4,7 +4,6 @@
 // 담당자: 김재웅
 
 import styles from './custom.module.css';
-import { getHighlightSegments } from '../../../utils/highlight';
 
 export default function CustomSearchbar({
     value,
@@ -39,19 +38,5 @@ export default function CustomSearchbar({
                 🔍
             </button>
         </div>
-    );
-}
-
-// 검색 결과 목록에서 검색어와 일치하는 부분만 <mark>로 감싸는 헬퍼.
-// 실제 텍스트 조각내기는 utils/highlight.js(getHighlightSegments)가 담당하고,
-// 여기서는 그 결과를 JSX(<mark>)로 그리기만 함
-// (SearchHighlight 컴포넌트도 같은 getHighlightSegments를 가져다 쓰면 됨)
-export function highlightText(text, keyword) {
-    return getHighlightSegments(text, keyword).map((segment, i) =>
-        segment.matched ? (
-            <mark key={i} className={styles.highlight}>{segment.text}</mark>
-        ) : (
-            <span key={i}>{segment.text}</span>
-        )
     );
 }

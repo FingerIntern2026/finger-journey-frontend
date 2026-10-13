@@ -1,102 +1,107 @@
-// 역할: 화면 코드 기반 이동 이력과 현재 화면 상태를 전역으로 관리한다.
+// 역할: 화면 코드 기반 이동과 브라우저 URL에 대응하는 현재 화면 상태를 전역으로 관리한다.
 // 사용처: AppRoutes와 화면 내 이전·다음 이동 처리
 // 담당자: 김재웅
 
 import { create } from "zustand";
 import { findScreenByCode } from "../services/screenService";
 
-const useNavigationStore = create((set, get) => ({
-    historyStack: [],
+const EMPTY_PAGE_PARAMS = {
+  path: "/",
+  params: {},
+  preParams: {},
+};
 
-    nowPageParams: {
-        path: "/home",
-        params: {},
-        preParams: {},
-    },
-
-    initializeNavigation: (initialPage) => {
-        if (!initialPage?.path) {
-            return false;
-        }
-
-        set({
-            historyStack: [],
-
-            nowPageParams: {
-                path: initialPage.path,
-                params: { ...(initialPage.params ?? {}) },
-                preParams: {},
-            },
-        });
-
-        return true;
-    },
-
-    goForward: (screenCode, params = {}) => {
-
-        const targetScreen = findScreenByCode(screenCode);
-        if (!targetScreen) {
-            return false;
-        }
-
-        set((state) => {
-            const currentPage = {
-                path: state.nowPageParams.path,
-
-                // 객체 복사해서 저장. 복사하지 않고 저장하면 이후에 원래 변수를 수정하면 현재 화면 상태도 같이 바뀜
-                params: { ...(state.nowPageParams.params ?? {}) },
-            };
-
-            const nextPageParams = {
-                path: targetScreen.routePath,
-                params: { ...params },
-                preParams: {},
-            };
-
-            return {
-                historyStack: [
-                    ...state.historyStack,
-                    currentPage,
-                ],
-
-                nowPageParams: nextPageParams
-            }
-        })
-        return true;
-    },
-
-    goBack: (num = 1, preParams = {}) => {
-
-        /// goBack 0, -1등을 막음 (비정상 호출)
-        if (!Number.isInteger(num) || num < 1) {
-            return false;
-        }
-
-        const { historyStack } = get();
-
-        if (historyStack.length < num) {
-            return false;
-        }
-
-        const targetIndex = historyStack.length - num;
-        const targetPage = historyStack[targetIndex];
-        const nextHistoryStack = historyStack.slice(0, targetIndex)
-
-        set(() => ({
-            historyStack: nextHistoryStack,
-
-            nowPageParams: {
-                path: targetPage.path,
-                params: { ...(targetPage.params ?? {}) },
-                preParams: { ...preParams },
-            },
-        }));
-
-        return true;
+function createHistoryState(params = {}, navigationIndex = 0) {
+  return {
+    fingerJourney: true,
+    navigationIndex,
+    params: { ...params },
+  };
 }
 
+const useNavigationStore = create((set, get) => ({
+  nowPageParams: EMPTY_PAGE_PARAMS,
+  historyIndex: 0,
+  pendingBackParams: {},
 
+  initializeNavigation: (initialPage) => {
+    if (!initialPage?.path) {
+      return false;
+    }
+
+    set({
+      nowPageParams: {
+        path: initialPage.path,
+        params: { ...(initialPage.params ?? {}) },
+        preParams: {},
+      },
+      historyIndex: initialPage.navigationIndex ?? 0,
+      pendingBackParams: {},
+    });
+
+    return true;
+  },
+
+  syncNavigation: ({ path, params = {}, navigationIndex = 0 }) => {
+    if (!path) {
+      return false;
+    }
+
+    set((state) => ({
+      nowPageParams: {
+        path,
+        params: { ...params },
+        preParams: { ...state.pendingBackParams },
+      },
+      historyIndex: navigationIndex,
+      pendingBackParams: {},
+    }));
+
+    return true;
+  },
+
+  goForward: (screenCode, params = {}) => {
+    const targetScreen = findScreenByCode(screenCode);
+
+    if (!targetScreen) {
+      return false;
+    }
+
+    const nextHistoryIndex = get().historyIndex + 1;
+
+    window.history.pushState(
+      createHistoryState(params, nextHistoryIndex),
+      "",
+      targetScreen.routePath
+    );
+
+    set({
+      nowPageParams: {
+        path: targetScreen.routePath,
+        params: { ...params },
+        preParams: {},
+      },
+      historyIndex: nextHistoryIndex,
+      pendingBackParams: {},
+    });
+
+    return true;
+  },
+
+  goBack: (num = 1, preParams = {}) => {
+    if (!Number.isInteger(num) || num < 1) {
+      return false;
+    }
+
+    if (get().historyIndex < num) {
+      return false;
+    }
+
+    set({ pendingBackParams: { ...preParams } });
+    window.history.go(-num);
+    return true;
+  },
 }));
 
+export { createHistoryState };
 export default useNavigationStore;
-

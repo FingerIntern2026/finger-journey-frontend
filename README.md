@@ -5,7 +5,7 @@
 ## Tech Stack
 
 - React
-- React Router
+- Zustand
 - Axios
 - Vite
 

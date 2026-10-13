@@ -1,7 +1,7 @@
 // 역할: 관리자 화면 전체(ADM_EMP_P01/ADM_PRG_P01/ADM_HRC_P01 등)에서 고정으로 쓰는 하단 탭바.
 //       AdminHeader와 세트로 관리자 레이아웃을 구성함 (인터페이스 명세서 3.3.5).
 //       스타일은 layout.module.css 사용
-// 사용처: ComponentListPage.jsx (컴포넌트 데모)
+// 사용처: AdminPageLayout.jsx
 // 담당자: 김재웅
 import { User, BookOpen, TrendingUp, Bell } from 'lucide-react';
 import styles from './layout.module.css';

@@ -1,7 +1,8 @@
 import EthicsRulePage from "../../../components/feature/PTH/RTH/EthicsRulePage";
-import useEthicsRuleNavigation from "./useEthicsRuleNavigation";
+import useNavigationStore from "../../../stores/useNavigationStore";
 
 export default function PTH_ETH_P03() {
-  const { handleBack, handleNext } = useEthicsRuleNavigation("PTH_ETH_P04");
-  return <EthicsRulePage step={3} onBack={handleBack} onNext={handleNext} />;
+  const goBack = useNavigationStore((state) => state.goBack);
+  const goForward = useNavigationStore((state) => state.goForward);
+  return <EthicsRulePage step={3} onBack={goBack} onNext={() => goForward("PTH_ETH_P04")} />;
 }

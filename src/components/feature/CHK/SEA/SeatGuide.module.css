@@ -1,0 +1,16 @@
+.page { box-sizing: border-box; display: flex; width: 100%; max-width: 480px; min-height: 820px; margin: 0 auto; padding: 24px 7% 20px; flex-direction: column; background: #fff; color: #171717; }
+.content { flex: 1; }
+.title { margin: 0; color: #141414; text-align: center; font-size: 21px; line-height: 1.35; letter-spacing: -.7px; font-weight: 800; }
+.illustration { display: grid; width: 142px; height: 142px; margin: 30px auto 18px; place-items: center; border-radius: 50%; background: #c9f4b9; }
+.illustration img { width: 94px; max-height: 94px; object-fit: contain; }
+.branchDiagram { display: block; width: 84%; height: 72px; margin: 0 auto -1px; overflow: visible; fill: none; stroke: #222; stroke-width: 3; stroke-linecap: square; stroke-linejoin: miter; }
+.officeBranch { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; }
+.page .officeButton { min-height: 122px; padding: 14px; border: 0; border-radius: 7px; background: #68c95d; color: #fff; font-size: 17px; line-height: 1.5; font-weight: 800; cursor: pointer; }
+.page .nextButton { width: 100%; min-height: 48px; margin-top: 18px; padding: 14px 18px; border: 0; border-radius: 7px; background: #6bc761; color: #fff; font-size: 15px; font-weight: 800; cursor: pointer; }
+.mapHeader { margin-bottom: 16px; }
+.mapImage { display: block; width: 90%; height: auto; max-width: none; max-height: none; margin: 28px auto 24px; }
+.wideMapImage { width: 94%; }
+
+@media (max-width: 360px) {
+  .page { padding-right: 19px; padding-left: 19px; }
+}

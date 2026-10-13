@@ -1,7 +1,8 @@
 import CorporateCardPage from "../../../components/feature/PTH/CRD/CorporateCardPage";
-import useCorporateCardNavigation from "./useCorporateCardNavigation";
+import useNavigationStore from "../../../stores/useNavigationStore";
 
 export default function PTH_CRD_P05() {
-  const { handleBack, handleNext } = useCorporateCardNavigation("PTH_CRD_P06");
-  return <CorporateCardPage step={5} onBack={handleBack} onNext={handleNext} />;
+  const goBack = useNavigationStore((state) => state.goBack);
+  const goForward = useNavigationStore((state) => state.goForward);
+  return <CorporateCardPage step={5} onBack={goBack} onNext={() => goForward("PTH_CRD_P06")} />;
 }

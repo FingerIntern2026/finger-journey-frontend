@@ -1,6 +1,7 @@
 import ForestPage from "../../../components/feature/PTH/FOR/ForestPage";
-import useForestNavigation from "./useForestNavigation";
+import useNavigationStore from "../../../stores/useNavigationStore";
 export default function PTH_FOR_P06() {
-  const { handleBack, handleNext } = useForestNavigation("PTH_FOR_P07");
-  return <ForestPage step={6} onBack={handleBack} onNext={handleNext} />;
+  const goBack = useNavigationStore((state) => state.goBack);
+  const goForward = useNavigationStore((state) => state.goForward);
+  return <ForestPage step={6} onBack={goBack} onNext={() => goForward("PTH_FOR_P07")} />;
 }

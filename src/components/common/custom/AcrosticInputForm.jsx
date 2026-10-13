@@ -60,7 +60,7 @@ export default function AcrosticInputForm({
                 await sendPost(apiUrl, { name, lines, ...extraBody });
             }
             onSuccess?.(lines);
-        } catch (err) {
+        } catch {
             // 저장 자체가 실패한 경우(네트워크/서버 에러)는 디자인에 명시된 케이스는
             // 아니지만, 사용자에게 아무 반응이 없으면 안 되니 같은 에러 영역에 표시
             setError('저장에 실패했어요. 잠시 후 다시 시도해주세요.');

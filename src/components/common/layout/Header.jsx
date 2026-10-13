@@ -1,10 +1,9 @@
-// 역할: 체크인(가방싸기)~오솔길 세부 화면 등 대부분의 화면 상단에 공통으로 쓰이는 헤더.
+// 역할: 오솔길(PTH) 세부 화면 상단에 공통으로 쓰이는 진행률 헤더.
 //       왼쪽 뒤로가기 버튼, 가운데 상태 텍스트+진행률 바(+n/10), 오른쪽 새싹 아이콘으로 구성되며
 //       화면마다 텍스트/진행률만 다르고 구조는 동일해서 props로 값만 받아 그려줌.
 //       ⚠️ 오솔길 메인맵 전용 헤더는 PathMapHeader, 관리자 화면은 AdminHeader로 별도 분리되어
 //       있고, PageLayout이 header prop으로 받아 조합함
-// 사용처: AuthCheckPage.jsx, DemoIndexPage.jsx, MoveGuidePage.jsx, ReportExamplePage.jsx,
-//         ReportResultPage.jsx, ComponentListPage.jsx (PageLayout의 header prop으로 전달)
+// 사용처: PTH 각 Feature의 PageLayout header prop
 // 담당자:
 import { ChevronLeft } from 'lucide-react';
 // ↑ 왼쪽 화살표 아이콘. lucide-react 라이브러리에서 가져와요.
@@ -13,10 +12,8 @@ import styles from './layout.module.css';
 
 const Header = ({ label, current, total, onBack }) => {
   // label: 상단에 보여줄 텍스트 (예: "가방 싸는 중", "온보딩 진행 중")
-  // current, total: 오솔길 화면에서만 씀 (예: current=4, total=10 → "4/10" 표시)
-  //                 체크인 화면에서는 안 넘기면 자동으로 숨겨짐
-  // onBack: 뒤로가기 버튼 눌렀을 때 실행할 함수. 실제 동작(라우팅 방식)은
-  //         나중에 사수님 컨펌 후 쓰는 쪽에서 넘겨주면 됨 (아직 미확정)
+  // current, total: 현재 단계와 전체 단계 (예: current=4, total=9 → "4/9" 표시)
+  // onBack: Page에서 공통 네비게이션 스토어의 goBack을 전달
   // 진행률 바+새싹 아이콘은 CustomProgressIndicator(3.4.9)로 분리돼 있어 그대로 조합해서 씀
   // (배지는 headerCount에서 이미 n/10을 보여주므로 showBadge={false}로 중복 표시 방지)
 

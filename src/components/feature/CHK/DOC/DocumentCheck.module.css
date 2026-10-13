@@ -1,0 +1,17 @@
+.page { box-sizing: border-box; display: flex; width: 100%; max-width: 480px; min-height: 820px; margin: 0 auto; padding: 24px 7% 20px; flex-direction: column; background: #fff; color: #171717; }
+.content { flex: 1; }
+.title { margin: 0; color: #141414; text-align: center; font-size: 21px; line-height: 1.35; letter-spacing: -.7px; font-weight: 800; }
+.illustration { display: grid; width: 142px; height: 142px; margin: 24px auto 18px; place-items: center; border-radius: 50%; background: #c9f4b9; }
+.illustration img { width: 94px; max-height: 94px; object-fit: contain; }
+.branchDiagram { display: block; width: 84%; height: 72px; margin: 0 auto -1px; overflow: visible; fill: none; stroke: #222; stroke-width: 3; stroke-linecap: square; stroke-linejoin: miter; }
+.choices { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.page .choice { width: 100%; min-height: 122px; padding: 12px 8px; border: 0; border-radius: 7px; background: #68c95d; color: #fff; font-size: 17px; line-height: 1.45; font-weight: 800; cursor: pointer; }
+.caption { margin: 10px 0 0; color: #777; text-align: center; font-size: 10px; line-height: 1.45; }
+.status { margin-top: 14px; text-align: center; }
+.done { display: inline-block; padding: 6px 11px; border-radius: 999px; background: #e6f8e5; color: #329243; font-size: 12px; font-weight: 800; }
+.waitingBadge { display: inline-block; width: 106px; height: auto; object-fit: contain; }
+.page .nextButton { width: 100%; min-height: 48px; margin-top: 18px; padding: 14px 18px; border: 0; border-radius: 7px; background: #6bc761; color: #fff; font-size: 15px; font-weight: 800; cursor: pointer; }
+
+@media (max-width: 360px) {
+  .page { padding-right: 19px; padding-left: 19px; }
+}
