@@ -1,7 +1,8 @@
 import EmploymentRulePage from "../../../components/feature/PTH/RUL/EmploymentRulePage";
-import useEmploymentRuleNavigation from "./useEmploymentRuleNavigation";
+import useNavigationStore from "../../../stores/useNavigationStore";
 
 export default function PTH_RUL_P03() {
-  const { handleBack, handleNext } = useEmploymentRuleNavigation("PTH_RUL_P04");
-  return <EmploymentRulePage step={3} onBack={handleBack} onNext={handleNext} />;
+  const goBack = useNavigationStore((state) => state.goBack);
+  const goForward = useNavigationStore((state) => state.goForward);
+  return <EmploymentRulePage step={3} onBack={goBack} onNext={() => goForward("PTH_RUL_P04")} />;
 }

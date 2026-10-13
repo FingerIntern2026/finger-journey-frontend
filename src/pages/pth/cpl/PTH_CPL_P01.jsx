@@ -8,8 +8,7 @@ export default function PTH_CPL_P01() {
   const params = useNavigationStore((state) => state.nowPageParams.params);
   const name = params.employeeName ?? params.name ?? COMPLETION_MOCK_NAME;
 
-  const handleBack = () => { if (!goBack()) goForward("PTH_MAP_P01"); };
   const handleSuccess = (lines) => goForward("PTH_CPL_P02", { ...params, employeeName: name, lines });
 
-  return <CompletionInput name={name} preview onBack={handleBack} onSuccess={handleSuccess} />;
+  return <CompletionInput name={name} preview onBack={goBack} onSuccess={handleSuccess} />;
 }

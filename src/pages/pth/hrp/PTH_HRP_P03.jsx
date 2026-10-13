@@ -1,7 +1,8 @@
 import HrPolicyPage from "../../../components/feature/PTH/HRP/HrPolicyPage";
-import useHrPolicyNavigation from "./useHrPolicyNavigation";
+import useNavigationStore from "../../../stores/useNavigationStore";
 
 export default function PTH_HRP_P03() {
-  const { handleBack, handleNext } = useHrPolicyNavigation("PTH_HRP_P04");
-  return <HrPolicyPage step={3} onBack={handleBack} onNext={handleNext} />;
+  const goBack = useNavigationStore((state) => state.goBack);
+  const goForward = useNavigationStore((state) => state.goForward);
+  return <HrPolicyPage step={3} onBack={goBack} onNext={() => goForward("PTH_HRP_P04")} />;
 }

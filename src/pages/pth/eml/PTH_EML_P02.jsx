@@ -1,7 +1,8 @@
 import EmailGuideClear from "../../../components/feature/PTH/EML/EmailGuideClear";
-import useEmailNavigation from "./useEmailNavigation";
+import useNavigationStore from "../../../stores/useNavigationStore";
 
 export default function PTH_EML_P02() {
-  const { handleBack, handleNext } = useEmailNavigation("PTH_MAP_P01");
-  return <EmailGuideClear onBack={handleBack} onComplete={handleNext} />;
+  const goBack = useNavigationStore((state) => state.goBack);
+  const goForward = useNavigationStore((state) => state.goForward);
+  return <EmailGuideClear onBack={goBack} onComplete={() => goForward("PTH_MAP_P01")} />;
 }

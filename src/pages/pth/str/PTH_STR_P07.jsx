@@ -1,7 +1,8 @@
 import FingerStoryClear from "../../../components/feature/PTH/STR/FingerStoryClear";
-import useFingerStoryNavigation from "./useFingerStoryNavigation";
+import useNavigationStore from "../../../stores/useNavigationStore";
 
 export default function PTH_STR_P07() {
-  const { handleBack, handleNext } = useFingerStoryNavigation("PTH_MAP_P01");
-  return <FingerStoryClear onBack={handleBack} onComplete={handleNext} />;
+  const goBack = useNavigationStore((state) => state.goBack);
+  const goForward = useNavigationStore((state) => state.goForward);
+  return <FingerStoryClear onBack={goBack} onComplete={() => goForward("PTH_MAP_P01")} />;
 }

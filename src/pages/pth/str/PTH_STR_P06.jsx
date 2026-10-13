@@ -1,7 +1,8 @@
 import FingerStoryPage from "../../../components/feature/PTH/STR/FingerStoryPage";
-import useFingerStoryNavigation from "./useFingerStoryNavigation";
+import useNavigationStore from "../../../stores/useNavigationStore";
 
 export default function PTH_STR_P06() {
-  const { handleBack, handleNext } = useFingerStoryNavigation("PTH_STR_P07");
-  return <FingerStoryPage step={6} onBack={handleBack} onNext={handleNext} />;
+  const goBack = useNavigationStore((state) => state.goBack);
+  const goForward = useNavigationStore((state) => state.goForward);
+  return <FingerStoryPage step={6} onBack={goBack} onNext={() => goForward("PTH_STR_P07")} />;
 }
