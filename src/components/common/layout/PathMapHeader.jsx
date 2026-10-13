@@ -6,13 +6,28 @@
 import CustomProgressIndicator from '../custom/CustomProgressIndicator';
 import styles from './layout.module.css';
 
-const PathMapHeader = ({ badgeLabel = 'FINGER ONBOARDING', title, currentStep, totalStep }) => {
+const PathMapHeader = ({
+  badgeLabel = '✦ FINGER ONBOARDING',
+  title,
+  progressLabel = '온보딩 진행 중',
+  currentStep,
+  totalStep,
+}) => {
   return (
-    <div className={styles.pathMapHeader}>
+    <header className={styles.pathMapHeader}>
       <span className={styles.pathMapBadge}>{badgeLabel}</span>
-      <span className={styles.pathMapTitle}>{title}</span>
-      <CustomProgressIndicator current={currentStep} total={totalStep} className={styles.pathMapProgress} />
-    </div>
+      <h1 className={styles.pathMapTitle}>{title}</h1>
+      <div className={styles.pathMapProgressMeta}>
+        <span>{progressLabel}</span>
+        <strong>{currentStep}/{totalStep}</strong>
+      </div>
+      <CustomProgressIndicator
+        current={currentStep}
+        total={totalStep}
+        showBadge={false}
+        className={styles.pathMapProgress}
+      />
+    </header>
   );
 };
 

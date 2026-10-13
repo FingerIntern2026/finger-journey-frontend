@@ -17,6 +17,16 @@ import PreboardingPreview from './pages/dev/PreboardingPreview';
 import AdminPreview from './pages/dev/AdminPreview';
 import WikiPreview from './pages/dev/WikiPreview';
 import ChatPreview from './pages/dev/ChatPreview';
+import PTH_MAP_P01 from './pages/pth/PTH_MAP_P01';
+import FingerStoryPreview from './pages/dev/FingerStoryPreview';
+import EmploymentRulePreview from './pages/dev/EmploymentRulePreview';
+import HrPolicyPreview from './pages/dev/HrPolicyPreview';
+import EthicsRulePreview from './pages/dev/EthicsRulePreview';
+import EmailGuidePreview from './pages/dev/EmailGuidePreview';
+import CorporateCardPreview from './pages/dev/CorporateCardPreview';
+import ForestPreview from './pages/dev/ForestPreview';
+import LevelUpPreview from './pages/dev/LevelUpPreview';
+import CompletionPreview from './pages/dev/CompletionPreview';
 
 // 챗봇 진입 버튼/팝업은 데모 화면 어디서든 떠 있어야 해서 라우트 최상위인 여기서 관리함
 // (페이지마다 각자 붙이면 빠뜨리는 화면이 생기기 쉬움)
@@ -24,7 +34,17 @@ function App() {
   const previewType = import.meta.env.DEV
     ? new URLSearchParams(window.location.search).get('preview')
     : null;
-  const isPublishingPreview = previewType === 'preboarding' || previewType === 'admin' || previewType === 'wiki' || previewType === 'chat';
+  const isPathMapPreview = import.meta.env.DEV && window.location.pathname === '/pth/map';
+  const isFingerStoryPreview = import.meta.env.DEV && window.location.pathname === '/pth/str';
+  const isEmploymentRulePreview = import.meta.env.DEV && window.location.pathname === '/pth/rul';
+  const isHrPolicyPreview = import.meta.env.DEV && window.location.pathname === '/pth/hrp';
+  const isEthicsRulePreview = import.meta.env.DEV && window.location.pathname === '/pth/rth';
+  const isEmailGuidePreview = import.meta.env.DEV && window.location.pathname === '/pth/eml';
+  const isCorporateCardPreview = import.meta.env.DEV && window.location.pathname === '/pth/crd';
+  const isForestPreview = import.meta.env.DEV && window.location.pathname === '/pth/for';
+  const isLevelUpPreview = import.meta.env.DEV && window.location.pathname === '/pth/lev';
+  const isCompletionPreview = import.meta.env.DEV && window.location.pathname === '/pth/cpl';
+  const isPublishingPreview = previewType === 'preboarding' || previewType === 'admin' || previewType === 'wiki' || previewType === 'chat' || isPathMapPreview || isFingerStoryPreview || isEmploymentRulePreview || isHrPolicyPreview || isEthicsRulePreview || isEmailGuidePreview || isCorporateCardPreview || isForestPreview || isLevelUpPreview || isCompletionPreview;
   const [chatOpen, setChatOpen] = useState(false);
   const [screens, setScreens] = useState(null);
   const [screenLoadError, setScreenLoadError] = useState(null);
@@ -55,6 +75,46 @@ function App() {
       active = false;
     };
   }, [initializeNavigation, isPublishingPreview]);
+
+  if (isCompletionPreview) {
+    return <CompletionPreview />;
+  }
+
+  if (isLevelUpPreview) {
+    return <LevelUpPreview />;
+  }
+
+  if (isForestPreview) {
+    return <ForestPreview />;
+  }
+
+  if (isCorporateCardPreview) {
+    return <CorporateCardPreview />;
+  }
+
+  if (isEmailGuidePreview) {
+    return <EmailGuidePreview />;
+  }
+
+  if (isEthicsRulePreview) {
+    return <EthicsRulePreview />;
+  }
+
+  if (isHrPolicyPreview) {
+    return <HrPolicyPreview />;
+  }
+
+  if (isEmploymentRulePreview) {
+    return <EmploymentRulePreview />;
+  }
+
+  if (isFingerStoryPreview) {
+    return <FingerStoryPreview />;
+  }
+
+  if (isPathMapPreview) {
+    return <PTH_MAP_P01 preview />;
+  }
 
   if (previewType === 'preboarding') {
     return <PreboardingPreview />;

@@ -1,0 +1,12 @@
+.page { min-height: 100svh; background: #fff; color: #222; }
+.pageBody { min-height: max(calc(100svh - 82px), 800px); padding: 22px 24px 34px; box-sizing: border-box; }
+.intro { position: relative; min-height: 250px; padding: 18px 112px 20px 4px; box-sizing: border-box; }
+.logo { width: 92px; height: auto; margin-bottom: 24px; object-fit: contain; }
+.intro h1 { margin: 0; font-size: 29px; line-height: 1.42; font-weight: 950; letter-spacing: -1.2px; }
+.intro p { margin: 32px 0 0; color: #777; font-size: 14px; font-weight: 600; }
+.leaf { position: absolute; right: 6px; top: 94px; width: 86px; height: 86px; object-fit: contain; }
+.form { margin-top: 46px; }
+.savedPage { position: relative; min-height: max(calc(100svh - 82px), 860px); padding: 30px 24px 34px; overflow: hidden; box-sizing: border-box; }
+.savedLogo { position: relative; z-index: 2; width: 82px; height: auto; margin-bottom: 14px; }
+.savedPage > div { min-height: 740px; }
+@media (max-width: 380px) { .pageBody, .savedPage { padding-inline: 18px; } .intro { padding-right: 92px; } .intro h1 { font-size: 26px; } .leaf { width: 72px; height: 72px; } }

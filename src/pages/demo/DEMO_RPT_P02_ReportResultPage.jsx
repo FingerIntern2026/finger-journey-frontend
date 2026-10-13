@@ -14,6 +14,7 @@ import { parseApiError } from "../../utils/apiError";
 import PageLayout from "../../components/common/layout/PageLayout.jsx";
 import Header from "../../components/common/layout/Header.jsx";
 import BaseErrorCard from "../../components/common/base/BaseErrorCard.jsx";
+import BaseButton from "../../components/common/base/BaseButton.jsx";
 import useNavigationStore from "../../stores/useNavigationStore";
 import styles from "./DEMO_RPT_P02_ReportResult.module.css";
 
@@ -22,16 +23,29 @@ function splitParagraphs(text) {
   return (text ?? "").split(/\n\n+/).filter(Boolean);
 }
 
-export default function ReportResultPage() {
+export default function ReportResultPage({
+  employeeId: employeeIdProp,
+  initialReport = null,
+  initialPoemLines = [],
+  onBack: onBackProp,
+  onWikiClick,
+  pthMode = false,
+}) {
   const goBack = useNavigationStore((state) => state.goBack);
-  const employeeId = useNavigationStore((state) => state.nowPageParams.params.employeeId);
+  const employeeIdFromNavigation = useNavigationStore((state) => state.nowPageParams.params.employeeId);
+  const employeeId = employeeIdProp ?? employeeIdFromNavigation;
 
-  const [report, setReport] = useState(null);
-  const [poemLines, setPoemLines] = useState([]);
+  const [report, setReport] = useState(initialReport);
+  const [poemLines, setPoemLines] = useState(initialPoemLines);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (initialReport) {
+      setLoading(false);
+      return;
+    }
+
     if (!employeeId) {
       setLoading(false);
       return;
@@ -69,13 +83,13 @@ export default function ReportResultPage() {
     return () => {
       cancelled = true;
     };
-  }, [employeeId]);
+  }, [employeeId, initialReport]);
 
   return (
-    <PageLayout header={<Header label="완주 리포트" onBack={goBack} />}>
+    <PageLayout header={<Header label={pthMode ? "온보딩 진행 중" : "완주 리포트"} current={pthMode ? 9 : undefined} total={pthMode ? 9 : undefined} onBack={onBackProp ?? goBack} />}>
       <div className={styles.page}>
 
-        {!employeeId && (
+        {!employeeId && !report && (
           <BaseErrorCard message="전달받은 사원 정보가 없습니다. 완주 여정 데모 화면에서 다시 시도해주세요." />
         )}
 
@@ -152,6 +166,12 @@ export default function ReportResultPage() {
                   </div>
                 </section>
               </>
+            )}
+
+            {onWikiClick && (
+              <div className={styles.footer}>
+                <BaseButton label="핑거 위키 보러가기" onClick={onWikiClick} fullWidth />
+              </div>
             )}
 
           </div>

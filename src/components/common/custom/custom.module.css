@@ -277,21 +277,13 @@
   margin: 4px 0 0;
 }
 
-.acrosticSubmitBtn {
+.acrosticActionButton {
   height: 62px;
-  border: none;
   border-radius: 10px;
   background: #6fc667;
-  color: white;
   font-weight: 700;
   font-size: 20px;
-  cursor: pointer;
   margin-top: 8px;
-}
-
-.acrosticSubmitBtn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
 }
 
 

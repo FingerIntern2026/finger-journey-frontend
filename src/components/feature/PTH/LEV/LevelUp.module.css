@@ -1,0 +1,26 @@
+.page { min-height: 100svh; background: #fff; color: #262626; }
+.pageBody { min-height: max(calc(100svh - 82px), 920px); padding: 18px 24px 32px; display: flex; flex-direction: column; box-sizing: border-box; }
+.intro { padding: 12px 2px 24px; }
+.titleRow { display: flex; align-items: center; gap: 10px; }
+.titleIcon { width: 46px; height: 46px; object-fit: contain; }
+.title { margin: 0; color: #111; font-size: 23px; line-height: 1.2; font-weight: 900; letter-spacing: -0.7px; }
+.subtitle { margin: 7px 0 0 56px; color: #777; font-size: 13px; line-height: 1.55; font-weight: 550; letter-spacing: -0.35px; }
+.card { flex: 1; min-height: 625px; padding: 30px 20px 26px; display: flex; flex-direction: column; align-items: stretch; border: 1px solid #e7e7e7; border-radius: 18px; background: #fff; box-shadow: 0 5px 18px rgba(25, 25, 25, 0.06); box-sizing: border-box; }
+.card h2 { margin: 0; color: #35b948; font-size: 23px; line-height: 1.45; font-weight: 900; letter-spacing: -0.8px; text-align: center; word-break: keep-all; }
+.illustration { flex: 1; min-height: 340px; padding: 22px 0 14px; justify-content: center; }
+.illustration img { max-height: 350px; object-fit: contain; border-radius: 0; }
+.description { margin: 5px 0 0; color: #222; font-size: 15px; line-height: 1.65; font-weight: 700; text-align: center; word-break: keep-all; }
+.description span { display: block; }
+.tip { margin-top: 22px; padding: 14px 15px; display: flex; align-items: flex-start; gap: 9px; border: 1px solid #79c16f; border-radius: 12px; background: #fbfef8; }
+.tip svg { flex: none; color: #f1bd48; }
+.tip p { margin: 0; color: #333; font-size: 12px; line-height: 1.55; font-weight: 700; }
+.actionArea { margin-top: auto; padding-top: 26px; }
+.nextButton { min-height: 50px; border-radius: 12px; background: #39b54a; font-size: 16px; font-weight: 800; box-shadow: 0 4px 10px rgba(57, 181, 74, 0.18); }
+.clearContent { flex: 1; min-height: 600px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.clearImage { width: min(75%, 300px); aspect-ratio: 1; object-fit: contain; animation: celebrate 850ms ease-out both; }
+.clearContent h2 { margin: -8px 0 20px; color: #38b84a; font-size: 27px; font-weight: 950; }
+.clearContent > span { color: #777; font-size: 12px; }
+.boardLink { margin-top: 6px; padding: 4px; border: 0; background: transparent; color: #3d773e; font: inherit; font-size: 14px; font-weight: 800; text-decoration: underline; cursor: pointer; }
+@keyframes celebrate { from { opacity: 0; transform: scale(0.72) rotate(-7deg); } to { opacity: 1; transform: scale(1) rotate(0); } }
+@media (max-width: 380px) { .pageBody { padding-inline: 18px; } .card { min-height: 610px; padding-inline: 16px; } .illustration { min-height: 300px; } }
+@media (prefers-reduced-motion: reduce) { .clearImage { animation: none; } }
