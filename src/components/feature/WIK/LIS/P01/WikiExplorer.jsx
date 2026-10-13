@@ -4,7 +4,7 @@
 
 import { ChevronDown, ChevronUp } from "lucide-react";
 import BaseCard from "../../../../common/base/BaseCard";
-import { highlightText } from "../../../../common/custom/CustomSearchbar";
+import { highlightText } from "../../../../common/custom/highlightText";
 import styles from "./WikiExplorer.module.css";
 
 export default function WikiExplorer({

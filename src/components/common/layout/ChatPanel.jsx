@@ -2,7 +2,7 @@
 // 사용처: CHT_MAN_F01, WikiExplorer의 챗봇 진입 화면
 // 담당자: 김재웅
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Leaf, Send, X } from "lucide-react";
 import { AI_SERVER_URL } from "../../../config/apiConfig";
 import styles from "./chatPanel.module.css";
@@ -23,6 +23,9 @@ export default function ChatPanel({ onClose, embedded = false }) {
   const [messages, setMessages] = useState([WELCOME_MESSAGE]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const nextMessageIdRef = useRef(0);
+
+  const createMessageId = (role) => `${role}-${++nextMessageIdRef.current}`;
 
   const handleSend = async (overrideText) => {
     const textToSend = (overrideText ?? input).trim();
@@ -30,7 +33,7 @@ export default function ChatPanel({ onClose, embedded = false }) {
     if (!textToSend || loading) return;
 
     const userMessage = {
-      id: `user-${Date.now()}`,
+      id: createMessageId("user"),
       role: "user",
       text: textToSend,
     };
@@ -55,7 +58,7 @@ export default function ChatPanel({ onClose, embedded = false }) {
       setMessages((previous) => [
         ...previous,
         {
-          id: `assistant-${Date.now()}`,
+          id: createMessageId("assistant"),
           role: "assistant",
           text: data.reply,
           source: data.source,
@@ -66,7 +69,7 @@ export default function ChatPanel({ onClose, embedded = false }) {
       setMessages((previous) => [
         ...previous,
         {
-          id: `error-${Date.now()}`,
+          id: createMessageId("error"),
           role: "assistant",
           text: "아직 정확한 답변을 준비하지 못했어요 🙏",
         },

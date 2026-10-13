@@ -3,12 +3,11 @@
 // 사용처: App.jsx, hooks/useDialog.js
 // 담당자: 김재웅
 
-import { createContext, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import DialogShell from './DialogShell.jsx';
 import DialogAlert from './DialogAlert.jsx';
 import DialogConfirm from './DialogConfirm.jsx';
-
-export const DialogContext = createContext(null);
+import DialogContext from './dialogContextValue.js';
 
 export function DialogProvider({ children }) {
   const [dialogStack, setDialogStack] = useState([]);
@@ -102,16 +101,20 @@ export function DialogProvider({ children }) {
     <DialogContext.Provider value={{ showDialog, showAlert, showConfirm }}>
       {children}
 
-      {dialogStack.map((dialog, index) => (
-        <DialogShell
-          key={dialog.id}
-          type={dialog.type}
-          isTop={index === dialogStack.length - 1}
-          onClose={(result) => closeDialog(dialog.id, result)}
-        >
-          {dialog.content({ close: (result) => closeDialog(dialog.id, result) })}
-        </DialogShell>
-      ))}
+      {dialogStack.map((dialog, index) => {
+        const DialogContent = dialog.content;
+
+        return (
+          <DialogShell
+            key={dialog.id}
+            type={dialog.type}
+            isTop={index === dialogStack.length - 1}
+            onClose={(result) => closeDialog(dialog.id, result)}
+          >
+            <DialogContent close={(result) => closeDialog(dialog.id, result)} />
+          </DialogShell>
+        );
+      })}
     </DialogContext.Provider>
   );
 }
