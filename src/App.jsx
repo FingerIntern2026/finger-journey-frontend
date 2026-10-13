@@ -10,59 +10,27 @@ import AppRoutes from './routes/AppRoutes';
 import GlobalLoading from './components/common/feedback/GlobalLoading';
 import ChatEntryButton from './components/common/layout/ChatEntryButton';
 import ChatPanel from './components/common/layout/ChatPanel';
-import { SCREEN_CODES } from './config/screenCodes';
+import ScreenNavigationPanel from './components/common/layout/ScreenNavigationPanel';
+import { APP_ENTRY_SCREEN_CODE } from './config/appEntry';
 import useNavigationStore from './stores/useNavigationStore';
 import { fetchScreenList } from './services/screenService';
-import PreboardingPreview from './pages/dev/PreboardingPreview';
-import AdminPreview from './pages/dev/AdminPreview';
-import WikiPreview from './pages/dev/WikiPreview';
-import ChatPreview from './pages/dev/ChatPreview';
-import PTH_MAP_P01 from './pages/pth/PTH_MAP_P01';
-import FingerStoryPreview from './pages/dev/FingerStoryPreview';
-import EmploymentRulePreview from './pages/dev/EmploymentRulePreview';
-import HrPolicyPreview from './pages/dev/HrPolicyPreview';
-import EthicsRulePreview from './pages/dev/EthicsRulePreview';
-import EmailGuidePreview from './pages/dev/EmailGuidePreview';
-import CorporateCardPreview from './pages/dev/CorporateCardPreview';
-import ForestPreview from './pages/dev/ForestPreview';
-import LevelUpPreview from './pages/dev/LevelUpPreview';
-import CompletionPreview from './pages/dev/CompletionPreview';
 
-// 챗봇 진입 버튼/팝업은 데모 화면 어디서든 떠 있어야 해서 라우트 최상위인 여기서 관리함
+// 챗봇 진입 버튼/팝업은 서비스 화면 어디서든 떠 있어야 해서 라우트 최상위인 여기서 관리함
 // (페이지마다 각자 붙이면 빠뜨리는 화면이 생기기 쉬움)
 function App() {
-  const previewType = import.meta.env.DEV
-    ? new URLSearchParams(window.location.search).get('preview')
-    : null;
-  const isPathMapPreview = import.meta.env.DEV && window.location.pathname === '/pth/map';
-  const isFingerStoryPreview = import.meta.env.DEV && window.location.pathname === '/pth/str';
-  const isEmploymentRulePreview = import.meta.env.DEV && window.location.pathname === '/pth/rul';
-  const isHrPolicyPreview = import.meta.env.DEV && window.location.pathname === '/pth/hrp';
-  const isEthicsRulePreview = import.meta.env.DEV && window.location.pathname === '/pth/rth';
-  const isEmailGuidePreview = import.meta.env.DEV && window.location.pathname === '/pth/eml';
-  const isCorporateCardPreview = import.meta.env.DEV && window.location.pathname === '/pth/crd';
-  const isForestPreview = import.meta.env.DEV && window.location.pathname === '/pth/for';
-  const isLevelUpPreview = import.meta.env.DEV && window.location.pathname === '/pth/lev';
-  const isCompletionPreview = import.meta.env.DEV && window.location.pathname === '/pth/cpl';
-  const isPublishingPreview = previewType === 'preboarding' || previewType === 'admin' || previewType === 'wiki' || previewType === 'chat' || isPathMapPreview || isFingerStoryPreview || isEmploymentRulePreview || isHrPolicyPreview || isEthicsRulePreview || isEmailGuidePreview || isCorporateCardPreview || isForestPreview || isLevelUpPreview || isCompletionPreview;
   const [chatOpen, setChatOpen] = useState(false);
   const [screens, setScreens] = useState(null);
   const [screenLoadError, setScreenLoadError] = useState(null);
   const initializeNavigation = useNavigationStore((state) => state.initializeNavigation);
 
   useEffect(() => {
-    // 개발 중 화면 퍼블리싱만 확인할 때는 백엔드 화면목록 요청을 하지 않는다.
-    if (isPublishingPreview) {
-      return undefined;
-    }
-
     let active = true;
 
     fetchScreenList()
       .then((loadedScreens) => {
         if (!active) return;
-        const homeScreen = loadedScreens.find((screen) => screen.screenCode === SCREEN_CODES.DEMO_HOME);
-        if (!homeScreen) throw new Error(`메인 화면정보를 찾을 수 없습니다: ${SCREEN_CODES.DEMO_HOME}`);
+        const homeScreen = loadedScreens.find((screen) => screen.screenCode === APP_ENTRY_SCREEN_CODE);
+        if (!homeScreen) throw new Error(`메인 화면정보를 찾을 수 없습니다: ${APP_ENTRY_SCREEN_CODE}`);
 
         initializeNavigation({ path: homeScreen.routePath, params: {} });
         setScreens(loadedScreens);
@@ -74,67 +42,7 @@ function App() {
     return () => {
       active = false;
     };
-  }, [initializeNavigation, isPublishingPreview]);
-
-  if (isCompletionPreview) {
-    return <CompletionPreview />;
-  }
-
-  if (isLevelUpPreview) {
-    return <LevelUpPreview />;
-  }
-
-  if (isForestPreview) {
-    return <ForestPreview />;
-  }
-
-  if (isCorporateCardPreview) {
-    return <CorporateCardPreview />;
-  }
-
-  if (isEmailGuidePreview) {
-    return <EmailGuidePreview />;
-  }
-
-  if (isEthicsRulePreview) {
-    return <EthicsRulePreview />;
-  }
-
-  if (isHrPolicyPreview) {
-    return <HrPolicyPreview />;
-  }
-
-  if (isEmploymentRulePreview) {
-    return <EmploymentRulePreview />;
-  }
-
-  if (isFingerStoryPreview) {
-    return <FingerStoryPreview />;
-  }
-
-  if (isPathMapPreview) {
-    return <PTH_MAP_P01 preview />;
-  }
-
-  if (previewType === 'preboarding') {
-    return <PreboardingPreview />;
-  }
-
-  if (previewType === 'admin') {
-    return (
-      <DialogProvider>
-        <AdminPreview />
-      </DialogProvider>
-    );
-  }
-
-  if (previewType === 'wiki') {
-    return <WikiPreview />;
-  }
-
-  if (previewType === 'chat') {
-    return <ChatPreview />;
-  }
+  }, [initializeNavigation]);
 
   if (screenLoadError) {
     return (
@@ -146,12 +54,13 @@ function App() {
   }
 
   if (!screens) {
-    return <main role="status" style={{ padding: 24 }}>화면정보를 불러오는 중입니다.</main>;
+    return <GlobalLoading forceVisible initial />;
   }
 
   return (
     <DialogProvider>
       <AppRoutes screens={screens} />
+      <ScreenNavigationPanel screens={screens} />
       <GlobalLoading />
       <ChatEntryButton onClick={() => setChatOpen(true)} />
       {chatOpen && <ChatPanel onClose={() => setChatOpen(false)} />}

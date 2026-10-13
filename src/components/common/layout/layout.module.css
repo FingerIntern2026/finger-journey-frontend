@@ -107,8 +107,10 @@
 /* ===== ChatEntryButton ===== */
 .chatEntryButton {
   position: fixed;
-  right: 20px;
-  bottom: 20px;
+  /* 데스크톱에서도 중앙 모바일 앱 프레임의 우측 하단에 붙인다. */
+  right: max(20px, calc((100vw - var(--app-max-width)) / 2 + 20px));
+  bottom: calc(20px + env(safe-area-inset-bottom));
+  z-index: 200;
   width: 52px;
   height: 52px;
   border-radius: 50%;

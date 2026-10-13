@@ -5,6 +5,7 @@ import mouseIcon from '../../assets/checkin/mouse.png';
 import general from '../../assets/checkin/general.png';
 import waitingBadge from '../../assets/checkin/waiting-badge.png';
 import CheckinHeader from './CheckinHeader';
+import useNavigationStore from '../../stores/useNavigationStore';
 import styles from './checkin.module.css';
 
 const items = [
@@ -14,6 +15,8 @@ const items = [
 ];
 
 export default function EquipmentCheckPage() {
+  const goForward = useNavigationStore((state) => state.goForward);
+
   return <main className={`${styles.page} ${styles.equPage}`}>
     <CheckinHeader progress={34} />
     <section className={styles.content}>
@@ -30,7 +33,7 @@ export default function EquipmentCheckPage() {
       </div>
       <div className={styles.center}><img className={styles.waitingBadgeImage} src={waitingBadge} alt="대기중" /></div>
     </section>
-    <BaseButton className={styles.button} onClick={() => window.alert('아직 확인이 완료되지 않았습니다')}>다음</BaseButton>
+    <BaseButton className={styles.button} onClick={() => goForward('CHK_ACC_P01')}>다음</BaseButton>
     <p className={styles.equipmentFootnote}>🌱 부서별로 지급품이 상이할 수 있습니다.</p>
   </main>;
 }

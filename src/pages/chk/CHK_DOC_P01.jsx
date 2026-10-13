@@ -18,6 +18,6 @@ export default function DocumentCheckPage() {
       <div className={styles.branchChoices}><div><BaseButton className={styles.branchChoice} onClick={() => setSubmitted(true)}>그럼요<br/>완벽합니다</BaseButton><p className={styles.choiceCaption}>담당자가 확인할 때까지<br/>잠시만 기다려주세요</p></div><div><BaseButton className={styles.branchChoice} onClick={() => setSubmitted(false)}>아직<br/>못 낸 서류가 있어요</BaseButton><p className={styles.choiceCaption}>자리에 함께 계신 담당자님께<br/>바로 말씀드려주세요!</p></div></div>
       <div className={`${styles.center} ${styles.docStatus}`}>{submitted ? <span className={`${styles.statusBadge} ${styles.statusDone}`}>확인 완료</span> : <img className={styles.waitingBadgeImage} src={waitingBadge} alt="대기중" />}</div>
     </section>
-    <BaseButton className={styles.button} disabled={!submitted} onClick={() => goForward('CHK_EQU_P01')}>다음</BaseButton>
+    <BaseButton className={styles.button} onClick={() => goForward('CHK_EQU_P01')}>다음</BaseButton>
   </main>;
 }

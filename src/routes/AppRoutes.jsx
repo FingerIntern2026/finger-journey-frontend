@@ -2,7 +2,7 @@
 // 사용처: App.jsx
 // 담당자: 김재웅
 
-import { SCREEN_CODES } from '../config/screenCodes';
+import { APP_ENTRY_SCREEN_CODE } from '../config/appEntry';
 import useNavigationStore from '../stores/useNavigationStore';
 import RouteErrorPage from './RouteErrorPage';
 import ScreenErrorBoundary from './ScreenErrorBoundary';
@@ -10,10 +10,10 @@ import ScreenRenderer from './ScreenRenderer';
 
 export default function AppRoutes({ screens }) {
   const currentPath = useNavigationStore((state) => state.nowPageParams.path);
-  const homeScreen = screens.find((screen) => screen.screenCode === SCREEN_CODES.DEMO_HOME);
+  const homeScreen = screens.find((screen) => screen.screenCode === APP_ENTRY_SCREEN_CODE);
 
   if (!homeScreen) {
-    throw new Error(`메인 화면정보를 찾을 수 없습니다: ${SCREEN_CODES.DEMO_HOME}`);
+    throw new Error(`메인 화면정보를 찾을 수 없습니다: ${APP_ENTRY_SCREEN_CODE}`);
   }
 
   if (!screens.some((screen) => screen.routePath === currentPath)) {

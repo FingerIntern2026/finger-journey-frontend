@@ -201,7 +201,7 @@ export default function WIK_LIS_P01({ preview = false }) {
         label={<>퀴즈풀고<br />AI 리포트 생성하러 가기!</>}
         fullWidth
         className={styles.reportButton}
-        onClick={() => !preview && goForward("PTH_QUZ_A01")}
+        onClick={() => !preview && goForward("PTH_MAP_P01")}
       />
 
       <button type="button" className={styles.chatButton} aria-label="챗봇 열기">●●●</button>
