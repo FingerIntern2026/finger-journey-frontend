@@ -12,7 +12,7 @@ import ChatEntryButton from './components/common/layout/ChatEntryButton';
 import ChatPanel from './components/common/layout/ChatPanel';
 import ScreenNavigationPanel from './components/common/layout/ScreenNavigationPanel';
 import { APP_ENTRY_SCREEN_CODE } from './config/appEntry';
-import useNavigationStore from './stores/useNavigationStore';
+import useNavigationStore, { createHistoryState } from './stores/useNavigationStore';
 import { fetchScreenList } from './services/screenService';
 
 // 챗봇 진입 버튼/팝업은 서비스 화면 어디서든 떠 있어야 해서 라우트 최상위인 여기서 관리함
@@ -22,6 +22,7 @@ function App() {
   const [screens, setScreens] = useState(null);
   const [screenLoadError, setScreenLoadError] = useState(null);
   const initializeNavigation = useNavigationStore((state) => state.initializeNavigation);
+  const syncNavigation = useNavigationStore((state) => state.syncNavigation);
 
   useEffect(() => {
     let active = true;
@@ -32,7 +33,25 @@ function App() {
         const homeScreen = loadedScreens.find((screen) => screen.screenCode === APP_ENTRY_SCREEN_CODE);
         if (!homeScreen) throw new Error(`메인 화면정보를 찾을 수 없습니다: ${APP_ENTRY_SCREEN_CODE}`);
 
-        initializeNavigation({ path: homeScreen.routePath, params: {} });
+        const requestedPath = window.location.pathname;
+        const isRootPath = requestedPath === '/';
+        const initialPath = isRootPath ? homeScreen.routePath : requestedPath;
+        const initialParams = isRootPath ? {} : (window.history.state?.params ?? {});
+        const initialNavigationIndex = isRootPath
+          ? 0
+          : (window.history.state?.navigationIndex ?? 0);
+
+        window.history.replaceState(
+          createHistoryState(initialParams, initialNavigationIndex),
+          '',
+          initialPath
+        );
+
+        initializeNavigation({
+          path: initialPath,
+          params: initialParams,
+          navigationIndex: initialNavigationIndex,
+        });
         setScreens(loadedScreens);
       })
       .catch((error) => {
@@ -43,6 +62,26 @@ function App() {
       active = false;
     };
   }, [initializeNavigation]);
+
+  useEffect(() => {
+    if (!screens) {
+      return undefined;
+    }
+
+    const handlePopState = (event) => {
+      syncNavigation({
+        path: window.location.pathname,
+        params: event.state?.params ?? {},
+        navigationIndex: event.state?.navigationIndex ?? 0,
+      });
+    };
+
+    window.addEventListener('popstate', handlePopState);
+
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, [screens, syncNavigation]);
 
   if (screenLoadError) {
     return (
