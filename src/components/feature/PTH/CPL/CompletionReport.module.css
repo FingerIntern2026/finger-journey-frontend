@@ -1,0 +1,178 @@
+.page {
+  min-height: 100svh;
+  padding: 24px;
+  background: #f6f3ea;
+  box-sizing: border-box;
+}
+
+.report {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  overflow: hidden;
+  border: 1px solid #e4ddc9;
+  border-radius: 28px;
+  background: #ffffff;
+  box-shadow: 0 20px 50px -25px rgba(30, 40, 20, 0.35);
+}
+
+.progressHead {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 20px 14px;
+  border-bottom: 1px solid #e4ddc9;
+  color: #6c6650;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.bar {
+  flex: 1;
+  height: 6px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #efeadd;
+}
+
+.barFill {
+  width: 100%;
+  height: 100%;
+  background: #3e8f52;
+}
+
+.hero {
+  padding: 22px 22px 12px;
+  background: linear-gradient(160deg, #e3f3e2, #ffffff 80%);
+  text-align: center;
+}
+
+.eyebrow {
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 4px 10px;
+  border: 1px solid #e4ddc9;
+  border-radius: 999px;
+  color: #2e7340;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.hero h1,
+.section h2 {
+  margin: 0;
+  color: #232b1f;
+  font-family: "Gowun Batang", serif;
+}
+
+.hero h1 {
+  font-size: 22px;
+}
+
+.hero p,
+.poem > p,
+.quote p {
+  margin: 6px 0 0;
+  color: #6c6650;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.section,
+.poemSection {
+  padding: 18px 22px;
+}
+
+.section h2 {
+  margin-bottom: 14px;
+  color: #2e7340;
+  font-size: 20px;
+  text-align: center;
+}
+
+.story p {
+  margin: 0 0 12px;
+  color: #232b1f;
+  font-size: 13px;
+  line-height: 1.75;
+  white-space: pre-wrap;
+}
+
+.quote {
+  margin: 14px 0;
+  padding: 16px 18px;
+  border: 1.5px solid #3e8f52;
+  border-radius: 16px;
+}
+
+.quote strong {
+  color: #2e7340;
+  font-family: "Gowun Batang", serif;
+  font-size: 16px;
+}
+
+.keywords {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.keywords li {
+  padding: 9px 12px;
+  border: 1px solid #e4ddc9;
+  border-radius: 12px;
+  background: #efeadd;
+  color: #232b1f;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.poemSection {
+  border-top: 1px solid #e4ddc9;
+}
+
+.poemSection h2 {
+  margin: 0 0 12px;
+  color: #9b937a;
+  font-size: 13px;
+}
+
+.poem {
+  padding: 16px 18px;
+  border-radius: 16px;
+  background: #efeadd;
+}
+
+.poemRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.poemRow b {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border-radius: 10px;
+  background: #3e8f52;
+  color: #ffffff;
+}
+
+.poemRow span {
+  flex: 1;
+  padding: 7px 12px;
+  border: 1px solid #e4ddc9;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #232b1f;
+  font-size: 13px;
+}
+
+.footer {
+  padding: 0 22px 22px;
+}

@@ -28,3 +28,13 @@
     transform: rotate(360deg);
   }
 }
+
+/* 앱을 처음 열어 화면정보를 요청하는 동안에는 빈 흰 화면에서 로딩만 보여준다. */
+.initialLoading {
+  background: #ffffff;
+}
+
+.initialLoading .spinner {
+  border-color: #e4f3e2;
+  border-top-color: #63c95d;
+}

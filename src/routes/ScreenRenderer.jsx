@@ -3,7 +3,6 @@
 // 담당자: 홍지연
 
 import { createElement, Suspense } from 'react';
-import ProtectedRoute from './ProtectedRoute';
 import { loadScreenComponent } from './screenLoader';
 
 export default function ScreenRenderer({ screens, path }) {
@@ -20,5 +19,5 @@ export default function ScreenRenderer({ screens, path }) {
     </Suspense>
   );
 
-  return screen.loginRequired ? <ProtectedRoute>{element}</ProtectedRoute> : element;
+  return element;
 }

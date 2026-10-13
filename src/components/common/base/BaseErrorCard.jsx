@@ -1,6 +1,6 @@
 // 역할: API 에러(parseApiError가 반환하는 {code, message})를 보여주는 카드.
 //       ReportExamplePage(3곳)/ReportResultPage(2곳)에 복붙돼있던 마크업을 하나로 뽑음
-// 사용처: DEMO_RPT_P01_ReportExamplePage.jsx, DEMO_RPT_P02_ReportResultPage.jsx
+// 사용처: API 연동 화면의 오류 상태 표현
 // 담당자: 김재웅
 
 import styles from './base.module.css';

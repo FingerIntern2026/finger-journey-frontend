@@ -8,6 +8,17 @@
   background: rgba(17, 24, 18, 0.16);
 }
 
+/* 일반 화면에서 열리는 챗봇은 문서 흐름이 아닌 모바일 앱 프레임 위를 덮는다. */
+.overlay {
+  position: fixed;
+  inset-block: 0;
+  left: 50%;
+  z-index: 300;
+  width: min(100vw, var(--app-max-width));
+  transform: translateX(-50%);
+  overflow: hidden;
+}
+
 .embeddedPage {
   width: 100%;
   max-width: 480px;
