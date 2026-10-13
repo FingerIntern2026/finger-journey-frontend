@@ -23,7 +23,6 @@
 .stageLabel { display: flex; align-items: center; gap: 9px; margin-bottom: 20px; color: #55ae50; font-size: 14px; font-weight: 800; }
 .stageLabel::before { content: ''; width: 9px; height: 9px; border-radius: 50%; background: #65c95d; box-shadow: 0 0 0 5px #eaf8e8; }
 .card { margin-top: 22px; padding: 20px; border: 1px solid #e6e8e6; border-radius: 18px; background: #fff; box-shadow: 0 8px 26px rgba(26, 71, 25, .07); }
-.cardTitle { margin: 0 0 8px; color: #222; font-size: 18px; font-weight: 800; }
 .muted { color: #828282; font-size: 14px; line-height: 1.55; }
 .statusRow { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 .statusBadge { flex: none; padding: 6px 11px; border-radius: 999px; background: #fff3d8; color: #c47b11; font-size: 12px; font-weight: 800; }
@@ -32,19 +31,11 @@
 .choice { width: 100%; padding: 18px; border: 1px solid #e3e5e3; border-radius: 15px; background: #fff; color: #282828; text-align: left; font-size: 15px; cursor: pointer; }
 .choiceSelected { border-color: #67c75d; background: #f0faef; color: #318b39; font-weight: 700; }
 .branchLine { width: 1px; height: 42px; margin: 0 auto; background: #222; }
-.loginMock { margin-top: 24px; padding: 22px 18px; border-radius: 18px; background: #f3f6f3; }
-.screenImage { display: block; width: 100%; height: auto; border-radius: 12px; object-fit: contain; }
-.screenImageTall { max-height: 620px; }
 .loginWindow { padding: 24px 18px; border-radius: 12px; background: #fff; box-shadow: 0 8px 22px rgba(0, 0, 0, .08); }
 .loginWindow input { box-sizing: border-box; width: 100%; height: 44px; margin-top: 9px; padding: 0 12px; border: 1px solid #e3e3e3; border-radius: 8px; background: #fafafa; }
 .infoGrid { display: grid; gap: 10px; margin-top: 16px; }
 .infoRow { display: grid; grid-template-columns: 108px 1fr; gap: 12px; padding: 12px 0; border-bottom: 1px solid #eee; font-size: 14px; }
 .infoRow strong { color: #555; }
-.tipCard { margin-top: 18px; padding: 20px; border-radius: 18px; background: #f7fbf6; text-align: center; }
-.tipImage { display: block; width: min(100%, 324px); height: auto; margin: 14px auto 0; object-fit: contain; }
-.accountInfo { margin: 16px 0 4px; text-align: center; color: #777; font-size: 13px; line-height: 1.7; }
-.dualScreens { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 24px; }
-.dualScreens img { width: 100%; border-radius: 4px; }
 .waitingArea { display: flex; min-height: 360px; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
 .waitingMessage { padding: 24px 18px; border: 3px dotted #61c84f; border-radius: 10px; font-size: 21px; line-height: 1.5; font-weight: 800; }
 .waitingBadge { margin-top: 68px; padding: 7px 18px; border-radius: 999px; background: #fff9ed; color: #b17518; font-size: 13px; font-weight: 700; }
@@ -82,20 +73,11 @@
 
 .onboardingBadge { display: block; width: 118px; height: auto; margin: 0 0 12px; object-fit: contain; }
 
-.docPage .title, .equPage .title, .accountPage .title, .forestPage .title, .officePage .title, .mapPage .title { font-size: 21px; }
+.docPage .title, .equPage .title, .officePage .title, .mapPage .title { font-size: 21px; }
 .branchDiagram { display: block; width: 84%; height: 72px; margin: 0 auto -1px; overflow: visible; fill: none; stroke: #222; stroke-width: 3; stroke-linecap: square; stroke-linejoin: miter; }
 .page .waitingBadgeButton { padding: 0; border: 0; background: none; }
 .page .officeButton { border: 0; border-radius: 7px; background: #68c95d; color: #fff; font-weight: 800; }
 
-.accountPage .dualScreens { gap: 5px; margin-top: 24px; }
-.accountPage .accountInfo, .forestPage .accountInfo { margin-top: 12px; font-size: 11px; line-height: 1.55; }
-.tipCard { margin-top: 12px; padding: 0; border-radius: 0; background: transparent; }
-.tipCard .cardTitle { width: 74%; margin: 0 auto 10px; padding: 7px; border-radius: 9px; background: #82cf76; color: #fff; font-size: 13px; }
-.tipImage { width: 100%; max-height: 145px; margin-top: 0; }
-.tipCard p { margin: 10px 0 0; color: #777; font-size: 9px; }
-.forestPage .loginMock { margin-top: 58px; padding: 10px; border-radius: 8px; background: #fff; text-align: center; }
-.forestPage .accountInfo { margin-top: 58px; }
-.forestPage .loginMock strong { display: block; margin-top: 7px; font-size: 11px; }
 
 .approvalIntroPage { position: relative; overflow: hidden; }
 .approvalIntroPage .content { position: relative; }
