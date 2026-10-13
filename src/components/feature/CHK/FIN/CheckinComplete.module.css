@@ -1,0 +1,10 @@
+.page { box-sizing: border-box; display: flex; width: 100%; max-width: 480px; min-height: 820px; margin: 0 auto; padding: 48px 32px 24px; flex-direction: column; background: #fff; color: #171717; }
+.content { flex: 1; }
+.badge { display: block; width: 118px; height: auto; margin: 0 0 12px; object-fit: contain; }
+.title { margin: 0; color: #141414; font-size: 25px; line-height: 1.35; letter-spacing: -.7px; font-weight: 800; }
+.finishImage { display: block; width: 100%; height: auto; max-width: none; max-height: none; margin: 32px auto 36px; object-fit: contain; }
+.page .completeButton { width: 100%; min-height: 48px; margin-top: 18px; padding: 14px 18px; border: 0; border-radius: 7px; background: #6bc761; color: #fff; font-size: 15px; font-weight: 800; cursor: pointer; }
+
+@media (max-width: 360px) {
+  .page { padding-right: 28px; padding-left: 28px; }
+}
