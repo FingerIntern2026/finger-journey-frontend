@@ -1,0 +1,26 @@
+.page {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 480px;
+  min-height: 100svh;
+  margin-inline: auto;
+  background: #ffffff;
+}
+
+.content {
+  box-sizing: border-box;
+  display: flex;
+  height: 100%;
+  min-height: 100svh;
+  padding: 30px 32px 34px;
+  flex-direction: column;
+}
+
+.header { display: flex; align-items: center; justify-content: space-between; }
+.brandLogo { display: block; width: 48px; height: auto; }
+.adminButton { min-height: 30px; padding: 5px 8px; border-color: #67ca60; color: #65c85c; font-size: 10px; }
+.exploreButton { min-height: 58px; border-radius: 10px; background: #69ca60; font-size: 19px; font-weight: 800; }
+
+@media (max-width: 360px) {
+  .content { padding-inline: 24px; }
+}

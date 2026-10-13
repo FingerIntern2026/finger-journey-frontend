@@ -3,7 +3,6 @@
 // 담당자: 김재웅
 
 import wikiIntroForest from "../../../../../assets/wiki-intro-forest.png";
-import { House } from "lucide-react";
 import styles from "./WikiIntroHero.module.css";
 
 export default function WikiIntroHero() {
