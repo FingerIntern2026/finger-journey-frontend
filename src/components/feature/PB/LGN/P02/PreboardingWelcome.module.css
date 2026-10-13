@@ -1,0 +1,37 @@
+.page { box-sizing: border-box; width: 100%; max-width: 480px; min-height: 100svh; margin-inline: auto; background: #ffffff; color: #1f1f1f; }
+.introSection { box-sizing: border-box; display: flex; width: 100%; max-width: 480px; min-height: 100svh; margin: 0 auto; padding: 30px 32px 46px; flex-direction: column; }
+.introContent { display: flex; min-height: 0; flex: 1; flex-direction: column; }
+.welcomeCard { min-height: 0; flex: 1; }
+.detailsContent { box-sizing: border-box; width: 100%; max-width: 480px; margin: 0 auto; padding: 30px 32px 46px; }
+.scrollCue { display: flex; width: 100%; min-height: 50px; align-items: center; justify-content: center; padding: 0; border: 0; background: transparent; color: #6aca60; cursor: pointer; }
+.scrollCueIcon { display: grid; width: 31px; height: 31px; place-items: center; border: 1px solid #bfe8ba; border-radius: 50%; background: #f8fff7; box-shadow: 0 3px 8px rgba(72, 157, 63, .15); animation: cueBounce 1.65s ease-in-out infinite; }
+.scrollCue:hover .scrollCueIcon { background: #6aca60; color: #ffffff; }
+.scrollCueUp .scrollCueIcon { animation-name: cueBounceUp; }
+.guideSection { margin-top: 34px; }
+.guideCard { display: flex; gap: 14px; margin: 0; padding: 18px 4px; border: 0; border-bottom: 1px solid #e5e5e5; border-radius: 0; }
+.guideCard > span { width: 42px; text-align: center; font-size: 28px; }
+.guideCard h3 { margin: 0 0 6px; color: #2a2a2a; font-size: 17px; }
+.guideCard p { margin: 0; color: #777777; font-size: 13px; line-height: 1.55; }
+.sectionDivider { display: grid; width: 31px; height: 31px; margin: 46px auto 36px; padding: 0; place-items: center; border: 1px solid #bfe8ba; border-radius: 50%; background: #f8fff7; box-shadow: 0 3px 8px rgba(72, 157, 63, .15); color: #6aca60; cursor: pointer; }
+.sectionDivider:hover { background: #6aca60; color: #ffffff; }
+.timelineSection h2, .faqSection h2 { margin: 0; color: #202020; font-size: 27px; letter-spacing: -1.2px; }
+.faqSection { margin-top: 22px; }
+.faqList { margin-top: 18px; }
+.faqList > div { border-color: #e5e5e5; }
+.faqList button { min-height: 48px; padding-inline: 4px; color: #333333; font-size: 14px; font-weight: 700; }
+.faqList > div > div { padding: 0 4px 13px; color: #777777; font-size: 13px; line-height: 1.5; }
+.checkInButton { min-height: 58px; margin-top: 30px; border-radius: 10px; background: #6aca60; font-size: 19px; font-weight: 800; }
+
+@keyframes cueBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
+@keyframes cueBounceUp {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@media (max-width: 360px) {
+  .introSection, .detailsContent { padding-inline: 24px; }
+}
