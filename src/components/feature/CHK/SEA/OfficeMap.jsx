@@ -18,7 +18,7 @@ export default function OfficeMap({ title, image, imageTitle, viewBox, width, he
           height={height}
         />
       </section>
-      <BaseButton className={styles.nextButton} onClick={onBack}>뒤로 가기</BaseButton>
+      <BaseButton className={styles.nextButton} onClick={() => onBack?.()}>뒤로 가기</BaseButton>
     </main>
   );
 }

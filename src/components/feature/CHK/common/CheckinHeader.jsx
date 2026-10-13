@@ -7,7 +7,7 @@ export default function CheckinHeader({ progress = 0, onBack, className = '' }) 
   return (
     <header className={`${styles.header} ${className}`}>
       <span className={styles.label}>가방 싸는 중</span>
-      <BaseButton type="button" className={styles.backButton} onClick={onBack} aria-label="뒤로 가기">
+      <BaseButton type="button" className={styles.backButton} onClick={() => onBack?.()} aria-label="뒤로 가기">
         ‹
       </BaseButton>
       <BaseProgressBar current={progress} total={100} className={styles.progress} />
