@@ -2,19 +2,19 @@ import { StrictMode, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
 import './checkinPreview.css';
-import CheckinPasswordPage from './pages/checkin/CHK_INT_P01_CheckinPasswordPage';
-import PackingIntroPage from './pages/checkin/CHK_EXP_P01_PackingIntroPage';
-import DocumentCheckPage from './pages/checkin/CHK_DOC_P01_DocumentCheckPage';
-import EquipmentCheckPage from './pages/checkin/CHK_EQU_P01_EquipmentCheckPage';
-import ErpAccountPage from './pages/checkin/CHK_ACC_P01_ErpAccountPage';
-import ForestLoginPage from './pages/checkin/CHK_ACC_P02_ForestLoginPage';
-import ApprovalIntroPage from './pages/checkin/CHK_APR_P01_ApprovalIntroPage';
-import ApprovalGuidePage from './pages/checkin/CHK_APR_P02_ApprovalGuidePage';
-import ApprovalCompletePage from './pages/checkin/CHK_APR_P03_ApprovalCompletePage';
-import OfficeSelectPage from './pages/checkin/CHK_SEA_P01_OfficeSelectPage';
-import JongnoMapPage from './pages/checkin/CHK_SEA_P02_JongnoMapPage';
-import YeouidoMapPage from './pages/checkin/CHK_SEA_P03_YeouidoMapPage';
-import CheckinCompletePage from './pages/checkin/CHK_FIN_P01_CheckinCompletePage';
+import CheckinPasswordPage from './pages/checkin/CHK_INT_P01';
+import PackingIntroPage from './pages/checkin/CHK_EXP_P01';
+import DocumentCheckPage from './pages/checkin/CHK_DOC_P01';
+import EquipmentCheckPage from './pages/checkin/CHK_EQU_P01';
+import ErpAccountPage from './pages/checkin/CHK_ACC_P01';
+import ForestLoginPage from './pages/checkin/CHK_ACC_P02';
+import ApprovalIntroPage from './pages/checkin/CHK_APR_P01';
+import ApprovalGuidePage from './pages/checkin/CHK_APR_P02';
+import ApprovalCompletePage from './pages/checkin/CHK_APR_P03';
+import OfficeSelectPage from './pages/checkin/CHK_SEA_P01';
+import JongnoMapPage from './pages/checkin/CHK_SEA_P02';
+import YeouidoMapPage from './pages/checkin/CHK_SEA_P03';
+import CheckinCompletePage from './pages/checkin/CHK_FIN_P01';
 
 const screens = [
   ['CHK_INT_P01', '체크인 암호 입력', CheckinPasswordPage],
