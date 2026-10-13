@@ -1,4 +1,4 @@
-import CheckinArtwork from './CheckinArtwork';
+import CheckinArtwork from '../../components/feature/CHK/common/CheckinArtwork';
 import BaseButton from '../../components/common/base/BaseButton';
 import useNavigationStore from '../../stores/useNavigationStore';
 import yeouidoMap from '../../assets/checkin/yeouido-map.png';

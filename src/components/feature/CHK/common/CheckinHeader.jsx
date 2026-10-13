@@ -3,9 +3,9 @@ import BaseProgressBar from '../../../common/base/BaseProgressBar';
 import sprout from '../../../../assets/checkin/sprout.png';
 import styles from './CheckinHeader.module.css';
 
-export default function CheckinHeader({ progress = 0, onBack }) {
+export default function CheckinHeader({ progress = 0, onBack, className = '' }) {
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} ${className}`}>
       <span className={styles.label}>가방 싸는 중</span>
       <BaseButton type="button" className={styles.backButton} onClick={onBack} aria-label="뒤로 가기">
         ‹
