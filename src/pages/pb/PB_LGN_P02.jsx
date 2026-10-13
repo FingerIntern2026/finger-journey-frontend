@@ -2,7 +2,7 @@
 // 사용처: 화면 코드 PB_LGN_P02
 // 담당자: 김재웅
 
-import { useMemo, useRef } from "react";
+import { useRef } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import BaseButton from "../../components/common/base/BaseButton";
 import CustomAccordion from "../../components/common/custom/CustomAccordion";
@@ -16,7 +16,6 @@ import styles from "./PB_LGN_P02.module.css";
 const EMPLOYEE = {
   name: "김핑거",
   department: "Common Tech Part",
-  hireDate: "2026-08-01",
 };
 
 const GUIDES = [
@@ -47,7 +46,6 @@ const FAQS = [
 
 export default function PB_LGN_P02({ preview = false }) {
   const goForward = useNavigationStore((state) => state.goForward);
-  const canCheckIn = useMemo(() => new Date() >= new Date(EMPLOYEE.hireDate), []);
   const introRef = useRef(null);
   const detailsRef = useRef(null);
   const timelineRef = useRef(null);
@@ -96,12 +94,9 @@ export default function PB_LGN_P02({ preview = false }) {
         <BaseButton
           label="체크인 시작하기"
           fullWidth
-          disabled={!canCheckIn}
           className={styles.checkInButton}
           onClick={() => !preview && goForward("CHK_INT_P01")}
         />
-        {!canCheckIn && <p className={styles.checkInNotice}>입사일 이후부터 체크인을 시작할 수 있어요.</p>}
-
         <button type="button" className={`${styles.scrollCue} ${styles.scrollCueUp}`} onClick={() => scrollTo(introRef)} aria-label="처음으로 이동">
           <i className={styles.scrollCueIcon}><ChevronUp size={22} aria-hidden="true" /></i>
         </button>

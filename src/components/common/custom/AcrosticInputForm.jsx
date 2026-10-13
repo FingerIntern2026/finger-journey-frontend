@@ -17,8 +17,9 @@ export default function AcrosticInputForm({
     name = '',
     apiUrl = '/path/acrostic',
     extraBody = {},
-    submitter,
-    onSuccess,
+  submitter,
+  onSuccess,
+  skipValidation = false,
     className = '',
 }) {
     const chars = name.split('');
@@ -48,7 +49,8 @@ export default function AcrosticInputForm({
     };
 
     const handleSubmit = async () => {
-        if (!validate()) return;
+        if (!skipValidation && !validate()) return;
+        setError('');
 
         setSubmitting(true);
         try {

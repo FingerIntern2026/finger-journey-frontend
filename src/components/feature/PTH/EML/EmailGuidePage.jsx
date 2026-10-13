@@ -1,4 +1,3 @@
-import { useEffect, useRef, useState } from "react";
 import BaseButton from "../../../common/base/BaseButton";
 import Header from "../../../common/layout/Header";
 import PageLayout from "../../../common/layout/PageLayout";
@@ -8,22 +7,6 @@ import { EMAIL_GUIDE_STEPS } from "./emailGuideData";
 import styles from "./EmailGuide.module.css";
 
 export default function EmailGuidePage({ onBack, onNext }) {
-  const [hasReachedEnd, setHasReachedEnd] = useState(false);
-  const endRef = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) setHasReachedEnd(true);
-      },
-      { threshold: 0.8 },
-    );
-
-    const target = endRef.current;
-    if (target) observer.observe(target);
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <PageLayout
       className={styles.page}
@@ -36,12 +19,11 @@ export default function EmailGuidePage({ onBack, onNext }) {
             <EmailGuideStep key={step.title} index={index} step={step} />
           ))}
         </section>
-        <div ref={endRef} className={styles.endMarker} aria-hidden="true" />
+        <div className={styles.endMarker} aria-hidden="true" />
         <div className={styles.actionArea}>
           <BaseButton
             label="다음"
             onClick={onNext}
-            disabled={!hasReachedEnd}
             fullWidth
             className={styles.nextButton}
           />

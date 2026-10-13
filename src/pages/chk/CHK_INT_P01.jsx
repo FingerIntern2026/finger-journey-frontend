@@ -14,7 +14,6 @@ export default function CheckinPasswordPage() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (!password.trim()) return setError('암호를 입력해주세요');
     setError('');
     goForward('CHK_EXP_P01');
   };

@@ -58,6 +58,7 @@ export default function PB_LGN_P01({ preview = false }) {
             emptyMessage="값을 입력해주세요"
             field1ErrorMessage="사원번호가 올바르지 않아요"
             field2ErrorMessage="생년월일이 올바르지 않아요"
+            skipValidation
             buttonLabel="입력했어요"
             serverError={serverError}
             onSubmit={handleSubmit}

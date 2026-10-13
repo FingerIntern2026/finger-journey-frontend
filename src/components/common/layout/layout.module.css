@@ -122,6 +122,12 @@
   justify-content: center;
   cursor: pointer;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  touch-action: none;
+  user-select: none;
+}
+
+.chatEntryButton:active {
+  cursor: grabbing;
 }
 
 /* ===== PathMapHeader ===== */

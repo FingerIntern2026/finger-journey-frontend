@@ -14,6 +14,7 @@ export default function CompletionInput({ name, employeeId, onBack, onSuccess, p
           apiUrl="/complete/poem"
           extraBody={employeeId ? { employeeId: Number(employeeId) } : {}}
           submitter={preview ? async () => undefined : undefined}
+          skipValidation={preview}
           onSuccess={onSuccess}
           className={styles.form}
         />

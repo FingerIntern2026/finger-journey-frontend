@@ -10,7 +10,7 @@ import styles from "./chatPanel.module.css";
 const WELCOME_MESSAGE = {
   id: "welcome",
   role: "assistant",
-  text: "안녕하세요! 오늘도 핑거 위키를, 궁금한 게 있으면 편하게 물어보세요 🌱",
+  text: "안녕하세요! 핑거 위키 도우미예요.\n궁금한 점이 있으면 편하게 물어보세요 🌱",
 };
 
 const SUGGESTED_QUESTIONS = [
@@ -82,7 +82,7 @@ export default function ChatPanel({ onClose, embedded = false }) {
         <span className={styles.logo}><Leaf size={23} aria-hidden="true" /></span>
         <div className={styles.headerText}>
           <strong>핑거 AI 챗봇</strong>
-          <span>사내 문서기반으로 답변해요</span>
+          <span>사내 문서 기반으로 답변해요</span>
         </div>
         <button type="button" className={styles.closeButton} onClick={onClose} aria-label="챗봇 닫기">
           <X size={22} aria-hidden="true" />
