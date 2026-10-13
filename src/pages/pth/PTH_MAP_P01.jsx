@@ -21,41 +21,16 @@ const MAP_ITEMS = [
 ];
 
 const ASSET_PATH = "/assets/pth/map";
-const PREVIEW_ROUTES = {
-  PTH_STR_P01: "/pth/str",
-  PTH_RUL_P01: "/pth/rul",
-  PTH_HRP_P01: "/pth/hrp",
-  PTH_ETH_P01: "/pth/rth",
-  PTH_EML_P01: "/pth/eml",
-  PTH_CRD_P01: "/pth/crd",
-  PTH_FOR_P01: "/pth/for",
-  PTH_LEV_P01: "/pth/lev",
-  PTH_CPL_P01: "/pth/cpl",
-};
-
-export default function PTH_MAP_P01({ preview = false }) {
+export default function PTH_MAP_P01() {
   const goForward = useNavigationStore((state) => state.goForward);
   const currentRef = useRef(null);
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    if (!preview) {
-      currentRef.current?.scrollIntoView({ block: "center" });
-    }
-  }, [preview]);
+    currentRef.current?.scrollIntoView({ block: "center" });
+  }, []);
 
   const handleItemClick = (item) => {
-    if (preview) {
-      const previewRoute = PREVIEW_ROUTES[item.screenCode];
-      if (previewRoute) {
-        window.location.assign(previewRoute);
-        return;
-      }
-
-      setMessage(`${item.label} · ${item.screenCode}`);
-      return;
-    }
-
     if (item.status === "locked") return;
 
     if (!goForward(item.screenCode)) {
@@ -64,7 +39,7 @@ export default function PTH_MAP_P01({ preview = false }) {
   };
 
   return (
-    <main className={`${styles.page} ${preview ? styles.previewPage : ""}`}>
+    <main className={styles.page}>
       <PathMapHeader title="오솔길" currentStep={0} totalStep={9} />
 
       <section className={styles.map} aria-label="온보딩 오솔길 지도">
@@ -77,7 +52,7 @@ export default function PTH_MAP_P01({ preview = false }) {
             type="button"
             className={`${styles.mapItem} ${styles[item.status]} ${styles[item.kind]} ${item.hidden ? styles.hidden : ""}`}
             style={{ left: `${item.x}%`, top: `${item.y}%`, "--float-delay": `${index * -0.16}s` }}
-            disabled={!preview && item.status === "locked"}
+            disabled={item.status === "locked"}
             onClick={() => handleItemClick(item)}
             aria-label={`${item.label}${item.status === "locked" ? " 잠김" : ""}`}
           >

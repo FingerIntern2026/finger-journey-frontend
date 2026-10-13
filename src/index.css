@@ -1,4 +1,5 @@
 :root {
+  --app-max-width: 480px;
   --text: #6b6375;
   --text-h: #08060d;
   --bg: #fff;
@@ -63,7 +64,7 @@ html {
    핑거저니는 모바일 온보딩 앱이라 폭을 폰 화면 크기로 맞추고, 정렬은 각 컴포넌트가 알아서 하게 비움 */
 #root {
   width: 100%;
-  max-width: 480px;
+  max-width: var(--app-max-width);
   margin: 0 auto;
   min-height: 100svh;
   display: flex;

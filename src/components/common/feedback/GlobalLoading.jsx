@@ -5,20 +5,20 @@
 import { useGlobalLoading } from "../../../hooks/useGlobalLoading";
 import styles from "./feedback.module.css";
 
-export default function GlobalLoading() {
+export default function GlobalLoading({ forceVisible = false, initial = false }) {
   const loading = useGlobalLoading();
 
-  if (!loading) {
+  if (!forceVisible && !loading) {
     return null;
   }
 
   return (
     <div
-      className={styles.loadingOverlay}
+      className={`${styles.loadingOverlay} ${initial ? styles.initialLoading : ''}`}
       role="status"
       aria-live="polite"
     >
-      <div className={styles.spinner} />
+      <div className={styles.spinner} aria-label="화면정보를 불러오는 중" />
     </div>
   );
 }
