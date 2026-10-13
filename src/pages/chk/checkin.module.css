@@ -4,16 +4,12 @@
 .headerProgress { height: 6px; overflow: hidden; border-radius: 999px; background: #e8e8e8; }
 .headerProgress div { height: 100%; border-radius: inherit; background: #63c657; }
 .headerSprout { width: 34px; height: 42px; object-fit: contain; }
-.introHeadingRow { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
-.introLeaf { width: 82px; height: auto; flex: none; object-fit: contain; }
 .logo { margin: 0 0 28px; color: #555; font-size: 15px; font-weight: 800; }
-.logoImage { width: 72px; height: auto; margin-bottom: 28px; object-fit: contain; }
 .progress { height: 4px; margin-bottom: 34px; overflow: hidden; border-radius: 999px; background: #edf0ed; }
 .progressFill { height: 100%; border-radius: inherit; background: #68c85d; }
 .eyebrow { margin-bottom: 10px; color: #60bd56; font-size: 13px; font-weight: 800; }
 .title { margin: 0; color: #141414; font-size: clamp(28px, 8vw, 36px); line-height: 1.3; letter-spacing: -1.3px; font-weight: 800; }
 .title strong { color: #35ae53; }
-.description { margin-top: 18px; color: #777; font-size: 15px; line-height: 1.65; }
 .content { flex: 1; }
 .center { text-align: center; }
 .heroEmoji { display: grid; min-height: 220px; place-items: center; font-size: 104px; }
@@ -25,7 +21,6 @@
 .flowerField { margin: 32px auto 42px; color: #52af4a; font-size: 32px; line-height: 1.8; text-align: center; letter-spacing: 8px; }
 .field { box-sizing: border-box; width: 100%; height: 62px; padding: 0 18px; border: 2px solid transparent; border-radius: 15px; outline: none; background: #f3f3f3; color: #222; font-size: 16px; }
 .field:focus { border-color: #6bc761; background: #fff; }
-.error { min-height: 22px; margin: 8px 4px 0; color: #ff4d4f; font-size: 13px; }
 .page .button { width: 100%; min-height: 62px; margin-top: 16px; padding: 14px 18px; border: 0; border-radius: 14px; background: #6bc761; color: #fff; font-size: 19px; font-weight: 800; cursor: pointer; }
 .page .button:disabled { cursor: not-allowed; opacity: .42; }
 .buttonSecondary { background: #eef8ed; color: #3c9e43; }
@@ -104,27 +99,7 @@
 .circleIllustration { width: 142px; height: 142px; margin: 28px auto 18px; }
 .circleIllustration img { width: 94px; max-height: 94px; }
 
-.intPage { padding: 72px 34px 24px; }
-.intPage .logoImage { width: 62px; margin-bottom: 22px; }
-.intContent { flex: none; }
-.intContent .title { font-size: 29px; line-height: 1.28; letter-spacing: -1.1px; }
-.intContent .description { margin-top: 24px; font-size: 13px; line-height: 1.65; }
-.intPage .introLeaf { width: 70px; margin-top: 50px; }
-.intForm { display: flex; min-height: 450px; flex: 1; flex-direction: column; align-items: center; padding-top: 76px; }
-.intField { box-sizing: border-box; width: 220px; height: 62px; padding: 0 18px; border: 2px solid transparent; border-radius: 14px; outline: none; background: #f1f1f1; color: #222; text-align: center; font-size: 14px; }
-.intField:focus { border-color: #68c75d; background: #fff; }
-.intForm .error { margin-top: 7px; text-align: center; }
-.intFlowers { width: 226px; height: 180px; margin-top: 18px; object-fit: contain; }
-.page .intButton { margin-top: auto; }
-
-.expPage { padding: 52px 34px 24px; }
-.expBadge { margin: 0 0 12px; color: #59bb51; font-size: 10px; font-weight: 800; }
 .onboardingBadge { display: block; width: 118px; height: auto; margin: 0 0 12px; object-fit: contain; }
-.expTitle { margin: 0; font-size: 27px; line-height: 1.3; letter-spacing: -1px; }
-.expTitle { color: #111; text-align: left; font-weight: 800; }
-.expImage { display: block; width: 100%; max-height: 305px; margin: 70px auto 0; object-fit: contain; }
-.expDescription { margin: 64px 0 0; color: #8a8a8a; font-size: 13px; line-height: 1.72; }
-.page .expButton { margin-top: 28px; }
 
 .docPage .title, .equPage .title, .accountPage .title, .forestPage .title, .officePage .title, .mapPage .title { font-size: 21px; }
 .docPage .circleIllustration { margin-top: 24px; }
@@ -165,9 +140,6 @@
 .page .headerBack { padding: 0; border: 0; border-radius: 0; background: none; color: #222; }
 .page .waitingBadgeButton { padding: 0; border: 0; background: none; }
 .page .branchChoice, .page .officeButton { border: 0; border-radius: 7px; background: #68c95d; color: #fff; font-weight: 800; }
-.intForm .intInputWrapper { margin: 0; }
-.intForm .intField { padding: 0 18px; border: 2px solid transparent; border-radius: 14px; }
-.intForm .intField:focus { border-color: #68c75d; }
 .equPage .equipmentChecklist { display: flex; flex-direction: column; align-items: center; gap: 7px; width: 100%; margin: 0; padding: 0; border: 0; border-radius: 0; }
 .equPage .equipmentChecklist .checkItem { padding: 0; }
 .equPage .equipmentCheckLabel { color: #777; font-size: inherit; }
@@ -225,7 +197,6 @@
 .finishPage .finishImage { display: block; width: 100%; height: auto; max-width: none; max-height: none; margin: 32px auto 36px; }
 @media (max-width: 360px) {
   .page { padding-right: 19px; padding-left: 19px; }
-  .intPage, .expPage, .finishPage { padding-right: 28px; padding-left: 28px; }
-  .intContent .title { font-size: 27px; }
+  .finishPage { padding-right: 28px; padding-left: 28px; }
   .heroEmoji { min-height: 180px; font-size: 84px; }
 }
