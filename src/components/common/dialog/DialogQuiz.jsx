@@ -1,6 +1,6 @@
-// 역할: 징검다리 퀴즈(음식/휴식/협업 3세트)의 내용물만 담당. currentIndex로 문항을 순환시키고,
-//      overlay/box는 DialogShell이 그려주므로 문항 화면/클리어 화면 내용만 반환함.
-// 사용처: DialogExamplePage.jsx
+// 역할: 이미지형 선택 퀴즈의 문항 진행과 완료 화면을 담당한다.
+//      overlay/box는 DialogShell이 그리고, 문항 데이터는 사용하는 기능에서 props로 전달한다.
+// 사용처: PathMap.jsx
 // 담당자: 김재웅
 
 import { useState } from 'react';
@@ -9,56 +9,52 @@ import styles from './dialog.module.css';
 
 export default function DialogQuiz({
   title = '징검다리 퀴즈',
-  questions = [],
+  steps,
+  initialCode,
   onComplete,
-  onClose,
 }) {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentCode, setCurrentCode] = useState(initialCode);
+  const currentStep = steps[currentCode];
 
-  const isCleared = currentIndex >= questions.length;
-  const currentQuestion = questions[currentIndex];
-
-  const handleSelect = () => {
-    setCurrentIndex((prev) => prev + 1);
-  };
-
-  const handleFinish = () => {
-    onComplete?.();
-    setCurrentIndex(0);
-    onClose?.();
-  };
-
-  if (isCleared) {
+  if (currentStep.clear) {
     return (
-      <>
-        <p className={styles.quizClearText}>퀴즈 CLEAR!</p>
-        <div className={styles.actions}>
-          <BaseButton label="완료" onClick={handleFinish} />
-        </div>
-      </>
+      <section className={styles.quizDialog} aria-labelledby="quiz-clear-title">
+        <h2 id="quiz-clear-title" className={styles.quizClearTitle}>퀴즈 CLEAR!</h2>
+        <img
+          className={styles.quizClearImage}
+          src={currentStep.image}
+          alt={`${currentStep.group} 퀴즈 완료`}
+        />
+        <BaseButton
+          label="✓ 완료 · 맵으로 돌아가기"
+          fullWidth
+          className={styles.quizCompleteButton}
+          onClick={onComplete}
+        />
+      </section>
     );
   }
 
   return (
-    <>
-      <p className={styles.quizTitle}>{title}</p>
-      <p>{currentQuestion.question}</p>
-      {currentQuestion.subtitle && (
-        <p className={styles.quizSubtitle}>{currentQuestion.subtitle}</p>
-      )}
-
-      <div className={styles.quizOptions}>
-        {currentQuestion.options.map((option, index) => (
+    <section className={styles.quizDialog} aria-labelledby="quiz-title">
+      <div className={styles.quizRibbon}>{title}</div>
+      <div className={styles.quizQuestionBox}>
+        <h2 id="quiz-title" className={styles.quizQuestionTitle}>{currentStep.title}</h2>
+        <p className={styles.quizPrompt}>{currentStep.prompt}</p>
+        <img className={styles.quizQuestionImage} src={currentStep.image} alt="" />
+      </div>
+      <div className={styles.quizOptions} aria-label={`${currentStep.title} 선택지`}>
+        {currentStep.options.map((option) => (
           <button
-            key={index}
+            key={option}
             type="button"
             className={styles.quizOption}
-            onClick={handleSelect}
+            onClick={() => setCurrentCode(currentStep.nextCode)}
           >
             {option}
           </button>
         ))}
       </div>
-    </>
+    </section>
   );
 }

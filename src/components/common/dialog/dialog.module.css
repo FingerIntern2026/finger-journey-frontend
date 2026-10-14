@@ -30,51 +30,107 @@
   margin-top: 16px;
 }
 
-/* ===== DialogQuiz 전용 =====
-   Figma 실제 디자인(PTH_QUZ_C01~C04) 기준 색상/레이아웃 */
-
-/* 문항 카드 상단 타이틀 (예: "징검다리 퀴즈") */
-.quizTitle {
-  font-weight: 700;
-  font-size: 18px;
-  margin-bottom: 4px;
+/* ===== DialogQuiz ===== */
+.quizDialog {
+  position: relative;
+  width: min(76vw, 360px);
+  box-sizing: border-box;
+  color: #202020;
+  text-align: center;
 }
 
-/* 문항 아래 보조 설명 (예: "어떤 커피를 좋아하시나요?") */
-.quizSubtitle {
+.quizRibbon,
+.quizClearTitle {
+  position: relative;
+  z-index: 1;
+  width: calc(100% - 42px);
+  margin: -4px auto -18px;
+  padding: 13px 16px;
+  box-sizing: border-box;
+  border: 1px solid #4aaa50;
+  border-radius: 10px;
+  background: #d5f3d2;
+  font-size: 21px;
+  font-weight: 800;
+}
+
+.quizQuestionBox {
+  position: relative;
+  min-height: 292px;
+  padding: 40px 18px 15px;
+  box-sizing: border-box;
+}
+
+.quizQuestionTitle {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 800;
+}
+
+.quizPrompt {
+  margin: 5px 0 8px;
   color: #555;
   font-size: 13px;
-  margin-bottom: 12px;
 }
 
-/* 4지선다 옵션 2x2 그리드 배치 (디자인상 세로 나열이 아니라 2열 배치임) */
+.quizQuestionImage {
+  display: block;
+  width: 100%;
+  height: 205px;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
 .quizOptions {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  margin-top: 16px;
+  gap: 8px 10px;
+  padding: 10px;
 }
 
-/* 옵션 버튼 — 정답/오답 구분 없이 다 같은 스타일 (채점 안 하니까) */
 .quizOption {
-  padding: 10px 8px;
-  border: 1px solid #41943a;
-  border-radius: 10px;
-  background: #d2f3cf;
+  min-height: 34px;
+  padding: 6px 8px;
+  border: 1px solid #4aaa50;
+  border-radius: 999px;
+  background: #d9f5d6;
+  color: #2f5331;
+  font-family: inherit;
+  font-size: 12px;
   cursor: pointer;
-  font-size: 13px;
-  text-align: center;
-}
-.quizOption:hover {
-  background: #c1ecbc;
+  transition: background 0.15s ease, transform 0.15s ease;
 }
 
-/* 마지막 문항까지 답했을 때 뜨는 "퀴즈 CLEAR!" 문구 */
-.quizClearText {
-  font-weight: 700;
-  font-size: 20px;
-  text-align: center;
-  margin: 12px 0 20px;
+.quizOption:hover {
+  background: #c3edbf;
+  transform: translateY(-1px);
+}
+
+.quizOption:focus-visible {
+  outline: 3px solid rgba(35, 166, 66, 0.25);
+  outline-offset: 2px;
+}
+
+.quizClearTitle {
+  margin-bottom: 0;
+}
+
+.quizClearImage {
+  display: block;
+  width: 100%;
+  height: min(54vh, 430px);
+  object-fit: contain;
+}
+
+.quizCompleteButton {
+  min-height: 48px;
+  border-radius: 8px;
+}
+
+@media (max-width: 380px) {
+  .quizDialog { width: 78vw; }
+  .quizQuestionBox { min-height: 260px; }
+  .quizQuestionImage { height: 175px; }
 }
 
 /* ===== DialogShell: type별 오버레이(배경) 위치 =====

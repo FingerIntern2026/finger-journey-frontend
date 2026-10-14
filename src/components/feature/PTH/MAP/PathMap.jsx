@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import PathMapHeader from "../common/PathMapHeader";
 import { useDialog } from "../../../../hooks/useDialog";
-import PathQuizDialog from "../QUZ/PathQuizDialog";
+import DialogQuiz from "../../../common/dialog/DialogQuiz";
+import { QUIZ_STEPS } from "../QUZ/quizData";
 import { PATH_MAP_ITEMS } from "./pathMapData";
 import styles from "./PathMap.module.css";
 
@@ -19,7 +20,11 @@ export default function PathMap({ onSelectItem, initialQuizCode }) {
 
   const openQuiz = useCallback((quizCode) => {
     showDialog("center", ({ close }) => (
-      <PathQuizDialog initialCode={quizCode} onComplete={() => close(true)} />
+      <DialogQuiz
+        steps={QUIZ_STEPS}
+        initialCode={quizCode}
+        onComplete={() => close(true)}
+      />
     ));
   }, [showDialog]);
 
