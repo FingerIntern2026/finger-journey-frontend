@@ -1,5 +1,5 @@
-.content { box-sizing: border-box; width: 100%; padding: 18px; flex: 1; overflow-y: auto; }
-.content h1 { margin: 0 0 16px; color: #1f1f1f; font-size: 19px; font-weight: 750; letter-spacing: -.03em; }
+.content { box-sizing: border-box; width: 100%; padding: 22px 20px 28px; flex: 1; overflow-y: auto; }
+.content h1 { margin: 0 0 20px; color: #1f1f1f; font-size: 22px; font-weight: 750; letter-spacing: -.03em; }
 
 @media (max-width: 360px) {
   .content { padding-inline: 14px; }

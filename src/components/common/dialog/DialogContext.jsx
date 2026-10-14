@@ -75,6 +75,38 @@ export function DialogProvider({ children }) {
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
+  // 다이얼로그가 떠 있는 동안 배경 페이지는 현재 위치에 고정한다.
+  // 바텀 시트처럼 내부가 긴 다이얼로그는 DialogShell의 box만 스크롤되고,
+  // 휠/터치 스크롤이 뒤쪽 화면으로 전달되지 않게 한다.
+  useEffect(() => {
+    if (dialogStack.length === 0) return undefined;
+
+    const { body, documentElement } = document;
+    const scrollY = window.scrollY;
+    const previousBodyStyles = {
+      position: body.style.position,
+      top: body.style.top,
+      width: body.style.width,
+      overflow: body.style.overflow,
+    };
+    const previousHtmlOverflow = documentElement.style.overflow;
+
+    documentElement.style.overflow = 'hidden';
+    body.style.position = 'fixed';
+    body.style.top = `-${scrollY}px`;
+    body.style.width = '100%';
+    body.style.overflow = 'hidden';
+
+    return () => {
+      documentElement.style.overflow = previousHtmlOverflow;
+      body.style.position = previousBodyStyles.position;
+      body.style.top = previousBodyStyles.top;
+      body.style.width = previousBodyStyles.width;
+      body.style.overflow = previousBodyStyles.overflow;
+      window.scrollTo(0, scrollY);
+    };
+  }, [dialogStack.length]);
+
   // ── 편의 함수 (4단계와 동일) ──────────────────────────
 
   const showAlert = (message) => {

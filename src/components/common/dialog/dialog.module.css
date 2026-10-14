@@ -152,6 +152,8 @@
   display: flex;
   align-items: flex-end;
   justify-content: center;
+  overflow: hidden;
+  overscroll-behavior: contain;
 }
 
 .overlayFull {
@@ -257,6 +259,7 @@
   box-sizing: border-box;
   max-height: 85vh;
   overflow-y: auto;
+  overscroll-behavior: contain;
   animation: dialogSlideUpIn 0.25s ease-out;
 }
 

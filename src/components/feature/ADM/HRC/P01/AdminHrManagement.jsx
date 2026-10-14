@@ -3,6 +3,7 @@ import BaseButton from "../../../../common/base/BaseButton";
 import BaseInput from "../../../../common/base/BaseInput";
 import AdminPageLayout from "../../common/AdminPageLayout";
 import HrChecklist from "./HrChecklist";
+import HrPoem from "./HrPoem";
 import { EMPLOYEES, INITIAL_CHECKLIST } from "./hrManagementData";
 import styles from "./AdminHrManagement.module.css";
 
@@ -34,17 +35,18 @@ export default function AdminHrManagement({ onNavigate }) {
         <div className={styles.employeeTabs} aria-label="입사자 선택">
           {EMPLOYEES.map((employee) => (
             <button
-              key={employee}
+              key={employee.id}
               type="button"
-              className={selectedEmployee === employee ? styles.activeEmployee : ""}
+              className={selectedEmployee.id === employee.id ? styles.activeEmployee : ""}
               onClick={() => setSelectedEmployee(employee)}
             >
-              {employee}
+              {employee.name}
             </button>
           ))}
         </div>
 
-        <HrChecklist employeeName={selectedEmployee} items={checklist} onToggle={toggleChecklist} />
+        <HrPoem employee={selectedEmployee} />
+        <HrChecklist employeeName={selectedEmployee.name} items={checklist} onToggle={toggleChecklist} />
 
         <section className={styles.passwordSection} aria-labelledby="checkin-password-title">
           <h2 id="checkin-password-title">체크인 비밀번호 설정</h2>
