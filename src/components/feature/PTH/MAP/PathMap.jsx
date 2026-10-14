@@ -1,19 +1,40 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import PathMapHeader from "../common/PathMapHeader";
+import { useDialog } from "../../../../hooks/useDialog";
+import PathQuizDialog from "../QUZ/PathQuizDialog";
 import { PATH_MAP_ITEMS } from "./pathMapData";
 import styles from "./PathMap.module.css";
 
 const ASSET_PATH = "/assets/pth/map";
 
-export default function PathMap({ onSelectItem }) {
+export default function PathMap({ onSelectItem, initialQuizCode }) {
   const currentRef = useRef(null);
+  const openedInitialQuizRef = useRef(null);
   const [message, setMessage] = useState("");
+  const { showDialog } = useDialog();
 
   useEffect(() => {
     currentRef.current?.scrollIntoView({ block: "center" });
   }, []);
 
+  const openQuiz = useCallback((quizCode) => {
+    showDialog("center", ({ close }) => (
+      <PathQuizDialog initialCode={quizCode} onComplete={() => close(true)} />
+    ));
+  }, [showDialog]);
+
+  useEffect(() => {
+    if (!initialQuizCode || openedInitialQuizRef.current === initialQuizCode) return;
+    openedInitialQuizRef.current = initialQuizCode;
+    openQuiz(initialQuizCode);
+  }, [initialQuizCode, openQuiz]);
+
   const handleItemClick = (item) => {
+    if (item.kind === "quiz") {
+      openQuiz(item.quizCode);
+      return;
+    }
+
     if (!onSelectItem(item.screenCode)) {
       setMessage("연결할 화면이 아직 준비되지 않았어요.");
     }

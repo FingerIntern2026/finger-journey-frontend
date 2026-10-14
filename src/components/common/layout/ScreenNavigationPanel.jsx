@@ -11,10 +11,31 @@ const PRESENTATION_TASKS = [
   { taskCode: 'PB', label: '프리보딩' },
   { taskCode: 'CHK', label: '체크인' },
   { taskCode: 'PTH', label: '온보딩' },
+  { taskCode: 'QUZ', label: '징검다리 퀴즈' },
   { taskCode: 'WIK', label: '핑거위키' },
   { taskCode: 'CHT', label: '챗봇' },
   { taskCode: 'ADM', label: '어드민' },
 ];
+
+const QUIZ_SHORTCUTS = [
+  ['PTH_QUZ_C01', '음식 퀴즈 · 커피 취향'],
+  ['PTH_QUZ_C02', '음식 퀴즈 · 점심 취향'],
+  ['PTH_QUZ_C03', '음식 퀴즈 · 맵기 레벨'],
+  ['PTH_QUZ_C04', '음식 퀴즈 CLEAR'],
+  ['PTH_QUZ_C05', '휴식 퀴즈 · 쉬는 날'],
+  ['PTH_QUZ_C06', '휴식 퀴즈 · 좋아하는 계절'],
+  ['PTH_QUZ_C07', '휴식 퀴즈 · 여행 스타일'],
+  ['PTH_QUZ_C08', '휴식 퀴즈 CLEAR'],
+  ['PTH_QUZ_C09', '협업 퀴즈 · 친해지는 방법'],
+  ['PTH_QUZ_C10', '협업 퀴즈 · 출근길 콘텐츠'],
+  ['PTH_QUZ_C11', '협업 퀴즈 · 협업 스타일'],
+  ['PTH_QUZ_C12', '협업 퀴즈 CLEAR'],
+].map(([screenCode, screenName]) => ({
+  taskCode: 'QUZ',
+  screenCode,
+  screenName,
+  quizShortcut: true,
+}));
 
 export default function ScreenNavigationPanel({ screens }) {
   const [isOpen, setIsOpen] = useState(true);
@@ -22,7 +43,7 @@ export default function ScreenNavigationPanel({ screens }) {
   const goForward = useNavigationStore((state) => state.goForward);
 
   const screenGroups = useMemo(() => {
-    const groups = screens.reduce((groups, screen) => {
+    const groups = [...screens, ...QUIZ_SHORTCUTS].reduce((groups, screen) => {
       const group = groups.find((item) => item.taskCode === screen.taskCode);
 
       if (group) {
@@ -43,8 +64,13 @@ export default function ScreenNavigationPanel({ screens }) {
     });
   }, [screens]);
 
-  const moveToScreen = (screenCode) => {
-    goForward(screenCode);
+  const moveToScreen = (screen) => {
+    if (screen.quizShortcut) {
+      goForward('PTH_MAP_P01', { quizCode: screen.screenCode });
+      return;
+    }
+
+    goForward(screen.screenCode);
   };
 
   return (
@@ -85,7 +111,7 @@ export default function ScreenNavigationPanel({ screens }) {
                     type="button"
                     className={isCurrent ? styles.currentScreen : ''}
                     disabled={isCurrent}
-                    onClick={() => moveToScreen(screen.screenCode)}
+                    onClick={() => moveToScreen(screen)}
                   >
                     <span>{screen.screenCode}</span>
                     <small>{screen.screenName}</small>
