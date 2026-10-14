@@ -26,7 +26,7 @@ const BottomTabNav = ({ tabs, active, onChange }) => {
             className={`${styles.bottomTabItem} ${isActive ? styles.bottomTabItemActive : ''}`}
             onClick={() => onChange(tab.path)}
           >
-            {Icon && <Icon size={20} />}
+            {Icon && <Icon size={22} />}
             <span>{tab.label}</span>
           </button>
         );

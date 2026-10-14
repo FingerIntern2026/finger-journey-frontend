@@ -6,7 +6,9 @@ import useNavigationStore from '../stores/useNavigationStore';
 import ScreenRenderer from './ScreenRenderer';
 
 export default function AppRoutes({ screens }) {
-  const currentPath = useNavigationStore((state) => state.nowPageParams.path);
+  const currentPath = useNavigationStore(
+      (state) => state.nowPageParams.path);
+
 
   return <ScreenRenderer screens={screens} path={currentPath} />;
 }

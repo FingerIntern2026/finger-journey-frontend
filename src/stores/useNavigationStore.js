@@ -62,7 +62,6 @@ const useNavigationStore = create((set, get) => ({
 
   goForward: (screenCode, params = {}) => {
     const targetScreen = findScreenByCode(screenCode);
-
     if (!targetScreen) {
       return false;
     }

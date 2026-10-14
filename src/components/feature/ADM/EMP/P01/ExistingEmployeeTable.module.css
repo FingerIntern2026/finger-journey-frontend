@@ -5,16 +5,16 @@
 
 .table {
   width: 100%;
-  min-width: 390px;
+  min-width: 430px;
   border-collapse: collapse;
   table-layout: fixed;
   color: #565b57;
-  font-size: 8px;
+  font-size: 11px;
 }
 
 .table th,
 .table td {
-  padding: 8px 3px;
+  padding: 10px 4px;
   border-bottom: 1px solid #f0f1f0;
   text-align: center;
   vertical-align: middle;
@@ -44,8 +44,8 @@
 }
 
 .nameCell > span {
-  width: 18px;
-  height: 18px;
+  width: 22px;
+  height: 22px;
   flex: 0 0 auto;
   display: grid;
   place-items: center;
@@ -57,12 +57,12 @@
 
 .nameCell strong {
   color: #464b47;
-  font-size: 8px;
+  font-size: 11px;
 }
 
 .statusBadge {
-  padding: 2px 5px;
-  font-size: 7px;
+  padding: 3px 6px;
+  font-size: 9px;
 }
 
 .empty {
@@ -79,8 +79,8 @@
 }
 
 .pagination button {
-  width: 24px;
-  height: 24px;
+  width: 30px;
+  height: 30px;
   padding: 0;
   display: grid;
   place-items: center;
@@ -88,7 +88,7 @@
   border-radius: 6px;
   background: #ffffff;
   color: #8c928d;
-  font-size: 9px;
+  font-size: 11px;
   cursor: pointer;
 }
 

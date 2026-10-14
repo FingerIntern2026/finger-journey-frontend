@@ -1,7 +1,7 @@
 .content {
   flex: 1;
   width: 100%;
-  padding: 18px;
+  padding: 22px 20px 28px;
   box-sizing: border-box;
   overflow-y: auto;
 }
@@ -10,25 +10,25 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 18px;
+  margin-bottom: 22px;
 }
 
 .sectionHeader h1 {
   margin: 0;
   color: #1f1f1f;
-  font-size: 19px;
+  font-size: 22px;
   font-weight: 750;
   letter-spacing: -0.03em;
 }
 
 .addButton {
-  min-height: 30px;
-  padding: 5px 10px;
+  min-height: 36px;
+  padding: 7px 12px;
   display: inline-flex;
   align-items: center;
   gap: 3px;
   border-radius: 8px;
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .deleteMessage {
