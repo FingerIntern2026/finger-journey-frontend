@@ -5,7 +5,7 @@ import BaseSelect from "../../../../common/base/BaseSelect";
 import CustomSearchbar from "../../../../common/custom/CustomSearchbar";
 import DialogFormPopup from "../../../../common/dialog/DialogFormPopup";
 import { useDialog } from "../../../../../hooks/useDialog";
-import { checkDuplicateEmployeeNo } from "../../../../../utils/checkDuplicateEmployeeNo";
+import { checkDuplicateEmployeeNoUtils } from "../../../../../utils/checkDuplicateEmployeeNoUtils.js";
 import AdminPageLayout from "../../common/AdminPageLayout";
 import ExistingEmployeeTable from "./ExistingEmployeeTable";
 import OnboardingEmployeeCard from "./OnboardingEmployeeCard";
@@ -42,7 +42,7 @@ export default function AdminEmployeeManagement({ onNavigate }) {
         onCancel={() => close(false)}
         onSubmit={(values) => {
           const employeesExceptEdited = onboardingEmployees.filter((item) => item.id !== employee?.id);
-          const duplicate = checkDuplicateEmployeeNo(values.employeeNo, [
+          const duplicate = checkDuplicateEmployeeNoUtils(values.employeeNo, [
             ...employeesExceptEdited,
             ...EXISTING_EMPLOYEES,
           ]);

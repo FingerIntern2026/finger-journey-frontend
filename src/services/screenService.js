@@ -2,7 +2,7 @@
 
 import { fetchScreens } from "../api/screenApi";
 import { hasScreenModule } from "../routes/screenLoader";
-import { parseApiError } from "../utils/apiError";
+import { parseApiError } from "../utils/apiErrorUtils.js";
 
 const BACK_ACTIONS = new Set([
   "TARGET",

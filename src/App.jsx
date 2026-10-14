@@ -19,8 +19,10 @@ import { fetchScreenList } from './services/screenService';
 // (페이지마다 각자 붙이면 빠뜨리는 화면이 생기기 쉬움)
 function App() {
   const [chatOpen, setChatOpen] = useState(false);
+
   const [screens, setScreens] = useState(null);
   const [screenLoadError, setScreenLoadError] = useState(null);
+
   const initializeNavigation = useNavigationStore((state) => state.initializeNavigation);
   const syncNavigation = useNavigationStore((state) => state.syncNavigation);
 
@@ -30,7 +32,8 @@ function App() {
     fetchScreenList()
       .then((loadedScreens) => {
         if (!active) return;
-        const homeScreen = loadedScreens.find((screen) => screen.screenCode === APP_ENTRY_SCREEN_CODE);
+        const homeScreen = loadedScreens.find(
+            (screen) => screen.screenCode === APP_ENTRY_SCREEN_CODE);
         if (!homeScreen) throw new Error(`메인 화면정보를 찾을 수 없습니다: ${APP_ENTRY_SCREEN_CODE}`);
 
         const requestedPath = window.location.pathname;
@@ -52,8 +55,10 @@ function App() {
           params: initialParams,
           navigationIndex: initialNavigationIndex,
         });
+
         setScreens(loadedScreens);
       })
+
       .catch((error) => {
         if (active) setScreenLoadError(error);
       });

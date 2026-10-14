@@ -8,7 +8,7 @@
 // existingList : 이미 등록된 사원 목록. [{ employeeNo: '...' }, ...] 형태
 //                (EmployeeListResponse를 그대로 넘기면 됨)
 // 반환값 : true면 이미 등록된 사번(중복), false면 사용 가능
-export function checkDuplicateEmployeeNo(employeeNo, existingList) {
+export function checkDuplicateEmployeeNoUtils(employeeNo, existingList) {
     if (!employeeNo) return false;
 
     const target = employeeNo.trim();

@@ -4,7 +4,7 @@
 // 사용처: MoveGuidePage.jsx, AuthCheckPage.jsx
 // 담당자: 김재웅
 
-import { getIsLoggedIn } from '../utils/authStorage';
+import { getIsLoggedIn } from '../utils/authStorageUtils.js';
 
 export function useAuth() {
     const isLoggedIn = getIsLoggedIn();

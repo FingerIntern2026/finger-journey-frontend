@@ -1,4 +1,4 @@
-import { getHighlightSegments } from '../../../utils/highlight';
+import { getHighlightSegments } from '../../../utils/highlightUtils.js';
 import styles from './custom.module.css';
 
 export function highlightText(text, keyword) {
