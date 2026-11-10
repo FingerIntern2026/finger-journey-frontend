@@ -3,10 +3,10 @@
 // 담당자: 김재웅
 
 import AdminWikiManagement from "../../components/feature/ADM/WIK/P01/AdminWikiManagement";
-import useNavigationStore from "../../stores/useNavigationStore";
+import useNavigation from "../../hooks/useNavigation";
 
 export default function ADM_WIK_P01() {
-  const goForward = useNavigationStore((state) => state.goForward);
+  const { goForward } = useNavigation();
 
   return <AdminWikiManagement onNavigate={goForward} />;
 }

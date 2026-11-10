@@ -1,7 +1,6 @@
 import LevelUpClear from "../../../components/feature/PTH/LEV/LevelUpClear";
-import useNavigationStore from "../../../stores/useNavigationStore";
+import useNavigation from "../../../hooks/useNavigation";
 export default function PTH_LEV_P06() {
-  const goBack = useNavigationStore((state) => state.goBack);
-  const goForward = useNavigationStore((state) => state.goForward);
+  const { goForward, goBack } = useNavigation();
   return <LevelUpClear onBack={goBack} onComplete={() => goForward("PTH_MAP_P01")} />;
 }

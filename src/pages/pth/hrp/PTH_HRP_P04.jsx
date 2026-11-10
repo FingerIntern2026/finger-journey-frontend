@@ -1,8 +1,7 @@
 import HrPolicyClear from "../../../components/feature/PTH/HRP/HrPolicyClear";
-import useNavigationStore from "../../../stores/useNavigationStore";
+import useNavigation from "../../../hooks/useNavigation";
 
 export default function PTH_HRP_P04() {
-  const goBack = useNavigationStore((state) => state.goBack);
-  const goForward = useNavigationStore((state) => state.goForward);
+  const { goForward, goBack } = useNavigation();
   return <HrPolicyClear onBack={goBack} onComplete={() => goForward("PTH_MAP_P01")} />;
 }

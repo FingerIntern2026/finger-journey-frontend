@@ -3,10 +3,10 @@
 // 담당자: 김재웅
 
 import WikiIntro from "../../components/feature/WIK/INT/P01/WikiIntro";
-import useNavigationStore from "../../stores/useNavigationStore";
+import useNavigation from "../../hooks/useNavigation";
 
 export default function WIK_INT_P01() {
-  const goForward = useNavigationStore((state) => state.goForward);
+  const { goForward } = useNavigation();
   return (
     <WikiIntro
       onOpenAdmin={() => goForward("ADM_EMP_P01")}

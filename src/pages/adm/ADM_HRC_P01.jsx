@@ -3,9 +3,9 @@
 // 담당자: 김재웅
 
 import AdminHrManagement from "../../components/feature/ADM/HRC/P01/AdminHrManagement";
-import useNavigationStore from "../../stores/useNavigationStore";
+import useNavigation from "../../hooks/useNavigation";
 
 export default function ADM_HRC_P01() {
-  const goForward = useNavigationStore((state) => state.goForward);
+  const { goForward } = useNavigation();
   return <AdminHrManagement onNavigate={goForward} />;
 }

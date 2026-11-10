@@ -27,14 +27,9 @@ function App() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const setNavigate = useNavigationStore((state) => state.setNavigate);
   const syncNavigation = useNavigationStore((state) => state.syncNavigation);
   const currentPath = useNavigationStore((state) => state.nowPageParams.path);
   const currentScreenCode = screens?.find((screen) => screen.routePath === currentPath)?.screenCode ?? '';
-
-  useEffect(() => {
-    setNavigate(navigate);
-  }, [navigate, setNavigate]);
 
   useEffect(() => {
     let active = true;

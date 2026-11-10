@@ -1,7 +1,6 @@
 import ForestClear from "../../../components/feature/PTH/FOR/ForestClear";
-import useNavigationStore from "../../../stores/useNavigationStore";
+import useNavigation from "../../../hooks/useNavigation";
 export default function PTH_FOR_P07() {
-  const goBack = useNavigationStore((state) => state.goBack);
-  const goForward = useNavigationStore((state) => state.goForward);
+  const { goForward, goBack } = useNavigation();
   return <ForestClear onBack={goBack} onComplete={() => goForward("PTH_MAP_P01")} />;
 }

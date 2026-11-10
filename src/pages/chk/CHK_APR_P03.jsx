@@ -1,9 +1,8 @@
 import ApprovalComplete from '../../components/feature/CHK/APR/ApprovalComplete';
-import useNavigationStore from '../../stores/useNavigationStore';
+import useNavigation from '../../hooks/useNavigation';
 
 export default function CHK_APR_P03() {
-  const goBack = useNavigationStore((state) => state.goBack);
-  const goForward = useNavigationStore((state) => state.goForward);
+  const { goForward, goBack } = useNavigation();
 
   return <ApprovalComplete onBack={goBack} onNext={() => goForward('CHK_SEA_P01')} />;
 }

@@ -3,9 +3,9 @@
 // 담당자: 김재웅
 
 import WikiList from "../../components/feature/WIK/LIS/P01/WikiList";
-import useNavigationStore from "../../stores/useNavigationStore";
+import useNavigation from "../../hooks/useNavigation";
 
 export default function WIK_LIS_P01() {
-  const goForward = useNavigationStore((state) => state.goForward);
+  const { goForward } = useNavigation();
   return <WikiList onCreateReport={() => goForward("PTH_MAP_P01")} />;
 }
