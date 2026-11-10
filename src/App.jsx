@@ -59,7 +59,10 @@ function App() {
       return;
     }
 
-    if (location.pathname === '/') {
+    const isKnownPath = screens.some((screen) => screen.routePath === location.pathname);
+
+    // 루트 경로와 등록되지 않은 주소는 시작 화면으로 보낸다.
+    if (!isKnownPath) {
       const homeScreen = screens.find((screen) => screen.screenCode === APP_ENTRY_SCREEN_CODE);
       navigate(homeScreen.routePath, { replace: true });
       return;
