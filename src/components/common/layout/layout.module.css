@@ -11,7 +11,7 @@
 }
 
 .adminHeaderTitle {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 700;
 }
 
@@ -19,7 +19,7 @@
   background: none;
   border: none;
   color: #888;
-  font-size: 14px;
+  font-size: 16px;
   cursor: pointer;
 }
 
@@ -43,7 +43,7 @@
   border: none;
   cursor: pointer;
   color: #999;
-  font-size: 13px;
+  font-size: 16px;
 }
 
 .bottomTabItemActive {

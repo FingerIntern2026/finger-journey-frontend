@@ -183,7 +183,7 @@
 .formTitle {
   margin: 0 0 18px;
   color: #202020;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 700;
   letter-spacing: -0.03em;
 }
@@ -195,18 +195,18 @@
 
 .formInput {
   width: 100%;
-  min-height: 40px;
+  min-height: 44px;
   box-sizing: border-box;
   border-color: #cfd1d0;
   background: #f7f7f7;
   color: #242424;
-  font-size: 13px;
+  font-size: 16px;
 }
 
 .formError {
   margin: 4px 0 0;
   color: #e1534e;
-  font-size: 12px;
+  font-size: 16px;
 }
 
 .formActions,
@@ -221,9 +221,9 @@
 .formSubmit,
 .confirmCancel,
 .confirmSubmit {
-  min-height: 40px;
+  min-height: 44px;
   border-radius: 5px;
-  font-size: 13px;
+  font-size: 16px;
 }
 
 .formCancel,
@@ -246,7 +246,7 @@
 .confirmMessage {
   margin: 0;
   color: #222;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 700;
   text-align: center;
 }
@@ -260,7 +260,12 @@
   max-height: 85vh;
   overflow-y: auto;
   overscroll-behavior: contain;
+  scrollbar-width: none;
   animation: dialogSlideUpIn 0.25s ease-out;
+}
+
+.boxBottom::-webkit-scrollbar {
+  display: none;
 }
 
 .boxFull {

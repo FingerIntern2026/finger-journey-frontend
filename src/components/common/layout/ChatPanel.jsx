@@ -108,6 +108,7 @@ export default function ChatPanel({ onClose, embedded = false }) {
               <span />
               <span />
               <span />
+              <p className={styles.typingText}>답변을 준비하고 있어요</p>
             </div>
           </div>
         )}

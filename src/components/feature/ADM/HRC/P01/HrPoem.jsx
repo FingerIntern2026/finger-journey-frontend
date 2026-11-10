@@ -4,11 +4,28 @@
 
 import { useEffect, useState } from "react";
 import { sendPost } from "../../../../../api/client";
+import BaseButton from "../../../../common/base/BaseButton";
 import styles from "./HrPoem.module.css";
+
+const COPY_LABEL = "게시판용으로 복사하기";
 
 export default function HrPoem({ employee }) {
   const [status, setStatus] = useState("loading");
   const [lines, setLines] = useState([]);
+  const [copyLabel, setCopyLabel] = useState(COPY_LABEL);
+
+  const copyPoem = async () => {
+    const poem = lines.map((line) => `${line.letter} ${line.text}`).join("\n");
+
+    try {
+      await navigator.clipboard.writeText(`${employee.name}님의 3행시\n${poem}`);
+      setCopyLabel("복사했어요");
+    } catch {
+      setCopyLabel("복사하지 못했어요");
+    }
+
+    window.setTimeout(() => setCopyLabel(COPY_LABEL), 1500);
+  };
 
   useEffect(() => {
     let active = true;
@@ -52,6 +69,15 @@ export default function HrPoem({ employee }) {
             </p>
           ))}
         </div>
+      )}
+      {status === "ready" && lines.length > 0 && (
+        <BaseButton
+          label={copyLabel}
+          variant="ghost"
+          fullWidth
+          className={styles.copyButton}
+          onClick={copyPoem}
+        />
       )}
     </section>
   );

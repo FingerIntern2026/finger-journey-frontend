@@ -14,15 +14,18 @@ export default function OnboardingEmployeeCard({ employee, onEdit, onDelete }) {
       <div className={styles.information}>
         <strong>{employee.name}</strong>
         <span>{employee.employeeNo} · {employee.department}</span>
+      </div>
+
+      <div className={styles.footer}>
         <div className={styles.meta}>
           <time dateTime={employee.joinDate}>{employee.joinDate}</time>
           <span>{employee.progress}% 완료</span>
         </div>
-      </div>
 
-      <div className={styles.actions}>
-        <BaseButton label="수정" variant="ghost" className={styles.editButton} onClick={onEdit} />
-        <BaseButton label="삭제" variant="danger" className={styles.deleteButton} onClick={onDelete} />
+        <div className={styles.actions}>
+          <BaseButton label="수정" variant="ghost" className={styles.editButton} onClick={onEdit} />
+          <BaseButton label="삭제" variant="danger" className={styles.deleteButton} onClick={onDelete} />
+        </div>
       </div>
     </BaseCard>
   );

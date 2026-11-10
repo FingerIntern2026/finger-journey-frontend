@@ -26,17 +26,17 @@
 }
 
 .sectionHeader h1 {
-  font-size: 22px;
+  font-size: 24px;
 }
 
 .addButton {
-  min-height: 36px;
+  min-height: 40px;
   padding: 7px 12px;
   display: inline-flex;
   align-items: center;
   gap: 3px;
   border-radius: 8px;
-  font-size: 13px;
+  font-size: 16px;
 }
 
 .onboardingList {
@@ -53,12 +53,12 @@
 }
 
 .listHeading h2 {
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .listHeading span {
   color: #9a9a9a;
-  font-size: 12px;
+  font-size: 16px;
 }
 
 .filters {
@@ -73,7 +73,7 @@
 }
 
 .filters > div:last-child {
-  flex: 0 0 86px;
+  flex: 0 0 96px;
   margin-bottom: 0;
 }
 
@@ -84,7 +84,7 @@
   border-color: #ebefec;
   background: #f8faf8;
   color: #4f5751;
-  font-size: 13px;
+  font-size: 16px;
 }
 
 .deleteMessage {

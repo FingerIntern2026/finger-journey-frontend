@@ -1,4 +1,6 @@
 .celebration {
+  --card-offset: 24px;
+
   position: relative;
   display: grid;
   min-height: 324px;
@@ -8,6 +10,7 @@
 
 .card {
   position: relative;
+  top: var(--card-offset);
   z-index: 1;
   display: grid;
   width: min(100%, 260px);
@@ -45,7 +48,7 @@
 
 .confetti {
   position: absolute;
-  top: 50%;
+  top: calc(50% + var(--card-offset));
   left: 50%;
   z-index: 0;
   width: 9px;
