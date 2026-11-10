@@ -3,7 +3,7 @@
 // 담당자: 김재웅
 
 import PreboardingLogin from "../../components/feature/PB/LGN/P01/PreboardingLogin";
-import useNavigationStore from "../../stores/useNavigationStore";
+import useNavigation from "../../hooks/useNavigation";
 
 /**
  * 프리보딩 첫 화면
@@ -13,7 +13,7 @@ import useNavigationStore from "../../stores/useNavigationStore";
  */
 
 export default function PB_LGN_P01() {
-  const goForward = useNavigationStore((state) => state.goForward);
+  const { goForward } = useNavigation();
 
   return (
     <PreboardingLogin

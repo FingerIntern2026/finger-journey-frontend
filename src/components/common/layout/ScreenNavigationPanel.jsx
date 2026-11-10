@@ -4,6 +4,7 @@
 
 import { List, X } from 'lucide-react';
 import { useMemo, useState } from 'react';
+import useNavigation from '../../../hooks/useNavigation';
 import useNavigationStore from '../../../stores/useNavigationStore';
 import styles from './screenNavigationPanel.module.css';
 
@@ -40,7 +41,7 @@ const QUIZ_SHORTCUTS = [
 export default function ScreenNavigationPanel({ screens }) {
   const [isOpen, setIsOpen] = useState(true);
   const currentPath = useNavigationStore((state) => state.nowPageParams.path);
-  const goForward = useNavigationStore((state) => state.goForward);
+  const { goForward } = useNavigation();
 
   const screenGroups = useMemo(() => {
     const groups = [...screens, ...QUIZ_SHORTCUTS].reduce((groups, screen) => {
