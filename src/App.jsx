@@ -25,6 +25,8 @@ function App() {
 
   const initializeNavigation = useNavigationStore((state) => state.initializeNavigation);
   const syncNavigation = useNavigationStore((state) => state.syncNavigation);
+  const currentPath = useNavigationStore((state) => state.nowPageParams.path);
+  const currentScreenCode = screens?.find((screen) => screen.routePath === currentPath)?.screenCode ?? '';
 
   useEffect(() => {
     let active = true;
@@ -106,7 +108,12 @@ function App() {
       <AppRoutes screens={screens} />
       <ScreenNavigationPanel screens={screens} />
       <GlobalLoading />
-      <ChatEntryButton onClick={() => setChatOpen(true)} />
+      {currentScreenCode !== 'CHT_MAN_F01' && (
+        <ChatEntryButton
+          raised={currentScreenCode.startsWith('ADM_')}
+          onClick={() => setChatOpen(true)}
+        />
+      )}
       {chatOpen && <ChatPanel onClose={() => setChatOpen(false)} />}
     </DialogProvider>
   );

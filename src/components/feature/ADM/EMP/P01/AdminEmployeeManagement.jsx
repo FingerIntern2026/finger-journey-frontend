@@ -71,7 +71,7 @@ export default function AdminEmployeeManagement({ onNavigate }) {
     showConfirm(`${employee.name}님을 삭제할까요?`, () => {
       setOnboardingEmployees((employees) => employees.filter((item) => item.id !== employee.id));
     }, {
-      confirmLabel: "저장",
+      confirmLabel: "삭제",
       cancelLabel: "취소",
       messageClassName: styles.deleteMessage,
     });
