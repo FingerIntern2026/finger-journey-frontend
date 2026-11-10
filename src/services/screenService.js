@@ -1,7 +1,6 @@
 // 역할: 백엔드에서 받은 화면정보를 검증하고 캐싱한 뒤, 화면 코드나 경로로 조회
 
 import { fetchScreens } from "../api/screenApi";
-import { hasScreenModule } from "../routes/screenLoader";
 import { parseApiError } from "../utils/apiErrorUtils.js";
 
 const BACK_ACTIONS = new Set([
@@ -80,12 +79,6 @@ function validateScreens(screens) {
     if (paths.has(screen.routePath)) {
       throw new Error(
         `중복된 화면 경로입니다: ${screen.routePath}`
-      );
-    }
-
-    if (!hasScreenModule(screen.filePath)) {
-      throw new Error(
-        `화면 파일을 찾을 수 없습니다: ${screen.filePath}`
       );
     }
 

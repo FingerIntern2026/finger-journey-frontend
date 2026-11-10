@@ -1,6 +1,6 @@
 # Frontend Project Structure
 
-본 프로젝트의 프론트엔드는 React, Vite, Zustand를 사용합니다. 화면의 등록정보는 백엔드 DB에서 관리하고, 프론트엔드는 해당 정보를 이용해 페이지를 동적으로 불러옵니다.
+본 프로젝트의 프론트엔드는 React, Vite, React Router, Zustand를 사용합니다. 화면의 등록정보는 백엔드 DB에서 관리하고, 프론트엔드는 해당 정보를 이용해 페이지를 동적으로 불러옵니다.
 
 ## 1. 디렉터리 구조
 
@@ -55,12 +55,14 @@ routePath:  /checkin/password
 filePath:   chk/CHK_INT_P01.jsx
 ```
 
+`filePath`는 `폴더/파일.jsx` 또는 `폴더/하위폴더/파일.jsx` 형식으로 등록합니다.
+
 앱의 화면 로딩 흐름은 다음과 같습니다.
 
 ```text
 App.jsx
 → screenService에서 화면 목록 로딩 및 검증
-→ URL 또는 시작 화면으로 navigation store 초기화
+→ 현재 주소의 화면 정보를 스토어에 저장
 → AppRoutes
 → ScreenRenderer
 → screenLoader가 filePath의 페이지를 동적 import
@@ -82,15 +84,14 @@ pages/wik/WIK_INT_P01.jsx
 
 페이지는 DB 화면 코드에 대응하는 진입점입니다. 다음 역할만 담당하는 것을 원칙으로 합니다.
 
-- `useNavigationStore`를 이용한 화면 이동 연결
+- `useNavigation`을 이용한 화면 이동 연결
 - API 또는 상태 Hook 연결
 - 화면에 필요한 데이터 준비
 - Feature 컴포넌트 조립
 
 ```jsx
 export default function PTH_STR_P01() {
-  const goBack = useNavigationStore((state) => state.goBack);
-  const goForward = useNavigationStore((state) => state.goForward);
+  const { goForward, goBack } = useNavigation();
 
   return (
     <FingerStoryPage
@@ -140,11 +141,11 @@ export default function FingerStoryPage({ step, onBack, onNext }) {
 
 ## 4. 내비게이션 규칙
 
-모든 페이지는 `stores/useNavigationStore.js`의 공통 액션을 사용합니다.
+모든 페이지는 `hooks/useNavigation.js`로 이동합니다. 현재 화면의 값은 `stores/useNavigationStore.js`에서 읽습니다.
 
 ```jsx
-const goForward = useNavigationStore((state) => state.goForward);
-const goBack = useNavigationStore((state) => state.goBack);
+const { goForward, goBack } = useNavigation();
+const params = useNavigationStore((state) => state.nowPageParams.params);
 ```
 
 ```jsx
@@ -154,9 +155,9 @@ goBack();
 ```
 
 - `goForward(screenCode, params)`는 캐시된 DB 화면정보에서 `routePath`를 조회합니다.
-- 이동 시 브라우저 URL과 Zustand의 현재 화면을 함께 변경합니다.
-- 앱 시작과 새로고침 시 현재 URL에 대응하는 화면을 복원합니다.
-- 브라우저 뒤로/앞으로 가기는 `popstate`를 통해 Zustand와 동기화합니다.
+- 브라우저 URL과 히스토리는 React Router가 관리합니다.
+- 주소가 바뀌면 `App.jsx`에서 현재 화면 정보를 스토어에 저장합니다.
+- 페이지에서 `useNavigate`와 `window.history`를 직접 사용하지 않습니다.
 - 업무별로 동일한 내용을 복제한 navigation Hook을 만들지 않습니다.
 - 업무 고유의 복잡한 이동 정책이 생긴 경우에만 도메인 Hook을 추가합니다.
 
@@ -213,7 +214,6 @@ API 응답을 애플리케이션에서 사용할 수 있도록 검증, 가공, �
 - 화면정보 API 호출
 - 필수 필드 검사
 - 화면 코드와 경로 중복 검사
-- `filePath`에 대응하는 실제 페이지 파일 검사
 - 화면 목록 캐시
 - 화면 코드 및 경로 기반 조회
 
@@ -229,7 +229,8 @@ React 외부 로딩 상태     모듈 store + useSyncExternalStore
 ```
 
 - `DialogContext`: 다이얼로그 스택과 실행 함수 공유
-- `useNavigationStore`: 현재 화면, 파라미터, URL 이동 관리
+- `useNavigationStore`: 현재 화면과 파라미터 저장
+- `useNavigation`: 화면 코드 기준 이동과 뒤로가기
 - `loadingStore`: 진행 중인 API 요청 개수 관리
 
 ## 8. 파일 배치 기준
@@ -252,8 +253,8 @@ React 상태와 컴포넌트에 의존하지 않는 범용 함수를 관리합�
 
 ## 9. 개발 규칙
 
-- 페이지 이동은 `useNavigationStore`의 `goForward`, `goBack`을 사용합니다.
-- `window.location`을 페이지 컴포넌트에서 직접 변경하지 않습니다.
+- 페이지 이동은 `useNavigation`의 `goForward`, `goBack`을 사용합니다.
+- `window.location`, `window.history`를 직접 변경하지 않습니다.
 - 화면 파일명과 기본 export 이름은 DB 화면 코드와 일치시킵니다.
 - 화면 경로와 페이지 파일 경로는 DB의 `routePath`, `filePath`를 사용합니다.
 - Page는 연결과 조립, Feature는 실제 UI를 담당합니다.
