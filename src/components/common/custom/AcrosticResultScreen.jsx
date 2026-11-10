@@ -16,7 +16,7 @@ const AcrosticResultScreen = ({
   return (
     <div className={styles.acrosticResultScreen}>
       {/* 컨페티 - 모든 경우 공통이라 고정 이미지 */}
-      <img src={confettiSrc} alt="" className={styles.confettiImage} />
+      <img src={confettiSrc} alt="" className={styles.acrosticConfetti} />
 
       <p className={styles.acrosticCompleteText}>3행시가 저장됐어요!</p>
 
