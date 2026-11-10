@@ -23,23 +23,11 @@ const useNavigationStore = create((set, get) => ({
   nowPageParams: EMPTY_PAGE_PARAMS,
   historyIndex: 0,
   pendingBackParams: {},
+  navigate: null,
 
-  initializeNavigation: (initialPage) => {
-    if (!initialPage?.path) {
-      return false;
-    }
-
-    set({
-      nowPageParams: {
-        path: initialPage.path,
-        params: { ...(initialPage.params ?? {}) },
-        preParams: {},
-      },
-      historyIndex: initialPage.navigationIndex ?? 0,
-      pendingBackParams: {},
-    });
-
-    return true;
+  // 스토어 안에서는 useNavigate 훅을 호출할 수 없어서 App에서 navigate 함수를 전달받는다.
+  setNavigate: (navigate) => {
+    set({ navigate });
   },
 
   syncNavigation: ({ path, params = {}, navigationIndex = 0 }) => {
@@ -68,20 +56,8 @@ const useNavigationStore = create((set, get) => ({
 
     const nextHistoryIndex = get().historyIndex + 1;
 
-    window.history.pushState(
-      createHistoryState(params, nextHistoryIndex),
-      "",
-      targetScreen.routePath
-    );
-
-    set({
-      nowPageParams: {
-        path: targetScreen.routePath,
-        params: { ...params },
-        preParams: {},
-      },
-      historyIndex: nextHistoryIndex,
-      pendingBackParams: {},
+    get().navigate(targetScreen.routePath, {
+      state: createHistoryState(params, nextHistoryIndex),
     });
 
     return true;
@@ -101,10 +77,9 @@ const useNavigationStore = create((set, get) => ({
     }
 
     set({ pendingBackParams: { ...preParams } });
-    window.history.go(-step);
+    get().navigate(-step);
     return true;
   },
 }));
 
-export { createHistoryState };
 export default useNavigationStore;

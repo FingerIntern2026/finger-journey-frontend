@@ -3,6 +3,7 @@
 // 담당자: 홍지연
 
 import { createElement, Suspense } from 'react';
+import GlobalLoading from '../components/common/feedback/GlobalLoading';
 import { loadScreenComponent } from './screenLoader';
 
 export default function ScreenRenderer({ screens, path }) {
@@ -14,7 +15,7 @@ export default function ScreenRenderer({ screens, path }) {
 
   const Component = loadScreenComponent(screen.filePath);
   const element = (
-    <Suspense fallback={<main role="status" style={{ padding: 24 }}>화면을 불러오는 중입니다.</main>}>
+    <Suspense fallback={<GlobalLoading forceVisible initial />}>
       {createElement(Component)}
     </Suspense>
   );
