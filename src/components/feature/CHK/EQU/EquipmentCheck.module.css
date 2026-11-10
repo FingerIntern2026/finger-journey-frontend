@@ -18,10 +18,11 @@
 .checkLabel { color: #777; font-size: inherit; }
 .checkMark { width: 17px; flex: none; font-size: 14px; line-height: 1; }
 .waiting { text-align: center; }
-.waiting img { width: 31%; height: auto; margin-top: 24px; object-fit: contain; }
 .page .nextButton { width: 100%; min-height: 48px; margin-top: 18px; padding: 14px 18px; border: 0; border-radius: 7px; background: #70c35f; color: #fff; font-size: 15px; font-weight: 800; cursor: pointer; }
 .footnote { margin: 24px 0 0; color: #111; text-align: center; font-size: clamp(10px, 2.8vw, 13px); }
 
 @media (max-width: 360px) {
   .page { padding-right: 19px; padding-left: 19px; }
 }
+
+.waiting { margin-top: 24px; text-align: center; }

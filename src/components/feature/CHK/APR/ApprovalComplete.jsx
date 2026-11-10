@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import BaseButton from '../../../common/base/BaseButton';
-import waitingBadge from '../../../../assets/checkin/waiting-badge.png';
+import CheckinStatus from '../common/CheckinStatus';
 import CheckinHeader from '../common/CheckinHeader';
 import styles from './Approval.module.css';
 
@@ -14,7 +14,7 @@ export default function ApprovalComplete({ onBack, onNext }) {
         <div className={styles.waitingArea}>
           <div className={styles.waitingMessage}>다 하셨으면<br />HR 담당자님께 확인 받아주세요!</div>
           <BaseButton className={styles.confirmButton} onClick={() => setConfirmed(true)}>
-            {confirmed ? <span className={styles.confirmed}>확인 완료</span> : <img src={waitingBadge} alt="대기중" />}
+            <CheckinStatus complete={confirmed} />
           </BaseButton>
         </div>
       </section>

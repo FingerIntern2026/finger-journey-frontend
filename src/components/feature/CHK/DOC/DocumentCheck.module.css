@@ -8,8 +8,6 @@
 .page .choice { width: 100%; min-height: 122px; padding: 12px 8px; border: 0; border-radius: 7px; background: #68c95d; color: #fff; font-size: 17px; line-height: 1.45; font-weight: 800; cursor: pointer; }
 .caption { margin: 10px 0 0; color: #777; text-align: center; font-size: 10px; line-height: 1.45; }
 .status { margin-top: 14px; text-align: center; }
-.done { display: inline-block; padding: 6px 11px; border-radius: 999px; background: #e6f8e5; color: #329243; font-size: 12px; font-weight: 800; }
-.waitingBadge { display: inline-block; width: 106px; height: auto; object-fit: contain; }
 .page .nextButton { width: 100%; min-height: 48px; margin-top: 18px; padding: 14px 18px; border: 0; border-radius: 7px; background: #6bc761; color: #fff; font-size: 15px; font-weight: 800; cursor: pointer; }
 
 @media (max-width: 360px) {

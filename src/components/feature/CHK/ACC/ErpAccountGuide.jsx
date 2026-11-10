@@ -1,7 +1,6 @@
 import BaseButton from '../../../common/base/BaseButton';
 import employeeNumberTip from '../../../../assets/checkin/employee-number-tip.png';
-import forestLogin from '../../../../assets/checkin/forest-login.png';
-import forestLoginComplete from '../../../../assets/checkin/forest-login-complete.png';
+import CheckinWebview from '../common/CheckinWebview';
 import CheckinHeader from '../common/CheckinHeader';
 import styles from './AccountGuide.module.css';
 
@@ -11,10 +10,7 @@ export default function ErpAccountGuide({ onBack, onNext }) {
       <CheckinHeader progress={48} onBack={onBack} />
       <section className={styles.content}>
         <h1 className={styles.title}>ERP에 접속해볼까요?</h1>
-        <div className={styles.dualScreens}>
-          <img src={forestLogin} alt="ERP 로그인 전" />
-          <img src={forestLoginComplete} alt="ERP 로그인 후" />
-        </div>
+        <CheckinWebview src={import.meta.env.VITE_ERP_LOGIN_URL || 'https://gw.fingerservice.co.kr/#/login?logout=Y&lang=kr'} title="ERP 로그인" />
         <p className={styles.accountInfo}>
           회사 아이디 : FINGER
           <br />

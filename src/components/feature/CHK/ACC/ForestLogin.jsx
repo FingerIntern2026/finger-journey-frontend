@@ -1,6 +1,5 @@
 import BaseButton from '../../../common/base/BaseButton';
-import LoginWebviewEmbed from '../../../common/custom/LoginWebviewEmbed';
-import erpLogin from '../../../../assets/checkin/erp-login.png';
+import CheckinWebview from '../common/CheckinWebview';
 import CheckinHeader from '../common/CheckinHeader';
 import styles from './AccountGuide.module.css';
 
@@ -10,16 +9,7 @@ export default function ForestLogin({ onBack, onNext }) {
       <CheckinHeader progress={57} onBack={onBack} />
       <section className={styles.content}>
         <h1 className={styles.title}>포레스트에 접속해볼까요?</h1>
-        <div className={styles.loginPreview}>
-          <LoginWebviewEmbed
-            previewImage={erpLogin}
-            title="포레스트 로그인 화면"
-            height="auto"
-            previewObjectFit="contain"
-            previewClassName={styles.screenImage}
-          />
-          <strong>http://pms.fingerservice.co.kr/</strong>
-        </div>
+        <CheckinWebview src={import.meta.env.VITE_FOREST_LOGIN_URL || 'http://pms.fingerservice.co.kr/'} title="포레스트 로그인" />
         <p className={`${styles.accountInfo} ${styles.forestAccountInfo}`}>
           회사 아이디 : FINGER
           <br />
