@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import BaseButton from '../../../common/base/BaseButton';
 import documentIcon from '../../../../assets/checkin/document.png';
-import waitingBadge from '../../../../assets/checkin/waiting-badge.png';
+import CheckinStatus from '../common/CheckinStatus';
 import CheckinHeader from '../common/CheckinHeader';
 import styles from './DocumentCheck.module.css';
 
@@ -39,11 +39,7 @@ export default function DocumentCheck({ onBack, onNext }) {
           </div>
         </div>
         <div className={styles.status}>
-          {submitted ? (
-            <span className={styles.done}>확인 완료</span>
-          ) : (
-            <img className={styles.waitingBadge} src={waitingBadge} alt="대기중" />
-          )}
+          <CheckinStatus complete={submitted} />
         </div>
       </section>
       <BaseButton className={styles.nextButton} onClick={onNext}>다음</BaseButton>

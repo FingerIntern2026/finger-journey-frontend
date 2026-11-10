@@ -1,0 +1,4 @@
+.badge { box-sizing: border-box; display: inline-flex; min-width: 106px; min-height: 42px; padding: 12px 20px; align-items: center; justify-content: center; gap: 3px; border-radius: 999px; font-family: var(--sans, sans-serif); font-size: 12px; line-height: 18px; font-weight: 800; letter-spacing: 0; vertical-align: middle; white-space: nowrap; }
+.icon { display: inline-flex; align-items: center; justify-content: center; font-size: 12px; line-height: 1; }
+.waiting { background: #fff4e5; color: #a85d27; }
+.complete { background: #e6f8e5; color: #287638; }

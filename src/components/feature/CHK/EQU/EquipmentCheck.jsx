@@ -3,7 +3,7 @@ import CustomChecklist from '../../../common/custom/CustomChecklist';
 import general from '../../../../assets/checkin/general.png';
 import monitorIcon from '../../../../assets/checkin/monitor.png';
 import mouseIcon from '../../../../assets/checkin/mouse.png';
-import waitingBadge from '../../../../assets/checkin/waiting-badge.png';
+import CheckinStatus from '../common/CheckinStatus';
 import CheckinHeader from '../common/CheckinHeader';
 import styles from './EquipmentCheck.module.css';
 
@@ -42,7 +42,7 @@ export default function EquipmentCheck({ onBack, onNext }) {
             />
           </div>
         </div>
-        <div className={styles.waiting}><img src={waitingBadge} alt="대기중" /></div>
+        <div className={styles.waiting}><CheckinStatus /></div>
       </section>
       <BaseButton className={styles.nextButton} onClick={onNext}>다음</BaseButton>
       <p className={styles.footnote}>🌱 부서별로 지급품이 상이할 수 있습니다.</p>
