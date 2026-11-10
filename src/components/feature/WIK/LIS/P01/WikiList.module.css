@@ -13,8 +13,8 @@
 .header { display: flex; align-items: flex-start; justify-content: space-between; }
 .brand { display: inline-flex; align-items: center; gap: 10px; font-size: 21px; }
 .brandIcon { display: grid; width: 38px; height: 38px; place-items: center; border-radius: 10px; background: #e4f6e8; color: #448e39; }
-.reportBrand { display: flex; flex-direction: column; align-items: center; gap: 2px; color: #6eaf55; font-size: 10px; font-weight: 700; }
-.guide { margin: 16px 0 12px; color: #858585; font-size: 13px; line-height: 1.5; }
+.reportBrand { display: flex; flex-direction: column; align-items: center; gap: 2px; color: #6eaf55; font-size: 16px; font-weight: 700; }
+.guide { margin: 16px 0 12px; color: #858585; font-size: 16px; line-height: 1.5; word-break: keep-all; }
 .search { margin-bottom: 20px; }
-.emptyMessage { margin: 34px 0; color: #858585; text-align: center; font-size: 15px; }
+.emptyMessage { margin: 34px 0; color: #858585; text-align: center; font-size: 16px; }
 .reportButton { min-height: 64px; margin-top: 20px; border-radius: 10px; background: #69cf20; color: #ffffff; font-size: 17px; line-height: 1.3; font-weight: 800; }

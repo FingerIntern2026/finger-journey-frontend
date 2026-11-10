@@ -1,14 +1,14 @@
 .content { box-sizing: border-box; width: 100%; padding: 22px 20px 28px; flex: 1; overflow-y: auto; }
-.content h1 { margin: 0 0 22px; color: #1f1f1f; font-size: 22px; font-weight: 750; letter-spacing: -.03em; }
+.content h1 { margin: 0 0 22px; color: #1f1f1f; font-size: 24px; font-weight: 750; letter-spacing: -.03em; }
 .employeeTabs { display: flex; gap: 8px; padding: 12px 0; border-top: 1px solid #e8e8e8; border-bottom: 1px solid #e8e8e8; }
-.employeeTabs button { min-width: 52px; padding: 6px 11px; border: 0; border-radius: 999px; background: #eeeeee; color: #8a8a8a; font-size: 13px; cursor: pointer; }
+.employeeTabs button { min-width: 52px; padding: 6px 11px; border: 0; border-radius: 999px; background: #eeeeee; color: #8a8a8a; font-size: 16px; cursor: pointer; }
 .employeeTabs button.activeEmployee { background: #69ca60; color: #ffffff; font-weight: 700; }
 .passwordSection { margin-top: 27px; }
-.passwordSection h2 { margin: 0 0 12px; color: #2a2a2a; font-size: 17px; }
+.passwordSection h2 { margin: 0 0 12px; color: #2a2a2a; font-size: 18px; }
 .passwordRow { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: 10px; }
-.passwordInput { box-sizing: border-box; width: 100%; min-height: 44px; border: 0; border-radius: 8px; background: #f3f3f3; font-size: 13px; }
-.saveButton { min-height: 44px; padding: 9px 13px; border-radius: 6px; font-size: 13px; }
-.savedMessage { margin: -5px 0 0; color: #58a251; font-size: 13px; }
+.passwordInput { box-sizing: border-box; width: 100%; min-height: 44px; border: 0; border-radius: 8px; background: #f3f3f3; font-size: 16px; }
+.saveButton { min-height: 44px; padding: 9px 13px; border-radius: 6px; font-size: 16px; }
+.savedMessage { margin: -5px 0 0; color: #58a251; font-size: 16px; }
 
 @media (max-width: 360px) {
   .content { padding-inline: 14px; }

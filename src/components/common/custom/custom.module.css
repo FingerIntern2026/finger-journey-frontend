@@ -16,9 +16,10 @@
 
 .searchbarInput {
   flex: 1;
+  min-width: 0;
   border: none;
   outline: none;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .searchbarIconBtn {
@@ -297,7 +298,7 @@
 
 .formErrorText {
   color: red;
-  font-size: 14px;
+  font-size: 16px;
   margin: 0;
   text-align: center;
 }

@@ -21,7 +21,7 @@
 
 .formArea { margin-top: auto; padding-top: 58px; }
 .authForm { gap: 0; }
-.authInput { box-sizing: border-box; min-height: 56px; border: 0; border-radius: 14px; background: #f2f2f2; color: #3c3c3c; font-size: 15px; }
+.authInput { box-sizing: border-box; min-height: 56px; border: 0; border-radius: 14px; background: #f2f2f2; color: #3c3c3c; font-size: 16px; }
 .authInput::placeholder { color: #a6a6a6; }
 .authButton { min-height: 58px; margin-top: 200px; border-radius: 10px; background: #6aca60; font-size: 19px; font-weight: 800; }
 
