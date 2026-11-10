@@ -1,24 +1,19 @@
-// 역할: 백엔드 서버와 통신하는 모든 요청이 거쳐가는 공통 창구. axios 인스턴스를 한 곳에서
-//       설정(서버 주소, 헤더 등)해서 다른 파일에서는 sendGet/sendPost만 가져다 쓰면 됨.
-//       전역 로딩 처리: 요청 시작 시 startLoading, 끝나면(성공/실패 무관) stopLoading을
-//       try/finally로 감싸서 에러가 나도 로딩 카운트가 반드시 줄어들도록 보장
-// 사용처: ReportExamplePage.jsx, ReportResultPage.jsx, AcrosticInputForm.jsx, screenApi.js,
-//         ApiExamplePage.jsx
+// 역할: 백엔드 서버와 통신하는 공통 axios 인스턴스와 응답 인터셉터를 설정한다.
+// 사용처: apiRequestUtils.js
 // 담당자:
 
 import axios from "axios";
 import { API_BASE_URL } from "../config/apiConfig";
-import { startLoading, stopLoading } from "../stores/loadingStore";
 
 // axios 인스턴스 생성 (기본 주소 미리 설정해둠)
-const instance = axios.create({
+export const apiClient = axios.create({
   baseURL: API_BASE_URL,
   headers: {
     "Content-Type": "application/json",
   },
 });
 
-instance.interceptors.response.use(
+apiClient.interceptors.response.use(
   (response) => {
     // 9/23 백엔드 변경: 업무 흐름상 실패(CPL_003/CPL_005/QUZ_002 등)는 이제 HTTP 200 +
     // { success:false, errorCode, message }로 내려옴. axios는 2xx면 무조건 성공(then)으로
@@ -36,25 +31,3 @@ instance.interceptors.response.use(
   },
   (error) => Promise.reject(error)
 );
-
-// POST 요청 보내는 함수
-export const sendPost = async (url, data) => {
-  startLoading();
-  try {
-    const response = await instance.post(url, data);
-    return response.data;
-  } finally {
-    stopLoading();
-  }
-};
-
-// GET 요청 보내는 함수(post만 사용한다고 했지만 일단 남겨둠)
-export const sendGet = async (url, params) => {
-  startLoading();
-  try {
-    const response = await instance.get(url, { params });
-    return response.data;
-  } finally {
-    stopLoading();
-  }
-};

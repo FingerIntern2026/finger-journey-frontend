@@ -3,7 +3,7 @@
 // 담당자: 김재웅
 
 import { useEffect, useState } from "react";
-import { sendPost } from "../../../../../api/client";
+import { sendPost } from "../../../../../utils/apiRequestUtils";
 import BaseButton from "../../../../common/base/BaseButton";
 import styles from "./HrPoem.module.css";
 

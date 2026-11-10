@@ -200,7 +200,7 @@ components/common/layout/layout.module.css
 HTTP 요청 URL과 요청 데이터 전달을 담당합니다.
 
 ```text
-client.js     공통 Axios 인스턴스와 요청 함수
+client.js     공통 Axios 인스턴스와 응답 인터셉터
 screenApi.js  화면정보 목록 API 호출
 ```
 
@@ -244,7 +244,7 @@ React 외부 로딩 상태     모듈 store + useSyncExternalStore
 
 ### `utils/`
 
-React 상태, 컴포넌트, API 요청에 의존하지 않는 범용 변환·검사 함수를 관리합니다.
+React 상태와 컴포넌트에 의존하지 않는 범용 함수를 관리합니다. 공통 요청 함수 `sendPost`, `sendGet`은 `apiRequestUtils.js`에 둡니다.
 
 ### `config/`
 
