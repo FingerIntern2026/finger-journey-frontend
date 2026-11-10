@@ -157,6 +157,7 @@ goBack();
 - `goForward(screenCode, params)`는 캐시된 DB 화면정보에서 `routePath`를 조회합니다.
 - 브라우저 URL과 히스토리는 React Router가 관리합니다.
 - 주소가 바뀌면 `App.jsx`에서 현재 화면 정보를 스토어에 저장합니다.
+- 루트 경로와 DB에 등록되지 않은 주소는 시작 화면으로 이동합니다.
 - 페이지에서 `useNavigate`와 `window.history`를 직접 사용하지 않습니다.
 - 업무별로 동일한 내용을 복제한 navigation Hook을 만들지 않습니다.
 - 업무 고유의 복잡한 이동 정책이 생긴 경우에만 도메인 Hook을 추가합니다.
@@ -273,3 +274,11 @@ React 상태와 컴포넌트에 의존하지 않는 범용 함수를 관리합�
 ```
 
 SPA fallback이 없으면 `/checkin/password`, `/path/story/1` 같은 주소를 새로고침할 때 서버에서 404가 발생할 수 있습니다.
+
+Nginx를 사용하면 다음과 같이 설정합니다.
+
+```nginx
+location / {
+  try_files $uri /index.html;
+}
+```
