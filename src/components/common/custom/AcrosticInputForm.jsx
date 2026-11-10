@@ -5,7 +5,7 @@
 // 담당자:
 
 import { useState } from 'react';
-import { sendPost } from '../../../api/client';
+import { sendPost } from '../../../utils/apiRequestUtils';
 import BaseButton from '../base/BaseButton';
 import styles from './custom.module.css';
 
