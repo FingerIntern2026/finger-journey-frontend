@@ -156,7 +156,9 @@ goBack();
 
 - `goForward(screenCode, params)`는 캐시된 DB 화면정보에서 `routePath`를 조회합니다.
 - 브라우저 URL과 히스토리는 React Router가 관리합니다.
-- 주소가 바뀌면 `App.jsx`에서 현재 화면 정보를 스토어에 저장합니다.
+- 지나온 화면 목록은 `historyStack`으로 관리하며, 브라우저 기록의 `location.state`에 함께 저장합니다.
+- `goForward(screenCode, params, { clearHistory: true })`로 이동하면 `historyStack`을 비웁니다.
+- 주소가 바뀌면 `App.jsx`에서 현재 화면 정보와 `historyStack`을 스토어에 저장합니다.
 - 루트 경로와 DB에 등록되지 않은 주소는 시작 화면으로 이동합니다.
 - 페이지에서 `useNavigate`와 `window.history`를 직접 사용하지 않습니다.
 - 업무별로 동일한 내용을 복제한 navigation Hook을 만들지 않습니다.
@@ -230,7 +232,7 @@ React 외부 로딩 상태     모듈 store + useSyncExternalStore
 ```
 
 - `DialogContext`: 다이얼로그 스택과 실행 함수 공유
-- `useNavigationStore`: 현재 화면과 파라미터 저장
+- `useNavigationStore`: 현재 화면, 파라미터, 지나온 화면 목록 저장
 - `useNavigation`: 화면 코드 기준 이동과 뒤로가기
 - `loadingStore`: 진행 중인 API 요청 개수 관리
 

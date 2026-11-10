@@ -1,4 +1,4 @@
-// 역할: 현재 화면의 경로와 파라미터를 전역으로 저장한다. 화면 이동은 hooks/useNavigation.js가 담당한다.
+// 역할: 현재 화면의 경로와 파라미터, 지나온 화면 목록을 전역으로 저장한다. 화면 이동은 hooks/useNavigation.js가 담당한다.
 // 사용처: App.jsx, AppRoutes.jsx, useNavigation.js, 파라미터를 읽는 페이지
 // 담당자: 김재웅
 
@@ -12,14 +12,14 @@ const EMPTY_PAGE_PARAMS = {
 
 const useNavigationStore = create((set) => ({
   nowPageParams: EMPTY_PAGE_PARAMS,
-  historyIndex: 0,
+  historyStack: [],
   pendingBackParams: {},
 
   setPendingBackParams: (preParams) => {
     set({ pendingBackParams: { ...preParams } });
   },
 
-  syncNavigation: ({ path, params = {}, navigationIndex = 0 }) => {
+  syncNavigation: ({ path, params = {}, historyStack = [] }) => {
     if (!path) {
       return false;
     }
@@ -30,7 +30,7 @@ const useNavigationStore = create((set) => ({
         params: { ...params },
         preParams: { ...state.pendingBackParams },
       },
-      historyIndex: navigationIndex,
+      historyStack,
       pendingBackParams: {},
     }));
 
