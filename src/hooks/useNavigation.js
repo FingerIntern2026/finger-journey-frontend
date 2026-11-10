@@ -8,18 +8,26 @@ import useNavigationStore from "../stores/useNavigationStore";
 
 export default function useNavigation() {
   const navigate = useNavigate();
-  const historyIndex = useNavigationStore((state) => state.historyIndex);
+  const nowPageParams = useNavigationStore((state) => state.nowPageParams);
+  const historyStack = useNavigationStore((state) => state.historyStack);
   const setPendingBackParams = useNavigationStore((state) => state.setPendingBackParams);
 
-  const goForward = (screenCode, params = {}) => {
+  // clearHistory: true면 지나온 화면 목록을 비우고 이동한다.
+  const goForward = (screenCode, params = {}, { clearHistory = false } = {}) => {
     const targetScreen = findScreenByCode(screenCode);
 
     if (!targetScreen) {
       return false;
     }
 
+    const nowPage = { path: nowPageParams.path, params: nowPageParams.params };
+
+    // 브라우저 기록 한 칸마다 그 시점의 목록을 함께 저장한다.
     navigate(targetScreen.routePath, {
-      state: { params, navigationIndex: historyIndex + 1 },
+      state: {
+        params,
+        historyStack: clearHistory ? [] : [...historyStack, nowPage],
+      },
     });
 
     return true;
@@ -30,7 +38,7 @@ export default function useNavigation() {
     // 이벤트 때문에 이전 화면 이동이 막히지 않도록 그런 경우에는 기본값(한 단계)을 사용한다.
     const step = Number.isInteger(num) ? num : 1;
 
-    if (step < 1 || historyIndex < step) {
+    if (step < 1 || historyStack.length < step) {
       return false;
     }
 

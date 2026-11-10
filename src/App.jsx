@@ -71,7 +71,7 @@ function App() {
     syncNavigation({
       path: location.pathname,
       params: location.state?.params,
-      navigationIndex: location.state?.navigationIndex,
+      historyStack: location.state?.historyStack,
     });
   }, [screens, location, navigate, syncNavigation]);
 
