@@ -8,11 +8,7 @@ import styles from "./feedback.module.css";
 export default function GlobalLoading({ forceVisible = false, initial = false }) {
   const loading = useGlobalLoading();
 
-  if (!forceVisible && !loading) {
-    return null;
-  }
-
-  return (
+  return (forceVisible || loading) && (
     <div
       className={`${styles.loadingOverlay} ${initial ? styles.initialLoading : ''}`}
       role="status"

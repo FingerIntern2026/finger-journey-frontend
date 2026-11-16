@@ -2,6 +2,7 @@
 // 사용처: ADM_HRC_P01
 // 담당자: 김재웅
 
+import { Check } from "lucide-react";
 import styles from "./HrChecklist.module.css";
 
 export default function HrChecklist({ employeeName, items, onToggle }) {
@@ -10,7 +11,9 @@ export default function HrChecklist({ employeeName, items, onToggle }) {
       {items.map((item) => (
         <label className={styles.row} key={item.id}>
           <input type="checkbox" checked={item.checked} onChange={() => onToggle(item.id)} />
-          <span className={styles.checkbox} aria-hidden="true">{item.checked ? "✓" : ""}</span>
+          <span className={styles.checkbox} aria-hidden="true">
+            {item.checked && <Check size={14} strokeWidth={3} />}
+          </span>
           <span>{item.label}</span>
         </label>
       ))}

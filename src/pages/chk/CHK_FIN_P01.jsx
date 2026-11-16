@@ -1,8 +1,8 @@
 import CheckinComplete from '../../components/feature/CHK/FIN/CheckinComplete';
-import useNavigationStore from '../../stores/useNavigationStore';
+import useNavigation from '../../hooks/useNavigation';
 
 export default function CHK_FIN_P01() {
-  const goForward = useNavigationStore((state) => state.goForward);
+  const { goForward } = useNavigation();
 
   return <CheckinComplete onComplete={() => goForward('PTH_MAP_P01')} />;
 }

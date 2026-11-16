@@ -7,6 +7,7 @@ import { restoreSession } from './services/authService';
 // 담당자: 김재웅
 
 import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { DialogProvider } from './components/common/dialog/DialogContext';
 import AppRoutes from './routes/AppRoutes';
 import GlobalLoading from './components/common/feedback/GlobalLoading';
@@ -14,7 +15,7 @@ import ChatEntryButton from './components/common/layout/ChatEntryButton';
 import ChatPanel from './components/common/layout/ChatPanel';
 import ScreenNavigationPanel from './components/common/layout/ScreenNavigationPanel';
 import { APP_ENTRY_SCREEN_CODE } from './config/appEntry';
-import useNavigationStore, { createHistoryState } from './stores/useNavigationStore';
+import useNavigationStore from './stores/useNavigationStore';
 import { fetchScreenList } from './services/screenService';
 
 // 챗봇 진입 버튼/팝업은 서비스 화면 어디서든 떠 있어야 해서 라우트 최상위인 여기서 관리함
@@ -25,8 +26,12 @@ function App() {
   const [screens, setScreens] = useState(null);
   const [screenLoadError, setScreenLoadError] = useState(null);
 
-  const initializeNavigation = useNavigationStore((state) => state.initializeNavigation);
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const syncNavigation = useNavigationStore((state) => state.syncNavigation);
+  const currentPath = useNavigationStore((state) => state.nowPageParams.path);
+  const currentScreenCode = screens?.find((screen) => screen.routePath === currentPath)?.screenCode ?? '';
 
   useEffect(() => {
     let active = true;
@@ -38,29 +43,6 @@ function App() {
             (screen) => screen.screenCode === APP_ENTRY_SCREEN_CODE);
         if (!homeScreen) throw new Error(`메인 화면정보를 찾을 수 없습니다: ${APP_ENTRY_SCREEN_CODE}`);
 
-        const requestedPath = window.location.pathname;
-        const isRootPath = requestedPath === '/';
-        const session = useAuthStore.getState().session;
-        const phaseScreens = { PREBOARDING: 'PB_LGN_P02', BAG: 'CHK_INT_P01', ONBOARDING: 'PTH_MAP_P01', COMPLETED: 'PTH_CPL_P03' };
-        const resumeScreen = session && loadedScreens.find((screen) => screen.screenCode === phaseScreens[session.currentPhase]);
-        const initialPath = isRootPath ? (resumeScreen ?? homeScreen).routePath : requestedPath;
-        const initialParams = isRootPath ? {} : (window.history.state?.params ?? {});
-        const initialNavigationIndex = isRootPath
-          ? 0
-          : (window.history.state?.navigationIndex ?? 0);
-
-        window.history.replaceState(
-          createHistoryState(initialParams, initialNavigationIndex),
-          '',
-          initialPath
-        );
-
-        initializeNavigation({
-          path: initialPath,
-          params: initialParams,
-          navigationIndex: initialNavigationIndex,
-        });
-
         setScreens(loadedScreens);
       })
 
@@ -71,27 +53,33 @@ function App() {
     return () => {
       active = false;
     };
-  }, [initializeNavigation]);
+  }, []);
 
+  // 주소가 바뀌면 현재 화면 정보를 스토어에 저장한다.
   useEffect(() => {
     if (!screens) {
-      return undefined;
+      return;
     }
 
-    const handlePopState = (event) => {
-      syncNavigation({
-        path: window.location.pathname,
-        params: event.state?.params ?? {},
-        navigationIndex: event.state?.navigationIndex ?? 0,
-      });
-    };
+    const isKnownPath = screens.some((screen) => screen.routePath === location.pathname);
 
-    window.addEventListener('popstate', handlePopState);
+    // 루트 경로와 등록되지 않은 주소는 시작 화면으로 보낸다.
+    if (!isKnownPath) {
+      const homeScreen = screens.find((screen) => screen.screenCode === APP_ENTRY_SCREEN_CODE);
+      const session = useAuthStore.getState().session;
+      const phaseScreens = { PREBOARDING: 'PB_LGN_P02', BAG: 'CHK_INT_P01', ONBOARDING: 'PTH_MAP_P01', COMPLETED: 'PTH_CPL_P03' };
+      const resumeScreen = location.pathname === '/' && session
+        ? screens.find((screen) => screen.screenCode === phaseScreens[session.currentPhase]) : null;
+      navigate((resumeScreen ?? homeScreen).routePath, { replace: true });
+      return;
+    }
 
-    return () => {
-      window.removeEventListener('popstate', handlePopState);
-    };
-  }, [screens, syncNavigation]);
+    syncNavigation({
+      path: location.pathname,
+      params: location.state?.params,
+      historyStack: location.state?.historyStack,
+    });
+  }, [screens, location, navigate, syncNavigation]);
 
   if (screenLoadError) {
     return (
@@ -102,7 +90,8 @@ function App() {
     );
   }
 
-  if (!screens) {
+  // 첫 화면 정보가 스토어에 저장되기 전까지 로딩을 표시한다.
+  if (!screens || currentPath === '/') {
     return <GlobalLoading forceVisible initial />;
   }
 
@@ -111,7 +100,12 @@ function App() {
       <AppRoutes screens={screens} />
       <ScreenNavigationPanel screens={screens} />
       <GlobalLoading />
-      <ChatEntryButton onClick={() => setChatOpen(true)} />
+      {currentScreenCode !== 'CHT_MAN_F01' && (
+        <ChatEntryButton
+          raised={currentScreenCode.startsWith('ADM_')}
+          onClick={() => setChatOpen(true)}
+        />
+      )}
       {chatOpen && <ChatPanel onClose={() => setChatOpen(false)} />}
     </DialogProvider>
   );

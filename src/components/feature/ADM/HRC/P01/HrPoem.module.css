@@ -17,7 +17,7 @@
 .heading h2 {
   margin: 0;
   color: #2a2a2a;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 750;
   letter-spacing: -.03em;
 }
@@ -28,7 +28,7 @@
   border-radius: 999px;
   background: #e0f6dc;
   color: #428c3b;
-  font-size: 11px;
+  font-size: 16px;
   font-weight: 700;
 }
 
@@ -43,24 +43,35 @@
   gap: 9px;
   margin: 0;
   color: #4a4a4a;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.45;
 }
 
 .lines b {
   display: grid;
-  width: 22px;
-  height: 22px;
+  width: 26px;
+  height: 26px;
   flex: 0 0 auto;
   place-items: center;
   border-radius: 7px;
   background: #69ca60;
   color: #ffffff;
-  font-size: 13px;
+  font-size: 16px;
+}
+
+.copyButton {
+  min-height: 44px;
+  margin-top: 14px;
+  border: 1px solid #69ca60;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #428c3b;
+  font-size: 16px;
+  font-weight: 700;
 }
 
 .message {
   margin: 0;
   color: #858585;
-  font-size: 13px;
+  font-size: 16px;
 }

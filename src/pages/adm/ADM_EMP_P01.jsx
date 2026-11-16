@@ -3,10 +3,10 @@
 // 담당자: 김재웅
 
 import AdminEmployeeManagement from "../../components/feature/ADM/EMP/P01/AdminEmployeeManagement";
-import useNavigationStore from "../../stores/useNavigationStore";
+import useNavigation from "../../hooks/useNavigation";
 
 export default function ADM_EMP_P01() {
-  const goForward = useNavigationStore((state) => state.goForward);
+  const { goForward } = useNavigation();
 
   return <AdminEmployeeManagement onNavigate={goForward} />;
 }

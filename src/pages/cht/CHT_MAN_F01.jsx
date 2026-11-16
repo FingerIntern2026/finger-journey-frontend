@@ -3,10 +3,10 @@
 // 담당자: 김재웅
 
 import ChatPanel from "../../components/common/layout/ChatPanel";
-import useNavigationStore from "../../stores/useNavigationStore";
+import useNavigation from "../../hooks/useNavigation";
 
 export default function CHT_MAN_F01() {
-  const goBack = useNavigationStore((state) => state.goBack);
+  const { goBack } = useNavigation();
 
   return <ChatPanel embedded onClose={goBack} />;
 }

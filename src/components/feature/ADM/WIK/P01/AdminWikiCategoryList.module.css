@@ -55,16 +55,14 @@
 }
 
 .categoryText strong {
-  overflow: hidden;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 750;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  word-break: keep-all;
 }
 
 .categoryText small {
   color: #777777;
-  font-size: 12px;
+  font-size: 16px;
 }
 
 .categoryActions,
@@ -89,7 +87,7 @@
 }
 
 .itemRow {
-  min-height: 38px;
+  min-height: 48px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -101,7 +99,7 @@
   min-width: 0;
   overflow: hidden;
   color: #2e2e2e;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -113,7 +111,7 @@
   min-height: 0;
   padding: 6px 8px;
   border-radius: 7px;
-  font-size: 11px;
+  font-size: 16px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
 }
 
@@ -138,7 +136,7 @@
   border: 0;
   background: transparent;
   color: #3f9140;
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 700;
   cursor: pointer;
 }

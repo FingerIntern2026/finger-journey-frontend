@@ -1,9 +1,8 @@
 import OfficeSelect from '../../components/feature/CHK/SEA/OfficeSelect';
-import useNavigationStore from '../../stores/useNavigationStore';
+import useNavigation from '../../hooks/useNavigation';
 
 export default function CHK_SEA_P01() {
-  const goBack = useNavigationStore((state) => state.goBack);
-  const goForward = useNavigationStore((state) => state.goForward);
+  const { goForward, goBack } = useNavigation();
 
   return (
     <OfficeSelect

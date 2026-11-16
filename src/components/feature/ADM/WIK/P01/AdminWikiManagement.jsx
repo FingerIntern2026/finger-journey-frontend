@@ -48,7 +48,7 @@ export default function AdminWikiManagement({ onNavigate }) {
   const deleteCategory = (category) => {
     showConfirm(`${category.name}을(를) 삭제할까요?`, () => {
       setCategories((previous) => previous.filter((item) => item.id !== category.id));
-    }, { confirmLabel: "저장", cancelLabel: "취소", messageClassName: styles.deleteMessage });
+    }, { confirmLabel: "삭제", cancelLabel: "취소", messageClassName: styles.deleteMessage });
   };
 
   const deleteItem = (categoryId, item) => {
@@ -58,7 +58,7 @@ export default function AdminWikiManagement({ onNavigate }) {
           ? { ...category, items: category.items.filter((currentItem) => currentItem.id !== item.id) }
           : category
       )));
-    }, { confirmLabel: "저장", cancelLabel: "취소", messageClassName: styles.deleteMessage });
+    }, { confirmLabel: "삭제", cancelLabel: "취소", messageClassName: styles.deleteMessage });
   };
 
   return (

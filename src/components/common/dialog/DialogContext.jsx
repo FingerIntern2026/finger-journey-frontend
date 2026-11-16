@@ -4,6 +4,7 @@
 // 담당자: 김재웅
 
 import { useEffect, useRef, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import DialogShell from './DialogShell.jsx';
 import DialogAlert from './DialogAlert.jsx';
 import DialogConfirm from './DialogConfirm.jsx';
@@ -13,31 +14,17 @@ export function DialogProvider({ children }) {
   const [dialogStack, setDialogStack] = useState([]);
   const resolversRef = useRef(new Map());
   const nextIdRef = useRef(0);
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  // 다음 popstate 이벤트를 "내가 직접 일으킨 것"으로 간주하고 무시할지 여부
-  // (버튼/배경 클릭으로 닫을 때 history.back()을 직접 호출하는데, 그때 생기는
-  //  popstate까지 "사용자가 뒤로가기 눌렀다"로 착각해서 또 닫으면 안 되니까)
-  const skipNextPopStateRef = useRef(false);
-
-  // 스택 맨 위(마지막) 다이얼로그를 찾아서 resolve + 제거하는 내부 헬퍼
-  const closeTopOfStack = (result) => {
-    setDialogStack((prev) => {
-      if (prev.length === 0) return prev;
-      const top = prev[prev.length - 1];
-      const resolve = resolversRef.current.get(top.id);
-      if (resolve) {
-        resolve(result);
-        resolversRef.current.delete(top.id);
-      }
-      return prev.slice(0, -1);
-    });
-  };
+  // 다이얼로그를 열 때마다 history 항목에 현재 깊이를 기록한다.
+  const dialogDepth = location.state?.dialogDepth ?? 0;
+  const previousDepthRef = useRef(dialogDepth);
 
   // 버튼 클릭 / 배경 클릭 등 "사용자 조작"으로 특정 id를 닫을 때
   const closeDialog = (id, result) => {
     // 이 다이얼로그가 열릴 때 history에 쌓아둔 항목 하나를 되돌림
-    skipNextPopStateRef.current = true;
-    window.history.back();
+    navigate(-1);
 
     setDialogStack((prev) => prev.filter((dialog) => dialog.id !== id));
     const resolve = resolversRef.current.get(id);
@@ -47,33 +34,34 @@ export function DialogProvider({ children }) {
     }
   };
 
-  // 다이얼로그가 열릴 때마다 history 항목을 하나 쌓아둠
-  // → 나중에 popstate 한 번 = 다이얼로그 하나 닫힘, 이 대응 관계가 핵심
+  // 다이얼로그가 열릴 때마다 같은 주소로 history 항목을 하나 쌓아둠
   const showDialog = (type, content, options = {}) => {
     return new Promise((resolve) => {
       const id = `dialog-${++nextIdRef.current}`;
       resolversRef.current.set(id, resolve);
 
-      window.history.pushState({ dialogId: id }, '');
+      navigate(location.pathname, {
+        state: { ...location.state, dialogDepth: dialogStack.length + 1 },
+      });
       setDialogStack((prev) => [...prev, { id, type, content, options }]);
     });
   };
 
-  // 실제 브라우저 뒤로가기(popstate)를 감지해서, 스택 맨 위 것만 닫음
+  // 브라우저 뒤로가기로 깊이가 줄어들면 위쪽 다이얼로그를 결과 없이(null) 닫음
   useEffect(() => {
-    const handlePopState = () => {
-      if (skipNextPopStateRef.current) {
-        // closeDialog에서 우리가 직접 발생시킨 popstate → 무시
-        skipNextPopStateRef.current = false;
-        return;
-      }
-      // 진짜 사용자가 뒤로가기를 누른 경우 → 결과 없이(null) 닫음
-      closeTopOfStack(null);
-    };
+    const isDepthReduced = dialogDepth < previousDepthRef.current;
+    previousDepthRef.current = dialogDepth;
 
-    window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
-  }, []);
+    if (!isDepthReduced) return;
+
+    setDialogStack((prev) => {
+      prev.slice(dialogDepth).forEach((dialog) => {
+        resolversRef.current.get(dialog.id)?.(null);
+        resolversRef.current.delete(dialog.id);
+      });
+      return prev.slice(0, dialogDepth);
+    });
+  }, [dialogDepth]);
 
   // 다이얼로그가 떠 있는 동안 배경 페이지는 현재 위치에 고정한다.
   // 바텀 시트처럼 내부가 긴 다이얼로그는 DialogShell의 box만 스크롤되고,

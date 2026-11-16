@@ -1,7 +1,6 @@
 import LevelUpPage from "../../../components/feature/PTH/LEV/LevelUpPage";
-import useNavigationStore from "../../../stores/useNavigationStore";
+import useNavigation from "../../../hooks/useNavigation";
 export default function PTH_LEV_P02() {
-  const goBack = useNavigationStore((state) => state.goBack);
-  const goForward = useNavigationStore((state) => state.goForward);
+  const { goForward, goBack } = useNavigation();
   return <LevelUpPage step={2} onBack={goBack} onNext={() => goForward("PTH_LEV_P03")} />;
 }

@@ -1,7 +1,10 @@
-/* 화면 전체를 덮는 전역 로딩 배경 */
+/* 모바일 앱 프레임 영역만 덮는 전역 로딩 배경 */
 .loadingOverlay {
   position: fixed;
-  inset: 0;
+  inset-block: 0;
+  left: 50%;
+  width: min(100vw, var(--app-max-width));
+  transform: translateX(-50%);
   background: rgba(0, 0, 0, 0.2);
   display: flex;
   align-items: center;

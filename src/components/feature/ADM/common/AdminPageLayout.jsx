@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { logout } from '../../../../services/authService';
-import useNavigationStore from '../../../../stores/useNavigationStore';
+import useNavigation from '../../../../hooks/useNavigation';
 import { Leaf } from "lucide-react";
 import AdminHeader from "../../../common/layout/AdminHeader";
 import BottomTabNav from "../../../common/layout/BottomTabNav";
@@ -14,6 +14,7 @@ const ADMIN_TABS = [
 ];
 
 export default function AdminPageLayout({ activeScreenCode, onNavigate, onLogout, children }) {
+  const { goForward } = useNavigation();
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
   const handleLogout = async () => {
@@ -21,11 +22,11 @@ export default function AdminPageLayout({ activeScreenCode, onNavigate, onLogout
     setBusy(true);
     try {
       await logout();
-      useNavigationStore.getState().goForward('PB_LGN_P01');
+      goForward('PB_LGN_P01', {}, { clearHistory: true });
       onLogout?.();
     } catch {
       setError('서버 로그아웃에 실패했습니다. 다시 로그인 후 시도해주세요.');
-      useNavigationStore.getState().goForward('PB_LGN_P01');
+      goForward('PB_LGN_P01', {}, { clearHistory: true });
     } finally { setBusy(false); }
   };
   return (

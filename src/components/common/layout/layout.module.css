@@ -11,7 +11,7 @@
 }
 
 .adminHeaderTitle {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 700;
 }
 
@@ -19,7 +19,7 @@
   background: none;
   border: none;
   color: #888;
-  font-size: 14px;
+  font-size: 16px;
   cursor: pointer;
 }
 
@@ -43,7 +43,7 @@
   border: none;
   cursor: pointer;
   color: #999;
-  font-size: 13px;
+  font-size: 16px;
 }
 
 .bottomTabItemActive {
@@ -71,6 +71,11 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   touch-action: none;
   user-select: none;
+}
+
+/* 어드민 하단 탭을 가리지 않도록 탭 바 위로 올린다. */
+.chatEntryButtonRaised {
+  bottom: calc(84px + env(safe-area-inset-bottom));
 }
 
 .chatEntryButton:active {

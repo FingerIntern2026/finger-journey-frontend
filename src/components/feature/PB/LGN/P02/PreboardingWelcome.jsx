@@ -1,5 +1,5 @@
 import { logout } from '../../../../../services/authService';
-import useNavigationStore from '../../../../../stores/useNavigationStore';
+import useNavigation from '../../../../../hooks/useNavigation';
 import { useState } from 'react';
 import useAuthStore from '../../../../../stores/authStore';
 import { useRef } from "react";
@@ -14,6 +14,7 @@ import { FAQS, GUIDES, TIMELINE } from "./preboardingData";
 import styles from "./PreboardingWelcome.module.css";
 
 export default function PreboardingWelcome({ onStartCheckin }) {
+  const { goForward } = useNavigation();
   const [logoutError, setLogoutError] = useState('');
   const [loggingOut, setLoggingOut] = useState(false);
   const handleLogout = async () => {
@@ -21,7 +22,7 @@ export default function PreboardingWelcome({ onStartCheckin }) {
     setLoggingOut(true);
     try {
       await logout();
-      useNavigationStore.getState().goForward('PB_LGN_P01');
+      goForward('PB_LGN_P01', {}, { clearHistory: true });
     } catch {
       setLogoutError('서버에 로그아웃을 요청하지 못했습니다. 다시 로그인해주세요.');
     } finally { setLoggingOut(false); }

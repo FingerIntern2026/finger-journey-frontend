@@ -40,7 +40,7 @@
 .employeeInfo strong {
   overflow: hidden;
   color: #242424;
-  font-size: 15px;
+  font-size: 18px;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -48,7 +48,7 @@
 .employeeInfo small {
   overflow: hidden;
   color: #a3a3a3;
-  font-size: 11px;
+  font-size: 16px;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -56,7 +56,7 @@
 .counter {
   align-self: start;
   color: #438e3e;
-  font-size: 13px;
+  font-size: 16px;
 }
 
 .progressBar {
@@ -76,12 +76,12 @@
 }
 
 .stage {
-  padding: 4px 6px;
+  padding: 5px 8px;
   border-radius: 4px;
   background: #f1f1f1;
   color: #a2a2a2;
-  font-size: 10px;
-  line-height: 1.15;
+  font-size: 16px;
+  line-height: 1.2;
 }
 
 .completed {

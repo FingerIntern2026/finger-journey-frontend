@@ -16,19 +16,19 @@
 .sectionHeader h1 {
   margin: 0;
   color: #1f1f1f;
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 750;
   letter-spacing: -0.03em;
 }
 
 .addButton {
-  min-height: 36px;
+  min-height: 40px;
   padding: 7px 12px;
   display: inline-flex;
   align-items: center;
   gap: 3px;
   border-radius: 8px;
-  font-size: 13px;
+  font-size: 16px;
 }
 
 .deleteMessage {

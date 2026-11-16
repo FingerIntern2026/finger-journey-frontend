@@ -4,7 +4,8 @@ import { readFile } from 'node:fs/promises';
 import axios from 'axios';
 
 // 실제 공통 클라이언트를 메모리 저장소와 HTTP 어댑터에 연결한다.
-const source = (await readFile(new URL('../src/api/client.js', import.meta.url), 'utf8'))
+const source = (await Promise.all(['../src/api/client.js', '../src/utils/apiRequestUtils.js']
+  .map((path) => readFile(new URL(path, import.meta.url), 'utf8')))).join('\n')
   .replace(/^import .*;$/gm, '').replace(/export /g, '');
 function setup(adapter, refresh) {
   let session = { accessToken: 'old', refreshToken: 'refresh', name: '직원' };

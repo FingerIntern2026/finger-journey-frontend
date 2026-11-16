@@ -3,9 +3,9 @@
 // 담당자: 김재웅
 
 import PreboardingWelcome from "../../components/feature/PB/LGN/P02/PreboardingWelcome";
-import useNavigationStore from "../../stores/useNavigationStore";
+import useNavigation from "../../hooks/useNavigation";
 
 export default function PB_LGN_P02() {
-  const goForward = useNavigationStore((state) => state.goForward);
+  const { goForward } = useNavigation();
   return <PreboardingWelcome onStartCheckin={() => goForward("CHK_INT_P01")} />;
 }

@@ -9,7 +9,7 @@ const APP_FRAME_WIDTH = 480;
 const EDGE_GAP = 12;
 const DRAG_THRESHOLD = 6;
 
-const ChatEntryButton = ({ onClick, unreadCount = 0 }) => {
+const ChatEntryButton = ({ onClick, unreadCount = 0, raised = false }) => {
   const [position, setPosition] = useState(null);
   const dragState = useRef(null);
   const preventClick = useRef(false);
@@ -80,7 +80,7 @@ const ChatEntryButton = ({ onClick, unreadCount = 0 }) => {
   return (
     <button
       type="button"
-      className={styles.chatEntryButton}
+      className={`${styles.chatEntryButton} ${raised ? styles.chatEntryButtonRaised : ''}`}
       style={position ? { left: position.left, top: position.top, right: 'auto', bottom: 'auto' } : undefined}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}

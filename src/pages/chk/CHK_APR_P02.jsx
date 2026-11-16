@@ -1,9 +1,8 @@
 import ApprovalGuide from '../../components/feature/CHK/APR/ApprovalGuide';
-import useNavigationStore from '../../stores/useNavigationStore';
+import useNavigation from '../../hooks/useNavigation';
 
 export default function CHK_APR_P02() {
-  const goBack = useNavigationStore((state) => state.goBack);
-  const goForward = useNavigationStore((state) => state.goForward);
+  const { goForward, goBack } = useNavigation();
 
   return <ApprovalGuide onBack={goBack} onNext={() => goForward('CHK_APR_P03')} />;
 }

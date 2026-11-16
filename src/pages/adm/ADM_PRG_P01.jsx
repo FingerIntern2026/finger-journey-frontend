@@ -3,10 +3,10 @@
 // 담당자: 김재웅
 
 import AdminProgress from "../../components/feature/ADM/PRG/P01/AdminProgress";
-import useNavigationStore from "../../stores/useNavigationStore";
+import useNavigation from "../../hooks/useNavigation";
 
 export default function ADM_PRG_P01() {
-  const goForward = useNavigationStore((state) => state.goForward);
+  const { goForward } = useNavigation();
 
   return <AdminProgress onNavigate={goForward} />;
 }

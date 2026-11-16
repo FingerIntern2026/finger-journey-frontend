@@ -1,8 +1,8 @@
 import CheckinPassword from '../../components/feature/CHK/INT/CheckinPassword';
-import useNavigationStore from '../../stores/useNavigationStore';
+import useNavigation from '../../hooks/useNavigation';
 
 export default function CHK_INT_P01() {
-  const goForward = useNavigationStore((state) => state.goForward);
+  const { goForward } = useNavigation();
 
   return <CheckinPassword onSubmit={() => goForward('CHK_EXP_P01')} />;
 }

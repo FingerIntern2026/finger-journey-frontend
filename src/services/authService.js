@@ -1,4 +1,4 @@
-import { sendPost } from '../api/client';
+import { sendPost } from '../utils/apiRequestUtils';
 import useAuthStore from '../stores/authStore';
 
 export async function login(employeeNo, birthDate) {
