@@ -1,3 +1,5 @@
+import useAuthStore from './stores/authStore';
+import { restoreSession } from './services/authService';
 // 역할: 앱 전체를 감싸는 최상위 컴포넌트. DialogProvider로 다이얼로그 컨텍스트를 제공하고,
 //       AppRoutes로 라우팅을, GlobalLoading으로 전역 로딩 스피너를, ChatEntryButton/ChatPanel로
 //       챗봇을 최상단에 한 번씩 연결함
@@ -34,8 +36,8 @@ function App() {
   useEffect(() => {
     let active = true;
 
-    fetchScreenList()
-      .then((loadedScreens) => {
+    Promise.all([fetchScreenList(), restoreSession()])
+      .then(([loadedScreens]) => {
         if (!active) return;
         const homeScreen = loadedScreens.find(
             (screen) => screen.screenCode === APP_ENTRY_SCREEN_CODE);
@@ -64,7 +66,11 @@ function App() {
     // 루트 경로와 등록되지 않은 주소는 시작 화면으로 보낸다.
     if (!isKnownPath) {
       const homeScreen = screens.find((screen) => screen.screenCode === APP_ENTRY_SCREEN_CODE);
-      navigate(homeScreen.routePath, { replace: true });
+      const session = useAuthStore.getState().session;
+      const phaseScreens = { PREBOARDING: 'PB_LGN_P02', BAG: 'CHK_INT_P01', ONBOARDING: 'PTH_MAP_P01', COMPLETED: 'PTH_CPL_P03' };
+      const resumeScreen = location.pathname === '/' && session
+        ? screens.find((screen) => screen.screenCode === phaseScreens[session.currentPhase]) : null;
+      navigate((resumeScreen ?? homeScreen).routePath, { replace: true });
       return;
     }
 
