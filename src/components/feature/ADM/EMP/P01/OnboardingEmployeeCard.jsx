@@ -4,6 +4,7 @@
 
 import BaseButton from "../../../../common/base/BaseButton";
 import BaseCard from "../../../../common/base/BaseCard";
+import { phaseLabel } from "../../common/adminLabels";
 import styles from "./OnboardingEmployeeCard.module.css";
 
 export default function OnboardingEmployeeCard({ employee, onEdit, onDelete }) {
@@ -13,13 +14,13 @@ export default function OnboardingEmployeeCard({ employee, onEdit, onDelete }) {
 
       <div className={styles.information}>
         <strong>{employee.name}</strong>
-        <span>{employee.employeeNo} · {employee.department}</span>
+        <span>{employee.employeeNo} · {employee.organizationName}</span>
       </div>
 
       <div className={styles.footer}>
         <div className={styles.meta}>
-          <time dateTime={employee.joinDate}>{employee.joinDate}</time>
-          <span>{employee.progress}% 완료</span>
+          <span>{phaseLabel(employee.currentPhase)}</span>
+          <span>{employee.progressRate}% 완료</span>
         </div>
 
         <div className={styles.actions}>

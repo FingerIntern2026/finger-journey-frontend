@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import BaseButton from '../../../common/base/BaseButton';
 import BaseInput from '../../../common/base/BaseInput';
+import { parseApiError } from '../../../../utils/apiErrorUtils';
 import logo from '../../../../assets/checkin/finger-logo.png';
 import flowers from '../../../../assets/checkin/flowers.png';
 import leaf from '../../../../assets/checkin/leaf.png';
@@ -10,10 +11,15 @@ export default function CheckinPassword({ onSubmit }) {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     setError('');
-    onSubmit(password);
+
+    try {
+      await onSubmit(password);
+    } catch (err) {
+      setError(parseApiError(err).message);
+    }
   };
 
   return (

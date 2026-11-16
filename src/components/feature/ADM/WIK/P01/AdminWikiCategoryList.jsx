@@ -11,15 +11,15 @@ import styles from "./AdminWikiCategoryList.module.css";
 export default function AdminWikiCategoryList({ categories, onAddItem, onEditItem, onDeleteCategory, onDeleteItem }) {
   return (
     <div className={styles.list}>
-      {categories.map((category) => (
-        <WikiCategoryCard key={category.id} category={category} onAddItem={onAddItem} onEditItem={onEditItem} onDeleteCategory={onDeleteCategory} onDeleteItem={onDeleteItem} />
+      {categories.map((category, index) => (
+        <WikiCategoryCard key={category.id} category={category} defaultOpen={index === 0} onAddItem={onAddItem} onEditItem={onEditItem} onDeleteCategory={onDeleteCategory} onDeleteItem={onDeleteItem} />
       ))}
     </div>
   );
 }
 
-function WikiCategoryCard({ category, onAddItem, onEditItem, onDeleteCategory, onDeleteItem }) {
-  const [open, setOpen] = useState(category.id === "company-life");
+function WikiCategoryCard({ category, defaultOpen, onAddItem, onEditItem, onDeleteCategory, onDeleteItem }) {
+  const [open, setOpen] = useState(defaultOpen);
 
   return (
     <BaseCard className={`${styles.categoryCard} ${open ? styles.open : ""}`}>
