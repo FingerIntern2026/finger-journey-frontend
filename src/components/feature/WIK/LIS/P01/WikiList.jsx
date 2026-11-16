@@ -12,6 +12,8 @@ export default function WikiList({ onCreateReport }) {
     searchedKeyword,
     openCategoryId,
     selectedItemId,
+    isLoaded,
+    errorMessage,
     handleKeywordChange,
     handleSearch,
     handleToggleCategory,
@@ -50,7 +52,9 @@ export default function WikiList({ onCreateReport }) {
         onSelectItem={handleSelectItem}
       />
 
-      {categories.length === 0 && (
+      {errorMessage && <p className={styles.emptyMessage}>{errorMessage}</p>}
+
+      {isLoaded && !errorMessage && categories.length === 0 && (
         <p className={styles.emptyMessage}>검색 결과가 없어요. 다른 검색어로 찾아보세요.</p>
       )}
 
