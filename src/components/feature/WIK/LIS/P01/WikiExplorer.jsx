@@ -64,13 +64,16 @@ export default function WikiExplorer({
 
                       {isSelected && (
                         <div className={styles.detail}>
-                          <p>{highlightText(item.content, keyword)}</p>
-                          {item.attachment && (
-                            <div className={styles.attachment}>
-                              <span>첨부 이미지</span>
-                              <strong>{item.attachment}</strong>
-                            </div>
+                          {item.content && <p>{highlightText(item.content, keyword)}</p>}
+                          {item.detailStatus === "loading" && (
+                            <p className={styles.detailMessage}>불러오는 중이에요...</p>
                           )}
+                          {item.detailStatus === "error" && (
+                            <p className={styles.detailMessage}>내용을 불러오지 못했어요. 다시 눌러보세요.</p>
+                          )}
+                          {item.mediaUrls.map((src) => (
+                            <img key={src} src={src} alt={item.title} className={styles.image} />
+                          ))}
                         </div>
                       )}
                     </article>
