@@ -22,6 +22,7 @@ const CustomAuthForm = ({
   field1ErrorMessage = '입력값이 올바르지 않아요',
   field2ErrorMessage = '입력값이 올바르지 않아요',
   skipValidation = false,
+  disabled = false,
   className = '',
   inputClassName = '',
   buttonClassName = '',
@@ -48,6 +49,7 @@ const CustomAuthForm = ({
   };
 
   const handleSubmit = () => {
+    if (disabled) return;
     if (skipValidation) {
       setValidationError('');
 
@@ -120,6 +122,7 @@ const CustomAuthForm = ({
 
       {/* 버튼 - 빈 값이어도 항상 눌림 (비활성화 안 함) */}
       <BaseButton
+        disabled={disabled}
         label={buttonLabel}
         onClick={handleSubmit}
         fullWidth

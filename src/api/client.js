@@ -7,6 +7,7 @@
 // 담당자:
 
 import axios from "axios";
+import useAuthStore from "../stores/authStore";
 import { API_BASE_URL } from "../config/apiConfig";
 import { startLoading, stopLoading } from "../stores/loadingStore";
 
@@ -16,6 +17,38 @@ const instance = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
+});
+
+// 갱신 요청은 별도 인스턴스로 보내 재시도 루프를 방지한다.
+let refreshPromise = null;
+export async function refreshSession() {
+  if (!refreshPromise) {
+    const original = useAuthStore.getState().session;
+    if (!original?.refreshToken) throw new Error('다시 로그인해주세요.');
+    refreshPromise = axios.post(`${API_BASE_URL}/api/auth/refresh`, {
+      refreshToken: original.refreshToken,
+    }).then(({ data }) => {
+      if (!data.success || !data.data?.accessToken || !data.data?.refreshToken) {
+        throw new Error(data.message || '로그인을 갱신하지 못했습니다.');
+      }
+      if (useAuthStore.getState().session !== original) throw new Error('로그인 상태가 변경되었습니다.');
+      const session = { ...original, ...data.data };
+      useAuthStore.getState().setSession(session);
+      return session;
+    }).catch((error) => {
+      if (useAuthStore.getState().session === original
+          && (error.response?.status === 401 || error.response?.data?.success === false)) {
+        useAuthStore.getState().setSession(null);
+      }
+      throw error;
+    }).finally(() => { refreshPromise = null; });
+  }
+  return refreshPromise;
+}
+instance.interceptors.request.use((config) => {
+  const token = useAuthStore.getState().session?.accessToken;
+  if (token && config.url !== '/api/auth/login') config.headers.Authorization = `Bearer ${token}`;
+  return config;
 });
 
 instance.interceptors.response.use(
@@ -34,7 +67,23 @@ instance.interceptors.response.use(
 
     return response;
   },
-  (error) => Promise.reject(error)
+  async (error) => {
+    const config = error.config;
+    const code = error.response?.data?.errorCode;
+    if (config && !config._retried && config.url !== '/api/auth/login'
+        && (error.response?.status === 401 || code === 'AUTH_401' || code === 'AUTH_002')
+        && useAuthStore.getState().session?.refreshToken) {
+      config._retried = true;
+      // 이미 다른 요청이 갱신했다면 최신 토큰으로 재시도한다.
+      const current = useAuthStore.getState().session;
+      const session = config.headers.Authorization !== `Bearer ${current.accessToken}`
+        ? current : await refreshSession();
+      config.headers.Authorization = `Bearer ${session.accessToken}`;
+      return instance(config);
+    }
+    if (config?._retried && error.response?.status === 401) useAuthStore.getState().setSession(null);
+    return Promise.reject(error);
+  }
 );
 
 // POST 요청 보내는 함수

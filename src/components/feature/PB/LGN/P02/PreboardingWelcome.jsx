@@ -1,3 +1,7 @@
+import { logout } from '../../../../../services/authService';
+import useNavigationStore from '../../../../../stores/useNavigationStore';
+import { useState } from 'react';
+import useAuthStore from '../../../../../stores/authStore';
 import { useRef } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import BaseButton from "../../../../common/base/BaseButton";
@@ -6,10 +10,23 @@ import CustomInfoCard from "../../../../common/custom/CustomInfoCard";
 import PreboardingHero from "../P01/PreboardingHero";
 import EmployeeWelcomeCard from "./EmployeeWelcomeCard";
 import FirstDayTimeline from "./FirstDayTimeline";
-import { EMPLOYEE, FAQS, GUIDES, TIMELINE } from "./preboardingData";
+import { FAQS, GUIDES, TIMELINE } from "./preboardingData";
 import styles from "./PreboardingWelcome.module.css";
 
 export default function PreboardingWelcome({ onStartCheckin }) {
+  const [logoutError, setLogoutError] = useState('');
+  const [loggingOut, setLoggingOut] = useState(false);
+  const handleLogout = async () => {
+    if (loggingOut) return;
+    setLoggingOut(true);
+    try {
+      await logout();
+      useNavigationStore.getState().goForward('PB_LGN_P01');
+    } catch {
+      setLogoutError('서버에 로그아웃을 요청하지 못했습니다. 다시 로그인해주세요.');
+    } finally { setLoggingOut(false); }
+  };
+  const employee = useAuthStore((state) => state.session);
   const introRef = useRef(null);
   const detailsRef = useRef(null);
   const timelineRef = useRef(null);
@@ -21,10 +38,10 @@ export default function PreboardingWelcome({ onStartCheckin }) {
       <section className={styles.introSection} ref={introRef}>
         <div className={styles.introContent}>
           <PreboardingHero
-            name={EMPLOYEE.name}
+            name={employee?.name ?? ''}
             description={<>출근 전 꼭 확인해야 할 정보를 한 번에 모아봤어요.<br />쭉 내려가며 확인해보세요.</>}
           />
-          <EmployeeWelcomeCard name={EMPLOYEE.name} department={EMPLOYEE.department} className={styles.welcomeCard} />
+          <EmployeeWelcomeCard name={employee?.name ?? ''} department={employee?.organizationName ?? ''} className={styles.welcomeCard} />
         </div>
         <button type="button" className={styles.scrollCue} onClick={() => scrollTo(detailsRef)} aria-label="안내 정보로 이동">
           <i className={styles.scrollCueIcon}><ChevronDown size={22} aria-hidden="true" /></i>
@@ -50,6 +67,8 @@ export default function PreboardingWelcome({ onStartCheckin }) {
           <CustomAccordion items={FAQS} className={styles.faqList} />
         </section>
 
+        {logoutError && <p role="alert">{logoutError}</p>}
+        <BaseButton label={loggingOut ? '로그아웃 중...' : '로그아웃'} disabled={loggingOut} onClick={handleLogout} />
         <BaseButton label="체크인 시작하기" fullWidth className={styles.checkInButton} onClick={onStartCheckin} />
         <button type="button" className={`${styles.scrollCue} ${styles.scrollCueUp}`} onClick={() => scrollTo(introRef)} aria-label="처음으로 이동">
           <i className={styles.scrollCueIcon}><ChevronUp size={22} aria-hidden="true" /></i>
