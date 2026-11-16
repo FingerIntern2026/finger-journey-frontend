@@ -6,10 +6,11 @@
 import { apiClient } from "../api/client";
 import { startLoading, stopLoading } from "../stores/loadingStore";
 
-export const sendPost = async (url, data) => {
+// config는 선택 값이다. 파일 업로드처럼 요청 헤더를 따로 정해야 할 때만 넘긴다.
+export const sendPost = async (url, data, config) => {
   startLoading();
   try {
-    const response = await apiClient.post(url, data);
+    const response = await apiClient.post(url, data, config);
     return response.data;
   } finally {
     stopLoading();
@@ -25,3 +26,5 @@ export const sendGet = async (url, params) => {
     stopLoading();
   }
 };
+
+
