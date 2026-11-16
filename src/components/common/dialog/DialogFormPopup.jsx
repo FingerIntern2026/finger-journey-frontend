@@ -6,6 +6,7 @@
 import { useState } from "react";
 import BaseButton from "../base/BaseButton";
 import BaseInput from "../base/BaseInput";
+import BaseSelect from "../base/BaseSelect";
 import styles from "./dialog.module.css";
 
 export default function DialogFormPopup({
@@ -54,17 +55,31 @@ export default function DialogFormPopup({
 
       <div className={styles.formFields}>
         {fields.map((field) => (
-          <BaseInput
-            key={field.name}
-            label={field.label}
-            name={field.name}
-            type={field.type ?? "text"}
-            value={values[field.name] ?? ""}
-            placeholder={field.placeholder}
-            error={errors[field.name]}
-            onChange={(event) => handleChange(field.name, event.target.value)}
-            className={styles.formInput}
-          />
+          field.type === "select" ? (
+            <BaseSelect
+              key={field.name}
+              label={field.label}
+              name={field.name}
+              value={values[field.name] ?? ""}
+              options={field.options}
+              error={errors[field.name]}
+              onChange={(event) => handleChange(field.name, event.target.value)}
+              className={styles.formInput}
+            />
+          ) : (
+            <BaseInput
+              key={field.name}
+              label={field.label}
+              name={field.name}
+              type={field.type ?? "text"}
+              value={values[field.name] ?? ""}
+              placeholder={field.placeholder}
+              disabled={field.disabled}
+              error={errors[field.name]}
+              onChange={(event) => handleChange(field.name, event.target.value)}
+              className={styles.formInput}
+            />
+          )
         ))}
       </div>
 

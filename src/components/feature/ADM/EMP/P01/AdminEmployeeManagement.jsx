@@ -5,16 +5,28 @@ import BaseSelect from "../../../../common/base/BaseSelect";
 import CustomSearchbar from "../../../../common/custom/CustomSearchbar";
 import DialogFormPopup from "../../../../common/dialog/DialogFormPopup";
 import { useDialog } from "../../../../../hooks/useDialog";
-import { checkDuplicateEmployeeNoUtils } from "../../../../../utils/checkDuplicateEmployeeNoUtils.js";
+import { parseApiError } from "../../../../../utils/apiErrorUtils";
 import AdminPageLayout from "../../common/AdminPageLayout";
 import ExistingEmployeeTable from "./ExistingEmployeeTable";
 import OnboardingEmployeeCard from "./OnboardingEmployeeCard";
-import { EMPLOYEE_FORM_FIELDS, EXISTING_EMPLOYEES, ONBOARDING_EMPLOYEES } from "./employeeManagementData";
+import { buildEmployeeFormFields, EXISTING_EMPLOYEES } from "./employeeManagementData";
+import useOnboardingEmployees from "./useOnboardingEmployees";
 import styles from "./AdminEmployeeManagement.module.css";
 
 export default function AdminEmployeeManagement({ onNavigate }) {
   const { showConfirm, showDialog } = useDialog();
-  const [onboardingEmployees, setOnboardingEmployees] = useState(ONBOARDING_EMPLOYEES);
+  const {
+    employees: onboardingEmployees,
+    organizations,
+    positions,
+    isLoaded,
+    errorMessage,
+    setErrorMessage,
+    create,
+    update,
+    remove,
+    loadFormValues,
+  } = useOnboardingEmployees();
   const [keyword, setKeyword] = useState("");
   const [status, setStatus] = useState("all");
   const [page, setPage] = useState(1);
@@ -31,34 +43,30 @@ export default function AdminEmployeeManagement({ onNavigate }) {
     });
   }, [keyword, status]);
 
-  const openEmployeeForm = (employee = null) => {
+  const openEmployeeForm = async (employee = null) => {
     const isEdit = Boolean(employee);
+    setErrorMessage("");
+
+    let initialValues = {};
+    if (isEdit) {
+      try {
+        initialValues = await loadFormValues(employee.employeeId);
+      } catch (err) {
+        setErrorMessage(parseApiError(err).message);
+        return;
+      }
+    }
 
     showDialog("bottom", ({ close }) => (
       <DialogFormPopup
         title={isEdit ? "정보 수정" : "입사자 등록"}
-        fields={EMPLOYEE_FORM_FIELDS}
-        initialValues={employee ?? {}}
+        fields={buildEmployeeFormFields({ isEdit, organizations, positions })}
+        initialValues={initialValues}
         onCancel={() => close(false)}
-        onSubmit={(values) => {
-          const employeesExceptEdited = onboardingEmployees.filter((item) => item.id !== employee?.id);
-          const duplicate = checkDuplicateEmployeeNoUtils(values.employeeNo, [
-            ...employeesExceptEdited,
-            ...EXISTING_EMPLOYEES,
-          ]);
-
-          if (duplicate) return "이미 사용 중인 사번입니다.";
-
-          if (isEdit) {
-            setOnboardingEmployees((employees) => employees.map((item) => (
-              item.id === employee.id ? { ...item, ...values } : item
-            )));
-          } else {
-            setOnboardingEmployees((employees) => [
-              ...employees,
-              { ...values, id: Date.now(), progress: 0 },
-            ]);
-          }
+        onSubmit={async (values) => {
+          // 서버가 사번 중복(ADM_003) 등을 검사해서 오류 문구를 돌려주면 폼 안에 그대로 보여준다.
+          const error = isEdit ? await update(employee.employeeId, values) : await create(values);
+          if (error) return error;
 
           close(true);
           return undefined;
@@ -69,7 +77,7 @@ export default function AdminEmployeeManagement({ onNavigate }) {
 
   const handleDelete = (employee) => {
     showConfirm(`${employee.name}님을 삭제할까요?`, () => {
-      setOnboardingEmployees((employees) => employees.filter((item) => item.id !== employee.id));
+      remove(employee.employeeId);
     }, {
       confirmLabel: "삭제",
       cancelLabel: "취소",
@@ -91,10 +99,13 @@ export default function AdminEmployeeManagement({ onNavigate }) {
             />
           </div>
 
+          {errorMessage && <p role="alert">{errorMessage}</p>}
+          {isLoaded && !errorMessage && onboardingEmployees.length === 0 && <p>등록된 입사자가 없어요.</p>}
+
           <div className={styles.onboardingList}>
             {onboardingEmployees.map((employee) => (
               <OnboardingEmployeeCard
-                key={employee.id}
+                key={employee.employeeId}
                 employee={employee}
                 onEdit={() => openEmployeeForm(employee)}
                 onDelete={() => handleDelete(employee)}
