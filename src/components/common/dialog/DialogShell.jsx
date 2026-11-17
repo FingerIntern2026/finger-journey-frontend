@@ -5,11 +5,22 @@
 // 사용처: DialogContext.jsx
 // 담당자:
 
+import { useRef } from 'react';
 import styles from './dialog.module.css';
 
 export default function DialogShell({ type = 'center', isTop = true, onClose, children }) {
-  const handleBackdropClick = () => {
-    onClose?.(null);
+  // 배경에서 "누르기 시작한" 경우에만 닫는다. 파일 선택창에서 더블클릭하면 두 번째 클릭이
+  // 창이 닫힌 뒤 배경으로 전달되는데, 이때는 누르기를 배경에서 시작하지 않았으므로 닫지 않는다.
+  const pressedOnBackdrop = useRef(false);
+
+  const handleBackdropMouseDown = (event) => {
+    pressedOnBackdrop.current = event.target === event.currentTarget;
+  };
+
+  const handleBackdropClick = (event) => {
+    const shouldClose = pressedOnBackdrop.current && event.target === event.currentTarget;
+    pressedOnBackdrop.current = false;
+    if (shouldClose) onClose?.(null);
   };
 
   const handleContentClick = (event) => {
@@ -26,6 +37,7 @@ export default function DialogShell({ type = 'center', isTop = true, onClose, ch
     <div
       className={overlayClassName}
       style={{ zIndex: isTop ? 1001 : 1000 }}
+      onMouseDown={handleBackdropMouseDown}
       onClick={handleBackdropClick}
       role="presentation"
     >

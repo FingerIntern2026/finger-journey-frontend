@@ -1,7 +1,10 @@
-.content { box-sizing: border-box; width: 100%; padding: 22px 20px 28px; flex: 1; overflow-y: auto; }
+/* 아래쪽 여백을 넉넉히 둬서 오른쪽 아래의 챗봇 버튼이 "저장" 버튼을 가리지 않게 한다. */
+.content { box-sizing: border-box; width: 100%; padding: 22px 20px 96px; flex: 1; overflow-y: auto; }
 .content h1 { margin: 0 0 22px; color: #1f1f1f; font-size: 24px; font-weight: 750; letter-spacing: -.03em; }
-.employeeTabs { display: flex; gap: 8px; padding: 12px 0; border-top: 1px solid #e8e8e8; border-bottom: 1px solid #e8e8e8; }
-.employeeTabs button { min-width: 52px; padding: 6px 11px; border: 0; border-radius: 999px; background: #eeeeee; color: #8a8a8a; font-size: 16px; cursor: pointer; }
+/* 탭이 많으면 줄어들지 않고 옆으로 이어지게 하고(글자가 세로로 쪼개지지 않게), 마우스로 끌어서 넘긴다. */
+.employeeTabs { display: flex; gap: 8px; padding: 12px 0; overflow-x: auto; border-top: 1px solid #e8e8e8; border-bottom: 1px solid #e8e8e8; cursor: grab; user-select: none; scrollbar-width: none; }
+.employeeTabs::-webkit-scrollbar { display: none; }
+.employeeTabs button { flex: none; min-width: 52px; padding: 6px 11px; border: 0; border-radius: 999px; background: #eeeeee; color: #8a8a8a; font-size: 16px; white-space: nowrap; cursor: pointer; }
 .employeeTabs button.activeEmployee { background: #69ca60; color: #ffffff; font-weight: 700; }
 .passwordSection { margin-top: 27px; }
 .passwordSection h2 { margin: 0 0 12px; color: #2a2a2a; font-size: 18px; }

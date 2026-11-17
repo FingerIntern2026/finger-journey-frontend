@@ -9,7 +9,7 @@ import { parseApiError } from "../../../../../utils/apiErrorUtils";
 import AdminPageLayout from "../../common/AdminPageLayout";
 import ExistingEmployeeTable from "./ExistingEmployeeTable";
 import OnboardingEmployeeCard from "./OnboardingEmployeeCard";
-import { buildEmployeeFormFields, EXISTING_EMPLOYEES } from "./employeeManagementData";
+import { buildEmployeeFormFields } from "./employeeManagementData";
 import useOnboardingEmployees from "./useOnboardingEmployees";
 import styles from "./AdminEmployeeManagement.module.css";
 
@@ -34,14 +34,15 @@ export default function AdminEmployeeManagement({ onNavigate }) {
   const filteredEmployees = useMemo(() => {
     const normalizedKeyword = keyword.trim().toLowerCase();
 
-    return EXISTING_EMPLOYEES.filter((employee) => {
+    // 서버의 실제 사원 목록을 이름·사번 검색과 단계 필터로 거른다. (페이지 나누기는 표에서 한다)
+    return onboardingEmployees.filter((employee) => {
       const matchesKeyword = !normalizedKeyword
         || employee.name.toLowerCase().includes(normalizedKeyword)
         || employee.employeeNo.toLowerCase().includes(normalizedKeyword);
-      const matchesStatus = status === "all" || employee.status === status;
+      const matchesStatus = status === "all" || employee.currentPhase === status;
       return matchesKeyword && matchesStatus;
     });
-  }, [keyword, status]);
+  }, [onboardingEmployees, keyword, status]);
 
   const openEmployeeForm = async (employee = null) => {
     const isEdit = Boolean(employee);
@@ -117,7 +118,7 @@ export default function AdminEmployeeManagement({ onNavigate }) {
         <section className={styles.employeeSection} aria-labelledby="employee-list-title">
           <div className={styles.listHeading}>
             <h2 id="employee-list-title">기존 사원 목록</h2>
-            <span>총 300명</span>
+            <span>총 {onboardingEmployees.length}명</span>
           </div>
 
           <div className={styles.filters}>
@@ -139,14 +140,15 @@ export default function AdminEmployeeManagement({ onNavigate }) {
               }}
               options={[
                 { value: "all", label: "전체" },
-                { value: "재직", label: "재직" },
-                { value: "휴직", label: "휴직" },
+                { value: "PREBOARDING", label: "프리보딩" },
+                { value: "ONBOARDING", label: "온보딩" },
+                { value: "COMPLETED", label: "완료" },
               ]}
               className={styles.statusSelect}
             />
           </div>
 
-          <ExistingEmployeeTable employees={filteredEmployees} page={page} pageCount={3} onPageChange={setPage} />
+          <ExistingEmployeeTable employees={filteredEmployees} page={page} onPageChange={setPage} />
         </section>
       </main>
     </AdminPageLayout>

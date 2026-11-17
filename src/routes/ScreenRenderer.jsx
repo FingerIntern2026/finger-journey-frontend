@@ -20,6 +20,11 @@ export default function ScreenRenderer({ screens, path }) {
   }, [needsLogin, loginPath, navigate]);
 
   if (needsLogin) return <main role="status">로그인 화면으로 이동 중입니다.</main>;
+
+  // 관리자 화면(ADM_*)은 관리자 권한이 있는 사용자만 볼 수 있다. (서버도 403으로 막지만 화면 자체를 열지 않는다)
+  if (screen?.screenCode?.startsWith('ADM_') && !session?.adminRole) {
+    return <main role="alert">관리자만 접근할 수 있는 화면입니다.</main>;
+  }
   if (!screen) {
     throw new Error(`현재 path에 해당하는 화면정보가 없습니다: ${path}`);
   }
