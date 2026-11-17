@@ -1,5 +1,5 @@
 import BaseButton from "../../../common/base/BaseButton";
-import Header from "../common/Header";
+import PathProgressHeader from "../common/PathProgressHeader";
 import PageLayout from "../common/PageLayout";
 import ForestCard from "./ForestCard";
 import ForestIntro from "./ForestIntro";
@@ -10,7 +10,7 @@ export default function ForestPage({ step, onBack, onNext }) {
   return (
     <PageLayout
       className={styles.page}
-      header={<Header label="온보딩 진행 중" current={6} total={9} onBack={onBack} />}
+      header={<PathProgressHeader onBack={onBack} />}
     >
       <div className={styles.pageBody}>
         <ForestIntro step={step} />

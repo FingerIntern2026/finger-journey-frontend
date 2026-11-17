@@ -1,5 +1,5 @@
 import BaseButton from "../../../common/base/BaseButton";
-import Header from "../common/Header";
+import PathProgressHeader from "../common/PathProgressHeader";
 import PageLayout from "../common/PageLayout";
 import styles from "./CompletionReport.module.css";
 
@@ -9,7 +9,7 @@ function splitParagraphs(text) {
 
 export default function CompletionReport({ report, poemLines, onBack, onWikiClick }) {
   return (
-    <PageLayout className={styles.page} header={<Header label="온보딩 진행 중" current={9} total={9} onBack={onBack} />}>
+    <PageLayout className={styles.page} header={<PathProgressHeader onBack={onBack} extra={1} />}>
       <article className={styles.report}>
         <header className={styles.hero}>
           <span className={styles.eyebrow}>✦ AI가 정리한 나의 첫 페이지</span>

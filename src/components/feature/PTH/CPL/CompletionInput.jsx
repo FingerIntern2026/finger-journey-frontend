@@ -1,12 +1,12 @@
 import AcrosticInputForm from "../../../common/custom/AcrosticInputForm";
-import Header from "../common/Header";
+import PathProgressHeader from "../common/PathProgressHeader";
 import PageLayout from "../common/PageLayout";
 import CompletionIntro from "./CompletionIntro";
 import styles from "./Completion.module.css";
 
 export default function CompletionInput({ name, employeeId, onBack, onSuccess, preview = false }) {
   return (
-    <PageLayout className={styles.page} header={<Header label="온보딩 진행 중" current={8} total={9} onBack={onBack} />}>
+    <PageLayout className={styles.page} header={<PathProgressHeader onBack={onBack} />}>
       <div className={styles.pageBody}>
         <CompletionIntro />
         <AcrosticInputForm
