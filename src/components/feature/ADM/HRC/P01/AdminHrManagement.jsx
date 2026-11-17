@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { updateCheckinPassword } from "../../../../../api/adminApi";
+import { useDialog } from "../../../../../hooks/useDialog";
 import useDragScroll from "../../../../../hooks/useDragScroll";
 import { parseApiError } from "../../../../../utils/apiErrorUtils";
 import BaseButton from "../../../../common/base/BaseButton";
@@ -17,14 +18,34 @@ export default function AdminHrManagement({ onNavigate }) {
     checklist,
     isLoaded,
     errorMessage,
+    noticeMessage,
     selectEmployee,
     confirm,
+    cancel,
+    notifyNotStarted,
   } = useHrManagement();
+  const { showConfirm } = useDialog();
   const dragScroll = useDragScroll();
   const [password, setPassword] = useState("");
   const [savedMessage, setSavedMessage] = useState("");
 
   const selectedEmployee = employees.find((employee) => employee.employeeId === selectedEmployeeId);
+
+  // 항목을 누르면: 시작 전이면 안내, 확인 대기면 확인, 확인 완료면 한 번 더 물어본 뒤 확인 취소
+  const handleToggle = (item) => {
+    if (item.status === "NOT_STARTED") {
+      notifyNotStarted(selectedEmployee.name, item.checkName);
+      return;
+    }
+    if (item.status === "IN_PROGRESS") {
+      confirm(item.checkTypeId);
+      return;
+    }
+    showConfirm(`'${item.checkName}' 확인을 취소할까요?`, () => cancel(item.checkTypeId), {
+      confirmLabel: "확인 취소",
+      cancelLabel: "닫기",
+    });
+  };
 
   const savePassword = async () => {
     if (!password.trim()) {
@@ -69,7 +90,8 @@ export default function AdminHrManagement({ onNavigate }) {
         {selectedEmployee && (
           <>
             <HrPoem employee={{ id: selectedEmployee.employeeId, name: selectedEmployee.name }} />
-            <HrChecklist employeeName={selectedEmployee.name} items={checklist} onConfirm={confirm} />
+            {noticeMessage && <p role="status" className={styles.noticeMessage}>{noticeMessage}</p>}
+            <HrChecklist employeeName={selectedEmployee.name} items={checklist} onToggle={handleToggle} />
           </>
         )}
 

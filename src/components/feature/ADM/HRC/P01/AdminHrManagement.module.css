@@ -12,6 +12,7 @@
 .passwordInput { box-sizing: border-box; width: 100%; min-height: 44px; border: 0; border-radius: 8px; background: #f3f3f3; font-size: 16px; }
 .saveButton { min-height: 44px; padding: 9px 13px; border-radius: 6px; font-size: 16px; }
 .savedMessage { margin: -5px 0 0; color: #58a251; font-size: 16px; }
+.noticeMessage { margin: 12px 0; padding: 10px 12px; border-radius: 8px; background: #f3f8f2; color: #4f7f4a; font-size: 14px; line-height: 1.5; }
 
 @media (max-width: 360px) {
   .content { padding-inline: 14px; }

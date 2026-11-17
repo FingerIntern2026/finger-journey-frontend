@@ -3,6 +3,8 @@
 .row input { position: absolute; opacity: 0; }
 .checkbox { width: 22px; height: 22px; display: grid; flex: 0 0 auto; place-items: center; box-sizing: border-box; border: 1px solid #c5c5c5; border-radius: 50%; color: #ffffff; }
 .row input:checked + .checkbox { border-color: #69ca60; background: #69ca60; }
-.locked { cursor: default; }
+.row input:focus-visible + .checkbox { outline: 3px solid rgba(105, 202, 96, 0.35); outline-offset: 2px; }
+/* 입사자가 아직 들어오지 않은 항목은 흐리게 보여준다. (누르면 안내 문구가 뜬다) */
+.notStarted { color: #a5a5a5; }
 .name { flex: 1; }
 .hint { color: #8f8f8f; font-size: 14px; }
