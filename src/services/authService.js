@@ -2,7 +2,7 @@ import { sendPost } from '../utils/apiRequestUtils';
 import useAuthStore from '../stores/authStore';
 
 export async function login(employeeNo, birthDate) {
-  const response = await sendPost('/api/auth/login', { empNo: employeeNo, birthDate });
+  const response = await sendPost('/api/auth/login', { employeeNo, birthDate });
   const session = response.data;
   if (!session?.accessToken || !session?.refreshToken || !session?.redirectScreen) {
     throw new Error('로그인 응답을 확인해주세요.');

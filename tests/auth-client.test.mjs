@@ -48,3 +48,20 @@ test('토큰 갱신 중 네트워크 오류는 저장된 인증 정보를 보존
   assert.equal(api.session().accessToken, 'old');
   assert.equal(api.loading(), 0);
 });
+
+
+test('로그인 요청은 프론트와 같은 employeeNo 이름으로 전송하고 응답을 저장한다', async () => {
+  const serviceSource = (await readFile(new URL('../src/services/authService.js', import.meta.url), 'utf8'))
+    .replace(/^import .*;$/gm, '').replace(/export /g, '');
+  const expected = { employeeId: 1, accessToken: 'access', refreshToken: 'refresh', redirectScreen: 'PB_LGN_P02' };
+  let stored;
+  const sendPost = async (url, body) => {
+    assert.equal(url, '/api/auth/login');
+    assert.deepEqual(body, { employeeNo: '12345678', birthDate: '991231' });
+    return { success: true, data: expected };
+  };
+  const store = { getState: () => ({ setSession: (value) => { stored = value; } }) };
+  const login = new Function('sendPost', 'useAuthStore', serviceSource + '\nreturn login;')(sendPost, store);
+  assert.equal(await login('12345678', '991231'), expected);
+  assert.equal(stored, expected);
+});
