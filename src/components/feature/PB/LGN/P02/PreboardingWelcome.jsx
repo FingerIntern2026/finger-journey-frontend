@@ -37,6 +37,15 @@ export default function PreboardingWelcome({ onStartCheckin }) {
   return (
     <main className={styles.page}>
       <section className={styles.introSection} ref={introRef}>
+        {/* 로그아웃은 첫 화면 오른쪽 위에 작게 둔다. (예전에는 FAQ 아래에 붙어 있었음) */}
+        <BaseButton
+          label={loggingOut ? '로그아웃 중...' : '로그아웃'}
+          variant="ghost"
+          disabled={loggingOut}
+          onClick={handleLogout}
+          className={styles.logoutButton}
+        />
+        {logoutError && <p role="alert" className={styles.logoutError}>{logoutError}</p>}
         <div className={styles.introContent}>
           <PreboardingHero
             name={employee?.name ?? ''}
@@ -68,8 +77,6 @@ export default function PreboardingWelcome({ onStartCheckin }) {
           <CustomAccordion items={FAQS} className={styles.faqList} />
         </section>
 
-        {logoutError && <p role="alert">{logoutError}</p>}
-        <BaseButton label={loggingOut ? '로그아웃 중...' : '로그아웃'} disabled={loggingOut} onClick={handleLogout} />
         <BaseButton label="체크인 시작하기" fullWidth className={styles.checkInButton} onClick={onStartCheckin} />
         <button type="button" className={`${styles.scrollCue} ${styles.scrollCueUp}`} onClick={() => scrollTo(introRef)} aria-label="처음으로 이동">
           <i className={styles.scrollCueIcon}><ChevronUp size={22} aria-hidden="true" /></i>

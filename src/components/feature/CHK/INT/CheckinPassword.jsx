@@ -48,6 +48,7 @@ export default function CheckinPassword({ onSubmit }) {
         <BaseInput
           wrapperClassName={styles.inputWrapper}
           className={styles.field}
+          type="password"
           value={password}
           onChange={(event) => setPassword(event.target.value)}
           placeholder="우리만의 암호는?"

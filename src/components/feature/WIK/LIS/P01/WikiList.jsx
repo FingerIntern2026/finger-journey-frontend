@@ -5,7 +5,7 @@ import WikiExplorer from "./WikiExplorer";
 import useWikiSearch from "./useWikiSearch";
 import styles from "./WikiList.module.css";
 
-export default function WikiList({ onCreateReport }) {
+export default function WikiList({ reportStatus = "none", onOpenReport, onCreateReport }) {
   const {
     categories,
     keyword,
@@ -27,10 +27,10 @@ export default function WikiList({ onCreateReport }) {
           <span className={styles.brandIcon}><BookOpen size={22} aria-hidden="true" /></span>
           <strong>핑거 위키</strong>
         </div>
-        <div className={styles.reportBrand}>
+        <button type="button" className={styles.reportBrand} onClick={onOpenReport}>
           <Sprout size={24} aria-hidden="true" />
           <span>AI 리포트</span>
-        </div>
+        </button>
       </header>
 
       <p className={styles.guide}>핑거 생활에 필요한 모든 이야기를 핑거위키에 담아두었어요.</p>
@@ -58,12 +58,15 @@ export default function WikiList({ onCreateReport }) {
         <p className={styles.emptyMessage}>검색 결과가 없어요. 다른 검색어로 찾아보세요.</p>
       )}
 
-      <BaseButton
-        label={<>퀴즈풀고<br />AI 리포트 생성하러 가기!</>}
-        fullWidth
-        className={styles.reportButton}
-        onClick={onCreateReport}
-      />
+      {/* 이미 리포트가 있으면 만들 필요가 없으므로 보이지 않는다. 확인 중일 때도 깜빡이지 않게 숨긴다. */}
+      {reportStatus === "none" && (
+        <BaseButton
+          label={<>퀴즈풀고<br />AI 리포트 생성하러 가기!</>}
+          fullWidth
+          className={styles.reportButton}
+          onClick={onCreateReport}
+        />
+      )}
     </main>
   );
 }

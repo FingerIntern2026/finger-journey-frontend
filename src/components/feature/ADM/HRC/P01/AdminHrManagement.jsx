@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { updateCheckinPassword } from "../../../../../api/adminApi";
+import useDragScroll from "../../../../../hooks/useDragScroll";
 import { parseApiError } from "../../../../../utils/apiErrorUtils";
 import BaseButton from "../../../../common/base/BaseButton";
 import BaseInput from "../../../../common/base/BaseInput";
@@ -19,6 +20,7 @@ export default function AdminHrManagement({ onNavigate }) {
     selectEmployee,
     confirm,
   } = useHrManagement();
+  const dragScroll = useDragScroll();
   const [password, setPassword] = useState("");
   const [savedMessage, setSavedMessage] = useState("");
 
@@ -48,7 +50,7 @@ export default function AdminHrManagement({ onNavigate }) {
     <AdminPageLayout activeScreenCode="ADM_HRC_P01" onNavigate={onNavigate}>
       <main className={styles.content}>
         <h1>HR관리</h1>
-        <div className={styles.employeeTabs} aria-label="입사자 선택">
+        <div className={styles.employeeTabs} aria-label="입사자 선택" {...dragScroll}>
           {employees.map((employee) => (
             <button
               key={employee.employeeId}

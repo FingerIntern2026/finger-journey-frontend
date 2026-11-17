@@ -1,5 +1,7 @@
 .page { box-sizing: border-box; width: 100%; max-width: 480px; min-height: 100svh; margin-inline: auto; background: #ffffff; color: #1f1f1f; }
-.introSection { box-sizing: border-box; display: flex; width: 100%; max-width: 480px; min-height: 100svh; margin: 0 auto; padding: 30px 32px 46px; flex-direction: column; }
+.introSection { position: relative; box-sizing: border-box; display: flex; width: 100%; max-width: 480px; min-height: 100svh; margin: 0 auto; padding: 30px 32px 46px; flex-direction: column; }
+.logoutButton { position: absolute; top: 14px; right: 20px; z-index: 1; min-height: 32px; padding: 4px 10px; font-size: 14px; color: #8a8a8a; }
+.logoutError { position: absolute; top: 50px; right: 20px; margin: 0; color: #d9363e; font-size: 13px; }
 .introContent { display: flex; min-height: 0; flex: 1; flex-direction: column; }
 .welcomeCard { min-height: 0; flex: 1; }
 .detailsContent { box-sizing: border-box; width: 100%; max-width: 480px; margin: 0 auto; padding: 30px 32px 46px; }
