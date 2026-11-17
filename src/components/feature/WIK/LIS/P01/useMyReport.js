@@ -17,8 +17,9 @@ export default function useMyReport() {
     let cancelled = false;
 
     fetchReportDetail(employeeId)
-      .then(() => {
-        if (!cancelled) setStatus("exists");
+      .then((report) => {
+        // AI 생성이 실패(FAILED)했거나 생성 중인 리포트는 아직 없는 것으로 본다.
+        if (!cancelled) setStatus(report?.status === "COMPLETED" ? "exists" : "none");
       })
       .catch(() => {
         if (!cancelled) setStatus("none");

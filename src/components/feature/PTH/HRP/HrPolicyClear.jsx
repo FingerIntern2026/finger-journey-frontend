@@ -1,5 +1,5 @@
 import BaseButton from "../../../common/base/BaseButton";
-import Header from "../common/Header";
+import PathProgressHeader from "../common/PathProgressHeader";
 import PageLayout from "../common/PageLayout";
 import HrPolicyIntro from "./HrPolicyIntro";
 import styles from "./HrPolicy.module.css";
@@ -8,7 +8,7 @@ export default function HrPolicyClear({ onBack, onComplete }) {
   return (
     <PageLayout
       className={styles.page}
-      header={<Header label="온보딩 진행 중" current={2} total={9} onBack={onBack} />}
+      header={<PathProgressHeader onBack={onBack} />}
     >
       <div className={styles.pageBody}>
         <HrPolicyIntro showCount={false} />

@@ -4,6 +4,7 @@
 // 담당자: 김재웅
 
 import { useState } from 'react';
+import { parseApiError } from '../../../utils/apiErrorUtils';
 import BaseButton from '../base/BaseButton';
 import styles from './dialog.module.css';
 
@@ -11,10 +12,39 @@ export default function DialogQuiz({
   title = '징검다리 퀴즈',
   steps,
   initialCode,
+  onSaveGroup,
   onComplete,
 }) {
   const [currentCode, setCurrentCode] = useState(initialCode);
+  const [answers, setAnswers] = useState([]);
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState('');
   const currentStep = steps[currentCode];
+
+  // 보기를 고르면 답을 모아 두고 다음 문항으로 간다.
+  // 마지막 문항이면 CLEAR 화면으로 가기 전에 모은 답을 저장하고, 저장에 실패하면 그 문항에 남아 다시 고르게 한다.
+  const handleSelect = async (option) => {
+    if (saving) return;
+
+    const nextAnswers = [...answers, { code: currentCode, option }];
+    const nextCode = currentStep.nextCode;
+
+    if (steps[nextCode]?.clear && onSaveGroup) {
+      setSaving(true);
+      setError('');
+      try {
+        await onSaveGroup(nextAnswers);
+      } catch (err) {
+        setError(parseApiError(err).message);
+        setSaving(false);
+        return;
+      }
+      setSaving(false);
+    }
+
+    setAnswers(nextAnswers);
+    setCurrentCode(nextCode);
+  };
 
   if (currentStep.clear) {
     return (
@@ -49,12 +79,14 @@ export default function DialogQuiz({
             key={option}
             type="button"
             className={styles.quizOption}
-            onClick={() => setCurrentCode(currentStep.nextCode)}
+            disabled={saving}
+            onClick={() => handleSelect(option)}
           >
             {option}
           </button>
         ))}
       </div>
+      {error && <p role="alert" className={styles.quizError}>{error}</p>}
     </section>
   );
 }

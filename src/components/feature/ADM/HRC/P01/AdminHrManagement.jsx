@@ -17,14 +17,25 @@ export default function AdminHrManagement({ onNavigate }) {
     checklist,
     isLoaded,
     errorMessage,
+    noticeMessage,
     selectEmployee,
     confirm,
+    notifyNotStarted,
   } = useHrManagement();
   const dragScroll = useDragScroll();
   const [password, setPassword] = useState("");
   const [savedMessage, setSavedMessage] = useState("");
 
   const selectedEmployee = employees.find((employee) => employee.employeeId === selectedEmployeeId);
+
+  // 항목을 누르면: 시작 전이면 안내, 확인 대기면 확인 처리. 확인 완료는 되돌릴 수 없어 아무 동작도 하지 않는다.
+  const handleToggle = (item) => {
+    if (item.status === "NOT_STARTED") {
+      notifyNotStarted(selectedEmployee.name, item.checkName);
+      return;
+    }
+    if (item.status === "IN_PROGRESS") confirm(item.checkTypeId);
+  };
 
   const savePassword = async () => {
     if (!password.trim()) {
@@ -69,7 +80,8 @@ export default function AdminHrManagement({ onNavigate }) {
         {selectedEmployee && (
           <>
             <HrPoem employee={{ id: selectedEmployee.employeeId, name: selectedEmployee.name }} />
-            <HrChecklist employeeName={selectedEmployee.name} items={checklist} onConfirm={confirm} />
+            {noticeMessage && <p role="status" className={styles.noticeMessage}>{noticeMessage}</p>}
+            <HrChecklist employeeName={selectedEmployee.name} items={checklist} onToggle={handleToggle} />
           </>
         )}
 

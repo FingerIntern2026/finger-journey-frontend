@@ -1,5 +1,5 @@
 import BaseButton from "../../../common/base/BaseButton";
-import Header from "../common/Header";
+import PathProgressHeader from "../common/PathProgressHeader";
 import PageLayout from "../common/PageLayout";
 import LevelUpIntro from "./LevelUpIntro";
 import styles from "./LevelUp.module.css";
@@ -12,7 +12,7 @@ export default function LevelUpClear({ onBack, onComplete }) {
   };
 
   return (
-    <PageLayout className={styles.page} header={<Header label="온보딩 진행 중" current={7} total={9} onBack={onBack} />}>
+    <PageLayout className={styles.page} header={<PathProgressHeader onBack={onBack} />}>
       <div className={styles.pageBody}>
         <LevelUpIntro showCount={false} />
         <section className={styles.clearContent}>

@@ -111,6 +111,19 @@
   outline-offset: 2px;
 }
 
+.quizOption:disabled {
+  opacity: 0.6;
+  cursor: default;
+  transform: none;
+}
+
+.quizError {
+  margin: 10px 0 0;
+  color: #d9363e;
+  font-size: 12px;
+  text-align: center;
+}
+
 .quizClearTitle {
   margin-bottom: 0;
 }

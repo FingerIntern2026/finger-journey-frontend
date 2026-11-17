@@ -108,6 +108,24 @@
   cursor: default;
 }
 
+/* 아직 열리지 않은 스테이지는 흐리게, 끝낸 스테이지는 연한 초록 배경과 체크로 구분한다. */
+.locked:not(.quiz) .iconCircle {
+  opacity: 0.45;
+  filter: grayscale(0.7);
+}
+
+.completed .iconCircle {
+  background: #e4f6e1;
+}
+
+.completed .stageLabel::after {
+  content: " ✓";
+}
+
+.quiz.completed {
+  opacity: 0.55;
+}
+
 .stage {
   animation: float 2.2s ease-in-out infinite;
   animation-delay: var(--float-delay, 0s);

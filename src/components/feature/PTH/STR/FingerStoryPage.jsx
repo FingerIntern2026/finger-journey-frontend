@@ -1,5 +1,5 @@
 import BaseButton from "../../../common/base/BaseButton";
-import Header from "../common/Header";
+import PathProgressHeader from "../common/PathProgressHeader";
 import PageLayout from "../common/PageLayout";
 import FingerStoryCard from "./FingerStoryCard";
 import FingerStoryIntro from "./FingerStoryIntro";
@@ -12,7 +12,7 @@ export default function FingerStoryPage({ step, onBack, onNext }) {
   return (
     <PageLayout
       className={styles.page}
-      header={<Header label="온보딩 진행 중" current={0} total={9} onBack={onBack} />}
+      header={<PathProgressHeader onBack={onBack} />}
     >
       <div className={styles.pageBody}>
         <FingerStoryIntro step={step} />
