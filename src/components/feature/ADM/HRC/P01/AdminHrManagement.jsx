@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { updateCheckinPassword } from "../../../../../api/adminApi";
-import { useDialog } from "../../../../../hooks/useDialog";
 import useDragScroll from "../../../../../hooks/useDragScroll";
 import { parseApiError } from "../../../../../utils/apiErrorUtils";
 import BaseButton from "../../../../common/base/BaseButton";
@@ -21,30 +20,21 @@ export default function AdminHrManagement({ onNavigate }) {
     noticeMessage,
     selectEmployee,
     confirm,
-    cancel,
     notifyNotStarted,
   } = useHrManagement();
-  const { showConfirm } = useDialog();
   const dragScroll = useDragScroll();
   const [password, setPassword] = useState("");
   const [savedMessage, setSavedMessage] = useState("");
 
   const selectedEmployee = employees.find((employee) => employee.employeeId === selectedEmployeeId);
 
-  // 항목을 누르면: 시작 전이면 안내, 확인 대기면 확인, 확인 완료면 한 번 더 물어본 뒤 확인 취소
+  // 항목을 누르면: 시작 전이면 안내, 확인 대기면 확인 처리. 확인 완료는 되돌릴 수 없어 아무 동작도 하지 않는다.
   const handleToggle = (item) => {
     if (item.status === "NOT_STARTED") {
       notifyNotStarted(selectedEmployee.name, item.checkName);
       return;
     }
-    if (item.status === "IN_PROGRESS") {
-      confirm(item.checkTypeId);
-      return;
-    }
-    showConfirm(`'${item.checkName}' 확인을 취소할까요?`, () => cancel(item.checkTypeId), {
-      confirmLabel: "확인 취소",
-      cancelLabel: "닫기",
-    });
+    if (item.status === "IN_PROGRESS") confirm(item.checkTypeId);
   };
 
   const savePassword = async () => {

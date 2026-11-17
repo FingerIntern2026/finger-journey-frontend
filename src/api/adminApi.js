@@ -53,12 +53,6 @@ export async function confirmBagCheck(employeeId, checkTypeId) {
   return res.data;
 }
 
-// 확인 취소(COMPLETED -> IN_PROGRESS). 체크인을 마친 사원이거나 확인되지 않은 항목이면 서버가 거절한다.
-export async function cancelBagCheck(employeeId, checkTypeId) {
-  const res = await sendPost("/admin/bag/cancel", { employeeId, checkTypeId });
-  return res.data;
-}
-
 // 위키: 카테고리 등록·삭제, 항목 등록·수정·삭제 (목록·상세 조회는 사용자용 wikiApi.js를 같이 쓴다)
 export async function createWikiCategory(body) {
   const res = await sendPost("/admin/wiki/category/create", body);

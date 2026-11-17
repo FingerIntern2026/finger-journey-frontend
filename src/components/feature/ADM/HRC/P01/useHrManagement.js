@@ -2,12 +2,12 @@
 //       - 입사자 탭: 사원 목록
 //       - 체크리스트: 선택한 입사자의 가방싸기 항목별 상태.
 //         입사자가 체크인 화면에 들어오면 서버 상태가 바뀌므로, 3초마다 다시 불러와 화면에 바로 반영한다.
-//       - 확인 처리(IN_PROGRESS -> COMPLETED)와 확인 취소(COMPLETED -> IN_PROGRESS)
+//       - 확인 처리(IN_PROGRESS -> COMPLETED). 확인 완료는 되돌리지 않는다.
 // 사용처: AdminHrManagement.jsx
 // 담당자: 김재웅
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { cancelBagCheck, confirmBagCheck, fetchBagChecklist, fetchEmployees } from "../../../../../api/adminApi";
+import { confirmBagCheck, fetchBagChecklist, fetchEmployees } from "../../../../../api/adminApi";
 import { parseApiError } from "../../../../../utils/apiErrorUtils";
 
 const POLL_INTERVAL_MS = 3000;
@@ -20,7 +20,7 @@ export default function useHrManagement() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [noticeMessage, setNoticeMessage] = useState("");
-  // 확인/취소 요청 중에는 주기적으로 불러온 값이 방금 바꾼 상태를 덮어쓰지 않게 잠시 건너뛴다.
+  // 확인 요청 중에는 주기적으로 불러온 값이 방금 바꾼 상태를 덮어쓰지 않게 잠시 건너뛴다.
   const busy = useRef(false);
 
   useEffect(() => {
@@ -89,23 +89,20 @@ export default function useHrManagement() {
     ));
   }, []);
 
-  const runAction = async (request, checkTypeId) => {
+  const confirm = async (checkTypeId) => {
     const employeeId = selectedEmployeeId;
     setErrorMessage("");
     setNoticeMessage("");
     busy.current = true;
 
     try {
-      applyResult(employeeId, checkTypeId, await request(employeeId, checkTypeId));
+      applyResult(employeeId, checkTypeId, await confirmBagCheck(employeeId, checkTypeId));
     } catch (err) {
       setErrorMessage(parseApiError(err).message);
     } finally {
       busy.current = false;
     }
   };
-
-  const confirm = (checkTypeId) => runAction(confirmBagCheck, checkTypeId);
-  const cancel = (checkTypeId) => runAction(cancelBagCheck, checkTypeId);
 
   // 입사자가 아직 들어오지 않은 항목은 확인할 수 없다는 안내
   const notifyNotStarted = (employeeName, checkName) => {
@@ -122,7 +119,6 @@ export default function useHrManagement() {
     noticeMessage,
     selectEmployee,
     confirm,
-    cancel,
     notifyNotStarted,
   };
 }
