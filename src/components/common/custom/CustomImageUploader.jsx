@@ -22,6 +22,7 @@ const CustomImageUploader = ({
         <div key={image.id} className={styles.imageSlot}>
           <img src={image.url} alt="" className={styles.imagePreview} />
           <button
+            type="button"
             className={styles.imageRemoveButton}
             onClick={() => onRemoveImage(image.id)}
           >
@@ -32,7 +33,7 @@ const CustomImageUploader = ({
 
       {/* "+" 버튼 - 꽉 차면(isFull이 true면) 안 그려짐 */}
       {!isFull && (
-        <button className={styles.imageAddButton} onClick={onAddImage}>
+        <button type="button" className={styles.imageAddButton} onClick={onAddImage}>
           +
         </button>
       )}

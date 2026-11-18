@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { Lock } from "lucide-react";
 import PathMapHeader from "../common/PathMapHeader";
 import usePathProgress from "../common/usePathProgress";
 import { enterStage } from "../../../../api/pathApi";
@@ -31,7 +32,11 @@ export default function PathMap({ onSelectItem, initialQuizCode }) {
     : null;
 
   const statusOf = (item) => {
-    if (!hasServerData) return item.status;
+    // 진행 정보를 못 받은 상태에서 미래 스테이지를 열어 보이지 않도록 첫 스테이지 외에는 잠근다.
+    if (!hasServerData) {
+      if (item.kind === "quiz") return item.status;
+      return item.stage === 1 ? "current" : "locked";
+    }
     if (item.kind === "quiz") return isGroupDone(item.quizCode) ? "completed" : "available";
     if (item.hidden) return allStagesCompleted ? "current" : "locked";
 
@@ -112,13 +117,18 @@ export default function PathMap({ onSelectItem, initialQuizCode }) {
               className={`${styles.mapItem} ${styles[status] ?? ""} ${styles[item.kind]} ${item.hidden ? styles.hidden : ""}`}
               style={{ left: `${item.x}%`, top: `${item.y}%`, "--float-delay": `${index * -0.16}s` }}
               onClick={() => handleItemClick(item)}
-              aria-label={item.label}
+              aria-label={`${item.label}${item.kind === "stage" && status === "locked" ? ", 잠김" : ""}`}
             >
               {item.kind === "quiz" ? (
                 <img className={styles.quizSign} src={`${ASSET_PATH}/${item.icon}`} alt="" />
               ) : (
                 <span className={styles.iconCircle}>
                   {item.icon ? <img src={`${ASSET_PATH}/${item.icon}`} alt="" /> : <b>{item.fallback ?? "?"}</b>}
+                </span>
+              )}
+              {item.kind === "stage" && status === "locked" && (
+                <span className={styles.lockBadge} aria-hidden="true">
+                  <Lock size={12} strokeWidth={2.5} />
                 </span>
               )}
               {item.kind === "stage" && <span className={styles.stageLabel}>STAGE {item.stage}</span>}

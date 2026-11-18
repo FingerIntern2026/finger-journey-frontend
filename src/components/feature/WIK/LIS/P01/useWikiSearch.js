@@ -26,12 +26,12 @@ const toCategory = (category) => ({
 const toMediaSrc = (url) => (/^https?:\/\//.test(url) ? url : `${API_BASE_URL}${url}`);
 
 export default function useWikiSearch() {
-  const [keyword, setKeyword] = useState("");
-  const [searchedKeyword, setSearchedKeyword] = useState("");
+  const [keyword, setKeyword] = useState(""); // 입력창에 지금 타이핑중인 값
+  const [searchedKeyword, setSearchedKeyword] = useState(""); // 실제로 검색 버튼을 눌러서 확정된 값
   const [openCategoryId, setOpenCategoryId] = useState(null);
   const [selectedItemId, setSelectedItemId] = useState(null);
 
-  const [wikiList, setWikiList] = useState([]);
+  const [wikiList, setWikiList] = useState([]); // 서버에서 받은 원본 목록
   const [isLoaded, setIsLoaded] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [searchHits, setSearchHits] = useState(null); // 검색 중이면 { itemId: snippet }
@@ -53,6 +53,7 @@ export default function useWikiSearch() {
       .finally(() => {
         if (!cancelled) setIsLoaded(true);
       });
+
 
     return () => {
       cancelled = true;

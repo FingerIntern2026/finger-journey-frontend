@@ -13,10 +13,15 @@ import CustomImageUploader from "../../../../common/custom/CustomImageUploader";
 import styles from "./WikiForms.module.css";
 
 const MAX_IMAGES = 3;
+const WIKI_ICON_OPTIONS = [
+  "📖", "🏠", "🎁", "🗺️", "🍜", "🌲", "🗓️", "🖨️",
+  "📦", "📶", "🌴", "🍴", "📍", "🥢", "🔗", "💡",
+];
 
 export default function WikiItemForm({ item, onCancel, onSubmit }) {
   const fileInputRef = useRef(null);
   const [icon, setIcon] = useState(item?.icon ?? "📖");
+  const [isIconPickerOpen, setIsIconPickerOpen] = useState(false);
   const [title, setTitle] = useState(item?.title ?? "");
   const [content, setContent] = useState(item?.content ?? "");
   const [images, setImages] = useState(item?.images ?? []);
@@ -65,7 +70,38 @@ export default function WikiItemForm({ item, onCancel, onSubmit }) {
   return (
     <form className={styles.form} onSubmit={submit}>
       <h2>{item ? "항목 수정" : "항목 추가"}</h2>
-      <BaseInput label="아이콘" value={icon} onChange={(event) => setIcon(event.target.value)} className={styles.input} />
+      <div className={styles.iconField}>
+        <span className={styles.fieldLabel}>아이콘</span>
+        <button
+          type="button"
+          className={styles.iconPickerTrigger}
+          aria-label="아이콘 선택"
+          aria-expanded={isIconPickerOpen}
+          onClick={() => setIsIconPickerOpen((open) => !open)}
+        >
+          <span>{icon}</span>
+          <span className={styles.iconPickerHint}>아이콘 선택</span>
+        </button>
+        {isIconPickerOpen && (
+          <div className={styles.iconPicker} role="group" aria-label="아이콘 목록">
+            {WIKI_ICON_OPTIONS.map((option) => (
+              <button
+                key={option}
+                type="button"
+                className={`${styles.iconOption} ${icon === option ? styles.selectedIcon : ""}`}
+                aria-label={`${option} 아이콘`}
+                aria-pressed={icon === option}
+                onClick={() => {
+                  setIcon(option);
+                  setIsIconPickerOpen(false);
+                }}
+              >
+                {option}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
       <BaseInput label="제목" placeholder="김핑거" value={title} onChange={(event) => setTitle(event.target.value)} className={styles.input} />
       <BaseTextArea label="내용" placeholder="상세 내용을 입력해주세요" rows={3} value={content} onChange={(event) => setContent(event.target.value)} className={styles.textarea} />
       <div className={styles.imageField}>
