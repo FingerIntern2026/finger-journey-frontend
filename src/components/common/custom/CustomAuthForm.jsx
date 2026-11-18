@@ -22,6 +22,7 @@ const CustomAuthForm = ({
   field1ErrorMessage = '입력값이 올바르지 않아요',
   field2ErrorMessage = '입력값이 올바르지 않아요',
   skipValidation = false,
+  preserveInput = false,
   disabled = false,
   className = '',
   inputClassName = '',
@@ -41,11 +42,11 @@ const CustomAuthForm = ({
   };
 
   const handleField1Change = (e) => {
-    setField1Value(filterNumbers(e.target.value, field1Length));
+    setField1Value(preserveInput ? e.target.value : filterNumbers(e.target.value, field1Length));
   };
 
   const handleField2Change = (e) => {
-    setField2Value(filterNumbers(e.target.value, field2Length));
+    setField2Value(preserveInput ? e.target.value : filterNumbers(e.target.value, field2Length));
   };
 
   const handleSubmit = () => {
@@ -71,12 +72,14 @@ const CustomAuthForm = ({
       return; // 여기서 끝내버려서 onSubmit(API 호출)은 실행 안 시킴
     }
 
-    if (field1Length && field1Value.length !== field1Length) {
+    if ((preserveInput && !/^[0-9]+$/.test(field1Value))
+        || (field1Length && field1Value.length !== field1Length)) {
       setValidationError(field1ErrorMessage);
       return;
     }
 
-    if (!isSingleField && field2Length && field2Value.length !== field2Length) {
+    if (!isSingleField && ((preserveInput && !/^[0-9]+$/.test(field2Value))
+        || (field2Length && field2Value.length !== field2Length))) {
       setValidationError(field2ErrorMessage);
       return;
     }

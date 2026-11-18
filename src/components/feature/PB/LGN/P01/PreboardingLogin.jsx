@@ -58,9 +58,10 @@ export default function PreboardingLogin({ onSubmit }) {
             field2Label="생년월일 8자리를 입력해주세요"
             field1Length={8}
             field2Length={8}
-            emptyMessage="값을 입력해주세요"
-            field1ErrorMessage="사원번호가 올바르지 않아요"
-            field2ErrorMessage="생년월일이 올바르지 않아요"
+            preserveInput
+            emptyMessage="숫자 8자리를 입력해주세요"
+            field1ErrorMessage="숫자 8자리를 입력해주세요"
+            field2ErrorMessage="숫자 8자리를 입력해주세요"
             disabled={isSubmitting}
             buttonLabel={isSubmitting ? '확인 중...' : '입력했어요'}
             serverError={serverError}
