@@ -2,6 +2,14 @@
 .form h2 { margin: 0 0 18px; color: #202020; font-size: 18px; font-weight: 700; }
 .input, .textarea { width: 100%; box-sizing: border-box; border-color: #cfd1d0; background: #f7f7f7; color: #242424; font-size: 16px; }
 .textarea { min-height: 80px; resize: vertical; }
+.iconField { position: relative; display: grid; gap: 4px; margin-bottom: 12px; }
+.fieldLabel { color: #888; font-size: 14px; }
+.iconPickerTrigger { display: flex; width: 100%; min-height: 42px; align-items: center; gap: 10px; padding: 0 12px; border: 1px solid #cfd1d0; border-radius: 8px; background: #f7f7f7; text-align: left; cursor: pointer; }
+.iconPickerTrigger > span:first-child { font-size: 20px; }
+.iconPickerHint { color: #777; font-size: 14px; }
+.iconPicker { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; padding: 8px; border: 1px solid #dfe4df; border-radius: 10px; background: #fff; box-shadow: 0 5px 16px rgb(0 0 0 / 10%); }
+.iconOption { min-width: 0; height: 38px; border: 1px solid transparent; border-radius: 7px; background: #f5f7f5; font-size: 20px; cursor: pointer; }
+.iconOption:hover, .selectedIcon { border-color: #68ca5e; background: #eaf8e8; }
 .imageField { display: grid; gap: 4px; margin-bottom: 12px; }
 .imageField > span { color: #333333; font-size: 16px; font-weight: 500; }
 .fileInput { display: none; }

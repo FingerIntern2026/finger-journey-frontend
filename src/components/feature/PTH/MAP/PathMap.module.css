@@ -60,6 +60,22 @@
   font-weight: 900;
 }
 
+.lockBadge {
+  position: absolute;
+  z-index: 2;
+  top: 5px;
+  right: 7px;
+  display: grid;
+  width: 21px;
+  height: 21px;
+  place-items: center;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: #657267;
+  color: #fff;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 18%);
+}
+
 .stageLabel {
   position: relative;
   display: block;
